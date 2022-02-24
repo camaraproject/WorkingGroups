@@ -25,7 +25,8 @@ Some notes related to the above template:
   </ul>
   <li> The <b>Actors and scope</b> item allows linking user story with existing Cloud/NaaS reference architectures. The architectures that are within the scope of CAMARA project are detailed in this document: https://github.com/telekom/telco-global-api-alliance/files/7065771/Reference.Architectures.pptx)
     <ul>    
-        <li> Actor: specifies the role(s) that the corresponding CAMARA API customer (e.g., application service provider, hyperscaler, application developer) plays for the user story. <ins>Options -> customer:user; customer:administrator; customer:business manager</ins>. </li>
+        <li> Actors: CAMARA API customer (e.g., application service provider, hyperscaler, application developer); end user (relevant wheer e.g. consent is required)   
+        <li> Roles: specifies the role(s) that the CAMARA API customer plays for the user story. <ins>Options -> customer:user; customer:administrator; customer:business manager</ins>. </li> 
         <li> Scope: specifies the service lifecycle area(s) that the user story impacts on. <ins>Options -> Design time ; Prospect to Order (P2O); Usage to Cash (U2C); Order to Activate (O2A); Trouble to Resolution (T2R)</ins>. </li>
     </ul>
   </li>
@@ -37,5 +38,7 @@ Once we have the user story, the next step is to clarify the <b>data journey</b>
 <ul>
   <li> Think about triggers for workflows: how and when does data need to be moved between the application and the service? </li>
   <li> Think about dependencies of data objects: does the data in underlying objects need to be regularly kept in sync with another system? </li>
-   <li> Think about any parameters the user might need to configure or change. This is particularly important when building self- serve integrations for non-technical end users. </li>
+  <li> Think about any parameters the user might need to configure or change. This is particularly important when building self- serve integrations for non-technical end users. 
+  <li> Think about privacy by design: does any data represent sensitive information, and how can this be safely shared/stored according to regulation (e.g. anonymisation, tokenisation, zero-trust principles) 
+  </li>
 </ul>
