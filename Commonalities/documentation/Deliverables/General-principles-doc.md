@@ -1,5 +1,14 @@
 # General principles doc (Issue #7)
 
+**Issue 1: API format** : Suported API format will be OAS3. We shall support both sync (200/201 response code) and async (202 response code) API spec. Note that support of async API is subject to capabilities of underlying assets and bound to specific operations (e.g. feasibility check, etc.).
+
+**Issue 2: Criteria to go from step 3 (testing) to step 4 (validation)**
+<ul>
+  <li> At least one independent method 100% implemented. </li>
+  <li> In case a method "x" has dependencies with other methods "{Y,Z}", for method "X" to be validated, methods "{Y,Z}" need to be implemented as well.</li>
+</ul>
+  
+**Issue 3: API design principles**
 <ul>
   <li> API First </li>
   <ul>    
