@@ -52,9 +52,17 @@
  <li> Architecture Headers </li>
  <li> Security </li>
      <ul>    
-          <li> API REST Security </li>
-          <li> Security Implementation </li>
-    </ul>
+     <li> API REST Security </li>
+     <ul>
+         <li> REST security design principles  </li>
+         <li> REST APIs Securitzation Good practises </li>
+    </ul>    
+     <li> Security Implementation </li>
+     <ul>
+         <li> Channel security (TLS and authentication, certificate chain validation, recommended ciphers) </li>
+         <li> Access security (OAuth, scopes) </li>
+         <li> Data security (Headers Validations, Body Validation) </li>
+    </ul>    
  <li> Open API definition </li>
  <ul>    
     <li> General Information </li>
