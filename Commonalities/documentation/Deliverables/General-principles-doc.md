@@ -48,8 +48,19 @@
     <li> Sorting </li>
     <li> Filtering  </li>
     <li> Partial responses </li>
-    </ul>
  </ul>
  <li> Architecture Headers </li>
  <li> Security </li>
+     <ul>    
+          <li> API REST Security </li>
+          <li> Security Implementation </li>
+    </ul>
+ <li> Open API definition </li>
+ <ul>    
+    <li> General Information </li>
+    <li> Request Params </li>
+    <li> Response Structure </li>
+    <li> Data Definitions </li>
+    <li> OAUuh Definitions </li>
+ </ul>
 </ul>
