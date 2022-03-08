@@ -62,7 +62,8 @@
          <li> Channel security (TLS and authentication, certificate chain validation, recommended ciphers) </li>
          <li> Access security (OAuth, scopes) </li>
          <li> Data security (Headers Validations, Body Validation) </li>
-    </ul>    
+    </ul>
+    </ul>
  <li> Open API definition </li>
  <ul>    
     <li> General Information </li>
