@@ -23,7 +23,7 @@ Some notes related to the above template:
   <ul>    
     <li> A user story based on <em>user persona</em> focuses on expectations from the point of view of an end-user. This is contrary to a user story based on <em>system persona </em>, which is designed to represent background system functions that do not require interaction from the end-user (i.e., elaborate on the behind-of-the-scenes integration tasks that are not user-centric).</li>
   </ul>
-  <li> The <b>Actors and scope</b> item allows linking user story with existing Cloud/NaaS reference architectures. The architectures that are within the scope of CAMARA project are detailed in this document: https://github.com/telekom/telco-global-api-alliance/files/7065771/Reference.Architectures.pptx)
+  <li> The <b>Roles, Actor(s) and scope</b> item allows linking a user story with existing Cloud/NaaS reference architectures. The architectures that are within the scope of CAMARA project are detailed in this document: https://github.com/telekom/telco-global-api-alliance/files/7065771/Reference.Architectures.pptx)
     <ul>    
         <li> Roles: specifies the role(s) that the CAMARA API customer plays for the user story. <ins>Options -> customer:user; customer:administrator; customer:business manager</ins>. </li>
         <li> Actor(s): API usage should not be restricted to a particular actor (e.g., application service provider, hyperscaler, application developer, or end user where e.g. consent is required). Examples may use a particular actor to perform a role in the API flow, but that does not exclude other Actors from performing the role. 
