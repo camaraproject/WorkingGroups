@@ -37,7 +37,7 @@ This pattern (together with an API management system) has other advantages:
 - Accelerates API adoption rate
 - Improves partner/developer onboarding timelines with self service capabilities  
 
-<img src="../images/apim.png" alt="APIM"
+<img src="./images/apim.png" alt="APIM"
 	title="API Gateway Pattern" width="650" height="400" />
 
 
@@ -98,7 +98,7 @@ For ID token, audience, time of token issue, nonce etc. should be included as a 
 
 <ins> Protocol Flow </ins>: An abstract protocol flow for OAuth2 is illustrated below:
 
-<img src="../images/oauth2.png" alt="Oauth2"
+<img src="./images/oauth2.png" alt="Oauth2"
 	title="Abstarct Oauth2 Flow" width="550" height="300" />
 
 Relevant Authorization grants
@@ -117,7 +117,7 @@ The implicit and password grant types are other options specified by OAuth2 when
 #### Client Credential Grant
 The client credential grant is used for server to server use cases involving trusted partners or clients without any protected user data involved. In this method the API invoker client is registered as a confidential client with an authorization grant type of client_credentials. The Camara Service APIs in most use cases will make use of the client crendentials grant.
 
-<img src="../images/cc.png" alt="cc"
+<img src="./images/cc.png" alt="cc"
 	title="CLient Credentials Grant" width="800" height="600" />
 
 ### OIDC <a name="oidc"></a>
@@ -126,7 +126,7 @@ As already mentioned earlier OAuth2 is not authentication. OpenID Connect 1.0 (O
 It enables Clients to verify the identity of the End-User based on the authentication performed by an OpenID provider, as well as to obtain a basic profile information about the End-User in an interoperable and REST-like manner. OIDC defines a sign-in flow that enables a client application to authenticate a user, and to obtain information (or "claims") about that user, such as the username, email, and so on. User identity information is encoded in an ID token.
 
 
-<img src="../images/oidc.png" alt="OIDC"
+<img src="./images/oidc.png" alt="OIDC"
 	title="Abstarct OIDC Flow" width="350" height="300" />	
 
 
@@ -134,7 +134,7 @@ It enables Clients to verify the identity of the End-User based on the authentic
 The authorization code is a temporary code that the client will exchange for an access token. The code is obtained from the authorization server. The user gets to know about the information requested by the client and can then approve or deny the request. The application requesting for the access token must supplement the request with the client secret. This reduces the risk that the authorization code can be exploited if intercepted by a bad actor.
 
 
-<img src="../images/ac.png" alt="AC"
+<img src="./images/ac.png" alt="AC"
 	title="Authorization Code Grant" width="900" height="800" />	
 
 <ins>PKCE (security related Oauth2 extension)</ins>
