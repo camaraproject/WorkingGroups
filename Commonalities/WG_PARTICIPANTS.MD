@@ -7,7 +7,6 @@
 | Ericsson | Miguel A. Garcia-Martin |
 | Intel | Petar Torre |
 | KDDI | Toshi Wakayama |
-| Microsoft | Landon Cox |
 | MobiledgeX | Thomas Vits |
 | Orange | Sylvain Morel|
 | Telefonica | Jose Ordonez-Lucena |
