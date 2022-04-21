@@ -1,5 +1,7 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
+| Accenture | Adriano Poloni|
+| Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
 | Deutsche Telekom AG | Mariusz Sozanski |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
