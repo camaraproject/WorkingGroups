@@ -1,5 +1,6 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
+| Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | Scenera | Andrew Wajs  |
