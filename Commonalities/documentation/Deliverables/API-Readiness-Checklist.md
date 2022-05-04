@@ -7,3 +7,5 @@
 |4   |User Stories  |   Y        |	https://github.com/camaraproject/rep_main/blob/main/WorkingGroups/Commonalities/documentation/Deliverables/Userstory-template.md                                            |
 | 5   |API test cases  |   Y        |      TBD                                       |
 | 6   |Tested by atleast 2 operators  |   Y        |                                             |
+| 7   |Security review  |   Y        |  Complies with CAMARA 'security by design' principles                                           |
+| 8  |Privacy review  |   Y        |  Complies with CAMARA 'privacy by design' principles                                           |
