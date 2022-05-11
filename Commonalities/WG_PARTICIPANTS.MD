@@ -13,8 +13,6 @@
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
 | KDDI | Toshi Wakayama |
-| MobiledgeX | Christoph Goertz |
-| MobiledgeX | Thomas Vits |
 | Orange | Olivier Mathieu |
 | Orange | Sylvain Morel|
 | Telefonica | Jose Ordonez-Lucena |
