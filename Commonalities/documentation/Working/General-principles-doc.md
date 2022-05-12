@@ -79,6 +79,6 @@
     <li> Request Params </li>
     <li> Response Structure </li>
     <li> Data Definitions </li>
-    <li> OAUuh Definitions </li>
+    <li> OAuth Definitions </li>
  </ul>
 </ul>
