@@ -3,6 +3,7 @@
 | Accenture | Adriano Poloni|
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
+| Broadpeak | Christoph Neumann |
 | Deutsche Telekom AG | Mariusz Sozanski |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
