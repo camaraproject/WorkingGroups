@@ -33,6 +33,7 @@
  </ul>
  <li> API Resources Definitions </li>
  <ul>    
+    <li> API Naming convention for Camara </li>
     <li> URL Definition </li>
     <ul>
          <li> Good Practises </li>
@@ -43,6 +44,11 @@
  <li> Versioning </li>
  <ul>    
     <li> Strategy </li>
+    <ul>
+         <li> Agreement on major version  </li>
+         <li> Version change history </li>
+         <li> Repository tagging and releases </li>
+    </ul>
     <li> Backward and forward compability </li> 
     <ul>
          <li> Type of modifications  </li>
