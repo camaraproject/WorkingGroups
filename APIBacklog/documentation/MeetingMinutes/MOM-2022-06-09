@@ -1,0 +1,55 @@
+#
+API Backlog meeting
+
+#### *9th of June 2022*
+
+## Attendees
+
+* Noel Wirzius, DT
+* **Jan Friman, Ericsson**
+* Toshi Wakayama, KDDI
+* Herbet Damker, DT
+* Andrew Wajs, Scenera
+* Marcin Jarzab, DT
+* **Jose Ordonez-Lucena, Telefonica**
+* **Ruben Barrado Gonzalez, Telefonica**
+* Kevin <span class="colour" style="color:var(--vscode-unotes-wysList)">Smith, Vodafone</span>
+* **Eric** <span class="colour" style="color:var(--vscode-unotes-wysList)">**Murray, Vodafone**</span>
+* **Ivan Nieto, Vodafone**
+* Saad Sheikh, Dell
+* Mariusz Donzanski, DT
+* Shilpa Padgaonkar, DT
+
+## Agenda
+
+1. Discussion
+    * Current Issues
+    * New issues
+2. Action Points
+3. AoB
+
+## Discussion
+| Agenda Item | Who | Description |
+| ----------- | --- | ----------- |
+| **CURRENT ISSUES** |  | **Total: 7 [ Open: 6 , Closed: 1 ]** |
+| Issue #12<br>*-Change for API backlog* | Ericsson | \* TEF: some comments were proposed in the thread. Request for updates taking into account OPAG's API backlog -> [https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20backlog%20proposal%20for%20change.pdf](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20backlog%20proposal%20for%20change.pdf) <br>\* Slide 2.<br><ul><li>VF: agree with Ericsson proposal on the approach, focus more on use case driven capabilities rather than the actual technology solution (network slicing).</li><li>TEF: also agree with VF and Ericsson. TEF suggest the need to map the four bullets to the OPAG defined topics in the backlog, in order to manage expectations in terms of priorities (unrealistic to have them all ready in the same timeline). TEF also asks for clarification on the relationship of the first bullet (service ordering with SLA requirements) with the QoD API already posted in CAMARA.&nbsp;</li><li>**Related Action Points: 20220526-01, 20220526-02**</li></ul>\* Slide 4. <br><ul><li>VF: struggled to find the actual use case behind geofencing.</li><li>Ericsson has explained a possible use case.&nbsp;</li><li>All: We are not sure who originally proposed this API family.</li></ul>\* Slide 5.<br><ul><li>TEF: It'd be good to compare to this API famility to OPAG backlog, and identify matching/mis-matching.</li><li>Ericsson agrees.</li><li>**Related Action Points: 20220526-01**</li></ul>\* Slide 6.<br><ul><li>TEF: before removing traffic influence, it'd be interesting to understand what traffic influence API means for OPAG. In the OPAG backlog, traffic influence (priority #5), which is separate from Application onboarding and instance management (priority #1) and QoS management (priority #3).&nbsp;</li><li>**Related Action Points: 20220526-03**</li></ul> |
+| OdIssue #2<br>*\- Add Item for Hybrid Cloud Architecture in Context of Hyperscalers* | Dell | \* DELL: The intention is to standardize API's specifically service API's consumed by Edge App providers and that can be unanimously used by hyperscalers a well<br>\* DT: CAMARA intention is precisely to work on this. <br>\* VF: VF has worked on other initiatives dealing with this problem, with APIs suitable for app developers in telco edge cloud environements. <br>\* TEF: Telco Edge APIs will be available in CAMARA repository by the end of May or first week of June.<br>\* **Related Action Points: 20220512-01** |
+| Issue #20<br>*\- Add new endpoint in QoD API to request available qos\_prfoiles?* |  | When do we expect to have this capability?<br>**Conclusion: periodically check with Marcin the roadmap of this capability, and inform us when available, so the issue can be closed.** |
+| *Issue #21* <br>*\- How verification for authorized recipient \(e\.g\. UE\) impacts existing QoD API* | DT | It makes reference to QoD#8, which in in turn makes reference to commonalities WS and it is tagged with 'QoD-backlog'<br>How to handle this?<br>**Conclusion: close this issue** |
+| *Issue #29* <br>*\- API to request the status of the netwrok traffic* | Scenera | \* Scenera: From previous PoCs it is possible for the network to provide an indicaition of its conegestion and performacne. <br>\* TEF: What is the relation to IETF's L4S framework?<br>**Way forward: postponed to 9th June call** |
+| *Issue #30*<br>*\- APIto Route Traffic to a Specific Slice on the Network* | Scenera | \* Scenera: xxx<br>\* TEF:Is this API consumed at provisioning time, or can be at operation time? We need first to clarify URSP and OS supported service categories (GSMA and 3GPP working on this).<br>**Way forward: postponed to 9th June call** |
+| **NEW ISSUES** |  |  |
+| Issue #x<br>\- LS Reply to OPAG on backlog proposal | Ericsson, TEF | To prepare a LS reply to OPAG, to provide them with feedback on their CAMARA backlog proposal. This LS will be prepared once APs 20220526-01, 20220526-02 and 20220526-03 are closed. |
+
+## Action Points
+| AP Identifier | AP Owner | Status | Description |
+| ------------- | -------- | ------ | ----------- |
+| 20220512-01 | Dell | Open | To double check the Telco Edge Cloud APIs when posted in CAMARA, and assess whether they meet the expectations and goals captured in issue #2. |
+| 20220526-01 | Ericsson | Open | on slides 2 and 5 from [https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20backlog%20proposal%20for%20change.pdf](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20backlog%20proposal%20for%20change.pdf), to map bullets to the OPAG backlog topics, to align CAMARA-OPAG work. |
+| 20220526-02 | Ericsson | Open | on slide 2 from [https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20backlog%20proposal%20for%20change.pdf](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20backlog%20proposal%20for%20change.pdf) from to clarify on the relationship of the first bullet (service ordering with SLA requirements) with the QoD API already posted in CAMARA.  |
+| 20220526-03 | TEF | Open | to ask OPAG for clarification on the differences between traffic influence and QoS management, and the relationship between traffic influence and the Telco edge APIs. |
+
+## AoB
+1. Next call schedule: 23th May 2022
+2. Next call agenda: 
+    *  TBD
