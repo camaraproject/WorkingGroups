@@ -7,7 +7,7 @@
 | Deutsche Telekom AG | Mariusz Sozanski |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
-| Ericsson | Miguel A. Garcia-Martin |
+| Ericsson | Miguel A. García-Martin |
 | GSMA | Faisal Zia |
 | GSMA | Mark Cornall |
 | GSMA | Tom Van Pelt |
@@ -16,9 +16,9 @@
 | KDDI | Toshi Wakayama |
 | Orange | Olivier Mathieu |
 | Orange | Sylvain Morel|
-| Telefonica | Jose Ordonez-Lucena |
-| Telefonica | Ruben Barrado Gonzalez |
-| TIM | Fabricio Moggio|
+| Telefonica | José Ordoñez-Lucena |
+| Telefonica | Rubén Barrado Gonzalez |
+| TIM | Fabrizio Moggio|
 | Vodafone | Eric Murray |
 | Vodafone | Ivan Nieto|
 | Vodafone | Kevin Smith|
