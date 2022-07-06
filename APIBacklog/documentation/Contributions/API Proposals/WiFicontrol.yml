@@ -1,27 +1,4 @@
 openapi: 3.0.0
-info:
-  title: HaaC Home Devices Management API
-  description: |-
-    Allows to gather information about user home devices and be able to execute actions over those, like prioritization of the traffic.
-
-    # Relevant Definitions and concepts
-
-    - **HGU** (Home Gateway Unit): it is an advanced router (WiFi: 5GHz and 2.4GHz) that integrates ONT and router capabilities.
-    - **Devices**: provides a virtual map of the devices connected to the HGU (wireless and wired).
-
-    # API Functionality
-
-     This API allows to get information about and manage the user home devices
-
-    # Resources and Operations overview
-
-     There is one group of resources:
-    - **devices** to model endpoints about devices registered on the HGU.
-  version: 2.0.0
-  termsOfService: https://www.telefonica.es/es/
-  contact:
-    name: 4th Platform Team
-    email: 4pf@tid.es
 tags:
   - name: devices
     description: Information about HGU's registered devices and actions over them
