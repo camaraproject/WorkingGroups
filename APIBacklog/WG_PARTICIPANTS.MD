@@ -3,6 +3,7 @@
 | Deutsche Telekom | Marcin Jarzab  |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
+| Ericsson | Miguel Garcia |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | Scenera | Andrew Wajs  |
 | Telefonica | Jose Ordonez-Lucena  |
