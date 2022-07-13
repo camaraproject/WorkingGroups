@@ -6,9 +6,16 @@
 4. [Authentication and Authorization details](#details)
    1. [OAuth2 with TLS](#oauth2)
    2. [OIDC](#oidc)
-5. [Documentation and Specs](#docs)
-6. [Summary](#Summary)
-7. [References](#ref)
+5. [Identification of UEs](#ueid)
+   1. [General Public Subscription Identifier (GPSI)](#gpsi)
+   2. [External Identifier format of the GPSI](#extid)
+   3. [AF-specific UE external identifier](#afspecific)
+   	1. [AF obtaining the AF-specific UE External Identifier](#afobtaining)
+	2. [NEF obtaining the AF-specific UE External Identifier](#nefobtaining)
+   4. [UE Identification summary](#ueidsummary)
+6. [Documentation and Specs](#docs)
+7. [Summary](#Summary)
+8. [References](#ref)
 
 ## Introduction <a name="Introduction"></a>
 
@@ -141,6 +148,97 @@ The authorization code is a temporary code that the client will exchange for an 
 
 Proof Key for Code Exchange (PKCE is specified in RFC 7636) is a kind of proof of possession. It is an extension to the authorization code flow to prevent CSRF and authorization code injection attacks. The technique involves the client first creating a secret on each authorization request, and then using that secret again when exchanging the authorization code for an access token. This way if the code is intercepted, it will not be useful since the token request relies on the initial secret. PKCE uses cryptography to guarantee that the client exchanging an OAuth2 code for tokens is the same client that started the original OAuth2 request. It is hence important to use this extension when using Auth code grant flow.
 
+## Identification of UEs <a name="ueid"></a>
+
+### General Public Subscription Identifier (GPSI) <a name="gpsi"></a>
+
+3GPP defines the GPSI in TS 23.501 [10] clause 5.9.8 and TS 23.003 [12] clause 28.8.
+
+The Generic Public Subscription Identifier (GPSI) was created for addressing a 3GPP subscription in data networks outside of the 3GPP system, so that internal identifiers, such as the Subscription Permanent Identifier (SUPI), were not required to be disclosed to external parties .
+
+As such, 5G Core stores an association between each internal SUPI and one or more GPSIs associated to such SUPI.
+
+The GPSI has two possible formats:
+
+1. An MSISDN (defined in 3GPP TS 23.003 [12] clause 3.3). For example: 1555123456
+2. An External Identifier (defined in 3GPP TS 23.003 [12] clause 19.7.2), which has the format of _username@realm_ as specified in clause 2.1 of IETF RFC 4282 [RFC 4282].
+
+Example: user1AD4@subdomain.example.com
+
+### External Identifier format of the GPSI <a name="extid"></a>
+
+With respect to the External Identifier format of the SUPI, 3GPP TS 23.003 [12] indicates in clause 19.7.2 that the _username_ part contains a _Local Identifier_ as specified in 3GPP TS 23.682 [13] and the _realm_ part contains a _Domain Identifier_as specified in 3GPP TS 23.682 [13], which must be a duly registered Internet domain name.
+
+Observe that the combination of the Local Identifier and the Domain Identifier makes the External Identifier globally unique.
+
+3GPP TS 23.682 [13] specifies the _Domain Identifier_ as a domain that is under the control of a Mobile Network Operator (MNO) and then indicates that the _Domain Identifier_ is used to identify where services provided by the operator network can be accessed. It is possible for an operator to differentiate services by providing different domain identifiers associated to the same subscription.
+
+The _Local Identifier_, also according to 3GPP TS 23.682 [13], is used to derive or obtain the SUPI. It is unique within the applicable domain and managed by the Mobile Network Operator.
+
+Although the concepts of the _Domain Identifier_ and _Local Identifier_ were initially created for Cellular IoT environment, these are generally applicable to any type of user subscription in the mobile network.
+
+### AF-specific UE external identifier <a name="afspecific"></a>
+
+AF-specific UE external identifier is just a GPSI in the format of an External Identifier, that happens to be define for a specific AF, with the regular format of an External Identifier:
+
+\&lt;localIdentifier\&gt;@\&lt;AF-specific-domainRealm\&gt;
+
+The AF-specific UE external identifier is associated to the SUPI in UDM/UDR. It is assumed that the MNO provisions the AF-specific UE external identifier in UDM/UDR.
+
+The AF-specified UE external identifier was introduced in 3GPP Rel-17 to solve these problems:
+
+- A UE may change its UE IP address when it is served by an Edge Computing site.
+- If the AF identifies the UE with its UE IP address, the AF may lose control when the UE IP address changes.
+- The AF-specific UE external identifier takes into consideration privacy of the MSISDN, so that it does not require the user to disclose its MSISDN.
+
+The AF keeps the AF-specific UE external identifier for the duration of the AF session. The AF must not keep a binding to the UE IP address, since the UE IP address may change.
+
+3GPP indicates that the AF specific UE external identifier must not contain an MSISDN, due to privacy reasons. Please note that a GPSI can still contain an MSISDN, should this privacy reasons be properly addressed (e.g., the user discloses its MSISDN).
+
+Note: it is assumed that the UE IP address indicated by the AF is a public IP address. NAT considerations are left outside the scope of this document.
+
+#### AF obtaining the AF-specific UE External Identifier <a name="afobtaining"></a>
+
+3GPP has specified several mechanisms for allowing an AF to learn the AF-specific UE external identifier. These mechanisms include:
+
+1. The AF may invoke the Nnef\_UEId\_Get service operation for retrieving the AF‑specific UE external identifier. The procedure is specified in 3GPP TS 23.502 [11], clause 4.15.10 and allows the AF to use the UE IP or Ethernet address as an input to the query in order to obtain the AF-specific UE External Identifier of the UE.
+2. The AF may also obtain the AF-specific UE external identifier in a **response** to any of these service operations.
+
+1. Nnef\_EventExposure\_Subscribe (Monitoring Events)
+2. Nnef\_ParameterProvision\_Create
+3. Nnef\_ParameterProvision\_Update
+4. Nnef\_ParameterProvision\_Get
+
+In any of the cases, retrieval of the AF-specific UE external identifier requires a query to UDM/UDR based on the SUPI of the UE. UDM returns the AF-specific UE external identifier and, if legal, privacy, and regulatory aspects allow it, UDM may also deliver additional GPSIs associated to the SUPI, such as an MSISDN.
+
+After obtaining it, the AF may use the AF-specific UE external identifier in subsequent requests where a GPSI is used for identifying the UE.
+
+#### NEF obtaining the AF-specific UE External Identifier <a name="nefobtaining"></a>
+
+
+There might be occasions where the NEF receives from an AF a request for a UE which is identified by its UE IP address, for example, the request may be related to a subscription to Event Reporting or a Parameter Provision subscription. In these cases the NEF needs to obtain the SUPI of the UE , based on the UE IP address prior to contacting 5GC Network Functions. In this case, when the NEF has received a response from 5G Core, the NEF includes the AF specific UE external identifier in the response towards the AF. Then, the AF may use this AF specific external UE identifier in subsequent requests for the same UE. This is specified in 3GPP TS 23.502 [11], clause 4.15.3.2.13.
+
+## UE Identification summary <a name="ueidsummary"></a>
+
+There are several methods that an Application Function may use to identify a UE:
+
+1. An AF may identify the UE with its UE IP address, as seen from the AF.
+2. The AF may get the GPSI out of band. For example: the AF may also have been provisioned, by the user or the AF, with the MSISDN of the UE. The user might have &quot;logged&quot; into the AF server, in which case, the AF already knows the MSISDN of the UE.
+3. The AF may also get a GPSI in the format of AF-specific UE Identifier by querying NEF or in response to certain services, where the initial request uses the UE IP address.
+4. The NEF may resolve the UE IP address to a SUPI prior to executing a 5GC operation, learn the AF specific UE External identifier, and return it to the AF for use in subsequent requests.
+
+It seems that use cases exists for using GPSI in any of the possible formats.
+
+NOTE: UE identification must not be confused with identification of the PDU session or QoS flow of a UE.
+
+Camara APIs should enable AFs for identifying the UE primarily with:
+
+- A GPSI represented in any of the possible existing formats.
+
+And secondary (optionally) with:
+
+- The UE IP address or MAC address (together with the AF Identifier).
+
 
 ## Documentation and Specs <a name="docs"></a>
 Several developer surveys explain how important API documentation is to the success of an API. These surveys also highlight that missing or unclear documentation on authentication and authorization for an API can deter most consumers/developers to get started with the API. The API documentation template contributed within Camara alliance has already added the authentication section as mandatory to highlight its importance. 
@@ -202,7 +300,15 @@ Depending on the Service API use cases, we expect the APIs contributed to the Ca
 [6]: https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#securityRequirementObject  "Security Requirement Object"  
 [7]: https://openid.net/specs/openid-connect-core-1_0.html "OpenID Connect Specification"  
 [8]: https://openid.net/specs/openid-connect-discovery-1_0.html "OIDC Discovery Specification"  
-[9]: https://spec.openapis.org/oas/v3.1.0 "OAS3"
+[9]: https://spec.openapis.org/oas/v3.1.0 "OAS3"  
+
+[10]: https://www.3gpp.org/DynaReport/23501.htm "3GPP TS 23.501, System Architecture for the 5G System; Stage 2"  
+
+[11]: https://www.3gpp.org/DynaReport/23502.htm "3GPP TS 23.502, Procedures for the 5G System; Stage 2"  
+
+[12]: https://www.3gpp.org/DynaReport/23003.htm "3GPP TS 23.003, Numbering, addressing and identification"  
+
+[13]: https://www.3gpp.org/DynaReport/23682.htm "3GPP TS 23.682, Architecture enhancements to facilitate communications with packet data networks and applications"  
 
 [1] https://auth0.com/docs/authentication "Authentication"  
 [2] https://auth0.com/docs/authorization "Authorization"  
@@ -213,6 +319,10 @@ Depending on the Service API use cases, we expect the APIs contributed to the Ca
 [7] https://openid.net/specs/openid-connect-core-1_0.html "OpenID Connect Specification"  
 [8] https://openid.net/specs/openid-connect-discovery-1_0.html "OIDC Discovery Specification"  
 [9] https://spec.openapis.org/oas/v3.1.0 "OAS3"
+[10] https://www.3gpp.org/DynaReport/23501.htm "3GPP TS 23.501, System Architecture for the 5G System; Stage 2"
+[11] https://www.3gpp.org/DynaReport/23502.htm "3GPP TS 23.502, Procedures for the 5G System; Stage 2"
+[12] https://www.3gpp.org/DynaReport/23003.htm "3GPP TS 23.003, Numbering, addressing and identification"
+[13] https://www.3gpp.org/DynaReport/23682.htm "3GPP TS 23.682, Architecture enhancements to facilitate communications with packet data networks and applications"
 
 
 #### RFCs 
@@ -227,6 +337,7 @@ Depending on the Service API use cases, we expect the APIs contributed to the Ca
 -   OAuth 2 Token Introspection [RFC 7662](https://datatracker.ietf.org/doc/html/rfc7662)
 -   OAuth 2 Security Assertion Markup Language,  [RFC 7522](https://tools.ietf.org/html/rfc7522)
 -   JSON Web Token Bearer,  [RFC 7523](https://tools.ietf.org/html/rfc7523)
+-   The Network Access Identifier, [RFC 4282](https://tools.ietf.org/html/rfc4282)
 
 ## CAPIF <a name="CAPIF"></a>
 
