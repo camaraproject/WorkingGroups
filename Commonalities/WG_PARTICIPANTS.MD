@@ -19,6 +19,7 @@
 | Telefonica | José Ordoñez-Lucena |
 | Telefonica | Rubén Barrado Gonzalez |
 | TIM | Fabrizio Moggio|
-| Vodafone | Eric Murray |
+| TIM | Raffaele Passannanti|
+|Vodafone | Eric Murray |
 | Vodafone | Ivan Nieto|
 | Vodafone | Kevin Smith|
