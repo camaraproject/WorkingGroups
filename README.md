@@ -3,7 +3,7 @@
 <a href="https://github.com/camaraproject/WorkingGroups/pulls" title="Open Pull Requests"><img src="https://img.shields.io/github/issues-pr/camaraproject/WorkingGroups?style=plastic"></a>
 <a href="https://github.com/camaraproject/WorkingGroups/graphs/contributors" title="Contributors"><img src="https://img.shields.io/github/contributors/camaraproject/WorkingGroups?style=plastic"></a>
 <a href="https://github.com/camaraproject/WorkingGroups" title="Repo Size"><img src="https://img.shields.io/github/repo-size/camaraproject/WorkingGroups?style=plastic"></a>
-<a href="https://github.com/camaraproject/WorkingGroups/blob/main/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=plastic"></a>
+<a href="https://github.com/camaraproject/WorkingGroups/blob/main/Commonalities/LICENSE.APACHE2.0" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=plastic"></a>
 
 # CAMARA Working Groups
 Repository for the CAMARA Working Groups:
