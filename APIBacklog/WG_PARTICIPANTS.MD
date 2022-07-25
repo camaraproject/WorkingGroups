@@ -1,6 +1,5 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
-| Deutsche Telekom | Marcin Jarzab  |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
