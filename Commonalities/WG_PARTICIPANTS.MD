@@ -4,7 +4,6 @@
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
-| Deutsche Telekom AG | Mariusz Sozanski |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
@@ -20,6 +19,6 @@
 | Telefonica | Rubén Barrado Gonzalez |
 | TIM | Fabrizio Moggio|
 | TIM | Raffaele Passannanti|
-|Vodafone | Eric Murray |
+| Vodafone | Eric Murray |
 | Vodafone | Ivan Nieto|
 | Vodafone | Kevin Smith|
