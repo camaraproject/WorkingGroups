@@ -1,153 +1,96 @@
 openapi: 3.0.0
 tags:
-  - name: devices
-    description: Information about HGU's registered devices and actions over them
+  - name: Home Devices Prioritization
+    description: Home devices prioritization available for *Network-as-a-Service* API clients
 paths:
-  /users/{user_id}/{identifier_type}/{identifier_id}/hgu/devices:
-    get:
-      description: Get all registered devices with all information related to them, both info and settings data.
+  /users/{user_id}/devices/this/prioritization:
+    put:
+      description: |-
+        Updates the device prioritization status when there is a device connected to the user home network matching the input criteria provided in request body. Setting prioritization to CS0 removes any previous prioritization. **The device to be prioritized is replaced by the special keyword 'this' in the API resource referring to the device match.**
+         - The device to be prioritized is identified by the internal IP address of that device in the home network and the public IP address identifying that home network (external IP address of the home router).
+         - In case there is no device matching the input criteria, the operation returns a 404 error.
       tags:
-        - devices
-      operationId: getDevices
-      parameters:
-        - $ref: "#/components/parameters/XCorrelator"
-        - $ref: "#/components/parameters/UserId"
-        - $ref: "#/components/parameters/IdentifierType"
-        - $ref: "#/components/parameters/IdentifierId"
-        - in: query
-          name: status
-          required: false
-          description: The status of the registered devices used to filter the results.
-          schema:
-            type: string
-            enum:
-              - connected
-              - disconnected
-        - in: query
-          name: paused
-          required: false
-          description: The pause state of the registered devices used to filter the results.
-          schema:
-            type: boolean
-        - in: query
-          name: blocked
-          required: false
-          description: The block state of the registered devices used to filter the results.
-          schema:
-            type: boolean
-        - in: query
-          name: dscp
-          required: false
-          description: The DSCP prioritization value of the registered devices used to filter the results.
-          style: form
-          explode: false
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - CS0
-                - CS1
-                - AF11
-                - AF12
-                - AF13
-                - CS2
-                - AF21
-                - AF22
-                - AF23
-                - CS3
-                - AF31
-                - AF32
-                - AF33
-                - CS4
-                - AF41
-                - AF42
-                - AF43
-                - CS5
-                - EF
-                - CS6
-                - CS7
-            uniqueItems: true
-      summary: Get all registered devices ever connected to an HGU owned by a user
-      responses:
-        "200":
-          headers:
-            x-correlator:
-              description: Correlation id for the different services
-              schema:
-                type: string
-          description: An array of the devices registered in the HGU
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/DeviceInfo"
-        "400":
-          $ref: "#/components/responses/InvalidArgument"
-        "401":
-          $ref: "#/components/responses/Unauthenticated"
-        "403":
-          $ref: "#/components/responses/PermissionDenied"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/Internal"
-        "503":
-          $ref: "#/components/responses/Unavailable"
-        "504":
-          $ref: "#/components/responses/Timeout"
-      x-fp-security:
-        pi_scopes:
-          - home-devices-management-device-read
-  ? /users/{user_id}/{identifier_type}/{identifier_id}/hgu/devices/{device_id}/prioritization
-  : put:
-      description: Updates the device prioritization status (setting it to CS0 removes any previous prioritization)
-      tags:
-        - devices
+        - Home Devices Prioritization
       operationId: updateDevicePrioritization
       parameters:
-        - $ref: "#/components/parameters/XCorrelator"
-        - $ref: "#/components/parameters/UserId"
-        - $ref: "#/components/parameters/IdentifierType"
-        - $ref: "#/components/parameters/IdentifierId"
-        - $ref: "#/components/parameters/DeviceId"
+        - in: header
+          name: x-correlator
+          required: false
+          description: Correlation id for the different services
+          schema:
+            type: string
+        - $ref: '#/components/parameters/UserId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DevicePrioritizationUpdate"
+              $ref: '#/components/schemas/DevicePrioritizationUpdate'
         required: true
-      summary: Set the desired DSCP prioritization status of a device in the home network
+      summary: Set the desired DSCP prioritization status of the device matching the input criteria
       responses:
-        "204":
+        '204':
           headers:
             x-correlator:
               description: Correlation id for the different services
               schema:
                 type: string
           description: New prioritization passed all validations and was applied
-        "400":
-          $ref: "#/components/responses/InvalidArgument"
-        "401":
-          $ref: "#/components/responses/Unauthenticated"
-        "403":
-          $ref: "#/components/responses/PermissionDenied"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "409":
-          $ref: "#/components/responses/PrioritizationConflict"
-        "500":
-          $ref: "#/components/responses/Internal"
-        "503":
-          $ref: "#/components/responses/HguActionsUnavailable"
-        "504":
-          $ref: "#/components/responses/Timeout"
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          $ref: '#/components/responses/PermissionDenied'
+        '404':
+          $ref: '#/components/responses/NoDeviceMatch'
+        '409':
+          $ref: '#/components/responses/PrioritizationConflict'
+        '500':
+          $ref: '#/components/responses/Internal'
+        '503':
+          $ref: '#/components/responses/RouterActionsUnavailable'
+        '504':
+          $ref: '#/components/responses/Timeout'
       x-fp-security:
         pi_scopes:
-          - home-devices-management-device-write
+          - home-devices-prioritization-device-write
+info:
+  title: Home Devices Prioritization API - DRAFT VERSION
+  description: |-
+    Allows to prioritize user devices connected to the user home network as a NaaS capability.
+
+    # Relevant Definitions and concepts
+
+    - **Home Devices**: user devices connected to the user home network.
+    - **NaaS**: *Network-as-a-Service* model where OB Network resources are exposed to third parties through APIs. In this particular API, device prioritization operation is exposed following this model.
+    - **DSCP**: *Differentiated Services (DiffServ) Code Point* value used to prioritize traffic of the target home device.
+
+    # API Functionality
+
+     This API allows to third party clients to prioritize the device connected to the user home network matching the input criteria provided. 
+
+    # Resources and Operations overview
+
+     The API provides a single endpoint:
+    - An endpoint to set the desired DSCP prioritization status of the device matching the input criteria.
+
+    Resources in the API can be used in 2-legged or 3-legged mode. When accessed in 3 legged mode, the URI param {user_id} should be substituted by the special keyword ‘me’.
+
+    # Further Info and Support
+    Find answers to Frequently Asked Questions in **https://qna.baikalplatform.com/c/api-faq**.
+
+    Topics with the tag '**home devices prioritization**' are specific for Home Devices Prioritization API. Also topics with tags '**home network**', '**home devices**' or '**naas** may apply to this API.
+
+    # Authentication
+
+    <fp-authentication />
+  version: 1.0.0
+  termsOfService: https://www.telefonica.es/es/
+  contact:
+    name: 4th Platform Team
+    email: 4pf@tid.es
 servers:
-  - url: https://api.baikalplatform.com/home-devices-management/v2
+  - url: https://api.baikalplatform.com/home-devices-prioritization/v1
 components:
   parameters:
     UserId:
@@ -158,38 +101,6 @@ components:
       in: path
       required: true
       x-fp-identifier: user_id
-      schema:
-        type: string
-    IdentifierId:
-      name: identifier_id
-      description: Identifier of the 'internet' service where this HGU is installed. This identifier is returned in the User Profile API response. Could be a phone_number or a uid, depending on the OB.
-      in: path
-      required: true
-      schema:
-        type: string
-    IdentifierType:
-      name: identifier_type
-      description: Type of the identifier
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-          - phone-numbers
-          - uids
-    DeviceId:
-      name: device_id
-      description: Identifier of the device
-      in: path
-      required: true
-      schema:
-        type: string
-        maxLength: 256
-    XCorrelator:
-      in: header
-      name: x-correlator
-      required: false
-      description: Correlation id for the different services
       schema:
         type: string
   responses:
@@ -325,39 +236,6 @@ components:
               value:
                 code: NOT_FOUND
                 message: A specified resource is not found
-    Conflict:
-      description: Request conflict with the current state of the target resource
-      headers:
-        x-correlator:
-          description: Correlation id for the different services
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            allOf:
-              - type: object
-                required:
-                  - code
-                properties:
-                  code:
-                    type: string
-                    enum:
-                      - CONFLICT
-                    default: CONFLICT
-                    description: A specified resource duplicate entry found
-              - type: object
-                required:
-                  - message
-                properties:
-                  message:
-                    type: string
-                    description: A human readable description of what the event represent
-          examples:
-            response:
-              value:
-                code: CONFLICT
-                message: Request conflict with the current state of the target resource
     Internal:
       description: Server error
       headers:
@@ -391,44 +269,11 @@ components:
               value:
                 code: INTERNAL
                 message: Server error
-    Unavailable:
-      description: Service unavailable. Typically the server is down.
-      headers:
-        x-correlator:
-          description: Correlation id for the different services
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            allOf:
-              - type: object
-                required:
-                  - code
-                properties:
-                  code:
-                    type: string
-                    enum:
-                      - UNAVAILABLE
-                    default: UNAVAILABLE
-                    description: Request timeout exceeded
-              - type: object
-                required:
-                  - message
-                properties:
-                  message:
-                    type: string
-                    description: A human readable description of what the event represent
-          examples:
-            response:
-              value:
-                code: UNAVAILABLE
-                message: Service unavailable
-    HguActionsUnavailable:
+    RouterActionsUnavailable:
       description: |-
         Service unavailable. Typically the server is down.
         In addition to regular scenario of UNAVAILABLE to handle service availability problems, another scenario may exist.
-         - The HGU is offline ("code": "HOME_DEVICES_MANAGEMENT.HGU_OFFLINE","message": "HGU is not online. Try it later.").
+         - The router is offline ("code": "HOME_DEVICES_PRIORITIZATION.ROUTER_OFFLINE","message": "Router is not online. Try it later.").
       headers:
         x-correlator:
           description: Correlation id for the different services
@@ -446,10 +291,10 @@ components:
                 type: string
                 enum:
                   - UNAVAILABLE
-                  - HOME_DEVICES_MANAGEMENT.HGU_OFFLINE
+                  - HOME_DEVICES_PRIORITIZATION.ROUTER_OFFLINE
                 description: |-
                   Service unavailable. Typically the server is down.
-                  HGU is not online. Try it later.
+                  Router is not online. Try it later.
               message:
                 type: string
                 description: A human readable description of what the event represent
@@ -460,13 +305,12 @@ components:
                 message: Service unavailable
     PrioritizationConflict:
       description: |-
-        Device can't be prioritized. Possible scenarios are:
-         - HOME_DEVICES_MANAGEMENT.TOO_MANY_DEVICES: Exceeded the maximum quantity of priority devices.
-         - HOME_DEVICES_MANAGEMENT.RSSI_BELOW_THRESHOLD: RSSI from device is below allowed threshold.
-         - HOME_DEVICES_MANAGEMENT.PRIORITY_TOO_HIGH: Prioritization requested is above the maximum permitted.
-         - HOME_DEVICES_MANAGEMENT.OCCUPANCY_ABOVE_THRESHOLD: The occupancy is above the allowed threshold.
-         - HOME_DEVICES_MANAGEMENT.NOT_CONNECTED_TO_5GHZ: The device is not connected on main 5GHz interface.
-         - HOME_DEVICES_MANAGEMENT.DEVICE_NOT_PRIORITIZED: Device is not on priority list.
+        Device can't be prioritized. In addition to regular CONFLICT scenario to handle conflict with the current state of the target resource, another scenarios may exist:
+         - HOME_DEVICES_PRIORITIZATION.TOO_MANY_DEVICES: Exceeded the maximum quantity of priority devices.
+         - HOME_DEVICES_PRIORITIZATION.RSSI_BELOW_THRESHOLD: RSSI from device is below allowed threshold.
+         - HOME_DEVICES_PRIORITIZATION.PRIORITY_TOO_HIGH: Prioritization requested is above the maximum permitted.
+         - HOME_DEVICES_PRIORITIZATION.OCCUPANCY_ABOVE_THRESHOLD: The occupancy is above the allowed threshold.
+         - HOME_DEVICES_PRIORITIZATION.DEVICE_NOT_PRIORITIZED: Device is not on priority list.
       headers:
         x-correlator:
           description: Correlation id for the different services
@@ -483,12 +327,11 @@ components:
               code:
                 type: string
                 enum:
-                  - HOME_DEVICES_MANAGEMENT.TOO_MANY_DEVICES
-                  - HOME_DEVICES_MANAGEMENT.RSSI_BELOW_THRESHOLD
-                  - HOME_DEVICES_MANAGEMENT.PRIORITY_TOO_HIGH
-                  - HOME_DEVICES_MANAGEMENT.OCCUPANCY_ABOVE_THRESHOLD
-                  - HOME_DEVICES_MANAGEMENT.NOT_CONNECTED_TO_5GHZ
-                  - HOME_DEVICES_MANAGEMENT.DEVICE_NOT_PRIORITIZED
+                  - HOME_DEVICES_PRIORITIZATION.TOO_MANY_DEVICES
+                  - HOME_DEVICES_PRIORITIZATION.RSSI_BELOW_THRESHOLD
+                  - HOME_DEVICES_PRIORITIZATION.PRIORITY_TOO_HIGH
+                  - HOME_DEVICES_PRIORITIZATION.OCCUPANCY_ABOVE_THRESHOLD
+                  - HOME_DEVICES_PRIORITIZATION.DEVICE_NOT_PRIORITIZED
                 description: Device can't be prioritized because a precondition does not hold
               message:
                 type: string
@@ -496,7 +339,7 @@ components:
           examples:
             response:
               value:
-                code: HOME_DEVICES_MANAGEMENT.TOO_MANY_DEVICES
+                code: HOME_DEVICES_PRIORITIZATION.TOO_MANY_DEVICES
                 message: Exceeded the maximum quantity of priority devices
     Timeout:
       description: Request time exceeded. If it happens repeatedly, consider reducing the request complexity
@@ -531,6 +374,37 @@ components:
               value:
                 code: TIMEOUT
                 message: Request timeout exceeded. If it happens repeatedly, consider reducing the request complexity
+    NoDeviceMatch:
+      description: |-
+        Resource Not Found.
+        In addition to regular scenario of NOT_FOUND, another scenario may exist.
+         - There is no device matching the input criteria. ("code": "HOME_DEVICES_PRIORITIZATION.NO_DEVICE_MATCH","message": "No connected device found for the IP addresses provided.").
+      headers:
+        x-correlator:
+          description: Correlation id for the different services
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - code
+              - message
+            properties:
+              code:
+                type: string
+                enum:
+                  - HOME_DEVICES_PRIORITIZATION.NO_DEVICE_MATCH
+                description: There is no device matching the input criteria
+              message:
+                type: string
+                description: A human readable description of what the event represent
+          examples:
+            response:
+              value:
+                code: HOME_DEVICES_PRIORITIZATION.NO_DEVICE_MATCH
+                message: No connected device found for the IP address provided
   securitySchemes:
     three_legged:
       type: oauth2
@@ -539,131 +413,15 @@ components:
           authorizationUrl: https://auth.baikalplatform.com/authorize
           tokenUrl: https://auth.baikalplatform.com/token
           scopes:
-            home-devices-management-device-read: Read HGU Devices
-            home-devices-management-device-write: Write HGU Devices
+            home-devices-prioritization-device-write: Write Home Devices Prioritization
   schemas:
-    DeviceInfo:
-      type: object
-      description: Information about a device
-      required:
-        - device_id
-      properties:
-        device_id:
-          type: string
-          description: Identifier of the device
-          minLength: 1
-          maxLength: 256
-          example: e7e52160-5a76-4293-81be-33c154be0110
-        status:
-          type: string
-          description: |-
-            Current status of the device.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          enum:
-            - connected
-            - disconnected
-          example: connected
-        paused:
-          type: boolean
-          description: |-
-            Flag that indicates the device is currently paused.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: false
-        blocked:
-          type: boolean
-          description: |-
-            Flag that indicates the device is currently blocked.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: false
-        new:
-          type: boolean
-          description: |-
-            If the device is new it has never been viewed.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: false
-        host_name:
-          type: string
-          description: |-
-            Hostname of the device.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: haac_nas.local
-        mac_addr:
-          type: string
-          description: |-
-            MAC address of the device. Could be randomized.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: 33:4b:fe:3a:d4:4c
-        interface:
-          type: string
-          description: Name of the interface to which this device is connected in the router. Unavailable for devices with disconnected status.
-          example: wlan0
-        ip_address:
-          type: string
-          description: Internal IP address of the device in the LAN. Unavailable for devices with disconnected status.
-          example: 192.168.1.27
-        dynamic_ip:
-          type: boolean
-          description: |-
-            If the IP was assigned via DHCP instead of static IP.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: true
-        first_connection_time:
-          type: string
-          format: date-time
-          description: |-
-            First date when the device was connected to the HGU.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: "2021-04-28T10:33:27.146Z"
-        last_disconnection_time:
-          type: string
-          format: date-time
-          description: Last date when the device was disconnected from the HGU. This field will only be available when device status is disconnected.
-          example: "2021-04-30T11:45:59.213Z"
-        random_mac:
-          type: boolean
-          description: |-
-            The MAC address is randomized.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          example: false
-        dscp:
-          type: string
-          description: |-
-            DSCP information for QoS.
-            This field will always have a value if the PI-Scopes allow returning this information.
-          enum:
-            - CS0
-            - CS1
-            - AF11
-            - AF12
-            - AF13
-            - CS2
-            - AF21
-            - AF22
-            - AF23
-            - CS3
-            - AF31
-            - AF32
-            - AF33
-            - CS4
-            - AF41
-            - AF42
-            - AF43
-            - CS5
-            - EF
-            - CS6
-            - CS7
-          example: CS0
-        ssid:
-          type: string
-          description: SSID to which the device is connected to the HGU. Unavailable for non-WiFi devices or if devices has disconnected status.
-          example: MOVISTAR_2E4B
-        nick:
-          $ref: "#/components/schemas/DeviceNick"
     DevicePrioritizationUpdate:
       type: object
       description: Payload to change the prioritization status of a device.
       required:
         - dscp
+        - ip_address
+        - public_ip_address
       properties:
         dscp:
           type: string
@@ -692,27 +450,16 @@ components:
             - CS7
             - MAX_ALLOWED
           example: CS0
-    DeviceNick:
-      type: object
-      description: Custom name and category of the device provided by the user
-      properties:
-        nick_name:
+        ip_address:
           type: string
-          description: Custom name of the device provided by the user.
-          minLength: 1
-          maxLength: 256
-          example: iPhone X de HaaC
-        nick_category:
+          description: Internal IP address of the connected device in the LAN.
+          example: 192.168.1.27
+        public_ip_address:
           type: string
-          description: Custom category name provided by the user.
-          minLength: 1
-          maxLength: 256
-          example: Mis móviles
+          description: Public IP address of the device.
+          example: 83.58.37.57
   x-fp-authentication:
     pi_scopes:
-      home-devices-management-device-read:
-        title: Read HGU Devices
-        description: Read Access to the Devices connected to HGU
-      home-devices-management-device-write:
-        title: Write HGU Devices
-        description: Write Access to the Devices connected to HGU
+      home-devices-prioritization-device-write:
+        title: Write Home Devices Prioritization
+        description: Write Access to prioritization status of devices connected to the home network.
