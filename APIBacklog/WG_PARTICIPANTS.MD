@@ -4,6 +4,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
+| KDDI | Yusuke Nakano |
 | Orange | Jerome Larrode  |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
