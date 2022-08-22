@@ -1,6 +1,6 @@
 ## Scope
-* Discuss and include changes (GitHub issue #17) in APIBacklog.md 
-* Schedule: from 12.05.2022
+* Maintain the API Backlog for CAMARA 
+* Started: May 2022
 * Location: virtually  
 
 ## Meetings
