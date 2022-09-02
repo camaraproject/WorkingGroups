@@ -5,7 +5,7 @@
 |  2 |API Implementation |   N        |                                             |
 | 3   |API Documentation  |   Y        |https://github.com/camaraproject/WorkingGroups/blob/main/Commonalities/documentation/Deliverables/API-DocumentationTemplate.md                                             |
 |4   |User Stories  |   Y        |	https://github.com/camaraproject/WorkingGroups/blob/main/Commonalities/documentation/Deliverables/Userstory-template.md                                            |
-| 5   |API test cases  |   Y        |      TBD                                       |
+| 5   |API test cases and documentation  |   Y        |      TBD                                       |
 | 6   |Tested by atleast 2 operators  |   Y        |                                             |
-| 7   |Security review  |   O        |  Complies with 'security by design' principles. Kept optional as many checks(SAST etc. would be relevant only if the implementation is contributed. For the spec contribution mandatory security review for topics such as AuthN&AuthZ etc. should be in place.                                     |
+| 7   |Security review  |   Y        |  Spec contributions should include security scheme section with commonalities agreed means of AuthN&AuthZ                                    |
 
