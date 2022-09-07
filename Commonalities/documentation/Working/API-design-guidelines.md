@@ -1,6 +1,6 @@
-# User Consent Management
+# API design guidelines
 
-This document captures guidelines, compliant with GDPR requirements, for Operator NaaS platform to handle user consents.
+This document captures guidelines for the API design in CAMARA project. These guidelines are applicable to every API to be worked out under the CAMARA initiative.
 
 ## Table of Contents
 
