@@ -17,7 +17,7 @@ This template captures all the information that a partner should fill out when p
 **Guidelines on template submission**
 
 - Option A (default): the API proposal is out of scope of an existing API Sub Project
-  - Upload this template to API backlog, [in this directory](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/Contributions), using this filename: `APIproposal_<APIname>_<APIowner>.md`. The submission shall be done via PR, assigning at least with one reviewer.
+  - Upload this template to API backlog, [in this directory](https://github.com/camaraproject/WorkingGroups/tree/main/APIBacklog/documentation/Contributions/API%20Proposals), using this filename: `APIproposal_<APIname>_<APIowner>.md`. The submission shall be done via PR, assigning at least with one reviewer.
 
 
 - Option B (shortcut): the API proposal is in scope of an existing API Sub Project
