@@ -7,5 +7,5 @@
 |4   |User Stories  |   Y        |	https://github.com/camaraproject/WorkingGroups/blob/main/Commonalities/documentation/Deliverables/Userstory-template.md                                            |
 | 5   |API test cases and documentation  |   Y        |      TBD                                       |
 | 6   |Tested by atleast 2 operators  |   Y        |                                             |
-| 7   |Security review  |   Y        |  Spec contributions should include security scheme section with commonalities agreed means of AuthN&AuthZ                                    |
+| 7   |Security review  |   Y        |  Spec contributions should include a security scheme section that complies with the AuthN&AuthZ techniques agreed in Commonalities.                                   |
 
