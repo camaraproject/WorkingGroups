@@ -26,6 +26,12 @@ Authorization [2] refers to the process of verifying what a user has access to. 
 
 It is also important to reflect on a step before authentication (step 0) - onboarding. This is also referred to commonly as partner/consumer onboarding. 
 
+### User indentity
+
+On what refers to CAMARA APIs to be exposed by Telco operators, the end user is the human participant which is identified in Telco Operator by a unique user identifier (e.g. Subject identifier `sub` in OIDC terminology). Therefore, the Authentication process allows to confirm/validate user identity.
+
+It is important to differentiate the identification of a user from the identification of a device or UE. For example, the same user could have multiple associated devices.  
+
 ## API Gateway pattern <a name="Pattern"></a>
 An API implementation typically includes the business logic of the offered service. If the API includes all the security and exposure specific logic into an API, it will end up making the implementation too complex. The API gateway resides between the backend service (resource service) and the API consumer and it intercept all the requests from the consumer to the service. The API Management system integrates with an identity and access management system to ensure that all users accessing the system are authenticated and authorized to use the platform.
 
@@ -105,17 +111,18 @@ Relevant Authorization grants
 
 An authorization grant is a credential representing the resource owner's authorization (to access its protected resources) used by the client to obtain an access token. Out of the grants defined under OAuth2 we recommend:
 
-- <ins>Client Credentials grant</ins>: (when user resource is not involved & the client belongs to confidential category)
-- <ins>Authorization Code grant</ins>: (when user resource is involved)
+- <ins>Client Credentials grant</ins>: (**when user resource is NOT involved** & the **client belongs to confidential category**)
+- <ins>Authorization Code grant</ins>: (**when user resource is involved**)
 
 Extensions
 - <ins>Token exchange grant</ins>: (RFC8693) It is used when multiple participants are involved with impersonation (using subject_token) or/and delegation (actor_token) requirements and the existing grant options limit possible inputs/outputs
 - <ins>Device code grant</ins>: (RFC8628) It is used when two separate devices are involved, one asking for authorization, and  the other device on which authorization is actually granted but it is input constrained
 The implicit and password grant types are other options specified by OAuth2 when user resource is involved but they are already considered legacy.
+- <ins>Bearer JWT grant (jwt-bearer)</ins>: (RFC7523) It is used to request an access token when a client wishes to utilize an existing trust relationship, expressed through the semantics of the JWT, without a direct user-approval step at the authorization server. It uses the "Assertion Framework for OAuth 2.0" (RFC7521) to define assertions (JWT) as authorization grants with OAuth 2.0.
 
 
 #### Client Credential Grant
-The client credential grant is used for server to server use cases involving trusted partners or clients without any protected user data involved. In this method the API invoker client is registered as a confidential client with an authorization grant type of client_credentials. The Camara Service APIs in most use cases will make use of the client crendentials grant.
+The client credential grant is used for server to server use cases involving trusted partners or clients without any protected user data involved. In this method the API invoker client is registered as a confidential client with an authorization grant type of client_credentials.
 
 <img src="./images/cc.png" alt="cc"
 	title="CLient Credentials Grant" width="800" height="600" />
@@ -141,6 +148,8 @@ The authorization code is a temporary code that the client will exchange for an 
 
 Proof Key for Code Exchange (PKCE is specified in RFC 7636) is a kind of proof of possession. It is an extension to the authorization code flow to prevent CSRF and authorization code injection attacks. The technique involves the client first creating a secret on each authorization request, and then using that secret again when exchanging the authorization code for an access token. This way if the code is intercepted, it will not be useful since the token request relies on the initial secret. PKCE uses cryptography to guarantee that the client exchanging an OAuth2 code for tokens is the same client that started the original OAuth2 request. It is hence important to use this extension when using Auth code grant flow.
 
+#### OIDC Client-Initiated Backchannel Authentication (CIBA) flow
+CIBA is an authentication flow like regular OpenID Connect. However, unlike OpenID Connect, there is direct Relying Party to OpenID Provider communication without redirects through the user's browser. It decouples the concept of a Consumption Device (on which the user interacts with the Relying Party) and an Authentication Device (on which the user authenticates with the OpenID Provider and grants consent). CIBA allows a Relying Party that has an identifier for a user to obtain tokens from the OpenID Provider. The user starts the flow with the Relying Party at the Consumption Device, but authenticates and grants consent on the Authentication Device. Authentication could even be initiated without user action on the consumption device.
 
 ## Documentation and Specs <a name="docs"></a>
 Several developer surveys explain how important API documentation is to the success of an API. These surveys also highlight that missing or unclear documentation on authentication and authorization for an API can deter most consumers/developers to get started with the API. The API documentation template contributed within Camara alliance has already added the authentication section as mandatory to highlight its importance. 
