@@ -24,4 +24,4 @@ This is a live doc that captures the status of all the APIs which have been form
 	- Ready for SteerCo decision
 	- Approved (specify Sub-Project and include link)
 - `Supporters`: it lists the CAMARA companies or partner organizations that support working out API proposal in CAMARA. 
-- `Link to the filled-in template`: it specifies the URL.
+- `Link to the filled-in template`: URL where the filled-in template for API proposal has been submitted. If no URL is specified, it is assumed that no submission has been done yet; in such a case, the API is captured in the backlog for guidance/reference for future submissions.
