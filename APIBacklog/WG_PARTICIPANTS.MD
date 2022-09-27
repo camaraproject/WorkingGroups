@@ -3,6 +3,7 @@
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
+| GSMA | Mark Cornall |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | Orange | Jerome Larrode  |

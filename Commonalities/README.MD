@@ -1,6 +1,6 @@
 ## Scope
 * Elaborate and list “Commonalities for APIs”, work out commonalities on the list
-* Schedule: from now to 30.06.2022  
+* Started: October 2021  
 * Location: virtually  
 
 ## Meetings

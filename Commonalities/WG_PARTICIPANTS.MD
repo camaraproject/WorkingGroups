@@ -17,6 +17,7 @@
 | Orange | Sylvain Morel|
 | Telefonica | José Ordoñez-Lucena |
 | Telefonica | Rubén Barrado Gonzalez |
+| Telefonica | Jesús Peña García-Oliva |
 | TIM | Fabrizio Moggio|
 | TIM | Raffaele Passannanti|
 | Vodafone | Eric Murray |
