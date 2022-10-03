@@ -5,10 +5,15 @@ This is a live doc that captures the status of all the APIs which have been form
 | **Name**  |  **Owner**  | **Priority** | **API proposal registration date** | **Status**  | **Supporters** | **Link to the filled-in template** |
 | --- |  ---  | --- | --- | --- | --- | --- |
 | Home Devices Prioritization |  Telefónica  | TBD| 2022/09/14| Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/pull/73/files)|
-| SIM Swap|  DT, GSMA IDG  | TBD| 2022/09/30 | Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API%20Proposal_Sim%20Swap_Dawid%20Wroblewski.md)|
-| SIM Swap|  DT, GSMA IDG  | TBD| 2022/09/30 | Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API%20Proposal_Sim%20Swap_Dawid%20Wroblewski.md)|
+| Device Identifier |  Vodafone  | TBD| 2022/09/29| Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/APIproposal_Device-Identifier_Vodafone.md)|
+| Anonymised Subcriber Identifier |  Vodafone  | TBD| 2022/09/29| Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/APIproposal_Anonymised-Subscriber-Identifier_Vodafone.md)|
+| SIM Swap|  DT, GSMA IDG  | Short-term | 2022/09/30 | Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API%20Proposal_Sim%20Swap_Dawid%20Wroblewski.md)|
+| Number Verification - Mobile Connect Verified MSISDN|  DT, GSMA IDG  | Short-term | 2022/09/30 | Submitted | Airtel |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API_Proposal_%20Number_Verification_Dawid_Wroblewski.md)|
+| Number Verification - SMS 2FA|  DT, GSMA IDG  | Short-term | 2022/09/30 | Submitted | Airtel |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API_Proposal_Number_Verification_(SMS_2FA)_Dawid_Wroblewski.md)|
+|Carrier Billing - Check Out|  Telefónica  | Short-term| 2022/09/30 | Submitted | Airtel |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/Carrier_Billing_Check_Out_Pedro_Diez.md)|
 | --- |  ---  | --- | --- | --- | --- | --- |
 | --- |  ---  | --- | --- | --- | --- | --- |
+
 
 ### Attributes
 - `Name`: it is the name of the API proposal. 
