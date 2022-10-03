@@ -4,7 +4,9 @@ This is a live doc that captures the status of all the APIs which have been form
 
 | **Name**  |  **Owner**  | **Priority** | **API proposal registration date** | **Status**  | **Supporters** | **Link to the filled-in template** |
 | --- |  ---  | --- | --- | --- | --- | --- |
-| Home Devices Prioritization |  Telefónica  | TBD| 2022/09/14| Submitted | N/A |  [Link](https://github.com/camaraproject/WorkingGroups/pull/73/files)|
+| Home Devices Prioritization |  Telefónica  | TBD| 2022/09/14| Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/pull/73/files)|
+| SIM Swap|  DT, GSMA IDG  | TBD| 2022/09/30 | Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API%20Proposal_Sim%20Swap_Dawid%20Wroblewski.md)|
+| SIM Swap|  DT, GSMA IDG  | TBD| 2022/09/30 | Submitted | TBD |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/API%20Proposal_Sim%20Swap_Dawid%20Wroblewski.md)|
 | --- |  ---  | --- | --- | --- | --- | --- |
 | --- |  ---  | --- | --- | --- | --- | --- |
 
