@@ -4,7 +4,7 @@ Carrier Billing - Check Out API submission
 | ---- | ----- |
 | API name | Carrier Billing - Check Out|
 | API owner | Pedro Diez, Telefonica|
-| Initial API Contributors | Aurir Martinez - Telefonica, Juan Vazquez - Telefonica Sudhir Mittal - Airtel, Varun Talus - Airtel| 
+| Initial API Contributors | Aurir Martinez - Telefonica, Juan Vazquez - Telefonica Sudhir Mittal - Airtel, Varun Talus - Airtel, Toshi Wakayama - KDDI | 
 | API summary | Provides functionality for the purchase, payment and follow up of fulfilment of physical/digital goods, using as Payment Method Carrier Billing, i.e.: the operator will perform the billing of the goods.|
 | Technical viability | This API uses existing billing capabilities in every operator. This should be made available in a typical Checkout experience </em>.
 | Commercial viability | API commercially available (Checkout APIs)<em>|
