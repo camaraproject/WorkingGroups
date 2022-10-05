@@ -12,6 +12,6 @@
 ## Repository Structure
 Documentation includes:
 * Meeting minutes : [MeetingMinutes](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/MeetingMinutes)
-* Presentations and other supplementary docs : [Supporting_Docs](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/Supporting_Documents)
+* Presentations and other supplementary docs : [SupportingDocuments](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/SupportingDocuments)
 * Commonalities approved deliverables: [documentation](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation)
 * Working: [Working](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/Working) (*This is a legacy folder and will be removed soon)
