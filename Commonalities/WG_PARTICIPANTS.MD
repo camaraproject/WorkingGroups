@@ -1,5 +1,6 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
+| A1 | Manfred Mohrmann |
 | Accenture | Adriano Poloni|
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
