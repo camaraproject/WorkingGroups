@@ -12,7 +12,7 @@
 | Scenera | Andrew Wajs  |
 | Telefonica | Jose Ordonez-Lucena  |
 | Telefonica | Rubén Barrado González  |
+| TIM | Fabrizio Moggio  |
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
-| TIM | Fabrizio Moggio  |
