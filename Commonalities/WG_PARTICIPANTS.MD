@@ -11,6 +11,7 @@
 | GSMA | Faisal Zia |
 | GSMA | Mark Cornall |
 | GSMA | Tom Van Pelt |
+| Infobip | Kwok Onn Looi |
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
 | KDDI | Toshi Wakayama |
