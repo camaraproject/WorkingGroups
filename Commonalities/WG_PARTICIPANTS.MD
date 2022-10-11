@@ -16,6 +16,8 @@
 | KDDI | Toshi Wakayama |
 | Orange | Olivier Mathieu |
 | Orange | Sylvain Morel|
+| SpryFox Networks | Jignesh Sorathia |
+| SpryFox Networks | Ramesh Shanmugasundaram |
 | Telefonica | José Ordoñez-Lucena |
 | Telefonica | Rubén Barrado Gonzalez |
 | Telefonica | Jesús Peña García-Oliva |
