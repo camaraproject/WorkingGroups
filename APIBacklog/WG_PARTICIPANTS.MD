@@ -1,5 +1,6 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
+| Accenture | Giuseppe Di Nuccio  |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
