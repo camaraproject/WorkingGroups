@@ -1,5 +1,6 @@
 ## Scope
 * Elaborate and list “Commonalities for APIs”, work out commonalities on the list
+* Commonalities are topics which apply to some or all APIs, e.g. authentification, authorization, documentation standards, development standards, ...
 * Started: October 2021  
 * Location: virtually  
 
