@@ -1,6 +1,7 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
 | Accenture | Giuseppe Di Nuccio  |
+| AT&T | Sharam Mohajeri  |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
