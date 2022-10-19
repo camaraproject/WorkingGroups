@@ -475,7 +475,20 @@ API implementation versioning will follow semantic versioning. Given a `MAJOR.MI
 1)	The `MAJOR` version when you make an incompatible API change.
 2)	The `MINOR` version when you add functionality that is backwards compatible.
 3)	The `PATCH` version when you fix backward compatible bugs.
-As a recommendation tags for pre-release and final software are available as extensions to the `MAJOR.MINOR.PATCH` format. (Ex. 1.0.0.RELEASE, 1.0.1.SNAPSHOT)
+
+Related to the versioning of rest parts involved in Apification projects, best practises are detailed below:
+
+SHARED CODE ON REPOSITORIES
+
+1) MAJOR - Major of API Contract
+2) MINOR - Minor of API Contract
+3) PATCH - New Updates / Contributions of shared code
+
+MICROSERVICE DEPLOYMENTS (NOT MANDATORY BUT RECOMMENDED)
+
+1) MAJOR - Major of API Contract
+2) MINOR - Minor of API Contract
+3) PATCH - New Microservice Deployments
 
 
 ### 5.2 Backwards and Forward Compatibility
@@ -690,7 +703,7 @@ With the aim of standardizing the request observability and traceability process
 | Name | Description |  Type | Pattern	| Longitude | Required |	Example | 
 |---|---|---|---|---|---|---|  
 | `X-Version` |	Service version indentificator |	String| N/A	| | No | |	
-| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| Yes |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
+| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
 | `Authorization`	| Contains Access token |String | JWT| N/A	| Yes	 | Bearer eyJhbGciOiJIUzI1NiIsIn... |
 | `Content-Language` | Describe the language(s) intended for the audience |	String |	ISO 639-1	|  | No | es |
 | `Accept-Language` | Indicates the natural language and locale that the client prefers | String | N/A	| | No	| |
