@@ -17,6 +17,6 @@
 | Scenera	| David Lee |
 | T-Mobile US	| Lyle Bertz |
 | Telecom Italia	| Roberto Procopio |
-| Telefonica	| Jose Ordonez Lucena |
+| Telefonica	| Maria Virtudes Briz Ruiz |
 | TELUS	| Ali Tizghadam |
 | Vodafone	| Steven Pater |
