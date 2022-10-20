@@ -9,6 +9,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
 | GSMA | Faisal Zia |
+| GSMA | Gareth Williams |
 | GSMA | Mark Cornall |
 | GSMA | Tom Van Pelt |
 | Infobip | Kwok Onn Looi |
