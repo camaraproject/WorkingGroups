@@ -9,7 +9,6 @@
 | Infobip | Kwok Onn Looi |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
-| Orange | Jerome Larrode  |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
 | Telefonica | Jose Ordonez-Lucena  |
