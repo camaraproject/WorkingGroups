@@ -2,7 +2,7 @@
 | -----------------------| ----------------------------------------------------|
 | 5GFF	| Janine Grasso |
 | AT&T	| Wiley Wilkins |
-| Capgemini	| Shamik Mishra |
+| Capgemini	| Deepak A. Gunjal |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Ericsson	| Bart van Kaathoven |
 | Google Cloud	| Sridhar Gollapudi |
