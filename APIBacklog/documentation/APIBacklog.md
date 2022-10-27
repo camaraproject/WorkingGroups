@@ -4,6 +4,10 @@ This is a live doc that captures the status of all the APIs which have been form
 
 | **Name**  |  **Owner**  | **Priority** | **API proposal registration date** | **Status**  | **Supporters** | **Link to the filled-in template** |
 | --- |  ---  | --- | --- | --- | --- | --- |
+| Quality on Demand |  DT  | Short-term | xxx | Approved ([QualityOnDemand](https://github.com/camaraproject/QualityOnDemand)) | Orange, Telefónica, Vodafone| |
+| Edge Discovery  |  5GFF, VF | Short-term | xxx | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | DT, Orange, Telefónica |  |
+| Device Location  |  DT | Short-term | 2022/11/01 | Approved ([DeviceLocation](https://github.com/camaraproject/DeviceLocation)) | Orange, Telefónica, Vodafone |  |
+| Device Status |  DT | Short-term | 2022/11/01  | Approved ([DeviceStatus](https://github.com/camaraproject/DeviceStatus)) | Orange, Telefónica, Vodafone |  |
 | Home Devices Prioritization |  Telefónica  | TBD| 2022/09/14| Ready for SteerCo decision | DT, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/pull/73/files)|
 | Device Identifier |  Vodafone  | TBD| 2022/09/29| Ready for SteerCo decision | DT, KDDI, Telefónica|  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/APIproposal_Device-Identifier_Vodafone.md)|
 | Anonymised Subscriber Identifier |  Vodafone  | TBD| 2022/09/29| Ready for SteerCo decision| DT, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/APIproposal_Anonymised-Subscriber-Identifier_Vodafone.md)|
@@ -13,6 +17,7 @@ This is a live doc that captures the status of all the APIs which have been form
 |Carrier Billing - Check Out|  Telefónica  | Short-term| 2022/09/30 | Ready for SteerCo decision | Airtel, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/Contributions/API%20Proposals/Carrier_Billing_Check_Out_Pedro_Diez.md)|
 | --- |  ---  | --- | --- | --- | --- | --- |
 | --- |  ---  | --- | --- | --- | --- | --- |
+
 
 
 ### Attributes
