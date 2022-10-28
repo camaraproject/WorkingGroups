@@ -1,6 +1,6 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
-| 5GFF	| Janine Grasso |
+| 5GFF	| Jeremy Giese |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
 | Deutsche Telekom AG	| Markus Kümmerle |
