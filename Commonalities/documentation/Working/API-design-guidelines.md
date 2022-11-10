@@ -546,6 +546,7 @@ Tho ensure this compatibility, the following must be followed.
 In order to guarantee interoperability, one of the most important points is to carry out error management aimed at strictly complying with the error codes defined in the HTTP protocol.
 
 An error representation must not be different from the representation of any resource. A main error message is defined, with JSON structure with the following fields:
+- A field "`status`", which can be identified in the response as a standard code from list of Hypertext Transfer Protocol (HTTP) response status codes.
 - A unique error "`code`", which can be identified and traced for more details. It must be human readable; therefore, it must not be a numeric code. In turn, to achieve a better location of the error, you can reference the value or field that is causing it, and include it in the message. 
 - A detailed description of "`message`"
   
@@ -553,6 +554,7 @@ A JSON error structure is proposed below:
 
 ```json
 {
+   "status": "400",
    "code": "INVALID_ARGUMENT",
    "message": "A human readable description of what the event represent"
 }
@@ -667,18 +669,20 @@ Next, it is specified how it should be used according to the filtering based on 
 | **Operation** |	Text |	Numbers | 	Dates |
 | ----- |	-----  |	 -----  |  -----  |
 | Equal | `GET .../?name=Juan` | `GET .../?amount=807.24`	| `GET .../?executionDate=2018-30-05` | 
-| Greater or equal	| N/A | `GET .../?fromAmount=807.24` | `GET.../?fromExecutionDate=2018-30-05` |
-| smaller or equal | N/A | `GET .../?toAmount=807.24` | `GET.../?toExecutionDate=2018-30-05` | 
+| Greater or equal	| N/A | `GET .../?amount.gte=807.24` | `GET.../?execution_date.gte=2018-30-05` |
+| Strictly greater | N/A | `GET .../?amount.gt=807.24` | `GET.../?execution_date.gt=2018-30-05` | 
+| smaller or equal	| N/A | `GET .../?amount.lte=807.24` | `GET.../?execution_date.lte=2018-30-05` |
+| Strictly smaller | N/A | `GET .../?amount.lt=807.24` | `GET.../?execution_date.lt=2018-30-05` | 
 |Contains | `GET .../?name=~Juan` |N/A | N/A | 
 
 
 **Additional rules**:
 - The operator "`&`" is evaluated as an AND between different attributes.
 - A Query Param (attribute) can contain 1 or n values separated by "`,`".
-- For operations on numeric, date or enumerated fields, the use of the prefixes “from” and “to” will be allowed, which will act as comparators for “greater than or equal to” and “less than or equal to”.
+- For operations on numeric, date or enumerated fields, the use of the suffixes `.(gte|gt|lte|lt)$` will be allowed, which will act as comparators for “greater - equal to, greater than, smaller - equal to, smaller than”.
 
 **Examples**:
-- <u>Equals</u>: to search for users with first name "david" and last name "munoz":
+- <u>Equals</u>: to search users with first name "david" and last name "munoz":
   - `GET /users?name=david&surname=munoz`
   - `GET /users?name=David,Noelia`
     - Search for several values separating them by "`,`".
@@ -687,12 +691,12 @@ Next, it is specified how it should be used according to the filtering based on 
     - Search for the exact name "dav"
   - `GET /users?name=~dav`
     - Look for names that include "dav"
-- <u>Greater than / less than</u>: new attribute will be created and it will be preceded with a "from" and a "to".
-  - `GET /users?fromCreatrionDate=2021-01-01T00:00:00`
+- <u>Greater than / less than</u>: new attribute will be created and it will be preceded with the suffixes .(gte|gt|lte|lt)$.
+  - `GET /users?creation_date.gte=2021-01-01T00:00:00`
     - Find users with creation Date greater than 2021
-  - `GET /users?toCreationDate=2021-11-31T23:59:59`
+  - `GET /users?creation_date.gt=2021-11-31T23:59:59`
     - Find users with creationDate less than 2022
-  - `GET /users?fromCreationDate=2020-01-01T00:00:00&toCreationDate=2021-11-31T23:59:59`
+  - `GET /users?creation_date.gte=2020-01-01T00:00:00&creation_date.lte=2021-11-31T23:59:59`
     - Search for users created between 2020 and 2021
 
 
