@@ -268,9 +268,10 @@ Common errors are captured in the table below.
 | 202 | 202 (Accepted) code indicated that the request has been accepted to be processed, but it has not ended.<br>Usually, when a `DELETE` is requested but the server cannot make the action immediately. It should applies to async processes. |
 | 203 |  203 (Unathourized information) code indicated that the request has been successfully, but the attached payload was modified from the 200 (OK) response from the origin server using a transformation proxy.<br>It is used when data sent in the request could be modified as a third data subset.|
 | 204 | 204 (No Content) indicated that the server has ended successfully the request and there are nothing to return in the body response.<br>`POST` -> When used to modify a resource and output is not returned.<br>`PUT`/`PATCH` -> When used to modify a resource and output is not returned.<br>`DELETE` -> Resource delete action and output is not returned.<br> _NOTE: This list of levels MAY be extended with new values. The OpenID Provider (Auth Server) and the APIs used by the Relying Parties (client Applications) MUST be ready to support new values in the future._|
+| 206 | 206 (Partial Content) The server has fulfilled the partial GET request for the resource.
 | 400 | 400 (Bad Request) status code indicates that the server cannot or will not process the request due to something perceived as a client error (for example, malformed request syntax, invalid request message structure, or incorrect routing). <br>This code must be documented in all the operations in which it is necessary to receive data in the request.|
 | 401 | 401 (Unauthorized) status code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.<br>This code has to be documented in all API operations that require subscription by a client.|
-| 403 | 403 (Forbidden) status code indicates that the server understood the request, but is refusing to authorize it. A server that wants to make public why the request was prohibited can describe that reason in the response payload (if applicable).<br>This code is usually documented in the operations. It will be returned when the OAuth token access is invalid or when the user fails operational security.|
+| 403 | 403 (Forbidden) status code indicates that the server understood the request, but is refusing to authorize it. A server that wants to make public why the request was prohibited can describe that reason in the response payload (if applicable).<br>This code is usually documented in the operations. It will be returned when the OAuth token access does not have the required scope or when the user fails operational security.|
 | 404 | 404 (Not Found) status code indicates that the origin server either did not find a current representation for the target resource or is unwilling to reveal that it exists.<br>This code will occur on `GET` operations when the resource is not available, so it is necessary to document this return in such situations.|
 | 405 | 405 (Method Not Allowed) status code indicates that the origin server knows about the method received in the request line, but the target resource does not support it.<br>This code is documented at the API portal level, it should not be documented at the API level.|
 | 406 | 406 (Not Acceptable) status code indicates that the target resource does not have a current representation that would be acceptable to the user, based on the proactive negotiation header fields received in the request, and the server is unwilling to provide a predetermined representation. It must be reported when there is no response by default, and header fields are reported to carry out the content negotiation (Accept, Accept-Charset, Accept-Encoding, Accept-Language). |
@@ -279,6 +280,7 @@ Common errors are captured in the table below.
 | 500 | Status code 500 (Internal Server Error) indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.<br>This code must always be documented. It should be used as a general system error.|
 | 501 | Status code 501 (Not Implemented) indicates that the requested method is not supported by the server and cannot be handled. The only methods that servers require support (and therefore should not return this code) are `GET` and HEAD. |
 | 502 | Status code 502 (Bad Gateway) indicates that the server, while working as a gateway to get a response needed to handle the request, got an invalid response. |
+| 503 | Status code 503 (Service Unavailable) status code indicates that the server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay. |
 | 504 | Status code 504 (Gateway Timeout) indicates that the server is acting as a gateway and cannot get a response in time. |
 
 ### 3.3 Query Parameters Use
@@ -475,7 +477,20 @@ API implementation versioning will follow semantic versioning. Given a `MAJOR.MI
 1)	The `MAJOR` version when you make an incompatible API change.
 2)	The `MINOR` version when you add functionality that is backwards compatible.
 3)	The `PATCH` version when you fix backward compatible bugs.
-As a recommendation tags for pre-release and final software are available as extensions to the `MAJOR.MINOR.PATCH` format. (Ex. 1.0.0.RELEASE, 1.0.1.SNAPSHOT)
+
+Related to the versioning of rest parts involved in Apification projects, best practises are detailed below:
+
+SHARED CODE ON REPOSITORIES
+
+1) MAJOR - Major of API Contract
+2) MINOR - Minor of API Contract
+3) PATCH - New Updates / Contributions of shared code
+
+MICROSERVICE DEPLOYMENTS (NOT MANDATORY BUT RECOMMENDED)
+
+1) MAJOR - Major of API Contract
+2) MINOR - Minor of API Contract
+3) PATCH - New Microservice Deployments
 
 
 ### 5.2 Backwards and Forward Compatibility
@@ -533,6 +548,7 @@ Tho ensure this compatibility, the following must be followed.
 In order to guarantee interoperability, one of the most important points is to carry out error management aimed at strictly complying with the error codes defined in the HTTP protocol.
 
 An error representation must not be different from the representation of any resource. A main error message is defined, with JSON structure with the following fields:
+- A field "`status`", which can be identified in the response as a standard code from list of Hypertext Transfer Protocol (HTTP) response status codes.
 - A unique error "`code`", which can be identified and traced for more details. It must be human readable; therefore, it must not be a numeric code. In turn, to achieve a better location of the error, you can reference the value or field that is causing it, and include it in the message. 
 - A detailed description of "`message`"
   
@@ -540,6 +556,7 @@ A JSON error structure is proposed below:
 
 ```json
 {
+   "status": "400",
    "code": "INVALID_ARGUMENT",
    "message": "A human readable description of what the event represent"
 }
@@ -654,18 +671,20 @@ Next, it is specified how it should be used according to the filtering based on 
 | **Operation** |	Text |	Numbers | 	Dates |
 | ----- |	-----  |	 -----  |  -----  |
 | Equal | `GET .../?name=Juan` | `GET .../?amount=807.24`	| `GET .../?executionDate=2018-30-05` | 
-| Greater or equal	| N/A | `GET .../?fromAmount=807.24` | `GET.../?fromExecutionDate=2018-30-05` |
-| smaller or equal | N/A | `GET .../?toAmount=807.24` | `GET.../?toExecutionDate=2018-30-05` | 
+| Greater or equal	| N/A | `GET .../?amount.gte=807.24` | `GET.../?execution_date.gte=2018-30-05` |
+| Strictly greater | N/A | `GET .../?amount.gt=807.24` | `GET.../?execution_date.gt=2018-30-05` | 
+| smaller or equal	| N/A | `GET .../?amount.lte=807.24` | `GET.../?execution_date.lte=2018-30-05` |
+| Strictly smaller | N/A | `GET .../?amount.lt=807.24` | `GET.../?execution_date.lt=2018-30-05` | 
 |Contains | `GET .../?name=~Juan` |N/A | N/A | 
 
 
 **Additional rules**:
 - The operator "`&`" is evaluated as an AND between different attributes.
 - A Query Param (attribute) can contain 1 or n values separated by "`,`".
-- For operations on numeric, date or enumerated fields, the use of the prefixes “from” and “to” will be allowed, which will act as comparators for “greater than or equal to” and “less than or equal to”.
+- For operations on numeric, date or enumerated fields, the use of the suffixes `.(gte|gt|lte|lt)$` will be allowed, which will act as comparators for “greater - equal to, greater than, smaller - equal to, smaller than”.
 
 **Examples**:
-- <u>Equals</u>: to search for users with first name "david" and last name "munoz":
+- <u>Equals</u>: to search users with first name "david" and last name "munoz":
   - `GET /users?name=david&surname=munoz`
   - `GET /users?name=David,Noelia`
     - Search for several values separating them by "`,`".
@@ -674,12 +693,12 @@ Next, it is specified how it should be used according to the filtering based on 
     - Search for the exact name "dav"
   - `GET /users?name=~dav`
     - Look for names that include "dav"
-- <u>Greater than / less than</u>: new attribute will be created and it will be preceded with a "from" and a "to".
-  - `GET /users?fromCreatrionDate=2021-01-01T00:00:00`
+- <u>Greater than / less than</u>: new attribute will be created and it will be preceded with the suffixes .(gte|gt|lte|lt)$.
+  - `GET /users?creation_date.gte=2021-01-01T00:00:00`
     - Find users with creation Date greater than 2021
-  - `GET /users?toCreationDate=2021-11-31T23:59:59`
+  - `GET /users?creation_date.gt=2021-11-31T23:59:59`
     - Find users with creationDate less than 2022
-  - `GET /users?fromCreationDate=2020-01-01T00:00:00&toCreationDate=2021-11-31T23:59:59`
+  - `GET /users?creation_date.gte=2020-01-01T00:00:00&creation_date.lte=2021-11-31T23:59:59`
     - Search for users created between 2020 and 2021
 
 
@@ -690,7 +709,7 @@ With the aim of standardizing the request observability and traceability process
 | Name | Description |  Type | Pattern	| Longitude | Required |	Example | 
 |---|---|---|---|---|---|---|  
 | `X-Version` |	Service version indentificator |	String| N/A	| | No | |	
-| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| Yes |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
+| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
 | `Authorization`	| Contains Access token |String | JWT| N/A	| Yes	 | Bearer eyJhbGciOiJIUzI1NiIsIn... |
 | `Content-Language` | Describe the language(s) intended for the audience |	String |	ISO 639-1	|  | No | es |
 | `Accept-Language` | Indicates the natural language and locale that the client prefers | String | N/A	| | No	| |
