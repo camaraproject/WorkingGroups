@@ -240,7 +240,7 @@ Depending on the Service API use cases, we expect the APIs contributed to the Ca
 
 ## CAPIF <a name="CAPIF"></a>
 
-In 3GPP there are multiple northbound API-related specifications. To avoid duplication and inconsistency of approaches between different API specifications and to specify common services (e.g., authorization), 3GPP has developed the common API Reference framework (CAPIF) https://www.3gpp.org/common-api-framework-capif that includes common aspects applicable to any northbound service APIs. We highlight below some of the terms that are relevant from the authentication and authorization perspective.
+In 3GPP there are multiple northbound API-related specifications. To avoid duplication and inconsistency of approaches between different API specifications and to specify common services (e.g., authorization), 3GPP has developed the common API Reference framework (CAPIF) [[Ref]](https://github.com/camaraproject/WorkingGroups/blob/main/Commonalities/documentation/SupportingDocuments/API-exposure-reference-solution.docx) that includes common aspects applicable to any northbound service APIs. We highlight below some of the terms that are relevant from the authentication and authorization perspective.
 
 <ins>CAPIF Core</ins>: The CAPIF core function includes:
 
