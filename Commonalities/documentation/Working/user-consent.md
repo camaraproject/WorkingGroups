@@ -83,7 +83,7 @@ A purpose declares what the application intends to do with a set of Personal Inf
     "level": "terms_and_conditions",
     "purpose_type": "identifier-bound",
     "pi_scopes": ["qod-session-write"]
-  },
+  }
 ]
 ```
 Purposes can be grouped into three categories: 
@@ -186,7 +186,7 @@ The authorization endpoint still MUST support the `scope` parameter of the OAuth
 
 The application can request the Authorization endpoint using both parameters (`scope` and `purpose`), or one of them.
 
-PI scopes cannot be requested using `scope` parameter. As stated before in this document, getting access to PI scopes must always be done by explicitly declaring a purpose. If a PI scope is requested by the `scope` parameter, it will be ignored and removed from the request in Auth Server.
+PI scopes cannot be requested using `scope` parameter. As stated before in this document, getting access to PI scopes must always be done by explicitly declaring a purpose. If a PI scope is requested by using the `scope` parameter, it will be ignored and removed from the request in Auth Server.
 
 The authorization server MUST include all the obtained scopes and PI scopes in the `scope` response field of the Token Endpoint Request, the obtained scopes of the purposes and the obtained scopes of the `scope` parameter.
 
