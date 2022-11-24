@@ -1,0 +1,303 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Allows to create an anonymous subscriber id or get an existing one already bound to a phone_number based on input IP&Port and requester API Client.\n# Relevant  Definitions and concepts\n* **Anonymous Subscriber Id**: An anonymous subscriber id is an opaque identifier bound to the phone_number currently connected with the IP&port indicated as input fields, and also bound to the API Client requesting it. API Clients can use it to interact with third-party services outside of Kernel, such as a Marketplace, without having to share personal information of the user like the phone_number. \n# API Functionality\n  \n  This API has the functionality of creating an anonymous subscriber id bound to a phone_number of the user. Based on the IP&Port provided as input fields the server knows the associated phone_number and generates an id for that phone_number.  \n\n  API Clients can use an Anonymous Subscriber Id to interact with different third-party services such as a Marketplace and retrieve information from Kernel APIs without having to share user's personal information like the phone_number.\n\n  Although the anonymous subscriber id is generated based on input information of the user that can be dynamic and change after some time, the id generated will remain valid. The client must store the id in order to be able to use it without having to generate a new one each time it interacts with Kernel services. \n  \n  There can be a different identifier for each one of the API Clients that wants to retrieve information from the Kernel APIs. If a user have multiple phone_numbers associated, there will be a different id for each one of them since the creation of the id is bound to the phone_number.\n\n  The generated identifiers can expire within the reassignment period and client is required to get a new one, or it could be revoked in other scenarios that could make it no longer valid (change of tariff, fraud detection, etc).\n\n\n\n  \n# Resources and Operations overview\nThere is one endpoint: \n  - Create an anonymous subscriber id or get an existing one based on the information provided\n\n\n## Further Info and Support\n\n  Find answers to Frequently Asked Questions in https://qna.baikalplatform.com/c/api-faq\n  Topics with the **tag 'anonymous-subscriber-id'** are specific for Anonymous Subscriber Id API. Also topics with **tag 'user'** may apply to this API.",
+    "version": "1.0.0",
+    "title": "Anonymous Subscriber Id - DRAFT VERSION",
+    "termsOfService": "https://www.telefonica.es/es/",
+    "contact": {
+      "name": "4th Platform Team",
+      "email": "4pf@tid.es"
+    }
+  },
+  "x-fp-apiPrefix": "/anonymous-subscriber-id",
+  "host": "anonymous-subscriber-id:8080",
+  "basePath": "/anonymous-subscriber-id/v1",
+  "tags": [
+    {
+      "name": "Anonymous Subscriber Id",
+      "description": "Operations related to the creation of an anonymous subscriber id"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/anonymous-subscriber-id": {
+      "post": {
+        "tags": [
+          "Anonymous Subscriber Id"
+        ],
+        "summary": "Create or get an anonymous subscriber id",
+        "description": "Allows to create a new anonymous subscriber id or retrieve the id of an existing one with the same input information",
+        "operationId": "createAnonymousSubscriberId",
+        "x-fp-pi-scopes": [
+          "anonymous-subscriber-id-create"
+        ],
+        "parameters": [
+          {
+            "$ref": "https://docs.baikalplatform.com/common/v2.7/common.json#/parameters/x-correlator"
+          },
+          {
+            "$ref": "#/parameters/InputContext"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-correlator": {
+                "type": "string",
+                "description": "Correlation id for the different services"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AnonymousSubscriberId"
+            },
+            "examples": {
+              "application/json": {
+                "anonymous_subscriber_id": "31d7a7e2-896d-11e7-bb31-be2e44b06b34",
+                "expires_in": "15552000"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/UnkownSubscriber"
+          },
+          "403": {
+            "$ref": "#/responses/PermissionDenied"
+          },
+          "500": {
+            "$ref": "#/responses/Internal"
+          },
+          "503": {
+            "$ref": "#/responses/Unavailable"
+          },
+          "504": {
+            "$ref": "#/responses/Timeout"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnonymousSubscriberId": {
+      "type": "object",
+      "description": "Information related to the anonymous subscriber id",
+      "required": [
+        "anonymous_subscriber_id",
+        "expires_in"
+      ],
+      "properties": {
+        "anonymous_subscriber_id": {
+          "type": "string",
+          "description": "Opaque identifier bound to the phone_number currently connected with the IP&port indicated as input fields, and also bound to the API Client requesting it.",
+          "example": "31d7a7e2-896d-11e7-bb31-be2e44b06b34"
+        },
+        "expires_in": {
+          "type": "integer",
+          "description": "Expiration time in seconds for the Anonymous Subscriber Id"
+        }
+      }
+    },
+    "InputContext": {
+      "type": "object",
+      "description": "Information provided as input context",
+      "required": [
+        "input_type"
+      ],
+      "discriminator": "input_type",
+      "properties": {
+        "input_type": {
+          "type": "string",
+          "description": "Type of the information used as input context for the creation of the anonymous subscriber id.\n  - **'network_connection'**: Origin network information from which the user is connecting. Currently it consists of the public ip address and optionally the port.\n\nNOTE: list of input types could be extended with new values when new scenarios arise.\n",
+          "enum": [
+            "network_connection"
+          ]
+        }
+      }
+    },
+    "network_connection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputContext"
+        },
+        {
+          "type": "object",
+          "description": "Network connection information of the user provided as input context",
+          "required": [
+            "ip_address"
+          ],
+          "properties": {
+            "ip_address": {
+              "type": "string",
+              "description": "Origin public IP address from which the user is connecting. The IP address can be IPv4 or IPv6"
+            },
+            "port": {
+              "type": "integer",
+              "description": "Origin port from which the user is connecting.",
+              "minimum": 0,
+              "maximum": 65535
+            }
+          },
+          "example": 
+            {
+              "input_type": "network_connection",
+              "ip_address": "80.58.61.250",
+              "port": 65535
+            }
+        }
+      ]
+    },
+    "UnkownSubscriber": {
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "code"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "INVALID_ARGUMENT",
+                "ANONYMOUS_SUBSCRIBER_ID.UNKNOWN_SUBSCRIBER"
+              ],
+              "default": "INVALID_ARGUMENT",
+              "description": "Client specified an invalid argument."
+            }
+          }
+        },
+        {
+          "$ref": "https://docs.baikalplatform.com/errors/v2.1/errors.json#/definitions/ModelError"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "InputContext": {
+      "in": "body",
+      "name": "InputContext",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/InputContext"
+      }
+    }
+  },
+  "responses": {
+    "InvalidArgument": {
+      "description": "Problem with the client request",
+      "headers": {
+        "x-correlator": {
+          "type": "string",
+          "description": "Correlation id for the different services"
+        }
+      },
+      "schema": {
+        "$ref": "https://docs.baikalplatform.com/errors/v2.1/errors.json#/definitions/InvalidArgument"
+      },
+      "examples": {
+        "application/json": {
+          "code": "INVALID_ARGUMENT",
+          "message": "Client specified an invalid argument"
+        }
+      }
+    },
+    "PermissionDenied": {
+      "description": "Client does not have sufficient permission",
+      "headers": {
+        "x-correlator": {
+          "type": "string",
+          "description": "Correlation id for the different services"
+        }
+      },
+      "schema": {
+        "$ref": "https://docs.baikalplatform.com/errors/v2.1/errors.json#/definitions/PermissionDenied"
+      },
+      "examples": {
+        "application/json": {
+          "code": "PERMISSION_DENIED",
+          "message": "Authenticated user has no permission to access the requested resource"
+        }
+      }
+    },
+    "Internal": {
+      "description": "Server error",
+      "headers": {
+        "x-correlator": {
+          "type": "string",
+          "description": "Correlation id for the different services"
+        }
+      },
+      "schema": {
+        "$ref": "https://docs.baikalplatform.com/errors/v2.1/errors.json#/definitions/Internal"
+      },
+      "examples": {
+        "application/json": {
+          "code": "INTERNAL",
+          "message": "Server error"
+        }
+      }
+    },
+    "Unavailable": {
+      "description": "Service unavailable. Typically the server is down.",
+      "headers": {
+        "x-correlator": {
+          "type": "string",
+          "description": "Correlation id for the different services"
+        }
+      },
+      "schema": {
+        "$ref": "https://docs.baikalplatform.com/errors/v2.1/errors.json#/definitions/Unavailable"
+      },
+      "examples": {
+        "application/json": {
+          "code": "UNAVAILABLE",
+          "message": "Service unavailable"
+        }
+      }
+    },
+    "Timeout": {
+      "description": "Request time exceeded. If it happens repeatedly, consider reducing the request complexity",
+      "headers": {
+        "x-correlator": {
+          "type": "string",
+          "description": "Correlation id for the different services"
+        }
+      },
+      "schema": {
+        "$ref": "https://docs.baikalplatform.com/errors/v2.1/errors.json#/definitions/Timeout"
+      },
+      "examples": {
+        "application/json": {
+          "code": "TIMEOUT",
+          "message": "Request timeout exceeded. Try it later"
+        }
+      }
+    },
+    "UnkownSubscriber": {
+      "description": "Problem with the client request. In addition to regular scenario of `INVALID_ARGUMENT`, another scenario may exists:\n  - Input parameters do not match a valid subscriber (`{\"code\": \"ANONYMOUS_SUBSCRIBER_ID.UNKNOWN_SUBSCRIBER\",\"message\": \"Input parameters do not match a valid subscriber\"}`)",
+      "headers": {
+        "x-correlator": {
+          "type": "string",
+          "description": "Correlation id for the different services"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/UnkownSubscriber"
+      },
+      "examples": {
+        "application/json": {
+          "code": "INVALID_ARGUMENT",
+          "message": "Client specified an invalid argument"
+        }
+      }
+    }
+  }
+}
