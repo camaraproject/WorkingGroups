@@ -15,6 +15,7 @@
 | Nokia	| Tanja de Groot |
 | ORANGE	| Sylvain Morel |
 | Scenera	| David Lee |
+| T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US	| Lyle Bertz |
 | Telecom Italia	| Roberto Procopio |
 | Telefonica	| Maria Virtudes Briz Ruiz |
