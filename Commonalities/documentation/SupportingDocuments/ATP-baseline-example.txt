@@ -1,0 +1,322 @@
+Feature: Invoicing v3 - getInvoice
+
+  As an application using OAuth 2.0 Access Token 
+  I want to Get an invoice of a user
+  
+
+  @common-user
+  @3-legged
+  Scenario: Validate error response with an invalid user_id
+    Given A user with with invoices
+    When I ask for a valid Access Token for the user_id
+    And I ask for an invoice by invalid_user_id through 4th-platform backend
+    Then the response status code is "403"
+    And The Api returns the error code "PERMISSION_DENIED"
+    And The Api returns the error message "sub does not match."
+
+  
+  @common-user
+  @2-legged
+  Scenario: Validate error response with a non existing user_id
+    Given A non existing user
+    When I ask for a valid Access Token
+    And I ask for an invoice by non_existing_user_id through 4th-platform backend
+    Then the response status code is "404"
+    And The Api returns the error code "NOT FOUND"
+    And The Api returns the error message indicating the user does not exist  
+
+
+  @3-legged
+  Scenario Outline: Validate error response with invalid enum value in billed_items_summary.categories
+    Given A user with with invoices
+    And The query parameters to filter the request
+      | param_name                      | param_value |
+      | billed_items_summary.categories | [RANDOM]    |
+    When I ask for a valid Access Token for the user_id
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "400"
+    And The Api returns the error code "INVALID_ARGUMENT"
+    And The Api returns an error message indicating wrong parameter
+
+
+  @3-legged
+  Scenario Outline: Validate error response requesting a nonexistent invoice_id 
+    Given A user with with invoices
+    When I ask for a valid Access Token for the user_id
+    And I ask for an non-existent invoice by user_id through 4th-platform backend
+    Then the response status code is "404"
+    And The Api returns the error code "NOT FOUND"
+
+
+  @3-legged
+  Scenario Outline: Validate error response requesting an invoice_id belonging to different user
+    Given A user with with invoices
+    When I ask for a valid Access Token for the user_id
+    And I ask for an existing invoice of different_user_id through 4th-platform backend
+    Then the response status code is "404"
+    And The Api returns the error code "NOT FOUND"
+
+
+  @3-legged
+  @v3.5
+  Scenario Outline: Validate expected invoice billed_items filtered by billed_items_summary.categories
+    Given A user with with invoices
+    And The query parameters to filter the request
+      | param_name                      | param_value           |
+      | billed_items_summary.categories | <categories>          |
+    When I ask for a valid Access Token for the user_id
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The invoices returned have the billed_items_summary object entries filtered by category
+
+    Examples: billed_items_summary.categories = <categories>
+      | <categories>    |
+      | calls           |
+      | texts           |
+      | data            |
+      | tariff          |
+      | purchase        |
+      | adjustment      |
+      | taxes           |
+      | no_category     |
+      | none            |
+      | calls,texts     |
+      | tariff,purchase |
+      | none, tariff    |
+    @v3.6
+    Examples: billed_items_summary.categories = <categories>
+      | <categories>    |
+      | messages        |
+      | roaming         |
+      | premium         |
+      | device          |
+      | calls,roaming   |
+      | none, roaming   |    
+    @v3.7
+      Examples: billed_items_summary.categories = <categories>
+      | <categories>    |      
+      | total           |
+      | extra           |
+      | fee             |
+      | discount        |
+      | payment_plan    |
+      | calls,total     |
+      | none, roaming   |
+
+
+  @3-legged
+  @expand_by_user_type
+  @semantic
+  Scenario Outline: Validate dates consistency
+    Given A user of type / of each OB stack with invoices
+    When I ask for a valid Access Token for the user_id
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The start_date field is less than the end_date field
+    And The creation_date is greather than global and billed_items start_date and end_date
+    And The billed_items dates are within the global start_date and end_date in every invoice
+    And The creation_date field is within query parameter start_date and end_date
+
+
+  @3-legged @2-legged
+  @expand_by_user_type
+  Scenario Outline: Validate response body format
+    Given A user of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The response JSON body is validated against the Invoicing API swagger of published version
+
+
+  @3-legged
+  @expand_by_user_type
+  @semantic
+  Scenario Outline: Validate all the parent_id from billed_items_summary exist as id
+    Given A user of type / of each OB stack with invoices  
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And  All the parent_id in a billed_item exists as id in another billed_item
+
+
+  @3-legged
+  @v3.5
+  @expand_by_user_type
+  Scenario Outline: Validate billed_items
+    Given A user of type / of each OB stack with invoices
+    When I ask for a valid Access Token for the user_id
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The invoices returned have the billed_items_summary object with list of billed_items
+    And billed_items have corresponding <categories>
+    
+    @conditional
+    Examples: billed_items_summary.categories = <categories>
+      | <categories>    |
+      | calls           |
+      | texts           |
+      | data            |
+      | tariff          |
+      | purchase        |
+      | adjustment      |
+      | taxes           |      
+      | [NULL]          |
+    @conditional
+    @v3.6
+    Examples: billed_items_summary.categories = <categories>
+      | <categories>    |
+      | messages        |
+      | roaming         |
+      | premium         |
+      | device          |
+    @conditional
+    @v3.7
+      Examples: billed_items_summary.categories = <categories>
+      | <categories>    |      
+      | total           |
+      | extra           |
+      | fee             |
+      | discount        |
+      | payment_plan    |
+
+
+  @3-legged
+  @expand_by_user_type
+  @semantic
+  Scenario Outline: Validate charges consistency
+    Given A user of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The total_amount is the sum of amount of every billed_item without parent_id
+   
+  
+  @3-legged
+  @expand_by_user_type
+  Scenario Outline: Validate payment status
+    Given A user "<user>" of type / of each OB stack with invoices with "<payment_status>" 
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The payment_status of the invoice is <payment_status>
+
+    Examples: payment_status = <payment_status>
+      | payment_status |
+      | paid           |
+      | unpaid         |
+    @conditional
+    Examples: payment_status = <payment_status>
+      | payment_status |
+      | unknown        |
+      | blocked        |
+      | pending        |
+      | partial        |
+      | disputed       |
+    @v3.5
+    @conditional
+    Examples: payment_status = <payment_status>
+      | exempt         |     
+    @v3.5
+    @conditional
+    Examples: payment_status = <payment_status>
+      | negotiated     | 
+
+
+  @3-legged
+  @expand_by_user_type
+  @semantic
+  Scenario Outline: Validate payment_date
+    Given A user "<user>" of type / of each OB stack with invoices in paid status 
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And The payment_status of the invoice is paid
+    And payment_date is in the response
+
+
+  @3-legged
+  @optional
+  @expand_by_user_type
+  Scenario Outline: Validate next_invoice_date
+    Given A user "<user>" of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And next_invoice_date field is included
+
+ 
+  @3-legged
+  @optional
+  @expand_by_user_type
+  Scenario Outline: Validate download_url
+    Given A user "<user>" of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And download_url is included
+    And URl to download the URL is public and serves the .pdf
+
+
+  @3-legged
+  @optional
+  @expand_by_user_type
+  Scenario Outline: Validate secondary_download_urls
+    Given A user "<user>" of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And secondary_download_urls are included
+    And URLs provided are public and serves the file with correct mime_type
+
+
+  @3-legged
+  @optional
+  @expand_by_user_type
+  @v3.5
+  Scenario Outline: Validate payment_code
+    Given A user "<user>" of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And payment_code field is included
+
+
+  @3-legged
+  @optional
+  @expand_by_user_type
+  @v3.5
+  Scenario Outline: Validate original_total_amount
+    Given A user "<user>" of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And original_total_amount field is included in the invoice
+
+
+  @3-legged
+  @optional
+  @expand_by_user_type
+  @v3.5
+  Scenario Outline: Validate account_id
+    Given A user "<user>" of type / of each OB stack with invoices
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And account_id field is included
+
+
+  @3-legged
+  @conditional
+  @semantic
+  @expand_by_user_type
+  @v3.6
+  Scenario Outline: Validate balance_brought_forward and total_due
+    Given A user "<user>" of type / of each OB stack with invoices  
+    When I ask for a valid token to 4th-platform using OAuth
+    And I ask for an invoice by user_id through 4th-platform backend
+    Then the response status code is "200"
+    And balance_brought_forward field is included in the invoice
+    And total_due field is included in the invoice
+    And total_amount plus balance_brought_forward equals total_due
+  
+
