@@ -5,6 +5,7 @@
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
+| Dell | Vaishali Gupta |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
