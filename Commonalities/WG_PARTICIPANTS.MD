@@ -24,6 +24,7 @@
 | SpryFox Networks | Ramesh Shanmugasundaram |
 | T-Mobile NL | Muhammad Ahmad  |
 | Telefonica | José Ordoñez-Lucena |
+| Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado Gonzalez |
 | Telefonica | Jesús Peña García-Oliva |
 | TIM | Fabrizio Moggio|
