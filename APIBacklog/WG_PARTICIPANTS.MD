@@ -13,6 +13,7 @@
 | Scenera | Andrew Wajs  |
 | T-Mobile NL | Muhammad Ahmad  |
 | Telefonica | Jose Ordonez-Lucena  |
+| Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
 | TIM | Fabrizio Moggio  |
 | Vodafone | Kevin Smith  |
