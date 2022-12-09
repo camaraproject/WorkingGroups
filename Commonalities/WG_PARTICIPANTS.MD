@@ -5,6 +5,7 @@
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
+| CableLabs | Randy Levensalor |
 | Dell | Vaishali Gupta |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
