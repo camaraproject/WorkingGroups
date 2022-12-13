@@ -10,6 +10,7 @@ This document captures guidelines for the API design in CAMARA project. These gu
     - [API First](#22-api-first)
     - [Interface standardization. Standardization fora. ](#23-interface-standardization-standardization-fora)
     - [Information Representation Standard](#24-information-representation-standard)
+    - [Reduce telco-specific terminology in API defintions](#25-reduce-telco-specific-terminilogy)
   - [API Definition](#3-api-definition)
     - [API REST](#31-api-rest)
     - [HTTP Response Codes](#32-http-response-codes)
@@ -181,6 +182,20 @@ A **number** is similar to a C or Java number, except that octal and hexadecimal
 </p>
 
 Except for minor enconding details, the above-mentioned structures provide a full description of JSON language. 
+
+## 2.5 Reduce telco-specific terminology in API definitions
+CAMARA aims to produce 'intent-based' APIs, which have two key benefits:
+- for the developer: it does not assume familiarity with the network that will filfil the API.
+- for the operator: it avoids tight-coupling, meaning the API can be fulfilled by various networks (mobile, fixed, satellite etc.)  and network versions (4/5/6G etc.)
+
+To realise these benefits it is important to reduce the use of telco-specific terminolgy/acronyms in developer-facing APIs. 
+
+CAMARA API designers should:
+- Consider and account for how the API can be fulfilled on a range of network types
+- Avoid terms/types specific to a given telco domain. If this is unavoidable, either:
+- - allow a choice, so the developer can utilise other types. E.g. `MSISDN` should not be the _only_ way to identify an end user.
+- - use abstractions, which can evolve: e.g. an `end_user_identifier` enumeration can support mulitple identifiers.
+- - explain the telco-specific term in the documentation, and any constraints it brings.
 
 
 ## 3. API Definition
