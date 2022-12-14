@@ -185,7 +185,7 @@ Except for minor enconding details, the above-mentioned structures provide a ful
 
 ## 2.5 Reduce telco-specific terminology in API definitions
 CAMARA aims to produce 'intent-based' APIs, which have two key benefits:
-- for the developer: it does not assume familiarity with the network that will filfil the API.
+- for the developer: it does not assume familiarity with the network that will fulfil the API.
 - for the operator: it avoids tight-coupling, meaning the API can be fulfilled by various networks (mobile, fixed, satellite etc.)  and network versions (4/5/6G etc.)
 
 To realise these benefits it is important to reduce the use of telco-specific terminolgy/acronyms in developer-facing APIs. 
