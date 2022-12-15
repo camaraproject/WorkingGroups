@@ -7,6 +7,7 @@
 | Ericsson	| Bart van Kaathoven |
 | Google Cloud	| Sridhar Gollapudi |
 | GSMA	| Henry Calvert |
+| Huawei	| Qing Shuting |
 | IBM	| Jason Hunt |
 | Intel	| Petar Torre |
 | Kandy	| Philip Lintell |
