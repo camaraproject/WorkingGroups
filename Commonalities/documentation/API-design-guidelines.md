@@ -192,7 +192,7 @@ To realise these benefits it is important to reduce the use of telco-specific te
 
 CAMARA API designers should:
 - Consider and account for how the API can be fulfilled on a range of network types
-- Avoid terms/types specific to a given telco domain. If this is unavoidable, either:
+- Avoid terms/types specific to a given telco domain. For example the acronym 'UE': in 3GPP terminology this refers to 'User Equipment', but 'UE' means 'User Experience' for most Web developers: 'Terminal' would be a more appropriate, and unambiguous, term. If use of a telco-specific term is unavoidable, either:
 - - allow a choice, so the developer can utilise other types. E.g. `MSISDN` should not be the _only_ way to identify an end user.
 - - use abstractions, which can evolve: e.g. an `end_user_identifier` enumeration can support mulitple identifiers.
 - - explain the telco-specific term in the documentation, and any constraints it brings.
