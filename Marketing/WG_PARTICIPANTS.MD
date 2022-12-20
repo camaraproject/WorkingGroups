@@ -3,6 +3,7 @@
 | 5GFF	| Jeremy Giese |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
+| Cisco | Ravi Guntupalli |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Ericsson	| Bart van Kaathoven |
 | Google Cloud	| Sridhar Gollapudi |
