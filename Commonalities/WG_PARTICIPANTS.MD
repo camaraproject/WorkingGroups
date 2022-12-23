@@ -13,6 +13,7 @@
 | Ericsson | Miguel A. García-Martin |
 | GSMA | Gareth Williams |
 | GSMA | Mark Cornall |
+| GSMA | T. Rehman |
 | GSMA | Tom Van Pelt |
 | Infobip | Kwok Onn Looi |
 | Intel | Francesc Guim |
