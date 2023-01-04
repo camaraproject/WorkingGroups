@@ -22,4 +22,5 @@
 | Telecom Italia	| Roberto Procopio |
 | Telefonica	| Maria Virtudes Briz Ruiz |
 | TELUS	| Ali Tizghadam |
+| Vodafone	| Simon Gordon |
 | Vodafone	| Steven Pater |
