@@ -6,6 +6,6 @@
 | Technical viability | N/A | 
 | Commercial viability | There is no a direct commercial expectation from this API family -- it is an enabler instead. Identity and Consent Management API family includes one or more APIs which will allow other CAMARA APIs to be commercialized, provided those CAMARA APIs require user consent to be accessed as per in-scope data protection regulations.|
 | YAML code available? | N/A <br>|
-| Validated in lab/productive environments? | YES <br>|
+| Validated in lab/productive environments? | No <br>|
 | Validated with real customers? | No <br><br> |
-| Validated with operators? | NO  </em> |
+| Validated with operators? | No  </em> |
