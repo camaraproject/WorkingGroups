@@ -6,6 +6,7 @@
 | Cisco | Ravi Guntupalli |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Ericsson	| Bart van Kaathoven |
+| Ericsson	| Pehr Claesson |
 | Google Cloud	| Sridhar Gollapudi |
 | GSMA	| Henry Calvert |
 | Huawei	| Qing Shuting |
