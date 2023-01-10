@@ -17,6 +17,7 @@
 | KDDI	| Toshiyasu Wakayama |
 | Microsoft	| Landon Cox |
 | Nokia	| Tanja de Groot |
+| Nokia	| William Stanley |
 | ORANGE	| Sylvain Morel |
 | Scenera	| David Lee |
 | T-Mobile NL | Muhammad Ahmad  |
