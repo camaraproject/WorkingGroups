@@ -12,6 +12,7 @@
 | Huawei	| Qing Shuting |
 | IBM	| Jason Hunt |
 | Intel	| Petar Torre |
+| Kandy	| Kim Jones |
 | Kandy	| Philip Lintell |
 | KDDI	| Toshiyasu Wakayama |
 | Microsoft	| Landon Cox |
