@@ -19,6 +19,7 @@
 | Nokia	| Tanja de Groot |
 | Nokia	| William Stanley |
 | ORANGE	| Sylvain Morel |
+| Scenera	| Chien Lim |
 | Scenera	| David Lee |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US	| Lyle Bertz |
