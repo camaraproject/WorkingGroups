@@ -16,6 +16,7 @@
 | Kandy	| Philip Lintell |
 | KDDI	| Toshiyasu Wakayama |
 | Microsoft	| Landon Cox |
+| Midokura	| Kenji Shimizu |
 | Nokia	| Tanja de Groot |
 | Nokia	| William Stanley |
 | ORANGE	| Sylvain Morel |
