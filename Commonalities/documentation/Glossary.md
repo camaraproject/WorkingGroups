@@ -1,6 +1,6 @@
 # Glossary
 
-| Term      | Description | Usage(API/Documentation | Alternative developer-friendly terms |
+| Term      | Description | Usage(API/Documentation) | Alternative developer-friendly terms |
 | ----------- | ----------- | ----------- |  ----------- |
 | UeId | Identifier for devices   | API  |device_identifier  |
 | AsId | Identifier for application server   | API  |server_identifier  |
