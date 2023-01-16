@@ -23,4 +23,4 @@
 
 
 
-#### Note: The above entries are currently just samples provided from the commonalities. We propose the individual subprojects to contribute the concreate terms in the document as deemed fit.
+#### Note: The above entries are just samples provided from the commonalities. We propose the individual subprojects to contribute the concrete terms in the document as deemed fit.
