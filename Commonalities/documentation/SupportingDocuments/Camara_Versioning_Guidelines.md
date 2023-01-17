@@ -1,7 +1,7 @@
 # Camara versioning guidelines
 
 * Every release includes a **CHANGELOG.md** file. Please make sure that the content is structured in a format that is easy to read.
-* Release should follow the convention **\<subprj-name> \<tag-name>**
+* Release should follow the convention **\<subprj-name> \<tag-name>** for e.g. qod v0.8.0
 * Changelog content:
     * APIs/Software in alpha release needs to be clearly specified
     * API changes
