@@ -1,7 +1,7 @@
 # Camara versioning guidelines
 
-* Every release includes a **CHANGELOG.md** file. Please make sure that the content is structured in a format that is easy to read. Please refer to the template provided here [CHANGELOG_TEMPLATE.md](./CHANGELOG_TEMPLATE.md)
 * Release should follow the convention **\<subprj-name> \<tag-name>** for e.g. qod v0.8.0. The Github [release feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) should be used for this purpose.
+* Every release includes a **CHANGELOG.md** file. Please make sure that the content is structured in a format that is easy to read. Please refer to the template provided here [CHANGELOG_TEMPLATE.md](./CHANGELOG_TEMPLATE.md)
 * Changelog content:
     * APIs/Software in alpha release needs to be clearly specified
     * API changes
