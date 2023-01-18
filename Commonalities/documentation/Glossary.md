@@ -23,4 +23,4 @@
 
 
 
-#### Note: The above entries are just samples provided from the commonalities. We propose the individual subprojects to contribute the concrete terms in the document as deemed fit. If the usage in an API is already
+#### Note: The above entries are just samples provided from the commonalities. We propose the individual subprojects to contribute the concrete terms in the document as deemed fit. If the usage in an API is already using a developer friendly term, the last column can be left blank.
