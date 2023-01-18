@@ -2,6 +2,7 @@
 
 * Release should follow the convention **\<subprj-name> \<tag-name>** for e.g. qod v0.8.0. The Github [release feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) should be used for this purpose.
 * Every release includes a **CHANGELOG.md** file. Please make sure that the content is structured in a format that is easy to read. Please refer to the template provided here for possible sections that could be added to a changelog [CHANGELOG_TEMPLATE.md](./CHANGELOG_TEMPLATE.md)
+* The release can be agreed within the subproject by making a pull request for the changelog. The merge of this pull request would be marked as the release commit and the text within the changelog would be used as the release description
 * Changelog content:
     * APIs/Software in alpha release needs to be clearly specified
     * API changes
