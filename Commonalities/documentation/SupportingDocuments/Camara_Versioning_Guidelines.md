@@ -1,13 +1,14 @@
 # Camara versioning guidelines
 
 * Release should follow the convention **\<subprj-name> \<tag-name>** for e.g. qod v0.8.0. The Github [release feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) should be used for this purpose.
-* Every release includes a **CHANGELOG.md** file. Please make sure that the content is structured in a format that is easy to read. Please refer to the template provided here [CHANGELOG_TEMPLATE.md](./CHANGELOG_TEMPLATE.md)
+* Every release includes a **CHANGELOG.md** file. Please make sure that the content is structured in a format that is easy to read. Please refer to the template provided here for possible sections that could be added to a changelog [CHANGELOG_TEMPLATE.md](./CHANGELOG_TEMPLATE.md)
 * Changelog content:
     * APIs/Software in alpha release needs to be clearly specified
     * API changes
     * New features
     * Fixes
     * Deprecation (if any)
+* Going ahead, we could decide on a pull request process where use of right PR annotations could allow us to use tooling such as [krel](https://github.com/kubernetes/release/blob/master/docs/krel/README.md) or similar to automate atleast parts of release management. 
 * Release branches should have naming convention **release-x.y.z**
 * Tags should follow the naming conventions <strong>vx.y.z</strong> for versions
 * Adding relevant annotations to tags will be useful for later reference.
