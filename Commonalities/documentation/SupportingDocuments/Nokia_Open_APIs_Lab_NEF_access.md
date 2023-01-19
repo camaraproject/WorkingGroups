@@ -2,11 +2,11 @@
 
 To get access to the NEF APIs, CAMARA members can join the Nokia Open APIs Lab community on the Open Ecosystem Network (OpEN) platform using the following steps:
 
-1. Go to the OpEN platform: https://open-ecosystem.org/communities/open-apis-lab
+1. Go to the OpEN platform: http://open-ecosystem.org/communities/open-apis-lab
 1. Click on “Register” and follow the instructions - please use your corporate email only (not your social account).
 1. You will receive an email confirming your registration with the OpEN platform (check in SPAM if you don't see it)
 
-Once registered on OpEN, click again the link: https://open-ecosystem.org/communities/open-apis-lab
+Once registered on OpEN, click again the link: http://open-ecosystem.org/communities/open-apis-lab
 
 1. Click on "Ask to join community” and complete the request
 1. Wait for the email indicating you have been added to the community or check your messages in the OpEN portal.  
