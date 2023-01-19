@@ -15,6 +15,7 @@ This is a live doc that captures the status of all the APIs which have been form
 | Number Verification - Mobile Connect Verified MSISDN|  DT, GSMA IDG  | Short-term | 2022/09/30 | Approved ([NumberVerification](https://github.com/camaraproject/NumberVerification)) | Airtel, DT, KDDI, Telefónica |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_%20NumberVerification_DeustcheTelekom.md)|
 | Number Verification - SMS 2FA|  DT, GSMA IDG  | Short-term | 2022/09/30 | Approved ([NumberVerificationSMS2FA](https://github.com/camaraproject/NumberVerificationSMS2FA))  | Airtel, DT, KDDI, Telefónica|  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_NumberVerificationMS2FA_DeustcheTelekom.md)|
 |Carrier Billing - Check Out|  Telefónica  | Short-term| 2022/09/30 | Approved ([CarrierBillingCheckOut](https://github.com/camaraproject/CarrierBillingCheckOut)) | Airtel, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_CarrierBillingCheckOut_Telefonica.md)|
+|Identity and Consent|  Telefónica  | Short-term| 2023/01/19 | Under evaluation | DT, |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIFamilyproposal_Identity%26Consent.md)|
 | --- |  ---  | --- | --- | --- | --- | --- |
 | --- |  ---  | --- | --- | --- | --- | --- |
 
