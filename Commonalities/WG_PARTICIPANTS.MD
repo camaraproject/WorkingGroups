@@ -20,6 +20,7 @@
 | Intel | Petar Torre |
 | KDDI | Toshi Wakayama |
 | Nabstract.io | Vaibhav Mehta |
+| Nokia	| Tanja de Groot |
 | Orange | Olivier Mathieu |
 | Orange | Sylvain Morel|
 | Orange | Ludovic Robert|
