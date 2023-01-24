@@ -5,7 +5,7 @@
 * The release can be agreed within the subproject by making a pull request for the changelog. The merge of this pull request would be marked as the release commit and the text within the changelog would be used as the release description
 * Changelog content:
     * APIs/Software in alpha release needs to be clearly specified
-    * API changes
+    * API changes ( This should include/cover all API objects which are part of the API bundle)
     * New features
     * Fixes
     * Deprecation (if any)
