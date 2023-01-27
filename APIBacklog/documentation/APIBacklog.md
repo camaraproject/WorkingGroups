@@ -2,6 +2,7 @@
 
 This is a live doc that captures the status of all the APIs which have been formally registered in CAMARA project. 
 
+<<<<<<< Updated upstream
 | **Name**  |  **Owner**  | **Priority** | **API proposal registration date** | **Status**  | **Supporters** | **Link to the filled-in template** |
 | --- |  ---  | --- | --- | --- | --- | --- |
 | Quality on Demand - Mobile|  DT  | Short-term | xxx | Approved ([QualityOnDemand](https://github.com/camaraproject/QualityOnDemand)) | Orange, Telefónica, Vodafone| |
@@ -19,24 +20,48 @@ This is a live doc that captures the status of all the APIs which have been form
 |Traffic Influence |  Telecom Italia  | Short-term| 2022/11/02| Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | Telefónica |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/Userstory_Traffic%20Influence_TIM.md)|
 | --- |  ---  | --- | --- | --- | --- | --- |
 | --- |  ---  | --- | --- | --- | --- | --- |
+=======
+>>>>>>> Stashed changes
+
+| **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **Steering Committee date** |  **Steering Committee decision / Sub Project**  |  **API name**  |  **API release** |  **Link to API definition**  | **Link to API documentation**  |  **Link to API code**  |  **API tested at** |  **API deployed at company and country**  |  
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |---|
+| Quality on Demand | DT | YYYY/MM/DD| xxx | DT, ORA, TEF, VDF | YYYY/MM/DD | Approved ([QualityOnDemand](https://github.com/camaraproject/QualityOnDemand)) | Quality on Demand | v0.1.0 | TBC | TBC |TBC | DT | DT - Germany |
+|  | | | | | |  | | v0.8.0 | TBC | [Doc](https://github.com/camaraproject/QualityOnDemand/blob/main/documentation/API_documentation/QoD_API.md) |[YAML](https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml) | TBC | TBC | <!---Simple Edge Discovery --->
+| Simple Edge Discovery| 5GFF | YYYY/MM/DD | xxx | DT, ORA, TEF, VDF | YYYY/MM/DD | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | Edge Cloud | v1.1.2 | TBC| [Doc](https://github.com/camaraproject/EdgeCloud/blob/main/documentation/API_Documentation/Simple_Edge_Discovery.md)| [YAML](https://github.com/camaraproject/EdgeCloud/blob/main/code/API_definitions/simple_edge_discovery.yaml)| TBC | TBC | <!---Edge Cloud --->
+| Edge Cloud | GSMA OPAG | YYYY/MM/DD | xxx | DT, ORA, TEF, VDF | YYYY/MM/DD | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | Edge Cloud | v1.0.0 | TBC | TBC | [YAML](https://github.com/camaraproject/EdgeCloud/blob/main/code/API_definitions/EdgeCloudApi_v0.0.5.yaml)| TBC | TBC | <!---Device Location --->
+| Device Location | DT | 2022/11/01| xxx | DT, ORA, TEF, VDF | 2022/04/17 | Approved ([DeviceLocation](https://github.com/camaraproject/DeviceLocation)) | Device Location | v0.1.0 | TBC | [Doc](https://github.com/camaraproject/DeviceLocation/blob/main/documentation/API_documentation/Location_API.md)| [YAML](https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location.yaml)| TBC | TBC | <!---Device Status --->
+| Device Status | DT | 2022/11/01 | xxx | DT, ORA, TEF, VDF | 2022/04/17 | Approved ([DeviceStatus](https://github.com/camaraproject/DeviceStatus)) | Check Device Connectivity | v0.2.0 | TBC| [Doc](https://github.com/camaraproject/DeviceStatus/blob/main/documentation/API_documentation/Connectivity_API.md) | [YAML](https://github.com/camaraproject/DeviceStatus/blob/main/code/API_definitions/check-device-connectivity.yaml)| TBC | TBC | <!---Home Devices Quality on Demand SubProject--->
+| Home Devices Quality on Demand | TEF | 2022/09/14 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_HomeDevicesQoD_Telefonica.md) | DT, KDDI, TEF | 2022/10/13 | Approved ([HomeDevicesQoD](https://github.com/camaraproject/HomeDevicesQoD)) | Home Devices QoD| v0.1.0 | TBC | [Doc](https://github.com/camaraproject/HomeDevicesQoD/blob/main/documentation/API_documentation/home_devices_qod.md) | [YAML](https://github.com/camaraproject/HomeDevicesQoD/blob/main/code/API_definitions/home_devices_qod.yaml)| TBC | TBC | <!---Device Identifier SubProject--->
+| Device Identifier | VDF | 2022/09/29 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md) | DT, KDDI, TEF, VDF | 2022/10/13| Approved ([DeviceIdentifier](https://github.com/camaraproject/DeviceIdentifier)) | Device Identifier| v0.1.0 | TBC | TBC |[YAML](https://github.com/camaraproject/DeviceIdentifier/blob/main/code/API_definitions/CAMARA%20Device%20Identifier%20API.yaml) | TBC | TBC | <!---Anonymised Subscriber Identifier SubProject--->
+| Anonymised Subscriber Identifier | VDF | 2022/09/29 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_AnonymisedSubscriberIdentifier_Vodafone.md)| DT, KDDI, TEF, VDF | 2022/10/13 | Approved ([AnonymisedSubscriberIdenfifier](https://github.com/camaraproject/AnonymisedSubscriberIdentifier)) | Anonymised Subscriber Identifier| v0.1.0 |TBC |  TBC | TBC| TBC | TBC | <!---SIM Swap API--->
+| SIM Swap A | DT, GSMA IDG | 2022/09/30 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_Sim%20Swap_DeustcheTelekom.md)| DT, KDDI | 2022/10/13 | Approved ([SimSwap](https://github.com/camaraproject/SimSwap)) | Mobile Connect ATP| v0.1.0 | TBC | [Doc](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/MobileConnect/MobileConnectATP.md)| [YAML](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/MobileConnect/MC_ATP.yaml)| TBC | TBC | 
+| Sim Swap B| TEF | YYYY/MM/DD | XXX| KDDI, ORA, TEF | YYYY/MM/DD | Approved([SimSwap](https://github.com/camaraproject/SimSwap)) | Check SIM Swap| v0.3.0 |  | [Doc](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/CAMARA/Check_sim_swap_API.md)|  [YAML](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/CAMARA/checkSimSwap-v0.3.0.camara.swagger.yaml) | TBC | TBC | <!---Number Verification API --->
+| Number Verification A| DT, GSMA IDG | 2022/09/30 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_%20NumberVerification_DeustcheTelekom.md)| AIR, DT, ORA, TEF | 2022/10/13 | Approved([NumberVerification](https://github.com/camaraproject/NumberVerification)) | Number Verify MC| v0.1.0 | TBC |  [Doc](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/MobileConnect/MC_VERIFIED_MSISDN.md) | [YAML](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/MobileConnect/numberVerify.yaml)| TBC | TBC | 
+| Number Verification B| TEF | YYYY/MM/DD | XXX| AIR, KDDI, ORA, TEF | YYYY/MM/DD | Approved([NumberVerification](https://github.com/camaraproject/NumberVerification)) | Number Verify| v0.1.0 |  | [Doc](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/CAMARA/NUMBER_VERIFICATION_API.md)| [YAML](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/CAMARA/number_verification.yaml)| TBC | TBC | <!---OTP Validation API-->
+| OTP Validation | DT, GSMA IDG | 2022/09/30 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_NumberVerificationMS2FA_DeustcheTelekom.md)| AIR, DT, KDDI, TEF | 2022/10/13 | Approved ([OTPValidation](https://github.com/camaraproject/OTPValidationAPI))  | OTP SMS| v0.1.0 | TBC | [Doc](https://github.com/camaraproject/OTPvalidationAPI/blob/main/documentation/API_documentation/OTP_SMS_API.md) | [YAML](https://github.com/camaraproject/OTPvalidationAPI/blob/main/code/API_definitions/one-time-password-sms.yaml)| TBC | TBC | <!---Carrier Billing API-->
+| Carrier Billing A | TEF | 2022/09/30 | [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_CarrierBillingCheckOut_Telefonica.md)| AIR, KDDI, TEF | 2022/10/13 | Approved ([CarrierBillingCheckOut](https://github.com/camaraproject/CarrierBillingCheckOut))  | Carrier Billing Check Out| v0.5.0 | TBC | [Doc](https://github.com/camaraproject/CarrierBillingCheckOut/blob/main/documentation/API_documentation/Carrier_Billing_Checkout_API.md) | [YAML](https://github.com/camaraproject/CarrierBillingCheckOut/blob/main/code/API_definitions/carrier_billing_checkout.yaml)| TBC | TBC |
+| Carrier Billing B | ORA | 2022/11/02 | xxx | AIR, KDDI, ORA | 2022/11/10 | Approved ([CarrierBillingCheckOut](https://github.com/camaraproject/CarrierBillingCheckOut))  | Carrier Billing Payment| v0.5.0 | TBC | [Doc](https://github.com/camaraproject/CarrierBillingCheckOut/blob/main/documentation/API_documentation/Carrier_Billing_Payment_API.md) | [YAML](https://github.com/camaraproject/CarrierBillingCheckOut/blob/main/code/API_definitions/carrier_billing_payment.yaml) | TBC | TBC |  <!---Traffic Influence API-->
+| Traffic Influence | OPAG, TIM | 2022/11/02| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_NumberVerificationMS2FA_DeustcheTelekom.md)| DT, TEF, VDF | 2022/11/10 | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud))   | Traffic Influence | v0.8.1 | TBC| [Doc](https://github.com/camaraproject/EdgeCloud/blob/main/documentation/API_Documentation/Traffic_Influence_API_Documentation.md) | [YAML](https://github.com/camaraproject/EdgeCloud/blob/main/code/API_definitions/Traffic_Influence.yaml) | TBC | TBC | <!---Identity and Consent API-->
+| Identity and Consent | TEF | 2023/01/19| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIFamilyproposal_Identity%26Consent.md)| TEF | 2023/02/08 | Under evaluation | xxxx | xxx | xxxx | TBC | TBC| TBC | TBC |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 
 
-### Attributes
-- `Name`: it is the name of the API proposal. 
-- `Owner`: it is the CAMARA company or partner organization (e.g. OPAG, 5GFF) that leads the API proposal.
-- `Priority`: it specifies the priority of the API proposal, considering availability (readiness of standards and functionality in commercial products) and market relevance. This is to be decided by the API backlog WG participants. Priority value options:
-	- Short-term
-	- Medium-term
-	- Long-term
-- `Registration date`: it specifies the date when the API proposal was formally registered in CAMARA backlog. The date follows the YYYY/MM/DD format. 
-- `Status`: it specifies the status of the API in the pipeline. Status value options:
-	- NOT Submitted and no Sub-Project exists
-	- NOT submitted but Sub-Project exists (specify Sub-Project and include link)
-	- Submitted 
-	- Under evaluation
-	- Ready for SteerCo decision
-	- Approved (specify Sub-Project and include link)
-	- NOT Approved
-- `Supporters`: it lists the CAMARA companies or partner organizations that support working out API proposal in CAMARA. 
+## Attributes
+- `API [family] oame`: it is the name of the API [family] proposal
+- `API [family] Owner`: it is the partner which leads the API proposal (e.g. CAMARA member company, external companies or GSMA OPG). 
+- `API [family] proposal Rrgistration date`: it specifies the date when the API proposal was formally registered in CAMARA backlog. The date follows the YYYY/MM/DD format. 
 - `Link to the filled-in template`: URL where the filled-in template for API proposal has been submitted. If no URL is specified, it is assumed that no submission has been done yet; in such a case, the API is captured in the backlog for guidance/reference for future submissions.
+- `Supporters in API Backlog Working Group`: it lists the partners (e.g., CAMARA member compnay, external companies or GSMA OPG) that support working out API proposal in CAMARA. 
+- `Steering Committee date`: it specifies the SteerCo meeting where API proposal has been voted. The date follows the YYYY/MM/DD format. 
+- `Steering Committee decision / Sub Project`: it specifies the decision that the SteerCo took after API proposal voting. Options. 
+	- Approved. In such a case, the API proposal is allocated to a given Sub Project
+	- Rejected. 
+- `API name`: the actual name of the API. 
+- `API release`: the list of versions of the API. Version follows the x.y.z conventionE.
+- `Link to API definition`:  (for a given API release) it specifies a pointer to the API definition.
+- `Link to API documentation`:  (for a given API release) it specifies a pointer to the API definition.
+- `Link to API code`:  (for a given API release) it specifies a pointer to the API YAML file
+- `API tested at`: (for a given API release) list of operators which have tested the API functioning and behaviour.
+- `API deployed at company and country`: (for a given API release) list of operators which have deployed API, and in which countries.
