@@ -2,27 +2,6 @@
 
 This is a live doc that captures the status of all the APIs which have been formally registered in CAMARA project. 
 
-<<<<<<< Updated upstream
-| **Name**  |  **Owner**  | **Priority** | **API proposal registration date** | **Status**  | **Supporters** | **Link to the filled-in template** |
-| --- |  ---  | --- | --- | --- | --- | --- |
-| Quality on Demand - Mobile|  DT  | Short-term | xxx | Approved ([QualityOnDemand](https://github.com/camaraproject/QualityOnDemand)) | Orange, Telefónica, Vodafone| |
-| Simple Edge Discovery  |  5GFF, Vodafone | Short-term | xxx | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | DT, Orange, Telefónica |  |
-| MEC Experience & Experience Management  |  Capgemini, TEF | Short-term | xxx | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | Vodafone|  |
-| Device Location  |  DT | Short-term | 2022/11/01 | Approved ([DeviceLocation](https://github.com/camaraproject/DeviceLocation)) | Orange, Telefónica, Vodafone |  |
-| Device Status |  DT | Short-term | 2022/11/01  | Approved ([DeviceStatus](https://github.com/camaraproject/DeviceStatus)) | Orange, Telefónica, Vodafone |  |
-| Quality on Demand - Home|  Telefónica  | Short-term| 2022/09/14| Approved ([HomeDevicesQoD](https://github.com/camaraproject/HomeDevicesQoD)) | DT, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_HomeDevicesQoD_Telefonica.md)|
-| Device Identifier |  Vodafone  | Short-term| 2022/09/29| Approved ([DeviceIdentifier](https://github.com/camaraproject/DeviceIdentifier)) | DT, KDDI, Telefónica|  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_DeviceIdentifier_Vodafone.md)|
-| Anonymised Subscriber Identifier |  Vodafone  | Short-term| 2022/09/29| Approved ([AnonymisedSubscriberIdentifier](https://github.com/camaraproject/AnonymisedSubscriberIdentifier))| DT, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_AnonymisedSubscriberIdentifier_Vodafone.md)|
-| SIM Swap|  DT, GSMA IDG  | Short-term | 2022/09/30 | Approved ([SimSwap](https://github.com/camaraproject/SimSwap))| DT, KDDI, Telefónica |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_Sim%20Swap_DeustcheTelekom.md)|
-| Number Verification - Mobile Connect Verified MSISDN|  DT, GSMA IDG  | Short-term | 2022/09/30 | Approved ([NumberVerification](https://github.com/camaraproject/NumberVerification)) | Airtel, DT, KDDI, Telefónica |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_%20NumberVerification_DeustcheTelekom.md)|
-| Number Verification - SMS 2FA|  DT, GSMA IDG  | Short-term | 2022/09/30 | Approved ([OTPvalidationAPI](https://github.com/camaraproject/OTPvalidationAPI))  | Airtel, DT, KDDI, Telefónica|  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_NumberVerificationMS2FA_DeustcheTelekom.md)|
-|Carrier Billing - Check Out|  Telefónica  | Short-term| 2022/09/30 | Approved ([CarrierBillingCheckOut](https://github.com/camaraproject/CarrierBillingCheckOut)) | Airtel, KDDI |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_CarrierBillingCheckOut_Telefonica.md)|
-|Traffic Influence |  Telecom Italia  | Short-term| 2022/11/02| Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud)) | Telefónica |  [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/Userstory_Traffic%20Influence_TIM.md)|
-| --- |  ---  | --- | --- | --- | --- | --- |
-| --- |  ---  | --- | --- | --- | --- | --- |
-=======
->>>>>>> Stashed changes
-
 | **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **Steering Committee date** |  **Steering Committee decision / Sub Project**  |  **API name**  |  **API release** |  **Link to API definition**  | **Link to API documentation**  |  **Link to API code**  |  **API tested at** |  **API deployed at company and country**  |  
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |---|
 | Quality on Demand | DT | YYYY/MM/DD| xxx | DT, ORA, TEF, VDF | YYYY/MM/DD | Approved ([QualityOnDemand](https://github.com/camaraproject/QualityOnDemand)) | Quality on Demand | v0.1.0 | TBC | TBC |TBC | DT | DT - Germany |
