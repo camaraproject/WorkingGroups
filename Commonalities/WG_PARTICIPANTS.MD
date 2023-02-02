@@ -7,6 +7,7 @@
 | Broadpeak | Christoph Neumann |
 | CableLabs | Randy Levensalor |
 | Dell | Vaishali Gupta |
+| Deutsche Telekom AG | Herbert Damker |
 | Deutsche Telekom AG | Rafal Artych |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
