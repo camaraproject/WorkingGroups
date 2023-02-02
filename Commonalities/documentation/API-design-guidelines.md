@@ -571,7 +571,7 @@ A JSON error structure is proposed below:
 
 ```json
 {
-   "status": "400",
+   "status": 400,
    "code": "INVALID_ARGUMENT",
    "message": "A human readable description of what the event represent"
 }

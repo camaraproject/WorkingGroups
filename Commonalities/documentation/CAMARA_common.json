@@ -118,7 +118,7 @@
           "description": "A human readable description of what the event represent"
         },
         "status": {
-          "type": "string",
+          "type": "integer",
           "pattern": "^[4-5][0-9]{2}$",
           "description": "HTTP response status code"
         }
