@@ -27,6 +27,7 @@
 | Orange | Ludovic Robert|
 | SpryFox Networks | Jignesh Sorathia |
 | SpryFox Networks | Ramesh Shanmugasundaram |
+| Syniverse | Jyrki Penttinen |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut  |
 | Telefonica | José Ordoñez-Lucena |
