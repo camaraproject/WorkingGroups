@@ -1,0 +1,32 @@
+{
+  "self": "http://localhost:27080/3gpp-as-session-with-qos/v1/app1/subscriptions/068473bb-ae5b-47a7-988a-50718206479e",
+  "supportedFeatures": "0",
+  "notificationDestination": "http://localhost:8080/qosChanged/L2xvY2FsaG9zdDoxMDAxMi9Bc1NDUy9ub3RpZnk",
+  "flowInfo": [
+    {
+      "flowId": 11,
+      "flowDescriptions": [
+        "permit in 17 from 10.175.188.24 1234 to 10.175.188.23 4321",
+        "permit out 17 from 10.175.188.23 4321 to 10.175.188.24 1234"
+      ]
+    }
+  ],
+  "qosReference": "b55e2cc8-b386-4d90-9f95-b98ba20be050",
+  "ueIpv4Addr": "10.175.188.24",
+  "ueIpv6Addr": "2001:0db8:0000:b:111:b8:0000:001a",
+  "imsi": "460001357924680",
+  "msisdn": "12345678901",
+  "externalId": "example@ericsson.com",
+  "usageThreshold": {
+    "duration": 3000,
+    "totalVolume": 1000,
+    "downlinkVolume": 500,
+    "uplinkVolume": 500
+  },
+  "sponsorInfo": {
+    "sponsorId": "Somebody",
+    "aspId": "app@Bat"
+  },
+  "expirationTime": "2019-11-21T15:42:11+08:00",
+  "status": "accepted"
+}

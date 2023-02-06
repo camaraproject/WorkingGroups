@@ -1,0 +1,6 @@
+{
+  "type": "Business Exception",
+  "title": "error code 2010: business failed",
+  "status": 500,
+  "detail": "Un-supported features"
+}

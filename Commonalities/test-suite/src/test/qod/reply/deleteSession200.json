@@ -1,0 +1,17 @@
+{
+  "transaction": "068473bb-ae5b-47a7-988a-50718206479e",
+  "eventReports": [
+    {
+      "event": "SESSION_TERMINATION",
+      "accumulatedUsage": {
+        "duration": 1000,
+        "totalVolume": 10000,
+        "downlinkVolume": 90670,
+        "uplinkVolume": 9330
+      },
+      "flowIds": [
+        11
+      ]
+    }
+  ]
+}
