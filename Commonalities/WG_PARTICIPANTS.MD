@@ -19,6 +19,7 @@
 | Infobip | Kwok Onn Looi |
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
+| KDDI | Keichi Okonogi |
 | KDDI | Toshi Wakayama |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
@@ -36,6 +37,7 @@
 | Telefonica | Jesús Peña García-Oliva |
 | TIM | Fabrizio Moggio|
 | TIM | Raffaele Passannanti|
+| Telus | Ali Tizghadam |
 | Vodafone | Eric Murray |
 | Vodafone | Ivan Nieto|
 | Vodafone | Kevin Smith|
