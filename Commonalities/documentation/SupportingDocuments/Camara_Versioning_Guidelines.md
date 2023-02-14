@@ -11,12 +11,12 @@
     * Deprecation (if any)
 * Going ahead, we could decide on a pull request process where use of right PR annotations could allow us to use tooling such as [krel](https://github.com/kubernetes/release/blob/master/docs/krel/README.md) or similar to automate atleast parts of release management. 
 * Release branches should have naming convention **release-x.y.z**
-* Tags should follow the naming conventions <strong>vx.y.z</strong> for versions
+* Release tags should follow the naming conventions <strong>vx.y.z</strong> for versions
 * Adding relevant annotations to tags will be useful for later reference.
-* Bugfix branches can follow, naming as **patch-x.y.z**
 * Provider implementation repos can have their own naming conventions with regard to branches, tags etc. It is however mandatory to provide as a part of the  CHANGELOG.md - the API release version, capabilities and changes that are a part of the respective provider implementation release.
 * Main branch is assumed to be the latest.
 * Camara subproject will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until it has been released. For example, changes may be reverted before a release is published. For the best results, use the latest published release of any given subproject within Camara.
+* The commonalities WG does not impose any restrictions on the subprojects for creating other branches, tags which might be needed/useful to address their specific requirements. The above said guidelines are only applicable for the subproject releases.
 
 ### Release branches
 <img src="../images/versioning-pic.png" alt="Ver"
