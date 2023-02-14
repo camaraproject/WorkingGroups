@@ -1,4 +1,4 @@
-# Camara versioning guidelines
+# Camara subproject release guidelines
 
 * Release name for subprojects should be same as the tag-name for e.g. v0.8.0. The Github [release feature](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) should be used for this purpose. If referenced outside the subproject, it can be referred to as Release **\<sub-project-name>\<tag-name>** for eg. Release QualityOnDemand v0.8.0
 * Every release includes the **CHANGELOG.md** file in the root directory of the subproject. Please make sure that the content is structured in a format that is easy to read. Please refer to the template provided here for possible sections that could be added to a changelog [CHANGELOG_TEMPLATE.md](./CHANGELOG_TEMPLATE.md). Every release would add to the changelog. An example of how a changelog could look over time is shown below.
