@@ -1,0 +1,567 @@
+
+openapi: "3.0.3"
+info:
+  description: >-
+    Allows to manage Blockchain Public Address associated to a phone_number.
+
+    # Relevant Definitions and concepts
+
+    - **NaaS**: *Network-as-a-Service* model where OB Network resources are exposed to third parties through APIs. In this particular API, Blockchain Public Address is managed following this model.
+
+    - **Blockchain Public Address**: Unique string of code used by individuals to receive or request payments in cryptocurrency. 
+
+    # API Functionality 
+
+    This API allows to manage a Blockchain Public Address associated to a phone_number, i.e.: to retrieve the Blockchain Public Address(es) and to bind/unbind a Blockchain Public Address.
+
+
+    # Resources and Operations overview
+
+    This API provides three endpoints:
+     - **Endpoint to retrieve the Blockchain Public Address(es) associated to a phone_number sent as input**. The Blockchain Public Address is information made available by the user, in association to their phone_number. Then, this endpoint may be accessed in 2-legged or in 3-legged mode. Even in 3-legged mode, the phone_number included as input field need not belong to the sub (user_id) for which the Access Token is issued. This will enable a user asking for the Blockchain Public Address(es) of any phone_number, in order to perform a transaction with one of the available ones (send or request).
+     Notice that the phone_number used as input may even not belong to the same OB exposing the API. It is expected a communication between OBs to resolve the Blockchain Public Address(es). For example an OB will receive the request, identify the OB which owns the phone_number, and forward the request using a 2-legged approach to contact the other OB. Flow below shows the described options.
+     - **Endpoint to associate a phone_number with a Blockchain Public Address**. It does not matter if the phone_number is already bound to a Blockchain Public Address, as this operation adds a new Blockchain Public Address. This operation is intended to be used with a 3-legged Access Token, and the indicated phone_number must belong to the sub in the Access Token; this is because only the user of the phone_number must be able to perform a bind. As a consequence, this operation will only work with phone_numbers of the OB exposing the API.
+     - **Endpoint to remove the association of a phone_number with a Blockchain Public Address**. This operation is intended to be used with a 3-legged Access Token; this is because only the user of the phone_number must be able to perform an unbind. Note: Due to this, the API Server must validate that the `id` included in the request refers to a bind for a phone_number belonging to the sub in the Access Token and, when identifier_bound_scopes are used, validate that the `id` included in the request refers to a bind for a phone_number appearing in the list of identifier_bound_scopes for the scope protecting this endpoint. As a consequence, this operation will only work with phone_numbers of the OB exposing the API.
+  version: 1.0.0
+  title: Blockchain Public Address
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: project-email@sample.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+externalDocs:
+  description: Product documentation at Camara
+  url: https://github.com/camaraproject/
+servers:
+  - url: "{apiRoot}/{basePath}"
+    variables:
+      apiRoot:
+        default: http://localhost:8080
+        description: API root
+      basePath:
+        default: blockchain-public-address/v1
+        description: Base path for the Blockchain Public Address API
+tags:
+  - name: Blockchain Public Address
+    description: API operations manage Blockchain Public Address
+paths:
+  /blockchain-public-addresses:
+    get:
+      tags:
+        - Blockchain Public Address
+      operationId: retrieveBlockchainPublicAddress
+      description:
+        Retrieves Blockchain Public Address associated to a phone_number.
+        This operation can be accessed in 3-legged and in 2-legged, notice that
+        the phone_number used as input need not be related with the user or
+        phone_number to which the Access Token is associated; this is because
+        the operation is intended to be used to manage Blockchain Public Address
+        of any phone_number, in order to perform send or request crypto
+        operations.
+      summary: Retrieves Blockchain Public Address associated to a phone_number.
+      security:
+        - oAuth2ClientCredentials: []
+        - three_legged:
+            - blockchain-public-address-read
+      parameters:
+        - $ref: "#/components/parameters/PhoneNumber"
+        - $ref: "#/components/parameters/x-correlator"
+      responses:
+        "200":
+          description: OK
+          headers:
+            x-correlator:
+              $ref: "#/components/headers/x-correlator"
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of Blockchain Public Addresses bound to the phone_number
+                items:
+                  $ref: "#/components/schemas/BlockchainPublicAddressResponse"
+              example:
+                - id: 90c626ce-5284-4a84-b85e-46e0ee3d0434
+                  blockchain_public_address: "0x71C7656EC7ab88b098dafB451B2314C5f6d8932A"
+                  blockchain: Ethereum
+                  currency: ETH
+                - id: 5c179f50-db37-4d23-87e3-6f10c991899f
+                  blockchain_public_address: "0x329CdCAAC31c934fe32322b111bE8fBd30b4FFA9"
+                  blockchain: Polygon
+                  currency: WETH
+        "400":
+          $ref: "#/components/responses/InvalidArgument"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/Internal"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+        "504":
+          $ref: "#/components/responses/Timeout"
+    post:
+      tags:
+        - Blockchain Public Address
+      operationId: bindBlockchainPublicAddress
+      description: Binds Blockchain Public Address to a phone_number. If the
+        phone_number is already bound to a Blockchain Public Address, this
+        operation will add a new bound Blockchain Public Address to the
+        phone_number. This operation is intended to be used with a 3-legged
+        Access Token, and the indicated phone_number must belong to the sub in
+        the Access Token; this is because only the user of the phone_number must
+        be able to perform the bind.
+      summary: Binds Blockchain Public Address to a phone_number
+      security:
+        - three_legged:
+            - blockchain-public-address-create
+      parameters:
+        - $ref: "#/components/parameters/x-correlator"
+      requestBody:
+        description: BindBlockchainPublicAddressRequestBody
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BindBlockchainPublicAddressRequest"
+      responses:
+        "201":
+          description: Created
+          headers:
+            x-correlator:
+              $ref: "#/components/headers/x-correlator"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BindBlockchainPublicAddressResponse"
+              example:
+                id: 90c626ce-5284-4a84-b85e-46e0ee3d0434
+        "400":
+          $ref: "#/components/responses/InvalidCurrencyForBlockchain"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/Internal"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+        "504":
+          $ref: "#/components/responses/Timeout"
+  "/blockchain-public-addresses/{id}":
+    delete:
+      tags:
+        - Blockchain Public Address
+      operationId: deleteBlockchainPublicAddress
+      description: >-
+        Unbinds Blockchain Public Address to a phone_number. This operation is
+        intended to be used with a 3-legged Access Token; this is because only
+        the user of the phone_number must be able to perform the unbind. 
+
+        Note: Due to this, the API Server must validate that the `id` included in the request refers to a bind for a phone_number belonging to the sub in the Access Token and, when identifier_bound_scopes are used, validate that the `id` included in the request refers to a bind for a phone_number appearing in the list of identifier_bound_scopes for the scope protecting this endpoint.
+      summary: Unbinds Blockchain Public Address association to a phone_number
+      security:
+        - three_legged:
+            - blockchain-public-address-delete
+      parameters:
+        - $ref: "#/components/parameters/Id"
+        - $ref: "#/components/parameters/x-correlator"
+      responses:
+        "204":
+          description: No Content
+          headers:
+            x-correlator:
+              $ref: "#/components/headers/x-correlator"
+        "400":
+          $ref: "#/components/responses/InvalidArgument"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/Internal"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+        "504":
+          $ref: "#/components/responses/Timeout"
+components:
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: '{tokenUrl}'
+          scopes: {}
+    three_legged:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.example.com/authorize
+          tokenUrl: https://auth.example.com/token
+          scopes:
+            blockchain-public-address-read: retrieveBlockchainPublicAddress operation
+            blockchain-public-address-create: bindBlockchainPublicAddress operation
+            blockchain-public-address-delete: deleteBlockchainPublicAddress operation
+  parameters:
+    PhoneNumber:
+      name: phone_number
+      description:
+        Phone Number to which the Blockchain Public Address is related.
+        E164 with + format.
+      in: query
+      required: true
+      schema: 
+        type: string
+    Id:
+      name: id
+      description:
+        Unique identifier given to the bind relationship of a phone_number
+        with a Blockchain Public Address.
+      in: path
+      required: true
+      schema: 
+        type: string
+    x-correlator:
+      name: x-correlator
+      description: Correlation id for the different services
+      in: header
+      schema:
+        type: string
+  headers:
+    x-correlator:
+      description: Correlation id for the different services
+      schema:
+        type: string
+  schemas:
+    BindBlockchainPublicAddressRequest:
+      type: object
+      description: Payload to request the Bind of the Blockchain Public Adddress
+      required:
+        - phone_number
+        - blockchain_public_address
+        - blockchain
+        - currency
+      properties:
+        phone_number:
+          type: string
+          description:
+            Phone Number to which the Blockchain Public Address will be bound.
+            E164 with + format.
+        blockchain_public_address:
+          type: string
+          description: Blockchain Public Address to bind to the phone_number
+        blockchain:
+          type: string
+          description:
+            Name of the blockchain. Name of the blockchain. So far Ethereum,
+            Polygon, Bitcoin and Celo are supported. List may be extended.
+          enum:
+            - Ethereum
+            - Polygon
+            - Bitcoin
+            - Celo
+        currency:
+          type: string
+          description:
+            Currency used in the blockchain_public_address. Must be one
+            matching a supported wrapped token for the indicated blockchain.
+      example:
+        phone_number: "+346789990012"
+        blockchain_public_address: "0x71C7656EC7ab88b098dafB451B2314C5f6d8932A"
+        blockchain: Ethereum
+        currency: ETH
+    BindBlockchainPublicAddressResponse:
+      type: object
+      description: Bind Blockchain Public Address response
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description:
+            Unique identifier given to the bind relationship of a phone_number
+            with a Blockchain Public Address.
+    BlockchainPublicAddressResponse:
+      type: object
+      description: Blockchain Public Address response
+      required:
+        - id
+        - blockchain_public_address
+        - blockchain
+        - currency
+      properties:
+        id:
+          type: string
+          description:
+            Unique identifier given to the bind relationship of a phone_number
+            with a Blockchain Public Address.
+        blockchain_public_address:
+          type: string
+          description: Blockchain Public Address
+        blockchain:
+          type: string
+          description:
+            Name of the blockchain. Notice a limited list is supported be
+            supported, so far Ethereum, Polygon, Bitcoin and Celo. List may be
+            extended so this field is not set as enum, because API Client should
+            be ready to GET any value when returned.
+        currency:
+          type: string
+          description: Currency used in the blockchain_public_address.
+    Error400:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 400
+        code:
+          type: string
+          enum:
+            - INVALID_ARGUMENT
+        message:
+          type: string  
+    Error401:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 401
+        code:
+          type: string
+          enum:
+            - UNAUTHENTICATED
+        message:
+          type: string 
+    Error403:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 403
+        code:
+          type: string
+          enum:
+            - PERMISSION_DENIED
+        message:
+          type: string 
+    Error404:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 404
+        code:
+          type: string
+          enum:
+            - NOT_FOUND
+        message:
+          type: string
+    Error500:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 500
+        code:
+          type: string
+          enum:
+            - INTERNAL
+        message:
+          type: string
+    Error503:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 503
+        code:
+          type: string
+          enum:
+            - UNAVAILABLE
+        message:
+          type: string
+    Error504:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 504
+        code:
+          type: string
+          enum:
+            - TIMEOUT
+        message:
+          type: string
+    InvalidCurrencyForBlockChain:
+      type: object
+      required: 
+        - status
+        - code
+        - message
+      properties: 
+        status:
+          type: integer
+          enum:
+            - 400
+        code:
+          type: string
+          enum:
+            - INVALID_ARGUMENT
+            - BLOCKCHAIN_PUBLIC_ADDRESS.INVALID_CURRENCY
+        message:
+          type: string
+  responses:
+    InvalidArgument:
+      description: Problem with the client request
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error400"
+          example:
+            status: 400
+            code: INVALID_ARGUMENT
+            message: Client specified an invalid argument, request body or query param
+    InvalidCurrencyForBlockchain:
+      description: >-
+        Problem with the client request.
+
+        In addition to regular scenario of INVALID_ARGUMENT, another exception may exist.
+        
+        - Indicated Currency is not valid for the Blockchain ("code": "BLOCKCHAIN_PUBLIC_ADDRESS.INVALID_CURRENCY","message": "Indicated currency is not found")
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/InvalidCurrencyForBlockChain"
+          example:
+            status: 400
+            code: BLOCKCHAIN_PUBLIC_ADDRESS.INVALID_CURRENCY
+            message: Indicated currency is not found
+    Unauthenticated:
+      description: Authentication problem with the client request
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error401"
+          example:
+            status: 401
+            code: UNAUTHENTICATED
+            message: Request not authenticated due to missing, invalid, or expired
+                  credentials
+    PermissionDenied:
+      description: Client does not have sufficient permission
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error403"
+          example:
+            status: 403
+            code: PERMISSION_DENIED
+            message: Authenticated user has no permission to access the requested resource
+    NotFound:
+      description: Resource Not Found
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error404"
+          example:
+            status: 404
+            code: NOT_FOUND
+            message: A specified resource is not found
+    Internal:
+      description: Server error
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error500"
+          example:
+            status: 500
+            code: INTERNAL
+            message: Server error
+    Unavailable:
+      description: Service unavailable. Typically the server is down.
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error503"
+          example:
+            status: 503
+            code: UNAVAILABLE
+            message: Service unavailable
+    Timeout:
+      description:
+        Request time exceeded. If it happens repeatedly, consider reducing
+        the request complexity
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content: 
+        application/json: 
+          schema:
+            $ref: "#/components/schemas/Error504"
+          example:
+            status: 504
+            code: TIMEOUT
+            message: Request timeout exceeded. Try it later
