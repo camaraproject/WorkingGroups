@@ -36,6 +36,7 @@
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado Gonzalez |
 | Telefonica | Jesús Peña García-Oliva |
+| Telefonica | Pedro Diez Garcia |
 | TIM | Fabrizio Moggio|
 | TIM | Raffaele Passannanti|
 | Telus | Ali Tizghadam |
