@@ -12,6 +12,7 @@
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
+| Gapask | Rajesh Murty |
 | GSMA | Gareth Williams |
 | GSMA | Mark Cornall |
 | GSMA | T. Rehman |
@@ -19,6 +20,7 @@
 | Infobip | Kwok Onn Looi |
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
+| KDDI | Keichi Okonogi |
 | KDDI | Toshi Wakayama |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
@@ -27,14 +29,17 @@
 | Orange | Ludovic Robert|
 | SpryFox Networks | Jignesh Sorathia |
 | SpryFox Networks | Ramesh Shanmugasundaram |
+| Syniverse | Jyrki Penttinen |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut  |
 | Telefonica | José Ordoñez-Lucena |
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado Gonzalez |
 | Telefonica | Jesús Peña García-Oliva |
+| Telefonica | Pedro Diez Garcia |
 | TIM | Fabrizio Moggio|
 | TIM | Raffaele Passannanti|
+| Telus | Ali Tizghadam |
 | Vodafone | Eric Murray |
 | Vodafone | Ivan Nieto|
 | Vodafone | Kevin Smith|
