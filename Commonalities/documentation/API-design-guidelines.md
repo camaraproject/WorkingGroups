@@ -721,13 +721,13 @@ Next, it is specified how it should be used according to the filtering based on 
 
 With the aim of standardizing the request observability and traceability process, common headers that provide a follow-up of the E2E processes should be included. The table below captures these headers.
 
-| Name | Description |  Type | Pattern	| Longitude | Required |	Example | 
-|---|---|---|---|---|---|---|  
-| `X-Version` |	Service version indentificator |	String| N/A	| | No | |	
-| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
-| `Authorization`	| Contains Access token |String | JWT| N/A	| Yes	 | Bearer eyJhbGciOiJIUzI1NiIsIn... |
-| `Content-Language` | Describe the language(s) intended for the audience |	String |	ISO 639-1	|  | No | es |
-| `Accept-Language` | Indicates the natural language and locale that the client prefers | String | N/A	| | No	| |
+| Name | Description |  Type | Pattern	| Longitude | Required | Required on Swagger |	Example | 
+|---|---|---|---|---|---|---|---|
+| `X-Version` |	Service version indentificator |	String| N/A	| | No | No | |	
+| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| No | No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
+| `Authorization`	| Contains Access token |String | JWT| N/A	| Yes	 | No | Bearer eyJhbGciOiJIUzI1NiIsIn... |
+| `Content-Language` | Describe the language(s) intended for the audience |	String |	ISO 639-1	|  | No | No | es |
+| `Accept-Language` | Indicates the natural language and locale that the client prefers | String | N/A	| | No	| No | |
 
 ## 10. Security
 
