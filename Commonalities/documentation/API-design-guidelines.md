@@ -357,8 +357,8 @@ The main HTTP headers are described below:
 - `Authorization`: it allows sending the authorization token for API access, initially OAuth and JWT.
 - `Content-Type`: it indicates the type of message sent to the recipient or, in the case of the HEAD method, the type of message that would have been sent if the request had been a GET. The MIME type of the response, or the content uploaded via POST/PUT in case it is a request. 
 - `Content-Length`: it indicates the message size, in octets, sent to the recipient or, in the case of the HEAD method, the message size that would have been sent if the request had been a GET. The size of the response in octets (8 bits) 
-- `Content-Encoding`: it is used as a message type modifier. The type of encoding used in the response is indicated
-- `Host`:  specifies the host and port number of the server to which the request is being sent
+- `Content-Encoding`: it is used as a message type modifier. The type of encoding used in the response is indicated.
+- `Host`:  specifies the host and port number of the server to which the request is being sent.
 
 <font size="3"><span style="color: blue"> Optional recommendended security headers by OWASP </span></font>
 
