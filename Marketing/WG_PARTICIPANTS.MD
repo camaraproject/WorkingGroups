@@ -1,6 +1,7 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
 | 5GFF	| Jeremy Giese |
+| AclDigital | Sagar Suresh Nangare |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
 | Cisco | Ravi Guntupalli |
@@ -28,6 +29,7 @@
 | Telecom Italia	| Roberto Procopio |
 | Telefonica	| Maria Virtudes Briz Ruiz |
 | TELUS	| Ali Tizghadam |
+| Verizon	| Alicia Miller |
 | Verizon	| Priyanka Shah |
 | Vodafone	| Simon Gordon |
 | Vodafone	| Steven Pater |
