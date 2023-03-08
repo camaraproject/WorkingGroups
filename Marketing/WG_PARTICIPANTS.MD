@@ -17,6 +17,7 @@
 | Kandy	| Kim Jones |
 | Kandy	| Philip Lintell |
 | KDDI	| Toshiyasu Wakayama |
+| Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
 | Nokia	| Tanja de Groot |
