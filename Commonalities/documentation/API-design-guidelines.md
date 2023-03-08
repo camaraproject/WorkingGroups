@@ -357,7 +357,8 @@ The main HTTP headers are described below:
 - `Authorization`: it allows sending the authorization token for API access, initially OAuth and JWT.
 - `Content-Type`: it indicates the type of message sent to the recipient or, in the case of the HEAD method, the type of message that would have been sent if the request had been a GET. The MIME type of the response, or the content uploaded via POST/PUT in case it is a request. 
 - `Content-Length`: it indicates the message size, in octets, sent to the recipient or, in the case of the HEAD method, the message size that would have been sent if the request had been a GET. The size of the response in octets (8 bits) 
-- `Content-Encoding`: it is used as a message type modifier. The type of encoding used in the response is indicated.
+- `Content-Encoding`: it is used as a message type modifier. The type of encoding used in the response is indicated
+- `Host`:  specifies the host and port number of the server to which the request is being sent
 
 <font size="3"><span style="color: blue"> Optional recommendended security headers by OWASP </span></font>
 
@@ -373,7 +374,9 @@ The main HTTP headers are described below:
 - `Cross-Origin-Resource-Policy`: this response header (also referred to as CORP) allows to define a policy that lets web sites and applications opt in to protection against certain requests from other origins (such as those issued with elements like "`<script>`" and "`<img>`"), to mitigate speculative side-channel attacks, like Spectre, as well as Cross-Site Script Inclusion (XSSI) attacks
 - `Cache-Control`: it holds directives (instructions) for caching in both requests and responses. If a given directive is in a request, it does not mean this directive is in the response
 
-<font size="3"><span style="color: blue"> HTTP headers not allowed  </span></font>
+To avoid cluttering the CAMARA OAS (Swagger) definition files, the above headers must not be included explicitly in the API definition files even when supported, as it can be assumed that developers will already be familiar with their use.
+
+<font size="3"><span style="color: blue"> The following HTTP headers are not allowed:</span></font>
 
 - `Server`. This header offers relevant information on the server side, including version and in-scope services. It is strongly recommended to disable this header to avoid disclosing such information. 
 - `X-Powered-By`. This header describes the technology used to implement the exposed service. This information can be useful to potential attackers and should be avoided.
@@ -721,7 +724,7 @@ Next, it is specified how it should be used according to the filtering based on 
 
 With the aim of standardizing the request observability and traceability process, common headers that provide a follow-up of the E2E processes should be included. The table below captures these headers.
 
-| Name | Description |  Type | Pattern	| Longitude | Location | Required | Required on Swagger |	Example | 
+| Name | Description |  Type | Pattern	| Longitude | Location | Required by API Caller | Required in OAS Definition |	Example | 
 |---|---|---|---|---|---|---|---|---|
 | `X-Version` |	Service version description to help observability process |	String| N/A	| | Request | No | No | |	
 | `X-Correlator`|	Service correlator to make E2E observability |		String |	UUID (8-4-4-4-12)	| Max 36	| Request/Response | No | No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
