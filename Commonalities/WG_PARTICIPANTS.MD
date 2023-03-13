@@ -6,6 +6,7 @@
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
 | CableLabs | Randy Levensalor |
+| Cisco | Ravi Guntupalli |
 | Dell | Vaishali Gupta |
 | Deutsche Telekom AG | Herbert Damker |
 | Deutsche Telekom AG | Rafal Artych |
