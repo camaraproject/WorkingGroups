@@ -2,6 +2,7 @@
 | -----------------------| ----------------------------------------------------|
 | A1 | Manfred Mohrmann |
 | Accenture | Adriano Poloni|
+| Accenture | Gaetano Biancardi |
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
