@@ -7,6 +7,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | GSMA | Mark Cornall |
+| HCL | Norbert Naveen |
 | Infobip | Kwok Onn Looi |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
