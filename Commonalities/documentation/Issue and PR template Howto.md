@@ -13,6 +13,10 @@ GitHub will use and display default files for any repository owned by the accoun
 
 ## Configuration
 
+Copy the folder https://github.com/camaraproject/WorkingGroups/Commonalities/documentation/SupportingDocuments/Github_templates/.github
+to the root of Subproject repository.
+
+
 
 
 ## Usage
