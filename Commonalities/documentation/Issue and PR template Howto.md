@@ -32,8 +32,13 @@ blank_issues_enabled: true
 
 
 ## Usage
+Templates are automatically imported when creating new issue or PR in Github web interface.
 
 ### Issue templates 
+
+Github allows to multiple templates to be used for creating issues.
+
+
 
 
 ### Pull request template
@@ -41,3 +46,5 @@ blank_issues_enabled: true
 
 ## References
 [Github documentation](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)
+
+[Full Emoji List](https://unicode.org/emoji/charts/full-emoji-list.html)
