@@ -4,43 +4,49 @@ This document captures guidelines for the API design in CAMARA project. These gu
 
 ## Table of Contents
 
-  - [Introduction](#1-introduction)
-  - [APIfication Principles](#2-apification-principles)
-    - [Domain Driven Design](#21-domain-driven-design)
-    - [API First](#22-api-first)
-    - [Interface standardization. Standardization fora. ](#23-interface-standardization-standardization-fora)
-    - [Information Representation Standard](#24-information-representation-standard)
-    - [Reduce telco-specific terminology in API defintions](#25-reduce-telco-specific-terminilogy)
-  - [API Definition](#3-api-definition)
-    - [API REST](#31-api-rest)
-    - [HTTP Response Codes](#32-http-response-codes)
-    - [Query Parameters Use](#33-query-parameters-use)
-    - [Path Parameters Use](#34-path-parameters-use)
-    - [HTTP Headers Definition](#35-http-headers-definition)
-    - [MIME Types](#36-mime-types)
-  - [API Resource definition](#4-api-resource-definition)
-    - [URL Definition](#41-url-definition)
-    - [Input/Output Resource Definition](#42-input-output-resource-definition)
-  - [Versioning](#5-versioning)
-    - [Versioning Strategy](#51-versioning-strategy)
-    - [Backwards and Forwarding Compatibility](#52-backwards-and-forward-compatibility)
-  - [Error Responses](#6-error-responses)
-  - [Common Data Types](#7-common-data-types)
-  - [Pagination, Sorting and Filtering](#8-pagination-sorting-and-filtering)
-    - [Pagination](#81-pagination)
-    - [Sorting](#82-sorting)
-    - [Filtering](#83-filtering)
-  - [Architecture Headers](#9-architecture-headers)
-  - [Security](#10-security)
-    - [API REST Security](#101-api-rest-security)
-    - [Security Implementation](#102-security-implementation)
-  - [Definition in OpenAPI](#11-definition-in-openapi)
-    - [General Information](#111-general-information)
-    - [Published Routes](#112-published-routes)
-    - [Request Parameters](#113-request-parameters)
-    - [Response Structure](#114-response-structure)
-    - [Data Definitions](#115-data-definitions)
-    - [OAuth Definition](#116-oauth-definition)
+- [API design guidelines](#api-design-guidelines)
+  - [Table of Contents](#table-of-contents)
+  - [Common Vocabulary and Acronyms](#common-vocabulary-and-acronyms)
+  - [1. Introduction](#1-introduction)
+  - [2. APIfication Principles](#2-apification-principles)
+    - [2.1 Domain Driven Design](#21-domain-driven-design)
+    - [2.2 API First](#22-api-first)
+    - [2.3 Interface standardization. Standardization fora.](#23-interface-standardization-standardization-fora)
+    - [2.4 Information Representation Standard](#24-information-representation-standard)
+  - [2.5 Reduce telco-specific terminology in API definitions](#25-reduce-telco-specific-terminology-in-api-definitions)
+  - [3. API Definition](#3-api-definition)
+    - [3.1 API REST](#31-api-rest)
+    - [3.2 HTTP Response Codes](#32-http-response-codes)
+    - [3.3 Query Parameters Use](#33-query-parameters-use)
+    - [3.4 Path Parameters Use](#34-path-parameters-use)
+    - [3.5 HTTP Headers Definition](#35-http-headers-definition)
+    - [3.6 MIME Types](#36-mime-types)
+  - [4. API Resource Definition](#4-api-resource-definition)
+    - [4.1 URL Definition](#41-url-definition)
+    - [4.2 Input/Output Resource Definition](#42-inputoutput-resource-definition)
+  - [5. Versioning](#5-versioning)
+    - [5.1 Versioning Strategy](#51-versioning-strategy)
+    - [5.2 Backwards and Forward Compatibility](#52-backwards-and-forward-compatibility)
+  - [6. Error Responses](#6-error-responses)
+  - [7. Common Data Types](#7-common-data-types)
+  - [8. Pagination, Sorting and Filtering](#8-pagination-sorting-and-filtering)
+    - [8.1 Pagination](#81-pagination)
+    - [8.2 Sorting](#82-sorting)
+    - [8.3 Filtering](#83-filtering)
+  - [9. Architecture Headers](#9-architecture-headers)
+  - [10. Security](#10-security)
+    - [10.1 API REST Security](#101-api-rest-security)
+    - [10.2 Security Implementation](#102-security-implementation)
+  - [11. Definition in OpenAPI](#11-definition-in-openapi)
+    - [11.1 General Information](#111-general-information)
+    - [11.2 Published Routes](#112-published-routes)
+    - [11.3 Request Parameters](#113-request-parameters)
+    - [11.4 Response Structure](#114-response-structure)
+    - [11.5 Data Definitions](#115-data-definitions)
+    - [11.6 OAuth Definition](#116-oauth-definition)
+  - [12. Subscription, Notification \& Event](#12-subscription-notification--event)
+    - [12.1 Subscription](#121-subscription)
+    - [12.2 Event notification](#122-event-notification)
 
 
 ## Common Vocabulary and Acronyms
@@ -194,7 +200,7 @@ CAMARA API designers should:
 - Consider and account for how the API can be fulfilled on a range of network types
 - Avoid terms/types specific to a given telco domain. For example the acronym 'UE': in 3GPP terminology this refers to 'User Equipment', but 'UE' means 'User Experience' for most Web developers: 'Terminal' would be a more appropriate, and unambiguous, term. If use of a telco-specific term is unavoidable, either:
 - - allow a choice, so the developer can utilise other types. E.g. `MSISDN` should not be the _only_ way to identify an end user.
-- - use abstractions, which can evolve: e.g. an `end_user_identifier` enumeration can support mulitple identifiers.
+- - use abstractions, which can evolve: e.g. an `endUserIdentifier` enumeration can support mulitple identifiers.
 - - explain the telco-specific term in the documentation, and any constraints it brings.
 
 
@@ -312,16 +318,16 @@ If you want to add multiple query parameters, an "`&`" is placed between them to
 
 A path param is a unique identifier for the resource. For example:
 
-- ```/users/{user_id}```
+- ```/users/{userId}```
 
 Multiple path params can be entered if there is a logical path of mutually dependent resources.
-- ```/users/{user_id}/documents/{document_id}```
+- ```/users/{userId}/documents/{documentId}```
 
 <font size="3"><span style="color: blue"> Good Practices </span></font>
 
 
 1. Path params cannot be concatenated. A path param must be preceded by the resource represented. If we did this, the URL would be incomprehensible:
-   - ```/users/{user_id}/{document_id}```
+   - ```/users/{userId}/{documentId}```
    - ```/users/13225365/647658```
   <br></br>
 2. The attribute must be identifying itself, it is not enough with "`{id}`"
@@ -329,17 +335,17 @@ Multiple path params can be entered if there is a logical path of mutually depen
   <br></br>
 
    Reason is that if this resource is "extended" in the future and includes other identifiers, we would not know which of the entities the "`{id}`" parameter refers to. For example:
-   - Incorrect: ```/users/{id}/documents/{document_id}```
-   - Correct: ```/users/{user_id}/documents/{document_id}```
+   - Incorrect: ```/users/{id}/documents/{documentId}```
+   - Correct: ```/users/{userId}/documents/{documentId}```
 <br></br>
-3. It is recommended that the identifier have a similar morphology on all endpoints. For example, “`xxxx_id`”, where xxx is the name of the entity it references:
-   - ```/users/{user_id}```
-   - ```/accounts/{account_id}```
-   - ```/vehicles/{vehicle_id}```
-   - ```/users/{user_id}/vehicles/{vehicle_id}```
+3. It is recommended that the identifier have a similar morphology on all endpoints. For example, “`xxxxId`”, where xxx is the name of the entity it references:
+   - ```/users/{userId}```
+   - ```/accounts/{accountId}```
+   - ```/vehicles/{vehicleId}```
+   - ```/users/{userId}/vehicles/{vehicleId}```
 <br></br>
 4. Care must be taken not to create ambiguities in the URIs when defining paths. For example, if the "user" entity can be identified by two unique identifiers and we will create two URIs. 
-   - ```/users/{user_id}```
+   - ```/users/{userId}```
    - ```/users/{nif}```
 <br></br>
 5. Identifiers must be, as far as possible, of a hash type or similar so that we avoid enumeration or brute force attacks for their deduction.
@@ -449,9 +455,9 @@ To make the hierarchy, the following aspects must be applied:
 - A resource has multiple operations identified by HTTP Verbs.
 - Resources defined through URIs establish a hierarchical relationship with each other:
   - `/<entity>`<br>
-   `/<entity>/{<entity_id>}`<br>
-   `/<entity>/{<entity_id>}/<sub_entity>`<br>
-   `/<entity>/{<entity_id>}/<sub_entity>/{<sub_entity_id>}`
+   `/<entity>/{<entityId>}`<br>
+   `/<entity>/{<entityId>}/<subEntity>`<br>
+   `/<entity>/{<entityId>}/<subEntity>/{<subEntityId>}`
 
 
 ### 4.2 Input/Output Resource Definition
@@ -459,7 +465,7 @@ To make the hierarchy, the following aspects must be applied:
 At this point, some considerations are outlined about the business input and output data of the API resources. This data can be informed by different means: QueryString, Header, Body...
 
 These considerations are below:
-- API input and output business data will follow the snake_case notation.
+- API input and output business data will follow the camelCase notation.
 - The field names in JSON and XML will follow the same URIs standard.
   - Business data must be human readable.
   - commercial data name must be a noun, that means, it corresponds to an entity information.
@@ -646,7 +652,7 @@ Exposing a resources collection through a single URI can cause applications to f
 Services can answer with a resource or article collections. Sometimes these collections may be a partial set due to performance or security reasons. Elements must be identified and arranged consistently on all pages. Paging can be enabled by default on the server side to mitigate denial of service or similar.
 
 Services must accept and use these query parameters when paging is supported:
-- `per_page`: number of resources requested to be provided in the response 
+- `perPage`: number of resources requested to be provided in the response 
 - `page`: requested index to indicate the start of the resources to be provided in the response
 - `seek`: in ndex of last result read to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records.
 
@@ -662,21 +668,21 @@ The HTTP codes that the server will use as a response are:
 - `400`: request outside the range of the resource list
  
 Petitions examples:
-- `page=0 per_page=20`, which returnss the first 20 resources
-- `page=10 per_page=20`, which returns 20 resources from the 10th element.
+- `page=0 perPage=20`, which returnss the first 20 resources
+- `page=10 perPage=20`, which returns 20 resources from the 10th element.
 
 
 ### 8.2 Sorting
 
 Sorting the result of a query on a resources collection requires two main parameters:
-- `order_by`: it contains the names of the attributes on which the sort is performed, with comma separated if there is more than one criteria.
+- `orderBy`: it contains the names of the attributes on which the sort is performed, with comma separated if there is more than one criteria.
 - `order`: by default, sorting is done in descending order. 
 
 If you may want to specify which sort criteria you need to use "ascp" or "desc" as query value.
 
 For example: The list of orders is retrieved, sorted by rating, reviews and name with descending criteria.
 ```http
-https://api.mycompany.com/v1/orders?order_by=rating,reviews,name&order=desc
+https://api.mycompany.com/v1/orders?orderBy=rating,reviews,name&order=desc
 ```
 
 ### 8.3 Filtering
@@ -689,10 +695,10 @@ Next, it is specified how it should be used according to the filtering based on 
 | **Operation** |	Text |	Numbers | 	Dates |
 | ----- |	-----  |	 -----  |  -----  |
 | Equal | `GET .../?name=Juan` | `GET .../?amount=807.24`	| `GET .../?executionDate=2018-30-05` | 
-| Greater or equal	| N/A | `GET .../?amount.gte=807.24` | `GET.../?execution_date.gte=2018-30-05` |
-| Strictly greater | N/A | `GET .../?amount.gt=807.24` | `GET.../?execution_date.gt=2018-30-05` | 
-| smaller or equal	| N/A | `GET .../?amount.lte=807.24` | `GET.../?execution_date.lte=2018-30-05` |
-| Strictly smaller | N/A | `GET .../?amount.lt=807.24` | `GET.../?execution_date.lt=2018-30-05` | 
+| Greater or equal	| N/A | `GET .../?amount.gte=807.24` | `GET.../?executionDate.gte=2018-30-05` |
+| Strictly greater | N/A | `GET .../?amount.gt=807.24` | `GET.../?executionDate.gt=2018-30-05` | 
+| smaller or equal	| N/A | `GET .../?amount.lte=807.24` | `GET.../?executionDate.lte=2018-30-05` |
+| Strictly smaller | N/A | `GET .../?amount.lt=807.24` | `GET.../?executionDate.lt=2018-30-05` | 
 |Contains | `GET .../?name=~Juan` |N/A | N/A | 
 
 
@@ -712,11 +718,11 @@ Next, it is specified how it should be used according to the filtering based on 
   - `GET /users?name=~dav`
     - Look for names that include "dav"
 - <u>Greater than / less than</u>: new attribute will be created and it will be preceded with the suffixes .(gte|gt|lte|lt)$.
-  - `GET /users?creation_date.gte=2021-01-01T00:00:00`
+  - `GET /users?creationDate.gte=2021-01-01T00:00:00`
     - Find users with creation Date greater than 2021
-  - `GET /users?creation_date.gt=2021-11-31T23:59:59`
+  - `GET /users?creationDate.gt=2021-11-31T23:59:59`
     - Find users with creationDate less than 2022
-  - `GET /users?creation_date.gte=2020-01-01T00:00:00&creation_date.lte=2021-11-31T23:59:59`
+  - `GET /users?creationDate.gte=2020-01-01T00:00:00&creationDate.lte=2021-11-31T23:59:59`
     - Search for users created between 2020 and 2021
 
 
@@ -1021,3 +1027,180 @@ Finally, this part describes the OAuth security applied to the API. This spec is
 - Endpoint token URL
 - URL to endpoint authorization ( If flow is based on "`authorizationCode`").	
 
+
+## 12. Subscription, Notification & Event
+
+In order to provided event-based interaction, CAMARA API could provided capabilities for subscription & notification management.
+A subscription allows to an API consumer to request event notification reception at an given url (callback address) for a specific context.
+A notification is the publication at the listener address about an occurred event.
+Event type managed are explicitly defined in CAMAPA API OAS.
+
+### 12.1 Subscription
+
+We distinguish 2 types of subscription:
+- Instance-based subscription (indirect creation)
+- Resource-based subscription (direct creation)
+
+**Instance-based subscription**
+
+An instance-based subscription is a subscription indirectly created, additionnally, to another resource creation. For example for a Payment request (in Carrier Billing API), in the `POST/payments`, the API consumer could request to get event notification about **this** Payment request processing update. The subscription is not an entity and its lifecycle is linked to the managed entity (the Payment resource in this case). The subscription terminates with the managed entity.
+
+Providing this capability is optionnal for any CAMARA APIs depending on UC requirements
+
+If this capability is present in CAMARA API, following attributes **must** be used in the POST request for the managed entity:
+
+| attribute name | type | attribute description | cardinality |
+| ----- |	-----  |	 -----  | -----  | 
+| notificationUrl | string |callback address where the notification must be POST-ed | mandatory |
+| notificationAuthToken | string | authentification token for callback API | optional |
+
+
+**Resource-based subscription**
+
+A resource-based subscription is is subscription managed as a resource. A dedicated endpoint is provided to request subscription creation.  As this subscription is managed API resource, it is identified and operations to search, retrieve and delete them must be provided.
+
+Note: It is perfectly valid for a CAMARA API to have several subscriptions endpoints when distinct events are managed (for example in Device status API we manage distinct subscription for roaming status and reachability status event)
+
+In order to ease developer adoption, the pattern for Resource-based subscription must be the consistent for all API providing this feature.
+
+4 operations must be defined:
+
+| operation | path | description |
+| ----- |	-----  |	 -----  | 
+| POST | `/subscriptions/<subscriptionName>` | Operation to request a subscription.  eg. POST /subscriptions/roamingStatus    |
+| GET | `/subscriptions/` | Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
+| GET | `/subscriptions/{subscriptionId}` | Operation to retrieve a subscription |
+| DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
+
+Following table provides subscriptions attributes
+
+| name | type | attribute description | cardinality |
+| ----- |	-----  |	 -----  |  -----  | 
+| notificationUrl | string | callback address where the notification must be POST-ed | mandatory |
+| notificationAuthToken | string | authentification token for callback API | optional |
+| type | string | type of notification subscribed. This attribute must not be present in the POST request as it is explicitly provided in the path| mandatory in server response |
+| subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
+| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester | optional |
+| startedAt | string - datetime| Date when the subscription begun. This attribute must not be present in the POST request as it is provided by API server | optional |
+| expiredAt | string - datetime| Date when the subscription expired. This attribute must not be present in the POST request as it is provided by API server. Not valued if subscription still active. | optional |
+| subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
+
+_Error definition for subscription_
+
+Error definition are described in this guideline applies for subscriptions.
+
+Following Error code must be present:
+* for `POST`: 400, 401, 403, 409, 500, 503
+* for `GET`: 400, 401, 403, 500, 503
+* for `GET/{subscriptionId}`: 400, 401, 403, 404, 500, 503
+* dor `DELETE`: 400, 401, 403, 404, 500, 503
+
+_Termination for resource-based subscription_
+
+3 scenarios are possibles (business conditions may apply):
+
+* case1: subscriptionExpireTime has been provided in the request and reached. The operator in this case has to terminate the subscription.
+* case2: subscriber requests a DELETE for a subscription. 
+* case3: subscription ended at operator request. 
+
+It could be useful to provide a mechanism to inform subscriber for case3 (and probably case1). In this case a specific event type could be used.
+
+
+_Subscription example_
+
+Request:
+
+```json
+curl -X 'POST' \
+  'http://localhost:9091//device-status/v0/subscriptions/roamingStatus' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d
+{
+  "notificationUrl": "https://application-server.com",
+  "notificationAuthToken": "c8974e592c2fa383d4a3960714",
+  "subscriptionDetail": {
+    "ueId": {,
+      "ipv4Addr": "192.168.0.1"
+    },
+    "uePort": 5060
+  },
+  "subscriptionExpireTime": "2023-03-31T00:00:00.000Z"
+}
+```
+
+response:
+
+```json
+201 Created
+
+{
+  "notificationUrl": "https://application-server.com",
+  "notificationAuthToken": "c8974e592c2fa383d4a3960714",
+  "subscriptionDetail": {
+    "ueId": {
+      "ipv4Addr": "192.168.0.1"
+    },
+    "uePort": 5060
+  },
+  "subscriptionExpireTime": "2023-03-31T00:00:00.000Z",
+  "subscriptionId": "456g899g",
+  "type": "ROAMING_STATUS",
+  "startedAt": "2023-03-17T16:02:41.314Z"
+}
+```
+
+
+
+
+### 12.2 Event notification
+
+The notification endpoint is used by the API server to notify the API consumer that an event occured.
+
+Note: The notification is the message posted on listener side. We describe the notification message in the CAMARA OAS but it could confusing because this endpoint should be implemented on the business API consumer side. This notice should be explicited mentionned in all CAMARA API documentation featuring notification.
+
+Only Operation POST is provided for `notifications` and the expected response code is `204`.
+
+For consistence between CAMARA API an uniform `notifications` model must be used:
+
+| name | type | attribute description | cardinality |
+| ----- |	-----  |	 -----  |  -----  | 
+| subscriptionId | string | subscription identifier - could be valued for Resource-based subscription | optional |
+| eventType | string | type of event as defined in each CAMARA API. The event type are defined in UPPER_SNAKE_CASE| mandatory |
+| eventTime | string - datetime | date time when the event was notified by the issuer- valued in the request. This is not the date when the event occurred | mandatory |
+| eventDetail | object | A detailed event structure depending on the eventType | mandatory |
+
+
+Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination.
+
+_Example_
+
+Request:
+
+```json
+curl -X 'POST' \
+  'http://localhost:9091//device-status/v0/subscriptions/roamingStatus' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d
+{
+  "subscriptionId": "456g899g",
+  "eventType": "ROAMING_STATUS",
+  "eventTime": "2023-01-19T13:18:23.682Z",
+  "eventDetail": {
+    "ueId": {
+      "ipv4Addr": "192.168.0.1"
+      },
+    "uePort": 5060,
+    "roaming": true,
+    "countryCode": 208,
+    "countryName": "FR"
+  }
+}
+```
+
+response:
+
+```json
+204 No Content
+```
