@@ -29,7 +29,18 @@ blank_issues_enabled: true
     about: Please ask and answer questions here.
  ```
 3. Modify Issue and PR templates in Markdown files included in the  `.github` folder if needed.
+* Issue templates include headers, where the name and descripttion of issue category, the suggested title of the issue, 
+the labels and assigness for the issue can be configured, e.g. 
 
+```
+---
+name:  Bug 
+about: Describe the bug in Provider Implementation
+title: ''
+labels: 'implementation:bug'
+assignees: ''
+---
+```
 
 ## Usage
 Templates are automatically imported when creating new issue or PR in Github web interface.
@@ -37,7 +48,19 @@ Templates are automatically imported when creating new issue or PR in Github web
 ### Issue templates 
 
 Github allows to multiple templates to be used for creating issues.
+The screenshot below presents available options with proposed set of templates and configs: 
 
+![](images/New%20Issue%20%C2%B7%20templates.png)
+
+Note, that **Report a security vulnerability** option is added by Github and opening blank issues is enabled.
+
+The proposed issue categories are intended for:
+
+|Category| Description|
+|---|---|
+| Bug| Describing bugs in Provider Implementations|
+|Correction|Suggesting corrections of API specification or indicating misalignment with API design guidelines|
+|Enhancement| Suggesting ideas for new API features or questions on directions for API evolution| 
 
 
 
