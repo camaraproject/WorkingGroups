@@ -13,10 +13,22 @@ GitHub will use and display default files for any repository owned by the accoun
 
 ## Configuration
 
-Copy the folder https://github.com/camaraproject/WorkingGroups/Commonalities/documentation/SupportingDocuments/Github_templates/.github
+1. Copy the folder https://github.com/camaraproject/WorkingGroups/Commonalities/documentation/SupportingDocuments/Github_templates/.github
 to the root of Subproject repository.
 
+2. Edit the `config.yml` file inside `.github/ISSUE_TEMPLATE/` folder:
+* to allow creating blank issues (without template) set:
+```      
+blank_issues_enabled: true
+```
+* Edit or add external links using the following structure in `contact_links:` array:
 
+```
+  - name: Subproject discussions 
+    url: https://github.com/camaraproject/WorkingGroups/discussions
+    about: Please ask and answer questions here.
+ ```
+3. Modify Issue and PR templates in Markdown files included in the  `.github` folder if needed.
 
 
 ## Usage
