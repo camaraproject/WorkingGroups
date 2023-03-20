@@ -2,12 +2,12 @@
 #### What type of PR is this?
 
 Add one of the following kinds:
+* bug
 * correction
 * enhancement/feature
 * cleanup
 * documentation
 * subproject management
-
 
 
 #### What this PR does / why we need it:
