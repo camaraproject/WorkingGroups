@@ -73,11 +73,27 @@ The proposed issue categories are prepared with Github labels:
 
 ### Pull request template
 
+Pull request template is based on the template use in [Kubernetes project](https://github.com/kubernetes/kubernetes/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
 
+It requires to indicate kind of PR as one of:
+* bug
+* correction
+* enhancement/feature
+* cleanup
+* documentation
+* subproject management
 
+The proposed above values correspond to issue categories, with additional type: _cleanup_ for simple correction of typos/spelling mistakes or application of guidelines.
+
+After describing what the PR does, the link to relevant issue should be added.
+Thanks to Github keywords: `Fixes #<issue number>`, or `Fixes (paste link of issue)` pull request is linked to relevant issue to show that a fix is in progress and to automatically close the issue when the pull request is merged.
+
+The pull request template includes the place to input a clear, concise description of the change that will facilitate creation of the Release Notes. 
 
 
 ## References
 [Github templates documentation](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)
+
+[Github keywords to link an issue and pull request](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/using-keywords-in-issues-and-pull-requests)
 
 [Full Emoji List](https://unicode.org/emoji/charts/full-emoji-list.html)
