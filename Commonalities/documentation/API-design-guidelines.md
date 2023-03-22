@@ -1161,7 +1161,7 @@ Note: The notification is the message posted on listener side. We describe the n
 
 Only Operation POST is provided for `notifications` and the expected response code is `204`.
 
-For consistence between CAMARA API an uniform `notifications` model must be used:
+For consistence between CAMARA API a uniform `notifications` model must be used:
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
