@@ -1093,7 +1093,7 @@ Following Error code must be present:
 * for `POST`: 400, 401, 403, 409, 500, 503
 * for `GET`: 400, 401, 403, 500, 503
 * for `GET/{subscriptionId}`: 400, 401, 403, 404, 500, 503
-* dor `DELETE`: 400, 401, 403, 404, 500, 503
+* for `DELETE`: 400, 401, 403, 404, 500, 503
 
 _Termination for resource-based subscription_
 
