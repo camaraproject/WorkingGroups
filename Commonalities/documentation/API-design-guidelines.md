@@ -1051,7 +1051,7 @@ If this capability is present in CAMARA API, following attributes **must** be us
 
 | attribute name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  | -----  | 
-| notificationUrl | string |callback address where the notification must be POST-ed | mandatory |
+| notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
 | notificationAuthToken | string | authentification token for callback API | optional |
 
 
