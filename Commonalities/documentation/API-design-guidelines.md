@@ -1068,7 +1068,7 @@ In order to ease developer adoption, the pattern for Resource-based subscription
 | operation | path | description |
 | ----- |	-----  |	 -----  | 
 | POST | `/subscriptions/<subscriptionName>` | Operation to request a subscription.  eg. POST /subscriptions/roamingStatus    |
-| GET | `/subscriptions/` | Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
+| GET | `/subscriptions` | Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
 | GET | `/subscriptions/{subscriptionId}` | Operation to retrieve a subscription |
 | DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
 
