@@ -2,10 +2,12 @@
 | -----------------------| ----------------------------------------------------|
 | A1 | Manfred Mohrmann |
 | Accenture | Adriano Poloni|
+| Accenture | Gaetano Biancardi |
 | Accenture | Giuseppe Di Nuccio|
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
 | CableLabs | Randy Levensalor |
+| Cisco | Ravi Guntupalli |
 | Dell | Vaishali Gupta |
 | Deutsche Telekom AG | Herbert Damker |
 | Deutsche Telekom AG | Rafal Artych |
@@ -43,3 +45,5 @@
 | Vodafone | Eric Murray |
 | Vodafone | Ivan Nieto|
 | Vodafone | Kevin Smith|
+| Vonage | Chris Howell |
+| Vonage | Jose Recio |

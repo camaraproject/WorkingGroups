@@ -4,43 +4,46 @@ This document captures guidelines for the API design in CAMARA project. These gu
 
 ## Table of Contents
 
-  - [Introduction](#1-introduction)
-  - [APIfication Principles](#2-apification-principles)
-    - [Domain Driven Design](#21-domain-driven-design)
-    - [API First](#22-api-first)
-    - [Interface standardization. Standardization fora. ](#23-interface-standardization-standardization-fora)
-    - [Information Representation Standard](#24-information-representation-standard)
-    - [Reduce telco-specific terminology in API defintions](#25-reduce-telco-specific-terminilogy)
-  - [API Definition](#3-api-definition)
-    - [API REST](#31-api-rest)
-    - [HTTP Response Codes](#32-http-response-codes)
-    - [Query Parameters Use](#33-query-parameters-use)
-    - [Path Parameters Use](#34-path-parameters-use)
-    - [HTTP Headers Definition](#35-http-headers-definition)
-    - [MIME Types](#36-mime-types)
-  - [API Resource definition](#4-api-resource-definition)
-    - [URL Definition](#41-url-definition)
-    - [Input/Output Resource Definition](#42-input-output-resource-definition)
-  - [Versioning](#5-versioning)
-    - [Versioning Strategy](#51-versioning-strategy)
-    - [Backwards and Forwarding Compatibility](#52-backwards-and-forward-compatibility)
-  - [Error Responses](#6-error-responses)
-  - [Common Data Types](#7-common-data-types)
-  - [Pagination, Sorting and Filtering](#8-pagination-sorting-and-filtering)
-    - [Pagination](#81-pagination)
-    - [Sorting](#82-sorting)
-    - [Filtering](#83-filtering)
-  - [Architecture Headers](#9-architecture-headers)
-  - [Security](#10-security)
-    - [API REST Security](#101-api-rest-security)
-    - [Security Implementation](#102-security-implementation)
-  - [Definition in OpenAPI](#11-definition-in-openapi)
-    - [General Information](#111-general-information)
-    - [Published Routes](#112-published-routes)
-    - [Request Parameters](#113-request-parameters)
-    - [Response Structure](#114-response-structure)
-    - [Data Definitions](#115-data-definitions)
-    - [OAuth Definition](#116-oauth-definition)
+- [API design guidelines](#api-design-guidelines)
+  - [Table of Contents](#table-of-contents)
+  - [Common Vocabulary and Acronyms](#common-vocabulary-and-acronyms)
+  - [1. Introduction](#1-introduction)
+  - [2. APIfication Principles](#2-apification-principles)
+    - [2.1 Domain Driven Design](#21-domain-driven-design)
+    - [2.2 API First](#22-api-first)
+    - [2.3 Interface standardization. Standardization fora.](#23-interface-standardization-standardization-fora)
+    - [2.4 Information Representation Standard](#24-information-representation-standard)
+  - [2.5 Reduce telco-specific terminology in API definitions](#25-reduce-telco-specific-terminology-in-api-definitions)
+  - [3. API Definition](#3-api-definition)
+    - [3.1 API REST](#31-api-rest)
+    - [3.2 HTTP Response Codes](#32-http-response-codes)
+    - [3.3 Query Parameters Use](#33-query-parameters-use)
+    - [3.4 Path Parameters Use](#34-path-parameters-use)
+    - [3.5 HTTP Headers Definition](#35-http-headers-definition)
+    - [3.6 MIME Types](#36-mime-types)
+  - [4. API Resource Definition](#4-api-resource-definition)
+    - [4.1 URL Definition](#41-url-definition)
+    - [4.2 Input/Output Resource Definition](#42-inputoutput-resource-definition)
+  - [5. Versioning](#5-versioning)
+    - [5.1 Versioning Strategy](#51-versioning-strategy)
+    - [5.2 Backwards and Forward Compatibility](#52-backwards-and-forward-compatibility)
+  - [6. Error Responses](#6-error-responses)
+  - [7. Common Data Types](#7-common-data-types)
+  - [8. Pagination, Sorting and Filtering](#8-pagination-sorting-and-filtering)
+    - [8.1 Pagination](#81-pagination)
+    - [8.2 Sorting](#82-sorting)
+    - [8.3 Filtering](#83-filtering)
+  - [9. Architecture Headers](#9-architecture-headers)
+  - [10. Security](#10-security)
+    - [10.1 API REST Security](#101-api-rest-security)
+    - [10.2 Security Implementation](#102-security-implementation)
+  - [11. Definition in OpenAPI](#11-definition-in-openapi)
+    - [11.1 General Information](#111-general-information)
+    - [11.2 Published Routes](#112-published-routes)
+    - [11.3 Request Parameters](#113-request-parameters)
+    - [11.4 Response Structure](#114-response-structure)
+    - [11.5 Data Definitions](#115-data-definitions)
+    - [11.6 OAuth Definition](#116-oauth-definition)
 
 
 ## Common Vocabulary and Acronyms
@@ -194,7 +197,7 @@ CAMARA API designers should:
 - Consider and account for how the API can be fulfilled on a range of network types
 - Avoid terms/types specific to a given telco domain. For example the acronym 'UE': in 3GPP terminology this refers to 'User Equipment', but 'UE' means 'User Experience' for most Web developers: 'Terminal' would be a more appropriate, and unambiguous, term. If use of a telco-specific term is unavoidable, either:
 - - allow a choice, so the developer can utilise other types. E.g. `MSISDN` should not be the _only_ way to identify an end user.
-- - use abstractions, which can evolve: e.g. an `end_user_identifier` enumeration can support mulitple identifiers.
+- - use abstractions, which can evolve: e.g. an `endUserIdentifier` enumeration can support mulitple identifiers.
 - - explain the telco-specific term in the documentation, and any constraints it brings.
 
 
@@ -312,16 +315,16 @@ If you want to add multiple query parameters, an "`&`" is placed between them to
 
 A path param is a unique identifier for the resource. For example:
 
-- ```/users/{user_id}```
+- ```/users/{userId}```
 
 Multiple path params can be entered if there is a logical path of mutually dependent resources.
-- ```/users/{user_id}/documents/{document_id}```
+- ```/users/{userId}/documents/{documentId}```
 
 <font size="3"><span style="color: blue"> Good Practices </span></font>
 
 
 1. Path params cannot be concatenated. A path param must be preceded by the resource represented. If we did this, the URL would be incomprehensible:
-   - ```/users/{user_id}/{document_id}```
+   - ```/users/{userId}/{documentId}```
    - ```/users/13225365/647658```
   <br></br>
 2. The attribute must be identifying itself, it is not enough with "`{id}`"
@@ -329,17 +332,17 @@ Multiple path params can be entered if there is a logical path of mutually depen
   <br></br>
 
    Reason is that if this resource is "extended" in the future and includes other identifiers, we would not know which of the entities the "`{id}`" parameter refers to. For example:
-   - Incorrect: ```/users/{id}/documents/{document_id}```
-   - Correct: ```/users/{user_id}/documents/{document_id}```
+   - Incorrect: ```/users/{id}/documents/{documentId}```
+   - Correct: ```/users/{userId}/documents/{documentId}```
 <br></br>
-3. It is recommended that the identifier have a similar morphology on all endpoints. For example, “`xxxx_id`”, where xxx is the name of the entity it references:
-   - ```/users/{user_id}```
-   - ```/accounts/{account_id}```
-   - ```/vehicles/{vehicle_id}```
-   - ```/users/{user_id}/vehicles/{vehicle_id}```
+3. It is recommended that the identifier have a similar morphology on all endpoints. For example, “`xxxxId`”, where xxx is the name of the entity it references:
+   - ```/users/{userId}```
+   - ```/accounts/{accountId}```
+   - ```/vehicles/{vehicleId}```
+   - ```/users/{userId}/vehicles/{vehicleId}```
 <br></br>
 4. Care must be taken not to create ambiguities in the URIs when defining paths. For example, if the "user" entity can be identified by two unique identifiers and we will create two URIs. 
-   - ```/users/{user_id}```
+   - ```/users/{userId}```
    - ```/users/{nif}```
 <br></br>
 5. Identifiers must be, as far as possible, of a hash type or similar so that we avoid enumeration or brute force attacks for their deduction.
@@ -358,6 +361,7 @@ The main HTTP headers are described below:
 - `Content-Type`: it indicates the type of message sent to the recipient or, in the case of the HEAD method, the type of message that would have been sent if the request had been a GET. The MIME type of the response, or the content uploaded via POST/PUT in case it is a request. 
 - `Content-Length`: it indicates the message size, in octets, sent to the recipient or, in the case of the HEAD method, the message size that would have been sent if the request had been a GET. The size of the response in octets (8 bits) 
 - `Content-Encoding`: it is used as a message type modifier. The type of encoding used in the response is indicated.
+- `Host`:  specifies the host and port number of the server to which the request is being sent.
 
 <font size="3"><span style="color: blue"> Optional recommendended security headers by OWASP </span></font>
 
@@ -373,7 +377,9 @@ The main HTTP headers are described below:
 - `Cross-Origin-Resource-Policy`: this response header (also referred to as CORP) allows to define a policy that lets web sites and applications opt in to protection against certain requests from other origins (such as those issued with elements like "`<script>`" and "`<img>`"), to mitigate speculative side-channel attacks, like Spectre, as well as Cross-Site Script Inclusion (XSSI) attacks
 - `Cache-Control`: it holds directives (instructions) for caching in both requests and responses. If a given directive is in a request, it does not mean this directive is in the response
 
-<font size="3"><span style="color: blue"> HTTP headers not allowed  </span></font>
+To avoid cluttering the CAMARA OAS (Swagger) definition files, the above headers must not be included explicitly in the API definition files even when supported, as it can be assumed that developers will already be familiar with their use.
+
+<font size="3"><span style="color: blue"> The following HTTP headers are not allowed:</span></font>
 
 - `Server`. This header offers relevant information on the server side, including version and in-scope services. It is strongly recommended to disable this header to avoid disclosing such information. 
 - `X-Powered-By`. This header describes the technology used to implement the exposed service. This information can be useful to potential attackers and should be avoided.
@@ -446,9 +452,9 @@ To make the hierarchy, the following aspects must be applied:
 - A resource has multiple operations identified by HTTP Verbs.
 - Resources defined through URIs establish a hierarchical relationship with each other:
   - `/<entity>`<br>
-   `/<entity>/{<entity_id>}`<br>
-   `/<entity>/{<entity_id>}/<sub_entity>`<br>
-   `/<entity>/{<entity_id>}/<sub_entity>/{<sub_entity_id>}`
+   `/<entity>/{<entityId>}`<br>
+   `/<entity>/{<entityId>}/<subEntity>`<br>
+   `/<entity>/{<entityId>}/<subEntity>/{<subEntityId>}`
 
 
 ### 4.2 Input/Output Resource Definition
@@ -456,7 +462,7 @@ To make the hierarchy, the following aspects must be applied:
 At this point, some considerations are outlined about the business input and output data of the API resources. This data can be informed by different means: QueryString, Header, Body...
 
 These considerations are below:
-- API input and output business data will follow the snake_case notation.
+- API input and output business data will follow the camelCase notation.
 - The field names in JSON and XML will follow the same URIs standard.
   - Business data must be human readable.
   - commercial data name must be a noun, that means, it corresponds to an entity information.
@@ -643,7 +649,7 @@ Exposing a resources collection through a single URI can cause applications to f
 Services can answer with a resource or article collections. Sometimes these collections may be a partial set due to performance or security reasons. Elements must be identified and arranged consistently on all pages. Paging can be enabled by default on the server side to mitigate denial of service or similar.
 
 Services must accept and use these query parameters when paging is supported:
-- `per_page`: number of resources requested to be provided in the response 
+- `perPage`: number of resources requested to be provided in the response 
 - `page`: requested index to indicate the start of the resources to be provided in the response
 - `seek`: in ndex of last result read to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records.
 
@@ -659,21 +665,21 @@ The HTTP codes that the server will use as a response are:
 - `400`: request outside the range of the resource list
  
 Petitions examples:
-- `page=0 per_page=20`, which returnss the first 20 resources
-- `page=10 per_page=20`, which returns 20 resources from the 10th element.
+- `page=0 perPage=20`, which returnss the first 20 resources
+- `page=10 perPage=20`, which returns 20 resources from the 10th element.
 
 
 ### 8.2 Sorting
 
 Sorting the result of a query on a resources collection requires two main parameters:
-- `order_by`: it contains the names of the attributes on which the sort is performed, with comma separated if there is more than one criteria.
+- `orderBy`: it contains the names of the attributes on which the sort is performed, with comma separated if there is more than one criteria.
 - `order`: by default, sorting is done in descending order. 
 
 If you may want to specify which sort criteria you need to use "ascp" or "desc" as query value.
 
 For example: The list of orders is retrieved, sorted by rating, reviews and name with descending criteria.
 ```http
-https://api.mycompany.com/v1/orders?order_by=rating,reviews,name&order=desc
+https://api.mycompany.com/v1/orders?orderBy=rating,reviews,name&order=desc
 ```
 
 ### 8.3 Filtering
@@ -686,10 +692,10 @@ Next, it is specified how it should be used according to the filtering based on 
 | **Operation** |	Text |	Numbers | 	Dates |
 | ----- |	-----  |	 -----  |  -----  |
 | Equal | `GET .../?name=Juan` | `GET .../?amount=807.24`	| `GET .../?executionDate=2018-30-05` | 
-| Greater or equal	| N/A | `GET .../?amount.gte=807.24` | `GET.../?execution_date.gte=2018-30-05` |
-| Strictly greater | N/A | `GET .../?amount.gt=807.24` | `GET.../?execution_date.gt=2018-30-05` | 
-| smaller or equal	| N/A | `GET .../?amount.lte=807.24` | `GET.../?execution_date.lte=2018-30-05` |
-| Strictly smaller | N/A | `GET .../?amount.lt=807.24` | `GET.../?execution_date.lt=2018-30-05` | 
+| Greater or equal	| N/A | `GET .../?amount.gte=807.24` | `GET.../?executionDate.gte=2018-30-05` |
+| Strictly greater | N/A | `GET .../?amount.gt=807.24` | `GET.../?executionDate.gt=2018-30-05` | 
+| smaller or equal	| N/A | `GET .../?amount.lte=807.24` | `GET.../?executionDate.lte=2018-30-05` |
+| Strictly smaller | N/A | `GET .../?amount.lt=807.24` | `GET.../?executionDate.lt=2018-30-05` | 
 |Contains | `GET .../?name=~Juan` |N/A | N/A | 
 
 
@@ -709,11 +715,11 @@ Next, it is specified how it should be used according to the filtering based on 
   - `GET /users?name=~dav`
     - Look for names that include "dav"
 - <u>Greater than / less than</u>: new attribute will be created and it will be preceded with the suffixes .(gte|gt|lte|lt)$.
-  - `GET /users?creation_date.gte=2021-01-01T00:00:00`
+  - `GET /users?creationDate.gte=2021-01-01T00:00:00`
     - Find users with creation Date greater than 2021
-  - `GET /users?creation_date.gt=2021-11-31T23:59:59`
+  - `GET /users?creationDate.gt=2021-11-31T23:59:59`
     - Find users with creationDate less than 2022
-  - `GET /users?creation_date.gte=2020-01-01T00:00:00&creation_date.lte=2021-11-31T23:59:59`
+  - `GET /users?creationDate.gte=2020-01-01T00:00:00&creationDate.lte=2021-11-31T23:59:59`
     - Search for users created between 2020 and 2021
 
 
@@ -721,13 +727,10 @@ Next, it is specified how it should be used according to the filtering based on 
 
 With the aim of standardizing the request observability and traceability process, common headers that provide a follow-up of the E2E processes should be included. The table below captures these headers.
 
-| Name | Description |  Type | Pattern	| Longitude | Required |	Example | 
-|---|---|---|---|---|---|---|  
-| `X-Version` |	Service version indentificator |	String| N/A	| | No | |	
-| `X-Correlator`|	Service correlator to make observability|		String |	UUID (8-4-4-4-12)	| Max 36	| No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
-| `Authorization`	| Contains Access token |String | JWT| N/A	| Yes	 | Bearer eyJhbGciOiJIUzI1NiIsIn... |
-| `Content-Language` | Describe the language(s) intended for the audience |	String |	ISO 639-1	|  | No | es |
-| `Accept-Language` | Indicates the natural language and locale that the client prefers | String | N/A	| | No	| |
+| Name | Description |  Type | Pattern	| Longitude | Location | Required by API Caller | Required in OAS Definition |	Example | 
+|---|---|---|---|---|---|---|---|---|
+| `X-Version` |	Service version description to help observability process |	String| N/A	| | Request | No | No | |	
+| `X-Correlator`|	Service correlator to make E2E observability |		String |	UUID (8-4-4-4-12)	| Max 36	| Request/Response | No | No |	b4333c46-49c0-4f62-80d7-f0ef930f1c46 |
 
 ## 10. Security
 
@@ -1020,4 +1023,3 @@ Finally, this part describes the OAuth security applied to the API. This spec is
 - Security Flow description applied (String)
 - Endpoint token URL
 - URL to endpoint authorization ( If flow is based on "`authorizationCode`").	
-
