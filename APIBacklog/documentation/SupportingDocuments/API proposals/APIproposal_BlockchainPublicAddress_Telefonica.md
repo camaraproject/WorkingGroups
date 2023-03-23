@@ -9,3 +9,4 @@
 | Validated in lab/productive environments? | NO<br>|
 | Validated with real customers? | NO <br><br> |
 | Validated with operators? | NO  </em> |
+
