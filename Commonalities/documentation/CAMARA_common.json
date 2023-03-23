@@ -1,639 +1,359 @@
 {
   "info": {
-    "description": "Common data and errors for Telefonica APIs",
-    "version": "0.1.0",
-    "title": "Common data and errors for Telefonica APIs",
-    "contact": {
-      "name": "API DIGITAL INTEGRATION",
-      "email": "apidigital.integration@telefonica.com"
-    }
+    "description": "Common data and errors for CAMARA APIs",
+    "version": "0.3.0",
+    "title": "Common data and errors for CAMARA APIs"
   },
-  "definitions": {
-    "MoneyAmount": {
-      "type": "object",
-      "description": "Money amount",
-      "required": [
-        "value",
-        "currency"
-      ],
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "float",
-          "multipleOf": 0.01,
-          "description": "Amount value"
-        },
-        "currency": {
-          "type": "string",
-          "description": "Currency code in which the amount is expressed. ISO 4217"
-        },
-        "tax_included": {
-          "type": "boolean",
-          "description": "true if the amount includes government taxes",
-          "default": false
-        }
-      }
-    },
-    "Address": {
-      "type": "object",
-      "description": "User's address information",
-      "required": [
-        "formatted"
-      ],
-      "properties": {
-        "formatted": {
-          "type": "string",
-          "description": "Full address, formatted for display"
-        },
-        "street_address": {
-          "type": "string",
-          "description": "Address information"
-        },
-        "postal_code": {
-          "type": "string",
-          "description": "Postal code associated to the address"
-        },
-        "locality": {
-          "type": "string",
-          "description": "City or locality where the user lives"
-        },
-        "country": {
-          "type": "string",
-          "description": "Country name. Format iso3166-1"
-        }
-      }
-    },
-    "Coordinates": {
-      "type": "object",
-      "description": "Coordinates of a geographical location",
-      "required": [
-        "latitude",
-        "longitude"
-      ],
-      "properties": {
-        "latitude": {
-          "description": "latitude coordinate of a geographical location expressed in decimal degress.",
-          "type": "number",
-          "format": "float",
-          "minimum": -90,
-          "maximum": 90,
-          "multipleOf": 1e-06
-        },
-        "longitude": {
-          "description": "longitude coordinate of a geographical location expressed in decimal degress.",
-          "type": "number",
-          "format": "float",
-          "minimum": -180,
-          "maximum": 180,
-          "multipleOf": 1e-06
-        }
-      }
-    },
-    "TimePeriod": {
-      "properties": {
-        "start_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "An instant of time, starting of the TimePeriod"
-        },
-        "end_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "An instant of time, ending of the TimePeriod. If not included, then the period has no ending date"
-        }
-      },
-      "required": [
-        "start_date"
-      ]
-    },
-    "ModelError": {
-      "type": "object",
-      "required": [
-        "message",
-        "status"
-      ],
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "A human readable description of what the event represent"
-        },
-        "status": {
-          "type": "integer",
-          "pattern": "^[4-5][0-9]{2}$",
-          "description": "HTTP response status code"
-        }
-      }
-    },
-    "InvalidArgument": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "INVALID_ARGUMENT"
-              ],
-              "default": "INVALID_ARGUMENT",
-              "description": "Client specified an invalid argument, request body or query param."
-            }
+  "components": {
+    "schemas": {
+      "MoneyAmount": {
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "An instant of time, starting of the TimePeriod"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "An instant of time, ending of the TimePeriod. If not included, then the period has no ending date"
           }
         },
-        {
-          "$ref": "#/definitions/ModelError"
+        "required": [
+          "start_date"
+        ]
+      },
+      "ErrorInfo": {
+        "type": "object",
+        "required": [
+          "message",
+          "status",
+          "code"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A human readable description of what the event represent"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP response status code"
+          },
+          "code": {
+            "type": "string",
+            "description": "Friendly Code to describe the error"
+          }
         }
-      ]
+      }
+    }
+  },
+  "responses": {
+    "InvalidArgument": {
+      "description": "Invalid Argument",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 400,
+            "code": "INVALID_INPUT",
+            "message": "Schema validation failed at  ..."
+          }
+        }
+      }
     },
     "Conflict": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "CONFLICT"
-              ],
-              "default": "CONFLICT",
-              "description": "A specified resource duplicate entry found"
-            }
+      "description": "conflict",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 409,
+            "code": "CONFLICT",
+            "message": "Schema validation failed at  ..."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "FailedPrecondition": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "FAILED_PRECONDITION"
-              ],
-              "default": "FAILED_PRECONDITION",
-              "description": "Request cannot be executed in the current system state."
-            }
+      "description": "Failed precondition",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 400,
+            "code": "FAILED_PRECONDITION",
+            "message": "Schema validation failed at  ..."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "OutOfRange": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "OUT_OF_RANGE"
-              ],
-              "default": "OUT_OF_RANGE",
-              "description": "Client specified an invalid range"
-            }
+      "description": "Out of Range",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 400,
+            "code": "OUT_OF_RANGE",
+            "message": "Schema validation failed at  ..."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "Unauthenticated": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "UNAUTHENTICATED"
-              ],
-              "default": "UNAUTHENTICATED",
-              "description": "Request not authenticated due to missing, invalid, or expired credentials."
-            }
+      "description": "Not Authenticated",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 401,
+            "code": "UNAUTHENTICATED",
+            "message": "Request not authenticated due to missing, invalid, or expired"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "PermissionDenied": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "PERMISSION_DENIED"
-              ],
-              "default": "PERMISSION_DENIED",
-              "description": "Client does not have sufficient permissions to perform this action."
-            }
+      "description": "Permission denied",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 403,
+            "code": "PERMISSION_DENIED",
+            "message": "Client does not have sufficient permissions to perform"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "NotFound": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "NOT_FOUND"
-              ],
-              "default": "NOT_FOUND",
-              "description": "The specified resource is not found"
-            }
+      "description": "Not Found",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 404,
+            "code": "NOT_FOUND",
+            "message": "The specified resource is not found"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "Aborted": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "ABORTED"
-              ],
-              "default": "ABORTED",
-              "description": "Concurrency conflict."
-            }
+      "description": "Aborted",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 409,
+            "code": "ABORTED",
+            "message": "Concurrency conflict."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "AlreadyExists": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "ALREADY_EXISTS"
-              ],
-              "default": "ALREADY_EXISTS",
-              "description": "The resource that a client tried to create already exists."
-            }
+      "description": "Already Exists",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 409,
+            "code": "ALREADY_EXISTS",
+            "message": "The resource that a client tried to create already exists."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "TooManyRequests": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "TOO_MANY_REQUESTS"
-              ],
-              "default": "TOO_MANY_REQUESTS",
-              "description": "Either out of resource quota or reaching rate limiting."
-            }
+      "description": "Already Exists",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 429,
+            "code": "TOO_MANY_REQUESTS",
+            "message": "Either out of resource quota or reaching rate limiting."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
-    },
-    "DataLoss": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "DATA_LOSS"
-              ],
-              "default": "DATA_LOSS",
-              "description": "Unrecoverable data loss or data corruption."
-            }
-          }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
-        }
-      ]
+      }
     },
     "Internal": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "INTERNAL"
-              ],
-              "default": "INTERNAL",
-              "description": "Unknown server error.Typically a server bug."
-            }
+      "description": "Internal Error",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 500,
+            "code": "INTERNAL",
+            "message": "Unknown server error.Typically a server bug."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "BadGateway": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "BAD_GATEWAY"
-              ],
-              "default": "BAD_GATEWAY",
-              "description": "Couldn't reach an upstream internal service."
-            }
+      "description": "Bad Gateway",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 502,
+            "code": "BAD_GATEWAY",
+            "message": "Couldn't reach an upstream internal service."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "Unavailable": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "UNAVAILABLE"
-              ],
-              "default": "UNAVAILABLE",
-              "description": "Request timeout exceeded"
-            }
+      "description": "Service Unavailable",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 504,
+            "code": "UNAVAILABLE",
+            "message": "Request timeout exceeded"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "Timeout": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "TIMEOUT"
-              ],
-              "default": "TIMEOUT",
-              "description": "Request timeout exceeded"
-            }
+      "description": "Timeout",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 503,
+            "code": "TIMEOUT",
+            "message": "Request timeout exceeded"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "NotImplemented": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "NOT_IMPLEMENTED"
-              ],
-              "default": "NOT_IMPLEMENTED",
-              "description": "This functionality is not implemented yet"
-            }
+      "description": "Not Implemented",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 501,
+            "code": "NOT_IMPLEMENTED",
+            "message": "This functionality is not implemented yet"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "AuthenticationRequired": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "AUTHENTICATION_REQUIRED"
-              ],
-              "default": "AUTHENTICATION_REQUIRED",
-              "description": "New authentication is required"
-            }
+      "description": "Authentication Required",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 401,
+            "code": "AUTHENTICATION_REQUIRED",
+            "message": "New authentication is required"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "NotFoundAndOutOfRange": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "NOT_FOUND",
-                "OUT_OF_RANGE"
-              ],
-              "default": "NOT_FOUND",
-              "description": "Not found."
+      "description": "Out Of Range and Not Found",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": [
+            {
+              "status": 404,
+              "code": "OUT_OF_RANGE",
+              "message": "Out Of Range"
+            },
+            {
+              "status": 404,
+              "code": "NOT_FOUND",
+              "message": "Not found"
             }
-          }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
+          ]
         }
-      ]
+      }
     },
     "MethodNotAllowed": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "METHOD_NOT_ALLOWED"
-              ],
-              "default": "METHOD_NOT_ALLOWED",
-              "description": "The requested method is not allowed/supported on the target resource."
-            }
+      "description": "Method not allowed",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 405,
+            "code": "METHOD_NOT_ALLOWED",
+            "message": "The requested method is not allowed/supported on the target"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "NotAcceptable": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "NOT_ACCEPTABLE"
-              ],
-              "default": "NOT_ACCEPTABLE",
-              "description": "The server can't produce a response matching the content requested by the client through Accept-* headers."
-            }
+      "description": "Not Acceptable",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 406,
+            "code": "NOT_ACCEPTABLE",
+            "message": "The server can't produce a response matching the content requested by the client through Accept-* headers"
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
+      }
     },
     "UnsupportedMediaType": {
-      "allOf": [
-        {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string",
-              "enum": [
-                "UNSUPPORTED_MEDIA_TYPE"
-              ],
-              "default": "UNSUPPORTED_MEDIA_TYPE",
-              "description": "The server refuses to accept the request because the payload format is in an unsupported format."
-            }
+      "description": "Unsupported Media Type",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/ErrorInfo"
+          },
+          "example": {
+            "status": 415,
+            "code": "UNSUPPORTED_MEDIA_TYPE",
+            "message": "The server refuses to accept the request because the payload format is in an unsupported format."
           }
-        },
-        {
-          "$ref": "#/definitions/ModelError"
         }
-      ]
-    }
-  },
-  "parameters": {
-    "x-correlator": {
-      "in": "header",
-      "name": "x-correlator",
-      "type": "string",
-      "required": false,
-      "description": "Correlation id for the different services"
-    },
-    "Page": {
-      "name": "page",
-      "in": "query",
-      "description": "Requested page number for pagination purpose. If not included, page 1 is returned.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 1
-    },
-    "PerPage": {
-      "name": "per_page",
-      "in": "query",
-      "description": "Number of element per page. If not included, a default number of 100 elements per page are returned.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 100
+      }
     }
   }
 }
