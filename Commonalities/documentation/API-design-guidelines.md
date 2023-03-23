@@ -1052,8 +1052,13 @@ If this capability is present in CAMARA API, following attributes **must** be us
 | attribute name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  | -----  | 
 | notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
-| notificationAuthToken | string | authentification token for callback API | optional |
+| notificationAuthToken | string | authentication token for callback API endpoint. It MUST be indicated within HTTP Authorization header as a Bearer Token format, e.g. ```Authorization: Bearer $notificationAuthToken``` | optional |
 
+Format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
+- It MUST BE an opaque attribute
+- It MUST NOT be a JWT Token
+- It has to be a restricted length, being an string between [20-64] characters.
+- It is HIGHLY recommended to have random-based pattern, like UUIDv4 format (32 hexadecimal characters, separated by `-`, e.g. ```550e8400-e29b-41d4-a716-446655440000```) 
 
 **Resource-based subscription**
 
