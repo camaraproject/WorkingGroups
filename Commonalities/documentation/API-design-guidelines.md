@@ -1081,7 +1081,7 @@ Following table provides subscriptions attributes
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| notificationUrl | string | callback address where the notification must be POST-ed | mandatory |
+| notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
 | notificationAuthToken | string | authentification token for callback API | optional |
 | type | string | type of notification subscribed. This attribute must not be present in the POST request as it is explicitly provided in the path| mandatory in server response |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
