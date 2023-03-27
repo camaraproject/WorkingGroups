@@ -16,6 +16,7 @@
 | T-Mobile NL | Muhammad Ahmad  |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
+| Telefonica | Jorge Garcia Hospital |
 | Telefonica | Jose Ordonez-Lucena  |
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
