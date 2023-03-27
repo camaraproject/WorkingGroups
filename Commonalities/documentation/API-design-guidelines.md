@@ -1086,7 +1086,7 @@ Following table provides subscriptions attributes
 | type | string | type of notification subscribed. This attribute must not be present in the POST request as it is explicitly provided in the path| mandatory in server response |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
 | subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester | optional |
-| startedAt | string - datetime| Date when the subscription begun. This attribute must not be present in the POST request as it is provided by API server | optional |
+| startedAt | string - datetime| Date when the subscription begun. This attribute must not be present in the POST request as it is provided by API server. It must be present in GET endpoints | optional |
 | expiredAt | string - datetime| Date when the subscription expired. This attribute must not be present in the POST request as it is provided by API server. Not valued if subscription still active. | optional |
 | subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
 
