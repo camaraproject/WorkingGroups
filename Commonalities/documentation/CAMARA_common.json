@@ -6,7 +6,7 @@
   },
   "components": {
     "schemas": {
-      "MoneyAmount": {
+      "TimePeriod": {
         "properties": {
           "startDate": {
             "type": "string",
