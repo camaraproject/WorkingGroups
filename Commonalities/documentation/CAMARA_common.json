@@ -8,19 +8,19 @@
     "schemas": {
       "MoneyAmount": {
         "properties": {
-          "start_date": {
+          "startDate": {
             "type": "string",
             "format": "date-time",
             "description": "An instant of time, starting of the TimePeriod"
           },
-          "end_date": {
+          "endDate": {
             "type": "string",
             "format": "date-time",
             "description": "An instant of time, ending of the TimePeriod. If not included, then the period has no ending date"
           }
         },
         "required": [
-          "start_date"
+          "startDate"
         ]
       },
       "ErrorInfo": {
