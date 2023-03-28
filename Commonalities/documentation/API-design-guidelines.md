@@ -1062,11 +1062,11 @@ Format conventions regarding ```notificationAuthToken``` attribute, in order to 
 
 **Resource-based subscription**
 
-A resource-based subscription is is subscription managed as a resource. A dedicated endpoint is provided to request subscription creation.  As this subscription is managed API resource, it is identified and operations to search, retrieve and delete them must be provided.
+A resource-based subscription is is subscription managed as a resource. An endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete them must be provided.
 
 Note: It is perfectly valid for a CAMARA API to have several subscriptions endpoints when distinct events are managed (for example in Device status API we manage distinct subscription for roaming status and reachability status event)
 
-In order to ease developer adoption, the pattern for Resource-based subscription must be the consistent for all API providing this feature.
+In order to ease developer adoption, the pattern for Resource-based subscription **must** be the consistent for all API providing this feature.
 
 4 operations must be defined:
 
@@ -1083,9 +1083,9 @@ Following table provides subscriptions attributes
 | ----- |	-----  |	 -----  |  -----  | 
 | notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
 | notificationAuthToken | string | authentification token for callback API | optional |
-| type | string | type of notification subscribed. This attribute must not be present in the POST request as it is explicitly provided in the path| mandatory in server response |
+| eventType | string | type of event subscribed. This attribute must be present in the POST request | mandatory  |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
-| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester | optional |
+| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions) | optional |
 | startedAt | string - datetime| Date when the subscription begun. This attribute must not be present in the POST request as it is provided by API server. It must be present in GET endpoints | optional |
 | expiredAt | string - datetime| Date when the subscription expired. This attribute must not be present in the POST request as it is provided by API server. Not valued if subscription still active. | optional |
 | subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
@@ -1124,6 +1124,7 @@ curl -X 'POST' \
 {
   "notificationUrl": "https://application-server.com",
   "notificationAuthToken": "c8974e592c2fa383d4a3960714",
+  "eventType": "ROAMING_STATUS",
   "subscriptionDetail": {
     "ueId": {,
       "ipv4Addr": "192.168.0.1"
@@ -1140,7 +1141,7 @@ response:
 201 Created
 
 {
-  "notificationUrl": "https://application-server.com",
+  "notificationUrl": "https://application-server.com/v0",
   "notificationAuthToken": "c8974e592c2fa383d4a3960714",
   "subscriptionDetail": {
     "ueId": {
@@ -1150,7 +1151,7 @@ response:
   },
   "subscriptionExpireTime": "2023-03-31T00:00:00.000Z",
   "subscriptionId": "456g899g",
-  "type": "ROAMING_STATUS",
+  "eventType": "ROAMING_STATUS",
   "startedAt": "2023-03-17T16:02:41.314Z"
 }
 ```
@@ -1176,15 +1177,15 @@ For consistence between CAMARA API a uniform `notifications` model must be used:
 | eventDetail | object | A detailed event structure depending on the eventType | mandatory |
 
 
-Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination.
+Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination. It is used when the subscription expire time (required by the requester) has been reached or if the API server has to stop sending notification prematurely. For this specific event, the 'eventDetail' must feature 'terminationReason' attribute.
 
-_Example_
+_Examples_
 
-Request:
+Example for Roaming status - Request:
 
 ```json
 curl -X 'POST' \
-  'http://localhost:9091//device-status/v0/subscriptions/roamingStatus' \
+  'https://application-server.com/v0/notifications' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
@@ -1200,6 +1201,34 @@ curl -X 'POST' \
     "roaming": true,
     "countryCode": 208,
     "countryName": "FR"
+  }
+}
+```
+
+response:
+
+```json
+204 No Content
+```
+
+Example for subscription termination - Request:
+
+```json
+curl -X 'POST' \
+  'https://application-server.com/v0/notifications' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d
+{
+  "subscriptionId": "456g899g",
+  "eventType": "SUBSCRIPTION_ENDS",
+  "eventTime": "2023-01-24T13:18:23.682Z",
+  "eventDetail": {
+    "ueId": {
+      "ipv4Addr": "192.168.0.1"
+      },
+    "uePort": 5060,
+    "terminationReason": "Service terminates for lack of consent"
   }
 }
 ```
