@@ -16,7 +16,7 @@
 | **IP Address** | An single internet protocol address, specified using either "dotted-decimal" format (for IPv4) or IETF 5952 format (for IPv6). The source ip address is the ip address of the message sender, and the destination ip address is the ip address of the recipient. The description will make it clear which is required. | ip | ip_address source_ip_address destination_ip_address |
 | **Port** | A 16 bit number (in the range 0 - 65535) used by the TCP (IETF RFC 9293) and UDP (IETF RFC 768) protocols to identify different applications flows and services. The source port is the port alloacted to the message sender, and the destination port is the port allocated to the recipient. The description will make it clear which is required. | port | port source_port destination_port |
 | **Service Class** | A statement of the required QoS characteristics of a traffic aggregate. Conceptually, a service class refers to applications with similar characteristics and performance requirements. Each service class is mapped to a DSCP value according to RFC4594 guidelines. The DSCP value is used to classify the target home device's traffic so that it can be treated accordingly (i.e. to meet its QoS needs). |serviceClass |  |
-| **Event Type** | Type of event subscribed for notifications. More details and parameter definitions are included in chapter 12 of API DEsign guidelines  |  eventType|  |
+| **Event Type** | Type of event subscribed for notifications. More details and parameter definitions are included in chapter 12 of API Design guidelines.  |  eventType|  |
 
 
 
