@@ -659,8 +659,8 @@ The HTTP codes that the server will use as a response are:
 - `400`: request outside the range of the resource list
  
 Petitions examples:
-- `page=0 per_page=20`, which returnss the first 20 resources
-- `page=10 per_page=20`, which returns 20 resources from the 10th page (in terms of absolute index, 10 pages and 20 elements per page, means it will start on the 200 position as 10*20=200)
+- `page=0 perPage=20`, which returnss the first 20 resources
+- `page=10 perPage=20`, which returns 20 resources from the 10th page (in terms of absolute index, 10 pages and 20 elements per page, means it will start on the 200 position as 10*20=200)
 
 
 ### 8.2 Sorting
