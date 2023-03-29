@@ -643,7 +643,7 @@ Exposing a resources collection through a single URI can cause applications to f
 Services can answer with a resource or article collections. Sometimes these collections may be a partial set due to performance or security reasons. Elements must be identified and arranged consistently on all pages. Paging can be enabled by default on the server side to mitigate denial of service or similar.
 
 Services must accept and use these query parameters when paging is supported:
-- `per_page`: number of resources requested to be provided in the response 
+- `perPage`: number of resources requested to be provided in the response 
 - `page`: requested page number to indicate the start of the resources to be provided in the response (considering per_page page size)
 - `seek`: index of last result read, to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records. `seek` parameter offers finer control than `page` and could be used one or another as an alternative. If both are used in combination (not recommended) `seek` would mark the index starting from the page number specified by `page` and `per_page` [index = (page * per_page) + seek].
 
@@ -666,7 +666,7 @@ Petitions examples:
 ### 8.2 Sorting
 
 Sorting the result of a query on a resources collection requires two main parameters:
-- `order_by`: it contains the names of the attributes on which the sort is performed, with comma separated if there is more than one criteria.
+- `orderBy`: it contains the names of the attributes on which the sort is performed, with comma separated if there is more than one criteria.
 - `order`: by default, sorting is done in descending order. 
 
 If you may want to specify which sort criteria you need to use "ascp" or "desc" as query value.
