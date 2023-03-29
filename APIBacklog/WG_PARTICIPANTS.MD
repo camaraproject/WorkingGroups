@@ -7,6 +7,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | GSMA | Mark Cornall |
+| HCL | Norbert Naveen |
 | Infobip | Kwok Onn Looi |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
@@ -14,6 +15,8 @@
 | Scenera | Andrew Wajs  |
 | T-Mobile NL | Muhammad Ahmad  |
 | Telecomsxchange | Ameed Jamous |
+| Telefonica | Agustin Martin Gonzalez |
+| Telefonica | Jorge Garcia Hospital |
 | Telefonica | Jose Ordonez-Lucena  |
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
@@ -21,3 +24,4 @@
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
+| | Prashant Shrivastava |
