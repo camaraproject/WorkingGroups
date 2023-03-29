@@ -652,7 +652,7 @@ Services must accept and use these query parameters when paging is supported:
 - `perPage`: number of resources requested to be provided in the response 
 
 - `page`: requested page number to indicate the start of the resources to be provided in the response (considering perPage page size)
-- `seek`: index of last result read, to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records. `seek` parameter offers finer control than `page` and could be used one or another as an alternative. If both are used in combination (not recommended) `seek` would mark the index starting from the page number specified by `page` and `per_page` [index = (page * per_page) + seek].
+- `seek`: index of last result read, to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records. `seek` parameter offers finer control than `page` and could be used one or another as an alternative. If both are used in combination (not recommended) `seek` would mark the index starting from the page number specified by `page` and `perPage` [index = (page * perPage) + seek].
 
 
 Services must accept and use these headers when paging is supported:
