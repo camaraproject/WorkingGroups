@@ -29,6 +29,7 @@
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US	| Lyle Bertz |
 | Telecom Italia	| Roberto Procopio |
+| Telefonica | Jorge Garcia Hospital |
 | Telefonica	| Maria Virtudes Briz Ruiz |
 | TELUS	| Ali Tizghadam |
 | Verizon	| Alicia Miller |

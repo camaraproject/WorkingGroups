@@ -650,8 +650,10 @@ Services can answer with a resource or article collections. Sometimes these coll
 
 Services must accept and use these query parameters when paging is supported:
 - `perPage`: number of resources requested to be provided in the response 
-- `page`: requested index to indicate the start of the resources to be provided in the response
-- `seek`: in ndex of last result read to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records.
+
+- `page`: requested page number to indicate the start of the resources to be provided in the response (considering perPage page size)
+- `seek`: index of last result read, to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records. `seek` parameter offers finer control than `page` and could be used one or another as an alternative. If both are used in combination (not recommended) `seek` would mark the index starting from the page number specified by `page` and `perPage` [index = (page * perPage) + seek].
+
 
 Services must accept and use these headers when paging is supported:
 - `Content-Last-Key`: it allows specifying the key of the last resort provided in the response
@@ -666,7 +668,9 @@ The HTTP codes that the server will use as a response are:
  
 Petitions examples:
 - `page=0 perPage=20`, which returnss the first 20 resources
-- `page=10 perPage=20`, which returns 20 resources from the 10th element.
+
+- `page=10 perPage=20`, which returns 20 resources from the 10th page (in terms of absolute index, 10 pages and 20 elements per page, means it will start on the 200 position as 10*20=200)
+
 
 
 ### 8.2 Sorting
