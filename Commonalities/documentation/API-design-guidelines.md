@@ -1064,7 +1064,7 @@ Format conventions regarding ```notificationAuthToken``` attribute, in order to 
 
 A resource-based subscription is is subscription managed as a resource. An endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete them must be provided.
 
-Note: It is perfectly valid for a CAMARA API to have several subscriptions endpoints when distinct events are managed (for example in Device status API we manage distinct subscription for roaming status and reachability status event)
+Note: It is perfectly valid for a CAMARA API to have several event types managed. The subscription endpoint will be unique but 'eventType' attribute is used to distinguish distinct events subscribed.
 
 In order to ease developer adoption, the pattern for Resource-based subscription **must** be the consistent for all API providing this feature.
 
@@ -1072,7 +1072,7 @@ In order to ease developer adoption, the pattern for Resource-based subscription
 
 | operation | path | description |
 | ----- |	-----  |	 -----  | 
-| POST | `/subscriptions/<subscriptionName>` | Operation to request a subscription.  eg. POST /subscriptions/roamingStatus    |
+| POST | `/subscriptions/` | Operation to request a subscription.     |
 | GET | `/subscriptions` | Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
 | GET | `/subscriptions/{subscriptionId}` | Operation to retrieve a subscription |
 | DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
@@ -1117,7 +1117,7 @@ Request:
 
 ```json
 curl -X 'POST' \
-  'http://localhost:9091//device-status/v0/subscriptions/roamingStatus' \
+  'http://localhost:9091//device-status/v0/subscriptions' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
@@ -1163,7 +1163,7 @@ response:
 
 The notification endpoint is used by the API server to notify the API consumer that an event occured.
 
-Note: The notification is the message posted on listener side. We describe the notification message in the CAMARA OAS but it could confusing because this endpoint should be implemented on the business API consumer side. This notice should be explicited mentionned in all CAMARA API documentation featuring notification.
+Note: The notification is the message posted on listener side. We describe the notification message in the CAMARA OAS but it could confusing because this endpoint should be implemented on the business API consumer side. This notice should be explicited mentioned in all CAMARA API documentation featuring notification.
 
 Only Operation POST is provided for `notifications` and the expected response code is `204`.
 
