@@ -43,6 +43,7 @@ This document captures guidelines for the API design in CAMARA project. These gu
     - [11.3 Request Parameters](#113-request-parameters)
     - [11.4 Response Structure](#114-response-structure)
     - [11.5 Data Definitions](#115-data-definitions)
+      - [11.5.1 Usage of discriminator](#1151-usage-of-discriminator)
     - [11.6 OAuth Definition](#116-oauth-definition)
 
 
@@ -1009,19 +1010,62 @@ In this part, the error response structure must also be defined, which must be a
       - Type (Array, Integer…)
       - Error codes supported, as Enum list
    - Error description
-      - Type (Array)
-      - Min longitude
-      - Max longitude
-
+       - Type (Array)
+       - Min longitude
+       - Max longitude
 
 <p align="center">
 <img src="./images/guidelines-fig-18.png" width="400"/>
 </p>
 
+#### 11.5.1 Usage of discriminator
+
+As mentioned in Openapi doc [here](https://spec.openapis.org/oas/v3.1.0#discriminator-object) usage of discriminator may
+simplify serialization/deserialization process and so reduce resource consumption.
+
+To achieve this in the Camara context, we decided to :
+
+    - add property called "objectType" to all Camara objects involved in oneOf / anyOf section of any object
+    - define this property as a discriminator in Camara objects that "encapsulate" one of these objects
+
+The following sample illustrates this usage.
+
+``` yaml 
+...
+ipAddr:
+    type: object
+    oneOf:                          <-- we use oneOf or anyOf we need a discriminator
+        - $ref: '#/components/schemas/Ipv6Addr'
+        - $ref: '#/components/schemas/Ipv4Addr'
+    discriminator:
+        propertyName: objectType    <-- the property named objectType will play this role
+        
+Ipv4Addr:
+  type: object
+  properties:
+    objectType: string              <-- objectType is added 
+    ...
+  required:
+    - objectType
+    - ...
+
+Ipv6Addr:
+  type: object
+  properties:
+    objectType: string              <-- objectType is added
+    ...
+  required:
+    - objectType
+    - ...
+
+```
 
 ### 11.6 OAuth Definition
 
-Finally, this part describes the OAuth security applied to the API. This spec is for client testing purposes only, but there should be as similar as possible to the OAuth flows in your production environment. This definition has the following aspects:
+Finally, this part describes the OAuth security applied to the API. This spec is for client testing purposes only, but
+there should be as similar as possible to the OAuth flows in your production environment. This definition has the
+following aspects:
+
 - Security Type: oauth2, oauth…
 - Security Flow (Depends of security type): implicit, password…
 - Security Flow description applied (String)
