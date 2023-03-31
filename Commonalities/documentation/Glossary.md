@@ -17,6 +17,10 @@
 | **Port** | A 16 bit number (in the range 0 - 65535) used by the TCP (IETF RFC 9293) and UDP (IETF RFC 768) protocols to identify different applications flows and services. The source port is the port alloacted to the message sender, and the destination port is the port allocated to the recipient. The description will make it clear which is required. | TBD | sourcePort destinationPort devicePorts applicationServerPorts  |
 | **Service Class** | A statement of the required QoS characteristics of a traffic aggregate. Conceptually, a service class refers to applications with similar characteristics and performance requirements. Each service class is mapped to a DSCP value according to RFC4594 guidelines. The DSCP value is used to classify the target home device's traffic so that it can be treated accordingly (i.e. to meet its QoS needs). |serviceClass |  |
 | **Event Type** | Type of event subscribed for notifications. More details and parameter definitions are included in chapter 12 of API Design guidelines.  |  eventType|  |
+| **Latitude** | | latitude |
+| **Longitude** | | longitude |
+| **accuracy** | | accuracy |
+| **Location Verification result** | As value is a boolean, it matches better with an adjective. In future versions we may need to enhance current response model to give mor information about the verification process, for example to deal with partial matches. |locationVerified |
 
 
 
