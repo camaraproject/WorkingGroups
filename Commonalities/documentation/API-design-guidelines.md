@@ -1025,38 +1025,43 @@ simplify serialization/deserialization process and so reduce resource consumptio
 
 To achieve this in the Camara context, we decided to :
 
-    - add property called "objectType" to all Camara objects involved in oneOf / anyOf section of any object
-    - define this property as a discriminator in Camara objects that "encapsulate" one of these objects
+    - create an object CamaraDiscriminatedObject containing a property called "objectType" 
+    - all Camara objects involved in oneOf / anyOf section of any object will inherit from this object
+    - define property called "objectType" as a discriminator in objects containing oneOf or anyOf section 
 
 The following sample illustrates this usage.
 
 ``` yaml 
 ...
-ipAddr:
-    type: object
-    oneOf:                          <-- we use oneOf or anyOf we need a discriminator
+
+    CamaraDiscriminatedObject:
+      type: object
+      required:
+        - objectType
+      properties:
+        objectType:
+          type: string
+
+    IpAddr:
+      oneOf:
         - $ref: '#/components/schemas/Ipv6Addr'
         - $ref: '#/components/schemas/Ipv4Addr'
-    discriminator:
-        propertyName: objectType    <-- the property named objectType will play this role
-        
-Ipv4Addr:
-  type: object
-  properties:
-    objectType: string              <-- objectType is added 
-    ...
-  required:
-    - objectType
-    - ...
+      discriminator:
+        propertyName: objectType
 
-Ipv6Addr:
-  type: object
-  properties:
-    objectType: string              <-- objectType is added
-    ...
-  required:
-    - objectType
-    - ...
+    Ipv4Addr: <-- object involved in oneOf inherit from CamaraDiscriminatedObject
+      allOf:
+        - $ref: '#/components/schemas/CamaraDiscriminatedObject'
+      type: object
+      properties:
+        ...
+
+    Ipv6Addr: <-- object involved in oneOf inherit from CamaraDiscriminatedObject
+      allOf:
+        - $ref: '#/components/schemas/CamaraDiscriminatedObject'
+      type: object
+      properties:
+        ...
 
 ```
 
