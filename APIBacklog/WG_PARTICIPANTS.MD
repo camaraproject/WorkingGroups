@@ -3,6 +3,7 @@
 | Accenture | Giuseppe Di Nuccio  |
 | AT&T | Sharam Mohajeri  |
 | Cablelabs | Randy Levensalor |
+| China Telekom | Xu Dan |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
