@@ -8,6 +8,7 @@ Add one of the following kinds:
 * cleanup
 * documentation
 * subproject management
+* tests
 
 
 #### What this PR does / why we need it:
