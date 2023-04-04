@@ -16,7 +16,7 @@ GitHub uses templates for the repository if the respective template configuratio
 
 In order to use templates for issues and pull request for the CAMARA Subproject the following steps need to be taken:
 
-1. Copy the folder https://github.com/camaraproject/WorkingGroups/Commonalities/documentation/SupportingDocuments/Github_templates/.github
+1. Copy the folder [.github](/SupportingDocuments/Github_templates/.github)
 to the root of Subproject repository.
 
 2. Edit the `config.yml` file inside `.github/ISSUE_TEMPLATE/` folder:
@@ -64,11 +64,12 @@ The proposed issue categories are prepared with Github labels:
 
 |Category| Description|Labels|
 |---|---|---|
-|Bug| Describing bugs in Provider Implementations|_implementation:bug_|
-|Correction|Suggesting corrections of API specification or indicating misalignment with API design guidelines|_correction_|
-|Documentation| Indicating issues with API documentation or supplementary documents| _documentation_|
-|Enhancement| Suggesting ideas for new API features or questions on directions for API evolution| _enhancement_|
-|Subproject management| Indicating issues with subproject repository or release management process|_subproject management_|
+|Bug| Describing bugs in Provider Implementations|_implementation:bug_ |
+|Correction|Suggesting corrections of API specification or indicating misalignment with API design guidelines|_correction_ |
+|Documentation| Indicating issues with API documentation or supplementary documents| _documentation_ |
+|Enhancement| Suggesting ideas for new API features or questions on directions for API evolution| _enhancement_ |
+|Subproject management| Indicating issues with subproject repository or release management process|_subproject management_ |
+|Tests | Indicating issues with API tests | _tests_ |
 
 
 ### Pull request template
@@ -82,13 +83,14 @@ It requires to indicate kind of PR as one of:
 * cleanup
 * documentation
 * subproject management
+* tests
 
 The proposed above values correspond to issue categories, with additional type: _cleanup_ for simple correction of typos/spelling mistakes or application of guidelines.
 
 After describing what the PR does, the link to relevant issue should be added.
 Thanks to Github keywords: `Fixes #<issue number>`, or `Fixes (paste link of issue)` pull request is linked to relevant issue to show that a fix is in progress and to automatically close the issue when the pull request is merged.
 
-The pull request template includes the place to input a clear, concise description of the change that will facilitate creation of the Release Notes. 
+The pull request template includes the place to input a clear, concise description of the change that will facilitate creation of the **Release Notes**. 
 
 
 ## References
