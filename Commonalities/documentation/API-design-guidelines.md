@@ -1020,43 +1020,62 @@ In this part, the error response structure must also be defined, which must be a
 
 #### 11.5.1 Usage of discriminator
 
-As mentioned in Openapi doc [here](https://spec.openapis.org/oas/v3.1.0#discriminator-object) usage of discriminator may
+As mentioned in Openapi doc [here](https://spec.openapis.org/oas/v3.0.3#discriminator-object) usage of discriminator may
 simplify serialization/deserialization process and so reduce resource consumption.
 
-To achieve this in the Camara context, we decided to :
+To achieve this in the Camara context, we decided that :
 
-    - objects containing oneOf or anyOf section must include a discriminator defined by a propertyName
-    - objects involved in oneOf / anyOf section must include the property designed by propetyName
+    - objects containing oneOf or anyOf section MUST include a discriminator defined by a propertyName
+    - objects involved in oneOf / anyOf section MUST include the property designed by propetyName
 
 The following sample illustrates this usage.
 
 ``` yaml 
-...
     IpAddr:
       oneOf:
         - $ref: '#/components/schemas/Ipv6Addr'
         - $ref: '#/components/schemas/Ipv4Addr'
       discriminator:
-        propertyName: objectType <-- objectType property must be present in the objects referenced in oneOf
+        propertyName: objectType <-- objectType property MUST be present in the objects referenced in oneOf
 
-    Ipv4Addr: <-- object involved in oneOf must include the objectype property
+    Ipv4Addr: <-- object involved in oneOf MUST include the objectype property
       type: object
       required:
         - objectType
+        - address
       properties:
         objectType:
           type: string
+        address:
+          type: string
+          format: ipv6
         ...
 
-    Ipv6Addr: <-- object involved in oneOf must include the objectype property
+    Ipv6Addr: <-- object involved in oneOf MUST include the objectype property
       type: object
       required:
         - objectType
+        - address
       properties:
         objectType:
           type: string
+        address:
+          type: string
+          format: ipv4
         ...
 
+```
+
+When IpAddr is used in a payload the property objectType MUST be present to indicate which schema to use
+
+``` json
+{ 
+    "ipAddr": {
+        "objectType": "Ipv4Addr",   <-- objectType indicates to use Ipv4Addr to deserialize this IpAddr
+        "address": "192.168.1.1",
+        ...
+    }    
+}
 ```
 
 ### 11.6 OAuth Definition
