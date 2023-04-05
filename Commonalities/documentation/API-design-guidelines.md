@@ -1031,7 +1031,7 @@ Finally, this part describes the OAuth security applied to the API. This spec is
 ## 12. Subscription, Notification & Event
 
 In order to provided event-based interaction, CAMARA API could provided capabilities for subscription & notification management.
-A subscription allows to an API consumer to request event notification reception at an given url (callback address) for a specific context.
+A subscription allows to an API consumer to request event notification reception at a given url (callback address) for a specific context.
 A notification is the publication at the listener address about an occurred event.
 Event type managed are explicitly defined in CAMAPA API OAS.
 
