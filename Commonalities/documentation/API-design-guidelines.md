@@ -1045,7 +1045,7 @@ We distinguish 2 types of subscription:
 
 An instance-based subscription is a subscription indirectly created, additionally, to another resource creation. For example for a Payment request (in Carrier Billing API), in the `POST/payments`, the API consumer could request to get event notification about **this** Payment request processing update. The subscription is not an entity and its lifecycle is linked to the managed entity (the Payment resource in this case). The subscription terminates with the managed entity.
 
-Providing this capability is optionnal for any CAMARA APIs depending on UC requirements
+Providing this capability is optional for any CAMARA APIs depending on UC requirements
 
 If this capability is present in CAMARA API, following attributes **must** be used in the POST request for the managed entity:
 
