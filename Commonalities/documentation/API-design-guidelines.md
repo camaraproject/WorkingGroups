@@ -1025,42 +1025,36 @@ simplify serialization/deserialization process and so reduce resource consumptio
 
 To achieve this in the Camara context, we decided to :
 
-    - create an object CamaraDiscriminatedObject containing a property called "objectType" 
-    - all Camara objects involved in oneOf / anyOf section of any object will inherit from this object
-    - define property called "objectType" as a discriminator in objects containing oneOf or anyOf section 
+    - objects containing oneOf or anyOf section must include a discriminator defined by a propertyName
+    - objects involved in oneOf / anyOf section must include the property designed by propetyName
 
 The following sample illustrates this usage.
 
 ``` yaml 
 ...
+    IpAddr:
+      oneOf:
+        - $ref: '#/components/schemas/Ipv6Addr'
+        - $ref: '#/components/schemas/Ipv4Addr'
+      discriminator:
+        propertyName: objectType <-- objectType property must be present in the objects referenced in oneOf
 
-    CamaraDiscriminatedObject:
+    Ipv4Addr: <-- object involved in oneOf must include the objectype property
       type: object
       required:
         - objectType
       properties:
         objectType:
           type: string
-
-    IpAddr:
-      oneOf:
-        - $ref: '#/components/schemas/Ipv6Addr'
-        - $ref: '#/components/schemas/Ipv4Addr'
-      discriminator:
-        propertyName: objectType
-
-    Ipv4Addr: <-- object involved in oneOf inherit from CamaraDiscriminatedObject
-      allOf:
-        - $ref: '#/components/schemas/CamaraDiscriminatedObject'
-      type: object
-      properties:
         ...
 
-    Ipv6Addr: <-- object involved in oneOf inherit from CamaraDiscriminatedObject
-      allOf:
-        - $ref: '#/components/schemas/CamaraDiscriminatedObject'
+    Ipv6Addr: <-- object involved in oneOf must include the objectype property
       type: object
+      required:
+        - objectType
       properties:
+        objectType:
+          type: string
         ...
 
 ```
