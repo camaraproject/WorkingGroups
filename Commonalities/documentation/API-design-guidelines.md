@@ -1062,7 +1062,7 @@ Format conventions regarding ```notificationAuthToken``` attribute, in order to 
 
 **Resource-based subscription**
 
-A resource-based subscription is is subscription managed as a resource. An endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete them must be provided.
+A resource-based subscription is a subscription managed as a resource. An endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete them must be provided.
 
 Note: It is perfectly valid for a CAMARA API to have several event types managed. The subscription endpoint will be unique but 'eventType' attribute is used to distinguish distinct events subscribed.
 
