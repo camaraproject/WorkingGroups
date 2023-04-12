@@ -1137,12 +1137,12 @@ curl -X 'POST' \
 {
   "notificationUrl": "https://application-server.com",
   "notificationAuthToken": "c8974e592c2fa383d4a3960714",
-  "eventType": "ROAMING_STATUS",
   "subscriptionDetail": {
     "ueId": {,
       "ipv4Addr": "192.168.0.1"
     },
-    "uePort": 5060
+    "uePort": 5060,
+    "eventType": "ROAMING_STATUS"
   },
   "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z"
 }
@@ -1161,16 +1161,16 @@ response:
     "ueId": {
       "ipv4Addr": "192.168.0.1"
     },
-    "uePort": 5060
+    "uePort": 5060,
+    "eventType": "ROAMING_STATUS",
   },
   "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z",
   "subscriptionId": "456g899g",
-  "eventType": "ROAMING_STATUS",
   "startsAt": "2023-03-17T16:02:41.314Z"
 }
 ```
 
-Note: If an API provides both pattern (indirect and resource-based), and an API customer requests both (instance base + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptable, when the event occurred, that one or two notifications are send to listener.
+Note: If an API provides both pattern (indirect and resource-based), and an API customer requests both (instance base + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptable, when the event occurred, that one or two notifications are sent to listener.
 
 
 ### 12.2 Event notification
