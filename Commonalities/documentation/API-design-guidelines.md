@@ -1162,7 +1162,7 @@ response:
       "ipv4Addr": "192.168.0.1"
     },
     "uePort": 5060,
-    "eventType": "ROAMING_STATUS",
+    "eventType": "ROAMING_STATUS"
   },
   "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z",
   "subscriptionId": "456g899g",
