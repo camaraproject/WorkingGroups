@@ -1077,18 +1077,25 @@ In order to ease developer adoption, the pattern for Resource-based subscription
 | GET | `/subscriptions/{subscriptionId}` | Operation to retrieve a subscription |
 | DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
 
+
 Following table provides subscriptions attributes
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
-| notificationAuthToken | string | authentification token for callback API | optional |
-| eventType | string | type of event subscribed. This attribute must be present in the POST request | mandatory  |
+| notificationUrl | string | https Callback address where the notification must be POST-ed | mandatory |
+| notificationAuthToken | string | Authentification token for callback API | optional |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
 | subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server return exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
-| startsAt | string - datetime| Date when the subscription will begin/begun. This attribute must not be present in the POST request as it is provided by API server. It must be present in GET endpoints | optional |
-| expiresAt | string - datetime| Date when the subscription will expire/expired. This attribute must not be present in the POST request as it is provided by API server. Not valued if subscription still active. | optional |
+| startsAt | string - datetime| Date when the subscription will begin/begun. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
+| expiresAt | string - datetime| Date when the subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
 | subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
+
+The subscriptionDetail must have at least an eventType attribute:
+
+| name | type | attribute description | cardinality |
+| ----- |	-----  |	 -----  |  -----  | 
+| eventType | string | Type of event subscribed. This attribute must be present in the `POST` request. It is open to API working group to allow providing a list of event type based on specific UC | mandatory  |
+
 
 _Error definition for subscription_
 
@@ -1105,22 +1112,28 @@ _Termination for resource-based subscription_
 3 scenarios are possibles (business conditions may apply):
 
 * case1: subscriptionExpireTime has been provided in the request and reached. The operator in this case has to terminate the subscription.
-* case2: subscriber requests a DELETE for a subscription. 
+* case2: subscriber requests a `DELETE` for a subscription. 
 * case3: subscription ended at operator request. 
 
 It could be useful to provide a mechanism to inform subscriber for case3 (and probably case1). In this case a specific event type could be used.
+
+_Termination rules regarding subscriptionExpireTime usage_
+* When client side providing a `subscriptionExpireTime`, service side has to terminate the subscription without expecting a `DELETE` operation.
+* When the `subscriptionExpireTime` is not provided, client side has to trigger a `DELETE` operation to terminate it
 
 
 _Subscription example_
 
 Request:
 
-```json
+```
 curl -X 'POST' \
   'http://localhost:9091//device-status/v0/subscriptions' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
+ ```
+ ```json 
 {
   "notificationUrl": "https://application-server.com",
   "notificationAuthToken": "c8974e592c2fa383d4a3960714",
@@ -1137,9 +1150,10 @@ curl -X 'POST' \
 
 response:
 
-```json
+```
 201 Created
-
+```
+```json 
 {
   "notificationUrl": "https://application-server.com/v0",
   "notificationAuthToken": "c8974e592c2fa383d4a3960714",
@@ -1156,8 +1170,7 @@ response:
 }
 ```
 
-Note: If an API provides both pattern (indirect and resouce-based), and an API customer requests both (instance base + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptablbe when an event occured that one or two notifications are send to listener.
-
+Note: If an API provides both pattern (indirect and resource-based), and an API customer requests both (instance base + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptable, when the event occurred, that one or two notifications are send to listener.
 
 
 ### 12.2 Event notification
@@ -1173,71 +1186,86 @@ For consistence between CAMARA API a uniform `notifications` model must be used:
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
 | subscriptionId | string | subscription identifier - could be valued for Resource-based subscription | optional |
-| eventType | string | type of event as defined in each CAMARA API. The event type are defined in UPPER_SNAKE_CASE| mandatory |
-| eventTime | string - datetime | date time when the event occurred | mandatory |
+| event | object | event structure - see next table | mandatory |
+
+Following table defines event attribute object structure: 
+
+| name | type | attribute description | cardinality |
+| ----- |	-----  |	 -----  |  -----  | 
+| eventId | string - uuid | Identifier of the event from the server where the event was reported | optional |
+| eventType | string | Type of event as defined in each CAMARA API. The event type are defined in UPPER_SNAKE_CASE| mandatory |
+| eventTime | string - datetime | Date time when the event occurred | mandatory |
 | eventDetail | object | A detailed event structure depending on the eventType | mandatory |
 
-Note: For operational and troubleshooting purposes it is relevant to accomodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
+Note: For operational and troubleshooting purposes it is relevant to accommodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
 
-
-Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination. It is used when the subscription expire time (required by the requester) has been reached or if the API server has to stop sending notification prematurely. For this specific event, the 'eventDetail' must feature 'terminationReason' attribute.
+Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination. It is used when the subscription expire time (required by the requester) has been reached or if the API server has to stop sending notification prematurely. For this specific event, the `eventDetail` must feature `terminationReason` attribute.
 
 _Examples_
 
 Example for Roaming status - Request:
 
-```json
+```
 curl -X 'POST' \
   'https://application-server.com/v0/notifications' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
+ ```
+ ```json 
 {
   "subscriptionId": "456g899g",
-  "eventType": "ROAMING_STATUS",
-  "eventTime": "2023-01-19T13:18:23.682Z",
-  "eventDetail": {
-    "ueId": {
-      "ipv4Addr": "192.168.0.1"
+  "event": {
+    "eventType": "ROAMING_STATUS",
+    "eventTime": "2023-01-19T13:18:23.682Z",
+    "eventDetail": {
+      "ueId": {
+        "ipv4Addr": "192.168.0.1"
       },
-    "uePort": 5060,
-    "roaming": true,
-    "countryCode": 208,
-    "countryName": "FR"
+      "uePort": 5060,
+      "roaming": true,
+      "countryCode": 208,
+      "countryName": "FR"
+    }
   }
 }
 ```
 
 response:
 
-```json
+```
 204 No Content
 ```
 
+
 Example for subscription termination - Request:
 
-```json
+```
 curl -X 'POST' \
   'https://application-server.com/v0/notifications' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
+ ```
+ ```json 
 {
   "subscriptionId": "456g899g",
-  "eventType": "SUBSCRIPTION_ENDS",
-  "eventTime": "2023-01-24T13:18:23.682Z",
-  "eventDetail": {
-    "ueId": {
-      "ipv4Addr": "192.168.0.1"
+  "event": {
+    "eventType": "SUBSCRIPTION_ENDS",
+    "eventTime": "2023-01-24T13:18:23.682Z",
+    "eventDetail": {
+      "ueId": {
+        "ipv4Addr": "192.168.0.1"
       },
-    "uePort": 5060,
-    "terminationReason": "Service terminates for lack of consent"
+      "uePort": 5060,
+      "terminationReason": "Service terminates for lack of consent"
+    }
   }
 }
 ```
 
 response:
 
-```json
+```
 204 No Content
 ```
