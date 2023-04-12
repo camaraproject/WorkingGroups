@@ -1085,9 +1085,9 @@ Following table provides subscriptions attributes
 | notificationAuthToken | string | authentification token for callback API | optional |
 | eventType | string | type of event subscribed. This attribute must be present in the POST request | mandatory  |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
-| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions) | optional |
-| startedAt | string - datetime| Date when the subscription begun. This attribute must not be present in the POST request as it is provided by API server. It must be present in GET endpoints | optional |
-| expiredAt | string - datetime| Date when the subscription expired. This attribute must not be present in the POST request as it is provided by API server. Not valued if subscription still active. | optional |
+| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server return exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
+| startsAt | string - datetime| Date when the subscription will begin/begun. This attribute must not be present in the POST request as it is provided by API server. It must be present in GET endpoints | optional |
+| expiresAt | string - datetime| Date when the subscription will expire/expired. This attribute must not be present in the POST request as it is provided by API server. Not valued if subscription still active. | optional |
 | subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
 
 _Error definition for subscription_
@@ -1131,7 +1131,7 @@ curl -X 'POST' \
     },
     "uePort": 5060
   },
-  "subscriptionExpireTime": "2023-03-31T00:00:00.000Z"
+  "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z"
 }
 ```
 
@@ -1149,13 +1149,14 @@ response:
     },
     "uePort": 5060
   },
-  "subscriptionExpireTime": "2023-03-31T00:00:00.000Z",
+  "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z",
   "subscriptionId": "456g899g",
   "eventType": "ROAMING_STATUS",
-  "startedAt": "2023-03-17T16:02:41.314Z"
+  "startsAt": "2023-03-17T16:02:41.314Z"
 }
 ```
 
+Note: If an API provides both pattern (indirect and resouce-based), and an API customer requests both (instance base + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptablbe when an event occured that one or two notifications are send to listener.
 
 
 
@@ -1173,8 +1174,10 @@ For consistence between CAMARA API a uniform `notifications` model must be used:
 | ----- |	-----  |	 -----  |  -----  | 
 | subscriptionId | string | subscription identifier - could be valued for Resource-based subscription | optional |
 | eventType | string | type of event as defined in each CAMARA API. The event type are defined in UPPER_SNAKE_CASE| mandatory |
-| eventTime | string - datetime | date time when the event was notified by the issuer- valued in the request. This is not the date when the event occurred | mandatory |
+| eventTime | string - datetime | date time when the event occurred | mandatory |
 | eventDetail | object | A detailed event structure depending on the eventType | mandatory |
+
+Note: For operational and troubleshooting purposes it is relevant to accomodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
 
 
 Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination. It is used when the subscription expire time (required by the requester) has been reached or if the API server has to stop sending notification prematurely. For this specific event, the 'eventDetail' must feature 'terminationReason' attribute.
