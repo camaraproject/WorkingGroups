@@ -1066,7 +1066,7 @@ A resource-based subscription is a subscription managed as a resource. An endpoi
 
 Note: It is perfectly valid for a CAMARA API to have several event types managed. The subscription endpoint will be unique but 'eventType' attribute is used to distinguish distinct events subscribed.
 
-In order to ease developer adoption, the pattern for Resource-based subscription **must** be the consistent for all API providing this feature.
+In order to ease developer adoption, the pattern for Resource-based subscription **must** be consistent for all API providing this feature.
 
 4 operations must be defined:
 
