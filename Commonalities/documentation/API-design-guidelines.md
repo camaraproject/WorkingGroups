@@ -1085,7 +1085,7 @@ Following table provides subscriptions attributes
 | notificationUrl | string | https Callback address where the notification must be POST-ed | mandatory |
 | notificationAuthToken | string | Authentification token for callback API | optional |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
-| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server return exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
+| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
 | startsAt | string - datetime| Date when the subscription will begin/begun. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
 | expiresAt | string - datetime| Date when the subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
 | subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
