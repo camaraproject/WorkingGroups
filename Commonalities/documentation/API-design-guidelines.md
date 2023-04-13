@@ -1123,6 +1123,7 @@ _Termination rules regarding subscriptionExpireTime usage_
 
 
 _Subscription example_
+In this example we illustrate a request for a roaming status subscription. Requester did not provide a wished expiration time for the subscription. In the response server accepts this request and set an subcription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
 
 Request:
 
@@ -1143,8 +1144,7 @@ curl -X 'POST' \
     },
     "uePort": 5060,
     "eventType": "ROAMING_STATUS"
-  },
-  "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z"
+  }
 }
 ```
 
@@ -1164,9 +1164,9 @@ response:
     "uePort": 5060,
     "eventType": "ROAMING_STATUS"
   },
-  "subscriptionExpiresTime": "2023-03-31T00:00:00.000Z",
   "subscriptionId": "456g899g",
-  "startsAt": "2023-03-17T16:02:41.314Z"
+  "startsAt": "2023-03-17T16:02:41.314Z",
+  "expiresAt" : "2024-03-17T00:00:00.000Z"
 }
 ```
 
