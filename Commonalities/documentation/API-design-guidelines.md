@@ -1123,7 +1123,7 @@ _Termination rules regarding subscriptionExpireTime usage_
 
 
 _Subscription example_
-In this example we illustrate a request for a roaming status subscription. Requester did not provide a wished expiration time for the subscription. In the response server accepts this request and set an subcription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
+In this example, we illustrate a request for a roaming status subscription. Requester did not provide a wished expiration time for the subscription. In the response, server accepts this request and sets a subscription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
 
 Request:
 
