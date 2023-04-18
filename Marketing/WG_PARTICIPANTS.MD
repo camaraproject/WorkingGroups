@@ -10,6 +10,7 @@
 | Ericsson	| Pehr Claesson |
 | Google Cloud	| Sridhar Gollapudi |
 | GSMA	| Henry Calvert |
+| GSMA	| Lucy Thatcher |
 | HCL | Norbert Naveen |
 | Huawei	| Albert Wang |
 | Huawei	| Qing Shuting |
