@@ -27,6 +27,7 @@
 | ORANGE	| Sylvain Morel |
 | Scenera	| Chien Lim |
 | Scenera	| David Lee |
+| Summit-Tech | Doug Makishima |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US	| Lyle Bertz |
 | Telecom Italia	| Roberto Procopio |
