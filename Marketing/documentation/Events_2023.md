@@ -5,6 +5,7 @@
 | https://devdays.lt/ |23.-24. May | Vilnius | DT|
 | https://icc2023.ieee-icc.org/  | 28. May – 01. June 2023 | Rome  | DT |
 | https://www.apidays.global/helsinki_and_north/  | 05.-06. June | Helsinki | DT |
+| [https://www.apidays.global/helsinki_and_north/](https://www.eucnc.eu/about/announcement-eucnc-6g-summit-2023/)  | 06.-09. June | Gothenburg ||
 | https://www.wearedevelopers.com/world-congress  | 27.-28. July | Berlin | DT, GSMA |
 | https://www.apidays.global/london/  | 13.-14. September | London | DT, Vodafone |
 | https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT |
