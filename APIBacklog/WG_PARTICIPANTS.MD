@@ -7,6 +7,7 @@
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
+| Ericsson | Rajat Kandoi |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
 | Infobip | Kwok Onn Looi |
