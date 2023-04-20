@@ -15,6 +15,7 @@
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
+| Ericsson | Rajat Kandoi |
 | Gapask | Rajesh Murty |
 | GSMA | Gareth Williams |
 | GSMA | Mark Cornall |
