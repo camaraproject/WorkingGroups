@@ -15,6 +15,7 @@
 | Huawei	| Albert Wang |
 | Huawei	| Qing Shuting |
 | IBM	| Jason Hunt |
+| IEEE | Mak Saleh |
 | Intel	| Petar Torre |
 | Kandy	| Kim Jones |
 | Kandy	| Philip Lintell |
