@@ -39,3 +39,4 @@
 | Verizon	| Priyanka Shah |
 | Vodafone	| Simon Gordon |
 | Vodafone	| Steven Pater |
+| ZTE | Jie Hu |
