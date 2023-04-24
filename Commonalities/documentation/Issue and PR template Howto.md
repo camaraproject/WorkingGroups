@@ -16,7 +16,7 @@ GitHub uses templates for the repository if the respective template configuratio
 
 In order to use templates for issues and pull request for the CAMARA Subproject the following steps need to be taken:
 
-1. Copy the folder [.github](/SupportingDocuments/Github_templates/.github)
+1. Copy the folder [.github](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/SupportingDocuments/Github_templates/.github)
 to the root of Subproject repository.
 
 2. Edit the `config.yml` file inside `.github/ISSUE_TEMPLATE/` folder:
