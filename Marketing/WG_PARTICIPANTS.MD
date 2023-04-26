@@ -6,6 +6,7 @@
 | Capgemini	| Deepak A. Gunjal |
 | Cisco | Ravi Guntupalli |
 | Deutsche Telekom AG	| Markus Kümmerle |
+| Deutsche Telekom AG	| Jasmin Schulmeyer |
 | Ericsson	| Bart van Kaathoven |
 | Ericsson	| Pehr Claesson |
 | Google Cloud	| Sridhar Gollapudi |
