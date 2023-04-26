@@ -1,7 +1,7 @@
 | Event link | Schedule | Location | Participant(s) |
 | -----------| -----------| -----------| -----------|
 | https://events.linuxfoundation.org/open-source-summit-north-america/ | 10.-12. May 2023 | Vancouver||
-| https://www.apidays.global/new-york/ | 15.-16. May 2023 | New York ||
+| https://www.apidays.global/new-york/ | 15.-16. May 2023 | New York | Verizon |
 | https://mobixd.com.br/| 16 May 2023 | Sao Paulo | GSMA |
 | https://devdays.lt/ |23.-24. May 2023 | Vilnius | DT|
 | https://icc2023.ieee-icc.org/  | 28. May – 01. June 2023 | Rome  | DT |
