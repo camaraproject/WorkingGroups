@@ -1066,17 +1066,20 @@ A resource-based subscription is a subscription managed as a resource. An endpoi
 
 Note: It is perfectly valid for a CAMARA API to have several event types managed. The subscription endpoint will be unique but 'eventType' attribute is used to distinguish distinct events subscribed.
 
-In order to ease developer adoption, the pattern for Resource-based subscription **must** be consistent for all API providing this feature.
+In order to ease developer adoption, the pattern for Resource-based subscription should be consistent for all API providing this feature.
 
 4 operations must be defined:
 
 | operation | path | description |
 | ----- |	-----  |	 -----  | 
-| POST | `/subscriptions` | Operation to request a subscription.     |
-| GET | `/subscriptions` | Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
+| POST | `/subscriptions` |  Operation to request a subscription.     |
+| GET | `/subscriptions` |  Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
 | GET | `/subscriptions/{subscriptionId}` | Operation to retrieve a subscription |
 | DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
 
+
+Note on operation path:
+The recommended pattern is to use `/subscription` path for the subscription operation. But API design team, for specific case, has the option to append `/subscription` path with a prefix (e.g. `/roaming/subscription` and `/connectivity/subscription`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
 
 Following table provides subscriptions attributes
 
