@@ -10,6 +10,7 @@
 | Ericsson | Rajat Kandoi |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
+| Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
