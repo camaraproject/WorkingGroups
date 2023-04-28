@@ -43,6 +43,7 @@ This document captures guidelines for the API design in CAMARA project. These gu
     - [11.3 Request Parameters](#113-request-parameters)
     - [11.4 Response Structure](#114-response-structure)
     - [11.5 Data Definitions](#115-data-definitions)
+      - [11.5.1 Usage of discriminator](#1151-usage-of-discriminator)
     - [11.6 OAuth Definition](#116-oauth-definition)
 
 
@@ -1009,19 +1010,80 @@ In this part, the error response structure must also be defined, which must be a
       - Type (Array, Integer…)
       - Error codes supported, as Enum list
    - Error description
-      - Type (Array)
-      - Min longitude
-      - Max longitude
-
+       - Type (Array)
+       - Min longitude
+       - Max longitude
 
 <p align="center">
 <img src="./images/guidelines-fig-18.png" width="400"/>
 </p>
 
+#### 11.5.1 Usage of discriminator
+
+As mentioned in Openapi doc [here](https://spec.openapis.org/oas/v3.0.3#discriminator-object) usage of discriminator may
+simplify serialization/deserialization process and so reduce resource consumption.
+
+To achieve this in the Camara context, we decided that :
+
+    - objects containing oneOf or anyOf section MUST include a discriminator defined by a propertyName
+    - objects involved in oneOf / anyOf section MUST include the property designed by propetyName
+
+The following sample illustrates this usage.
+
+``` yaml 
+    IpAddr:
+      oneOf:
+        - $ref: '#/components/schemas/Ipv6Addr'
+        - $ref: '#/components/schemas/Ipv4Addr'
+      discriminator:
+        propertyName: objectType <-- objectType property MUST be present in the objects referenced in oneOf
+
+    Ipv4Addr: <-- object involved in oneOf MUST include the objectype property
+      type: object
+      required:
+        - objectType
+        - address
+      properties:
+        objectType:
+          type: string
+        address:
+          type: string
+          format: ipv6
+        ...
+
+    Ipv6Addr: <-- object involved in oneOf MUST include the objectype property
+      type: object
+      required:
+        - objectType
+        - address
+      properties:
+        objectType:
+          type: string
+        address:
+          type: string
+          format: ipv4
+        ...
+
+```
+
+When IpAddr is used in a payload the property objectType MUST be present to indicate which schema to use
+
+``` json
+{ 
+    "ipAddr": {
+        "objectType": "Ipv4Addr",   <-- objectType indicates to use Ipv4Addr to deserialize this IpAddr
+        "address": "192.168.1.1",
+        ...
+    }    
+}
+```
 
 ### 11.6 OAuth Definition
 
-Finally, this part describes the OAuth security applied to the API. This spec is for client testing purposes only, but there should be as similar as possible to the OAuth flows in your production environment. This definition has the following aspects:
+Finally, this part describes the OAuth security applied to the API. This spec is for client testing purposes only, but
+there should be as similar as possible to the OAuth flows in your production environment. This definition has the
+following aspects:
+
 - Security Type: oauth2, oauth…
 - Security Flow (Depends of security type): implicit, password…
 - Security Flow description applied (String)
