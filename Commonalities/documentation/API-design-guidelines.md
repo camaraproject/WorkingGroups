@@ -1204,6 +1204,13 @@ Note: For operational and troubleshooting purposes it is relevant to accommodate
 
 Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination. It is used when the subscription expire time (required by the requester) has been reached or if the API server has to stop sending notification prematurely. For this specific event, the `eventDetail` must feature `terminationReason` attribute.
 
+_Error definition for event notification_
+
+Error definition are described in this guideline applies for event notification.
+
+Following Error code must be present:
+* for `POST`: 400, 401, 403, 500, 503
+
 _Examples_
 
 Example for Roaming status - Request:
@@ -1212,6 +1219,7 @@ Example for Roaming status - Request:
 curl -X 'POST' \
   'https://application-server.com/v0/notifications' \
   -H 'accept: application/json' \
+  -H 'Authorization: Bearer c8974e592c2fa383d4a3960714' \
   -H 'Content-Type: application/json' \
   -d
  ```
@@ -1247,6 +1255,7 @@ Example for subscription termination - Request:
 curl -X 'POST' \
   'https://application-server.com/v0/notifications' \
   -H 'accept: application/json' \
+  -H 'Authorization: Bearer c8974e592c2fa383d4a3960714' \
   -H 'Content-Type: application/json' \
   -d
  ```
