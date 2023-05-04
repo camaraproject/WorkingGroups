@@ -8,17 +8,20 @@
 | Broadpeak | Christoph Neumann |
 | CableLabs | Randy Levensalor |
 | Cisco | Ravi Guntupalli |
+| Cisco | Ravi Shek |
 | Dell | Vaishali Gupta |
 | Deutsche Telekom AG | Herbert Damker |
 | Deutsche Telekom AG | Rafal Artych |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
+| Ericsson | Rajat Kandoi |
 | Gapask | Rajesh Murty |
 | GSMA | Gareth Williams |
 | GSMA | Mark Cornall |
 | GSMA | T. Rehman |
 | GSMA | Tom Van Pelt |
+| IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
@@ -34,6 +37,7 @@
 | Syniverse | Jyrki Penttinen |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut  |
+| Telefonica | Jorge Garcia Hospital |
 | Telefonica | José Ordoñez-Lucena |
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado Gonzalez |

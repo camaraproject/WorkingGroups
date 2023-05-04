@@ -653,8 +653,10 @@ Services can answer with a resource or article collections. Sometimes these coll
 
 Services must accept and use these query parameters when paging is supported:
 - `perPage`: number of resources requested to be provided in the response 
+
 - `page`: requested page number to indicate the start of the resources to be provided in the response (considering perPage page size)
 - `seek`: index of last result read, to create the next/previous number of results. This query parameter is used for pagination in systems with more than 1000 records. `seek` parameter offers finer control than `page` and could be used one or another as an alternative. If both are used in combination (not recommended) `seek` would mark the index starting from the page number specified by `page` and `perPage` [index = (page * perPage) + seek].
+
 
 Services must accept and use these headers when paging is supported:
 - `Content-Last-Key`: it allows specifying the key of the last resort provided in the response
@@ -670,6 +672,7 @@ The HTTP codes that the server will use as a response are:
 Petitions examples:
 - `page=0 perPage=20`, which returnss the first 20 resources
 - `page=10 perPage=20`, which returns 20 resources from the 10th page (in terms of absolute index, 10 pages and 20 elements per page, means it will start on the 200 position as 10*20=200)
+
 
 
 ### 8.2 Sorting
@@ -1008,25 +1011,85 @@ In this part, the error response structure must also be defined, which must be a
       - Type (Array, Integer…)
       - Error codes supported, as Enum list
    - Error description
-      - Type (Array)
-      - Min longitude
-      - Max longitude
-
+       - Type (Array)
+       - Min longitude
+       - Max longitude
 
 <p align="center">
 <img src="./images/guidelines-fig-18.png" width="400"/>
 </p>
 
+#### 11.5.1 Usage of discriminator
+
+As mentioned in Openapi doc [here](https://spec.openapis.org/oas/v3.0.3#discriminator-object) usage of discriminator may
+simplify serialization/deserialization process and so reduce resource consumption.
+
+To achieve this in the Camara context, we decided that :
+
+    - objects containing oneOf or anyOf section MUST include a discriminator defined by a propertyName
+    - objects involved in oneOf / anyOf section MUST include the property designed by propetyName
+
+The following sample illustrates this usage.
+
+``` yaml 
+    IpAddr:
+      oneOf:
+        - $ref: '#/components/schemas/Ipv6Addr'
+        - $ref: '#/components/schemas/Ipv4Addr'
+      discriminator:
+        propertyName: objectType <-- objectType property MUST be present in the objects referenced in oneOf
+
+    Ipv4Addr: <-- object involved in oneOf MUST include the objectype property
+      type: object
+      required:
+        - objectType
+        - address
+      properties:
+        objectType:
+          type: string
+        address:
+          type: string
+          format: ipv6
+        ...
+
+    Ipv6Addr: <-- object involved in oneOf MUST include the objectype property
+      type: object
+      required:
+        - objectType
+        - address
+      properties:
+        objectType:
+          type: string
+        address:
+          type: string
+          format: ipv4
+        ...
+
+```
+
+When IpAddr is used in a payload the property objectType MUST be present to indicate which schema to use
+
+``` json
+{ 
+    "ipAddr": {
+        "objectType": "Ipv4Addr",   <-- objectType indicates to use Ipv4Addr to deserialize this IpAddr
+        "address": "192.168.1.1",
+        ...
+    }    
+}
+```
 
 ### 11.6 OAuth Definition
 
-Finally, this part describes the OAuth security applied to the API. This spec is for client testing purposes only, but there should be as similar as possible to the OAuth flows in your production environment. This definition has the following aspects:
+Finally, this part describes the OAuth security applied to the API. This spec is for client testing purposes only, but
+there should be as similar as possible to the OAuth flows in your production environment. This definition has the
+following aspects:
+
 - Security Type: oauth2, oauth…
 - Security Flow (Depends of security type): implicit, password…
 - Security Flow description applied (String)
 - Endpoint token URL
 - URL to endpoint authorization ( If flow is based on "`authorizationCode`").	
-
 
 ## 12. Subscription, Notification & Event
 

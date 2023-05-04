@@ -17,6 +17,7 @@
 * Main branch is assumed to be the latest.
 * Camara subproject will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until it has been released. For example, changes may be reverted before a release is published. For the best results, use the latest published release of any given subproject within Camara.
 * The commonalities WG does not impose any restrictions on the subprojects for creating other branches, tags which might be needed/useful to address their specific requirements. The above said guidelines are only applicable for the subproject releases.
+* Main (`main`) branch and all release branches (`release\*`) will be protected by branch rules in Github: All pull requests need be reviewed by at least one code owner before they can be merged
 
 ### Release branches
 <img src="../images/versioning-pic.png" alt="Ver"
