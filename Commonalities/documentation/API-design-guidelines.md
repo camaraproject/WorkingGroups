@@ -1094,21 +1094,21 @@ following aspects:
 ## 12. Subscription, Notification & Event
 
 In order to provide event-based interaction, CAMARA API could provided capabilities for subscription & notification management.
-A subscription allows to an API consumer to request event notification reception at a given url (callback address) for a specific context.
+A subscription allows an API consumer to request event notification reception at a given URL (callback address) for a specific context.
 A notification is the publication at the listener address about an occurred event.
-Event type managed are explicitly defined in CAMAPA API OAS.
+Managed event types are explicitly defined in CAMARA API OAS.
 
 ### 12.1 Subscription
 
-We distinguish 2 types of subscription:
+We distinguish 2 types of subscriptions:
 - Instance-based subscription (indirect creation)
 - Resource-based subscription (direct creation)
 
 **Instance-based subscription**
 
-An instance-based subscription is a subscription indirectly created, additionally, to another resource creation. For example for a Payment request (in Carrier Billing API), in the `POST/payments`, the API consumer could request to get event notification about **this** Payment request processing update. The subscription is not an entity and its lifecycle is linked to the managed entity (the Payment resource in this case). The subscription terminates with the managed entity.
+An instance-based subscription is a subscription indirectly created, additionally to another resource creation. For example for a Payment request (in Carrier Billing API), in the `POST/payments`, the API consumer could request to get event notification about **this** Payment request processing update. The subscription is not an autonomous entity and its lifecycle is linked to the managed entity (the Payment resource in this case). The subscription terminates with the managed entity.
 
-Providing this capability is optional for any CAMARA APIs depending on UC requirements
+Providing this capability is optional for any CAMARA API depending on UC requirements.
 
 If this capability is present in CAMARA API, following attributes **must** be used in the POST request for the managed entity:
 
@@ -1120,12 +1120,12 @@ If this capability is present in CAMARA API, following attributes **must** be us
 Format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
 - It MUST BE an opaque attribute
 - It MUST NOT be a JWT Token
-- It has to be a restricted length, being an string between [20-64] characters.
+- It has to be restricted in length, a string between [20-64] characters.
 - It is HIGHLY recommended to have random-based pattern, like UUIDv4 format (32 hexadecimal characters, separated by `-`, e.g. ```550e8400-e29b-41d4-a716-446655440000```) 
 
 **Resource-based subscription**
 
-A resource-based subscription is a subscription managed as a resource. An endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete them must be provided.
+A resource-based subscription is a subscription managed as a resource. An API endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete it must be provided.
 
 Note: It is perfectly valid for a CAMARA API to have several event types managed. The subscription endpoint will be unique but 'eventType' attribute is used to distinguish distinct events subscribed.
 
@@ -1141,18 +1141,18 @@ In order to ease developer adoption, the pattern for Resource-based subscription
 | DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
 
 
-Note on operation path:
-The recommended pattern is to use `/subscription` path for the subscription operation. But API design team, for specific case, has the option to append `/subscription` path with a prefix (e.g. `/roaming/subscription` and `/connectivity/subscription`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
+Note on the operation path:
+The recommended pattern is to use `/subscriptions` path for the subscription operation. But API design team, for specific case, has the option to append `/subscriptions` path with a prefix (e.g. `/roaming/subscriptions` and `/connectivity/subscriptions`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
 
 Following table provides subscriptions attributes
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| notificationUrl | string | https Callback address where the notification must be POST-ed | mandatory |
+| notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
 | notificationAuthToken | string | Authentification token for callback API | optional |
 | subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
 | subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
-| startsAt | string - datetime| Date when the subscription will begin/begun. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
+| startsAt | string - datetime| Date when the subscription will begin/began. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
 | expiresAt | string - datetime| Date when the subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
 | subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
 
@@ -1165,7 +1165,7 @@ The subscriptionDetail must have at least an eventType attribute:
 
 _Error definition for subscription_
 
-Error definition are described in this guideline applies for subscriptions.
+Error definition described in this guideline applies for subscriptions.
 
 Following Error code must be present:
 * for `POST`: 400, 401, 403, 409, 500, 503
@@ -1175,21 +1175,21 @@ Following Error code must be present:
 
 _Termination for resource-based subscription_
 
-3 scenarios are possibles (business conditions may apply):
+3 scenarios subscription termination are possible (business conditions may apply):
 
 * case1: subscriptionExpireTime has been provided in the request and reached. The operator in this case has to terminate the subscription.
-* case2: subscriber requests a `DELETE` for a subscription. 
-* case3: subscription ended at operator request. 
+* case2: subscriber requests the `DELETE` operation for the subscription. 
+* case3: subscription ends on operator request. 
 
 It could be useful to provide a mechanism to inform subscriber for case3 (and probably case1). In this case a specific event type could be used.
 
 _Termination rules regarding subscriptionExpireTime usage_
 * When client side providing a `subscriptionExpireTime`, service side has to terminate the subscription without expecting a `DELETE` operation.
-* When the `subscriptionExpireTime` is not provided, client side has to trigger a `DELETE` operation to terminate it
+* When the `subscriptionExpireTime` is not provided, client side has to trigger a `DELETE` operation to terminate it.
 
 
 _Subscription example_
-In this example, we illustrate a request for a roaming status subscription. Requester did not provide a wished expiration time for the subscription. In the response, server accepts this request and sets a subscription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
+In this example, we illustrate a request for a device roaming status subscription. Requester did not provide anticipated expiration time for the subscription. In the response, server accepts this request and sets a subscription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
 
 Request:
 
@@ -1236,18 +1236,18 @@ response:
 }
 ```
 
-Note: If an API provides both pattern (indirect and resource-based), and an API customer requests both (instance base + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptable, when the event occurred, that one or two notifications are sent to listener.
+Note: If the API provides both patterns (indirect and resource-based), and the API customer requests both (instance based + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptable, when the event occurrs, that one or two notifications are sent to listener.
 
 
 ### 12.2 Event notification
 
 The notification endpoint is used by the API server to notify the API consumer that an event occured.
 
-Note: The notification is the message posted on listener side. We describe the notification message in the CAMARA OAS but it could confusing because this endpoint should be implemented on the business API consumer side. This notice should be explicited mentioned in all CAMARA API documentation featuring notification.
+Note: The notification is the message posted on listener side. We describe the notification message in the CAMARA OAS but it could confusing because this endpoint should be implemented on the business API consumer side. This notice should be explicited mentioned in all CAMARA API documentation featuring notifications.
 
 Only Operation POST is provided for `notifications` and the expected response code is `204`.
 
-For consistence among CAMARA API a uniform `notifications` model must be used:
+For consistence among CAMARA APIs the uniform `notifications` model must be used:
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
@@ -1259,9 +1259,9 @@ Following table defines event attribute object structure:
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
 | eventId | string - uuid | Identifier of the event from the server where the event was reported | optional |
-| eventType | string | Type of event as defined in each CAMARA API. The event type are defined in UPPER_SNAKE_CASE| mandatory |
+| eventType | string | Type of event as defined in each CAMARA API. The event type are written in UPPER_SNAKE_CASE| mandatory |
 | eventTime | string - datetime | Date time when the event occurred | mandatory |
-| eventDetail | object | A detailed event structure depending on the eventType | mandatory |
+| eventDetail | object | Event details structure depending on the eventType | mandatory |
 
 Note: For operational and troubleshooting purposes it is relevant to accommodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
 
