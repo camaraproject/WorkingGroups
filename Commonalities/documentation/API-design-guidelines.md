@@ -1115,46 +1115,47 @@ If this capability is present in CAMARA API, following attributes **must** be us
 | attribute name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  | -----  | 
 | notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
-| notificationAuthToken | string | authentication token for callback API endpoint. It MUST be indicated within HTTP Authorization header as a Bearer Token format, e.g. ```Authorization: Bearer $notificationAuthToken``` | optional |
+| notificationAuthToken | string | authentication token for callback API endpoint. It MUST be indicated within HTTP Authorization header accordingly to OAuth 2.0 Bearer Token format, e.g. ```Authorization: Bearer $notificationAuthToken``` | optional |
 
 Format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
 - It MUST BE an opaque attribute
 - It MUST NOT be a JWT Token
-- It has to be restricted in length, a string between [20-64] characters.
+- It has to be restricted in length, a string between [20-256] characters.
 - It is HIGHLY recommended to have random-based pattern, like UUIDv4 format (32 hexadecimal characters, separated by `-`, e.g. ```550e8400-e29b-41d4-a716-446655440000```) 
 
 **Resource-based subscription**
 
-A resource-based subscription is a subscription managed as a resource. An API endpoint is provided to request subscription creation.  As this subscription is managed as an API resource, it is identified and operations to search, retrieve and delete it must be provided.
+A resource-based subscription is a event subscription managed as a resource. An API endpoint is provided to request subscription creation.  As this event subscription is managed as an API resource, it is identified and operations to search, retrieve and delete it must be provided.
 
 Note: It is perfectly valid for a CAMARA API to have several event types managed. The subscription endpoint will be unique but 'eventType' attribute is used to distinguish distinct events subscribed.
 
-In order to ease developer adoption, the pattern for Resource-based subscription should be consistent for all API providing this feature.
+In order to ease developer adoption, the pattern for Resource-based event subscription should be consistent for all API providing this feature.
 
 4 operations must be defined:
 
 | operation | path | description |
 | ----- |	-----  |	 -----  | 
-| POST | `/subscriptions` |  Operation to request a subscription.     |
-| GET | `/subscriptions` |  Operation to retrieve a list of subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
-| GET | `/subscriptions/{subscriptionId}` | Operation to retrieve a subscription |
-| DELETE | `/subscriptions/{subscriptionId}` | Operation to delete a subscription |
+| POST | `/eventSubscriptions` |  Operation to request a event subscription.     |
+| GET | `/eventSubscriptions` |  Operation to retrieve a list of event subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
+| GET | `/eventSubscriptions/{eventSubscriptionsId}` | Operation to retrieve a event subscription |
+| DELETE | `/eventSubscriptions/{eventSubscriptionsId}` | Operation to delete a event subscription |
 
 
 Note on the operation path:
-The recommended pattern is to use `/subscriptions` path for the subscription operation. But API design team, for specific case, has the option to append `/subscriptions` path with a prefix (e.g. `/roaming/subscriptions` and `/connectivity/subscriptions`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
+The recommended pattern is to use `/eventSubscriptions` path for the subscription operation. But API design team, for specific case, has the option to append `/eventSubscriptions` path with a prefix (e.g. `/roaming/eventSubscriptions` and `/connectivity/eventSubscriptions`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
 
-Following table provides subscriptions attributes
+Following table provides `/eventSubscriptions` attributes
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
-| notificationAuthToken | string | Authentification token for callback API | optional |
-| subscriptionId | string | Identifier of the subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
-| subscriptionExpireTime | string - datetime| Date when the subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
-| startsAt | string - datetime| Date when the subscription will begin/began. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
-| expiresAt | string - datetime| Date when the subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
-| subscriptionDetail | object | Object defined for each subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
+| notificationUrl | string | https callback address where the event notification must be POST-ed | mandatory |
+| notificationAuthToken | string | authentication token for callback API endpoint. It MUST be indicated within HTTP Authorization header accordingly to OAuth 2.0 Bearer Token format, e.g. ```Authorization: Bearer $notificationAuthToken```  | optional |
+| eventSubscriptionId | string | Identifier of the event subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
+| subscriptionExpireTime | string - datetime| Date when the event subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
+| startsAt | string - datetime| Date when the event subscription will begin/began. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
+| expiresAt | string - datetime| Date when the event subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
+| correlationId | string | A correlation identifier provided by the requester. If valued it must be send back on all notifications related to this event subscription   | optional |
+| subscriptionDetail | object | Object defined for each event subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
 
 The subscriptionDetail must have at least an eventType attribute:
 
@@ -1189,13 +1190,13 @@ _Termination rules regarding subscriptionExpireTime usage_
 
 
 _Subscription example_
-In this example, we illustrate a request for a device roaming status subscription. Requester did not provide anticipated expiration time for the subscription. In the response, server accepts this request and sets a subscription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
+In this example, we illustrate a request for a device roaming status event subscription. Requester did not provide anticipated expiration time for the subscription. In the response, server accepts this request and sets an event subscription end one year later. This is an illustration and each implementation is free to provide - or not - a subscription planned expiration date.
 
 Request:
 
 ```
 curl -X 'POST' \
-  'http://localhost:9091//device-status/v0/subscriptions' \
+  'http://localhost:9091//device-status/v0/eventSubscriptions' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
@@ -1230,7 +1231,7 @@ response:
     "uePort": 5060,
     "eventType": "ROAMING_STATUS"
   },
-  "subscriptionId": "456g899g",
+  "eventSubscriptionId": "456g899g",
   "startsAt": "2023-03-17T16:02:41.314Z",
   "expiresAt" : "2024-03-17T00:00:00.000Z"
 }
@@ -1241,17 +1242,17 @@ Note: If the API provides both patterns (indirect and resource-based), and the A
 
 ### 12.2 Event notification
 
-The notification endpoint is used by the API server to notify the API consumer that an event occured.
+The event notification endpoint is used by the API server to notify the API consumer that an event occured.
 
 Note: The notification is the message posted on listener side. We describe the notification message in the CAMARA OAS but it could confusing because this endpoint should be implemented on the business API consumer side. This notice should be explicited mentioned in all CAMARA API documentation featuring notifications.
 
-Only Operation POST is provided for `notifications` and the expected response code is `204`.
+Only Operation POST is provided for `eventNotifications` and the expected response code is `204`.
 
-For consistence among CAMARA APIs the uniform `notifications` model must be used:
+For consistence among CAMARA APIs the uniform `eventNotifications` model must be used:
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| subscriptionId | string | subscription identifier - could be valued for Resource-based subscription | optional |
+| eventSubscriptionId | string | subscription identifier - could be valued for Resource-based subscription | optional |
 | event | object | event structure - see next table | mandatory |
 
 Following table defines event attribute object structure: 
@@ -1261,6 +1262,7 @@ Following table defines event attribute object structure:
 | eventId | string - uuid | Identifier of the event from the server where the event was reported | optional |
 | eventType | string | Type of event as defined in each CAMARA API. The event type are written in UPPER_SNAKE_CASE| mandatory |
 | eventTime | string - datetime | Date time when the event occurred | mandatory |
+| correlationId | string  | Correlation identifier - must be valued if provided in the subscription request | mandatory |
 | eventDetail | object | Event details structure depending on the eventType | mandatory |
 
 Note: For operational and troubleshooting purposes it is relevant to accommodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
@@ -1288,7 +1290,7 @@ curl -X 'POST' \
  ```
  ```json 
 {
-  "subscriptionId": "456g899g",
+  "eventSubscriptionId": "456g899g",
   "event": {
     "eventType": "ROAMING_STATUS",
     "eventTime": "2023-01-19T13:18:23.682Z",
@@ -1324,7 +1326,7 @@ curl -X 'POST' \
  ```
  ```json 
 {
-  "subscriptionId": "456g899g",
+  "eventSubscriptionId": "456g899g",
   "event": {
     "eventType": "SUBSCRIPTION_ENDS",
     "eventTime": "2023-01-24T13:18:23.682Z",
