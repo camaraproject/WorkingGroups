@@ -1115,7 +1115,7 @@ If this capability is present in CAMARA API, following attributes **must** be us
 | attribute name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  | -----  | 
 | notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
-| notificationAuthToken | string | authentication token for callback API endpoint. It MUST be indicated within HTTP Authorization header accordingly to OAuth 2.0 Bearer Token format, e.g. ```Authorization: Bearer $notificationAuthToken``` | optional |
+| notificationAuthToken | string | OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken | optional |
 
 Format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
 - It MUST BE an opaque attribute
@@ -1135,21 +1135,21 @@ In order to ease developer adoption, the pattern for Resource-based event subscr
 
 | operation | path | description |
 | ----- |	-----  |	 -----  | 
-| POST | `/eventSubscriptions` |  Operation to request a event subscription.     |
-| GET | `/eventSubscriptions` |  Operation to retrieve a list of event subscriptions - could be an empty list.  eg. `GET /subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
-| GET | `/eventSubscriptions/{eventSubscriptionsId}` | Operation to retrieve a event subscription |
-| DELETE | `/eventSubscriptions/{eventSubscriptionsId}` | Operation to delete a event subscription |
+| POST | `/event-subscriptions` |  Operation to request a event subscription.     |
+| GET | `/event-subscriptions` |  Operation to retrieve a list of event subscriptions - could be an empty list.  eg. `GET /event-subscriptions?type=ROAMING_STATUS&ExpireTime.lt=2023-03-17` |
+| GET | `/event-subscriptions/{eventSubscriptionsId}` | Operation to retrieve a event subscription |
+| DELETE | `/event-subscriptions/{eventSubscriptionsId}` | Operation to delete a event subscription |
 
 
 Note on the operation path:
-The recommended pattern is to use `/eventSubscriptions` path for the subscription operation. But API design team, for specific case, has the option to append `/eventSubscriptions` path with a prefix (e.g. `/roaming/eventSubscriptions` and `/connectivity/eventSubscriptions`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
+The recommended pattern is to use `/event-subscriptions` path for the subscription operation. But API design team, for specific case, has the option to append `/event-subscriptions` path with a prefix (e.g. `/roaming/event-subscriptions` and `/connectivity/event-subscriptions`). The rationale for using this alternate pattern should be explicitly provided (e.g. the notification source for each of the supported events may be completely different, in which case separating the implementations is beneficial). 
 
-Following table provides `/eventSubscriptions` attributes
+Following table provides `/event-subscriptions` attributes
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
 | notificationUrl | string | https callback address where the event notification must be POST-ed | mandatory |
-| notificationAuthToken | string | authentication token for callback API endpoint. It MUST be indicated within HTTP Authorization header accordingly to OAuth 2.0 Bearer Token format, e.g. ```Authorization: Bearer $notificationAuthToken```  | optional |
+| notificationAuthToken | string | OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken  | optional |
 | eventSubscriptionId | string | Identifier of the event subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
 | subscriptionExpireTime | string - datetime| Date when the event subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
 | startsAt | string - datetime| Date when the event subscription will begin/began. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
@@ -1161,7 +1161,7 @@ The subscriptionDetail must have at least an eventType attribute:
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| eventType | string | Type of event subscribed. This attribute must be present in the `POST` request. It is open to API working group to allow providing a list of event type based on specific UC | mandatory  |
+| eventType | string | Type of event subscribed. This attribute must be present in the `POST` request. It is open to API working group to allow providing a list of event type based on specific UC. `eventType` must follow UPPER_SNAKE_CASE format. | mandatory  |
 
 
 _Error definition for subscription_
@@ -1179,7 +1179,7 @@ _Termination for resource-based subscription_
 3 scenarios subscription termination are possible (business conditions may apply):
 
 * case1: subscriptionExpireTime has been provided in the request and reached. The operator in this case has to terminate the subscription.
-* case2: subscriber requests the `DELETE` operation for the subscription. 
+* case2: subscriber requests the `DELETE` operation for the subscription (if the subscription did not have a subscriptionExpireTime or before subscriptionExpireTime expires). 
 * case3: subscription ends on operator request. 
 
 It could be useful to provide a mechanism to inform subscriber for case3 (and probably case1). In this case a specific event type could be used.
@@ -1196,7 +1196,7 @@ Request:
 
 ```
 curl -X 'POST' \
-  'http://localhost:9091//device-status/v0/eventSubscriptions' \
+  'http://localhost:9091//device-status/v0/event-subscriptions' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d
