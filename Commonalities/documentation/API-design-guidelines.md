@@ -1121,7 +1121,7 @@ Recommended format conventions regarding ```notificationAuthToken``` attribute, 
 - It MUST BE an opaque attribute
 - It MUST NOT be a JWT Token
 - It has to be restricted in length, a string between [20-256] characters.
-- It is HIGHLY recommended to have random-based pattern, like UUIDv4 format (32 hexadecimal characters, separated by `-`, e.g. ```550e8400-e29b-41d4-a716-446655440000```) 
+- It is HIGHLY recommended to have random-based pattern (e.g. UUIDv4 or another one. Anycase it is an implementation topic not design one) 
 
 **Resource-based subscription**
 
