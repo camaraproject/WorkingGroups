@@ -1154,7 +1154,6 @@ Following table provides `/event-subscriptions` attributes
 | subscriptionExpireTime | string - datetime| Date when the event subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
 | startsAt | string - datetime| Date when the event subscription will begin/began. This attribute must not be present in the `POST` request as it is provided by API server. It must be present in `GET` endpoints | optional |
 | expiresAt | string - datetime| Date when the event subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
-| correlationId | string | A correlation identifier provided by the requester. If valued it must be send back on all notifications related to this event subscription   | optional |
 | subscriptionDetail | object | Object defined for each event subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
 
 The subscriptionDetail must have at least an eventType attribute:
@@ -1262,7 +1261,6 @@ Following table defines event attribute object structure:
 | eventId | string - uuid | Identifier of the event from the server where the event was reported | optional |
 | eventType | string | Type of event as defined in each CAMARA API. The event type are written in UPPER_SNAKE_CASE| mandatory |
 | eventTime | string - datetime | Date time when the event occurred | mandatory |
-| correlationId | string  | Correlation identifier - must be valued if provided in the subscription request | mandatory |
 | eventDetail | object | Event details structure depending on the eventType | mandatory |
 
 Note: For operational and troubleshooting purposes it is relevant to accommodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
