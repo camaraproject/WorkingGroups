@@ -1118,7 +1118,7 @@ If this capability is present in CAMARA API, following attributes **must** be us
 | notificationAuthToken | string | OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken | optional |
 
 Recommended format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
-- It MUST BE an opaque attribute
+- It SHOULD BE an opaque attribute, meaning that should not be based in security info shared between API Consumer and API Provider 
 - It has to be restricted in length, a string between [20-256] characters.
 - It is HIGHLY recommended to have random-based pattern (e.g. UUIDv4 or another one. Anycase it is an implementation topic not design one) 
 
