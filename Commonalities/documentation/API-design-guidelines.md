@@ -1262,7 +1262,7 @@ Following table defines event attribute object structure:
 | eventTime | string - datetime | Date time when the event occurred | mandatory |
 | eventDetail | object | Event details structure depending on the eventType | mandatory |
 
-Note: For operational and troubleshooting purposes it is relevant to accommodate use of X-Correlator header attribute. API listener implementations have to be ready to support and receive this data.
+Note: For operational and troubleshooting purposes it is relevant to accommodate use of `X-Correlator` header attribute. API listener implementations have to be ready to support and receive this data.
 
 Specific eventType "SUBSCRIPTION_ENDS" is defined to inform listener about subscrition termination. It is used when the subscription expire time (required by the requester) has been reached or if the API server has to stop sending notification prematurely. For this specific event, the `eventDetail` must feature `terminationReason` attribute.
 
@@ -1272,6 +1272,13 @@ Error definition are described in this guideline applies for event notification.
 
 Following Error code must be present:
 * for `POST`: 400, 401, 403, 500, 503
+
+_Managing correlation between resource-based event souscription and event notification_
+There are 2 possibilities to manage correlation between the souscription management and the event notification (as these are 2 distinct operations):
+- use `eventSubscriptionId` attribute (in body) - this identifier is provided in event subscription and could be valued in each event notification. 
+- use `X-correlator` - in this case during event subscription the subscriber values the `X-correlator` in the header. This X-correlator is provided in subscription response but also in all relevant event notification.
+
+note: There is no normative enforcement to use any of these patterns and they could be used on agreement between API consumer & provider.
 
 _Examples_
 
