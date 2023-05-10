@@ -19,6 +19,7 @@
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
 | T-Mobile NL | Muhammad Ahmad  |
+| T-Mobile US | Poornima Magadevan |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
 | Telefonica | Jorge Garcia Hospital |
