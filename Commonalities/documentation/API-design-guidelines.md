@@ -1110,12 +1110,23 @@ An instance-based subscription is a subscription indirectly created, additionall
 
 Providing this capability is optional for any CAMARA API depending on UC requirements.
 
-If this capability is present in CAMARA API, following attributes **must** be used in the POST request for the managed entity:
+If this capability is present in CAMARA API, following attributes **must** be used in the POST request, within a `webhook` object, for the managed entity:
 
 | attribute name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  | -----  | 
 | notificationUrl | string | https callback address where the notification must be POST-ed | mandatory |
 | notificationAuthToken | string | OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken | optional |
+
+_example:_
+
+```json
+{
+<Resource instance representation>
+"webhook": {
+   "notificationUrl": "https://callback..."
+   "notificationAuthToken" : "sdfr5sff...lmp"
+   }
+`
 
 Recommended format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
 - It SHOULD BE an opaque attribute, meaning that should not be based in security info shared between API Consumer and API Provider 
@@ -1147,7 +1158,7 @@ Following table provides `/event-subscriptions` attributes
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
-| notificationUrl | string | https callback address where the event notification must be POST-ed | mandatory |
+| webhook | object | detail for event channel - in current version only webhook description are provided but other event channel descriptor could be added in future | mandatory |
 | notificationAuthToken | string | OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken  | optional |
 | eventSubscriptionId | string | Identifier of the event subscription - This attribute must not be present in the POST request as it is provided by API server | mandatory in server response |
 | subscriptionExpireTime | string - datetime| Date when the event subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED" | optional |
@@ -1155,7 +1166,15 @@ Following table provides `/event-subscriptions` attributes
 | expiresAt | string - datetime| Date when the event subscription will expire. This attribute must not be present in the `POST` request as it is provided by API server.  | optional |
 | subscriptionDetail | object | Object defined for each event subscription depending on the event - it could be for example the ueID targeted by the subscription | optional |
 
-The subscriptionDetail must have at least an eventType attribute:
+
+The `webhook` object definition: 
+
+| name | type | attribute description | cardinality |
+| ----- |	-----  |	 -----  |  -----  | 
+| notificationUrl | string | https callback address where the event notification must be POST-ed | mandatory |
+| notificationAuthToken | string | OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken  | optional |
+
+The `subscriptionDetail` must have at least an eventType attribute:
 
 | name | type | attribute description | cardinality |
 | ----- |	-----  |	 -----  |  -----  | 
@@ -1201,8 +1220,10 @@ curl -X 'POST' \
  ```
  ```json 
 {
-  "notificationUrl": "https://application-server.com",
-  "notificationAuthToken": "c8974e592c2fa383d4a3960714",
+  "webhook": {
+    "notificationUrl": "https://application-server.com",
+    "notificationAuthToken": "c8974e592c2fa383d4a3960714"
+    }
   "subscriptionDetail": {
     "ueId": {,
       "ipv4Addr": "192.168.0.1"
@@ -1220,8 +1241,10 @@ response:
 ```
 ```json 
 {
-  "notificationUrl": "https://application-server.com/v0",
-  "notificationAuthToken": "c8974e592c2fa383d4a3960714",
+  "webhook": {
+    "notificationUrl": "https://application-server.com",
+    "notificationAuthToken": "c8974e592c2fa383d4a3960714"
+    }
   "subscriptionDetail": {
     "ueId": {
       "ipv4Addr": "192.168.0.1"
@@ -1235,7 +1258,7 @@ response:
 }
 ```
 
-Note: If the API provides both patterns (indirect and resource-based), and the API customer requests both (instance based + subscription), the 2 requests should be handled  independently & autonomously. Depending on server implementation, it is acceptable, when the event occurrs, that one or two notifications are sent to listener.
+Note: If the API provides both patterns (indirect and resource-based), and the API customer requests both (instance based + subscription), the 2 requests should be handled independently & autonomously. Depending on server implementation, it is acceptable, when the event occurrs, that one or two notifications are sent to listener.
 
 
 ### 12.2 Event notification
