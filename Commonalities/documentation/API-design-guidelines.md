@@ -1126,7 +1126,7 @@ _example:_
    "notificationUrl": "https://callback..."
    "notificationAuthToken" : "sdfr5sff...lmp"
    }
-`
+```
 
 Recommended format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
 - It SHOULD BE an opaque attribute, meaning that should not be based in security info shared between API Consumer and API Provider 
