@@ -1297,7 +1297,7 @@ Following Error code must be present:
 * for `POST`: 400, 401, 403, 500, 503
 
 _Managing correlation between resource-based event souscription and event notification_
-There are 2 possibilities to manage correlation between the souscription management and the event notification (as these are 2 distinct operations):
+To manage correlation between the subscription management and the event notification (as these are 2 distinct operations):
 - use `eventSubscriptionId` attribute (in body) - this identifier is provided in event subscription and could be valued in each event notification. 
 - use `X-correlator` - in this case during event subscription the subscriber values the `X-correlator` in the header. This X-correlator is provided in subscription response but also in all relevant event notification.
 
