@@ -5,6 +5,7 @@
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
 | Cisco | Ravi Guntupalli |
+| CPaaSaa | Rob Kurver |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Deutsche Telekom AG	| Jasmin Schulmeyer |
 | Ericsson	| Bart van Kaathoven |
