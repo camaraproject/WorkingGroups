@@ -1126,6 +1126,7 @@ _example:_
    "notificationUrl": "https://callback..."
    "notificationAuthToken" : "sdfr5sff...lmp"
    }
+}
 ```
 
 Recommended format conventions regarding ```notificationAuthToken``` attribute, in order to provide Uniqueness, Randomness and Simplicity for its management are the following:
