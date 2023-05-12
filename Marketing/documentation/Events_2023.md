@@ -9,7 +9,7 @@
 | https://www.mobile360series.com/latin-america | 31 May - 1 June 2023 | Mexico City | GSMA |
 | https://www.apidays.global/helsinki_and_north/  | 05.-06. June 2023 | Helsinki | DT |
 | https://www.eucnc.eu/about/announcement-eucnc-6g-summit-2023/  | 06.-09. June 2023 | Gothenburg |TEF|
-| [https://www.mwcshanghai.com/](https://www.openatom.org/home) | 11 - 13 June 2023 | Beijing| Huawei |
+| [https://www.openatom.org/home](https://www.openatom.org/home) | 11 - 13 June 2023 | Beijing| Huawei |
 | https://www.mwcshanghai.com/ | 28 - 30 June 2023 | Shanghai| GSMA |
 | https://www.wearedevelopers.com/world-congress  | 27.-28. July 2023 | Berlin | DT, GSMA |
 | https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone |
