@@ -13,6 +13,7 @@
 | Deutsche Telekom AG | Herbert Damker |
 | Deutsche Telekom AG | Rafal Artych |
 | Deutsche Telekom AG | Shilpa Padgaonkar |
+| Ericsson | Istvan Andras Horvath |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
 | Ericsson | Rajat Kandoi |
