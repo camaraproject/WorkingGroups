@@ -1,11 +1,12 @@
+
 # Glossary
 
 | Term      | Description | Usage in API (Parameter/Field) | Alternative developer-friendly terms |
 | ------------ | ----------- | ----------- |  ----------- |
-| **Device** | End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators.   | device |  |  |
+| **Device** | End-user equipment able to connect to a mobile network. Examples of devices include smartphones or IoT sensors/actuators.   | device |  |  |
 | **Application Server** | A server hosting backend applications to deliver some business logic to clients. | applicationServer |  |  |
 | **Phone Number** |A public identifier addressing a telephone subscription. In mobile networks it corresponds to the MSISDN (Mobile Station International Subscriber Directory Number). In order to be globally unique it has to be formatted in international format, according to E.164 standard.  | phoneNumber |  |  |
-| **Network Access Identifier** |  A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.| networkAccessIdentifier  |  |  |
+| **Network Access Identifier** |  A public identifier addressing a subscription in a mobile network. In 3GPP terminology, it corresponds to the GPSI formatted with the External Identifier ({Local Identifier}@{Domain Identifier}). Unlike the telephone number, the network access identifier is not subjected to portability ruling in force, and is individually managed by each operator.| networkAccessIdentifier  |  |  |
 | **IP v4 Address** | Identifier of a node in a network using Internet Protocol version 4 (IPv4). IPv4 uses 32-bit addresses, which are insufficient to allocate unique addresses to all current devices. In order to mitigate this, network operators use Network Address Translation (NAT), mapping a private IP address space to a public one. | ipv4Address |  |  |
 | **IP v6 Address** |  | ipv6Address |  |  |  |  |
 | **Carrier Billing** (a.k.a. Direct Carrier Billing) | An online payment process which allows users to make purchases by charging payments against OB Billing Systems, accordingly to the user's configuration in the OB. In a common usage in the industry, the payment is processed on current account balance or charged on next bill generated for this line | N/A | N/A |
@@ -21,6 +22,9 @@
 | **Longitude** | | longitude |
 | **accuracy** | | accuracy |
 | **Location Verification result** | As value is a boolean, it matches better with an adjective. In future versions we may need to enhance current response model to give mor information about the verification process, for example to deal with partial matches. |locationVerified |
+| **Telco Operator Edge site** | MEC Datacenter. Term for the documentation. |N/A|N/A |
+| **API Producer** | Software component, in the OP, that exposes the API. Term for the documentation. |N/A|N/A |
+| **API Consumer** | Software component in the Application implemented by the Developer, that consumes the API produced by the API Producer. Term for the documentation. |N/A|N/A |
 
 
 
