@@ -22,6 +22,7 @@
 | GSMA | Mark Cornall |
 | GSMA | T. Rehman |
 | GSMA | Tom Van Pelt |
+| Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
 | Intel | Francesc Guim |
