@@ -11,11 +11,13 @@
 | Ericsson | Rajat Kandoi |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
+| Huawei | Chuanyu Chen |
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
+| MEF | Karthik |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
 | T-Mobile NL | Muhammad Ahmad  |
