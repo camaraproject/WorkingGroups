@@ -920,7 +920,7 @@ API documentation usually consists of:
 - Reference information to inform customers of every detail of your API.
 
 Below considerations should be checked when an API is documented:
-- The API functionalities must be implemented following the specifications of the Open API latest version using the .yaml or .json file extension.
+- The API functionalities must be implemented following the specifications of the [Open API version 3.0.3](https://spec.openapis.org/oas/v3.0.3) using the .yaml or .json file extension.
 - The API specification structure should have the following parts:
    -	General information ([Section 11.1](#111-general-information))
    -  Published Routes ([Section 11.2](#112-published-routes))
