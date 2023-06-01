@@ -19,8 +19,6 @@
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
 | Intel	| Petar Torre |
-| Kandy	| Kim Jones |
-| Kandy	| Philip Lintell |
 | KDDI	| Toshiyasu Wakayama |
 | Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
