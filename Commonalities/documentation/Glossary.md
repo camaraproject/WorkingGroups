@@ -25,6 +25,7 @@
 | **Telco Operator Edge site** | Edge Datacenter where the Application are deployed. Term for the documentation. |N/A|N/A |
 | **API Producer** | Software component, inside the platform, that exposes the CAMARA API. Term for the documentation. |N/A|N/A |
 | **API Consumer** | Software component in the Application implemented by the Developer, that consumes the CAMARA API produced by the API Producer. Term for the documentation. |N/A|N/A |
+| **Suffix: Id vs Identifier** |	Suffix "Id" for unique fields. E.g, ApplicationId (specific code for an Application). Suffix "Identifier" for generic fields, ProductIdentifier (generic variable to identify a family of products)|	e.g. ApplicationId or ProductIdentifier|	N/A|
 
 
 
