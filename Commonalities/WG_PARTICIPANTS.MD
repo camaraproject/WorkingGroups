@@ -9,6 +9,7 @@
 | CableLabs | Randy Levensalor |
 | Cisco | Ravi Guntupalli |
 | Cisco | Ravi Shek |
+| Comviva | Vidhi Mehta |
 | Dell | Vaishali Gupta |
 | Deutsche Telekom AG | Alexander Khine |
 | Deutsche Telekom AG | Herbert Damker |
