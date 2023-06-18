@@ -268,6 +268,24 @@ In this document will be defined the principal verbs to use in the API definitio
 - `DELETE`: it allows deleting full entities from server. From consumer perspective, it is not a reversible action. (Rollback action is not available).
 - `PATCH`: it allows updating partial fields of a resource.
 
+<br>
+
+#### **POST or GET for retrieving sensitive data**
+
+Using GET operation exposes information through query string URL. This information for example remain in browser history and could be visible to everyone checking the URL. This allow fraudsters to obtain sensitive data. Using HTTPS does not solve this vulnerability.
+
+The classification of data tagged as sensitive should be assessed in API project but to provide exemples data like:
+-  phone number (msisdn) must be cautiously handled  As it is not solely about the number itself, but also knowing something about what transactions are being processed for that customer.
+-  localisation information (like latitude & longitude) associated with device identifier as it allows to get possible device position.
+-  etc.
+
+In such case, it it recommended to use `POST` verb instead of `GET` to perform information retrieval. 
+
+When `POST` is used, the resource in the path *must* be a verb (eg retrieve-location and not location) to differentiate from 'real' resource creation.
+
+Note: For technical limitation, it is also fine using POST instead of GET to bypass technical limitations like potentially too big input (if could be longer than 4k characters) or a complex structure of the input.
+
+
 ### 3.2 HTTP Response Codes
 
 HTTP status response codes indicate if a request has been completed successfully. Response codes are group by five classes.
