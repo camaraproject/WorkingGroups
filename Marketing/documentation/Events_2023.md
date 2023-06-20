@@ -18,6 +18,8 @@
 | https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT |
 | https://edgecomputing-expo.com/europe/ | 26.-27. September 2023 | Amsterdam | DT |
 | https://www.mwclasvegas.com/ | 26 - 28 September 2023 | Las Vegas | GSMA |
+| [https://www.gsma.com/futurenetworks/gsma_events/gsma-open-gateway-devcon/] | 27 September 2023 | Las Vegas | GSMA |
+| [https://futurenetworld.net/events/futurenet-asia-2023/] | 18-19 October 2023 | Singapore | GSMA |
 | https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/  | 06.-09. November 2023 | Chicago ||
 | LFN developers conference | November | Budapest ||
 | https://globecom2023.ieee-globecom.org | 04.-08. December 2023 | Kuala Lumpur | TEF |
