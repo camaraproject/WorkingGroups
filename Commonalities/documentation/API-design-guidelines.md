@@ -270,21 +270,22 @@ In this document will be defined the principal verbs to use in the API definitio
 
 <br>
 
-#### **POST or GET for retrieving sensitive data**
+#### **POST or GET for transferring sensitive or complex data**
 
-Using GET operation exposes information through query string URL. This information for example remain in browser history and could be visible to everyone checking the URL. This allow fraudsters to obtain sensitive data. Using HTTPS does not solve this vulnerability.
+Using the GET operation to pass senstive data potentially embeds this information in the URL if contained in query or path parameters. For example, this information can remain in browser history, could be visible to anyone who can read the URL, or could be logged by elements along the route such as gateways and load balancers. This increases the risk that the sensitive data may be acquired by unauthorised 3rd parties. Using HTTPS does not solve this vulnerability, as the TLS termination points are not necessarily the same as the API endpoints themselves.
 
-The classification of data tagged as sensitive should be assessed in API project but to provide exemples data like:
--  phone number (msisdn) must be cautiously handled  As it is not solely about the number itself, but also knowing something about what transactions are being processed for that customer.
--  localisation information (like latitude & longitude) associated with device identifier as it allows to get possible device position.
--  etc.
+The classification of data tagged as sensitive should be assessed for each API project, but might include the following examples:
+-  phone number (MSISDN) must be cautiously handled as it is not solely about the number itself, but also knowing something about what transactions are being processed for that customer
+-  localisation information (such as latitude & longitude) associated with a device identifier as it allows the device, and hence customer, location to be known
+-  physical device identifiers, such as IP addresses, MAC addresses or IMEI
 
-In such case, it it recommended to use `POST` verb instead of `GET` to perform information retrieval. 
+In such cases, it is recommended to use one of the following methods to transfer the sensitive data:
+- When using `GET`, transfer the data using headers, which are not routinely logged or cached
+- Use `POST` instead of `GET`, with the sensitive data being embedded in the request body which, again, is not routinely logged or cached 
 
-When `POST` is used, the resource in the path *must* be a verb (eg retrieve-location and not location) to differentiate from 'real' resource creation.
+When the `POST` methid is used, the resource in the path *must* be a verb (e.g. `retrieve-location` and not `location`) to differentiate from an actual resource creation.
 
-Note: For technical limitation, it is also fine using POST instead of GET to bypass technical limitations like potentially too big input (if could be longer than 4k characters) or a complex structure of the input.
-
+It is also fine to use POST instead of GET to bypass technical limitations, such as URL character limits (if longer than 4k characters) or passing complex objects in the request.
 
 ### 3.2 HTTP Response Codes
 
