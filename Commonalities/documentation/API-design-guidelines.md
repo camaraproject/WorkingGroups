@@ -286,8 +286,8 @@ In such cases, it is recommended to use one of the following methods to transfer
 When the `POST` method is used, the resource in the path *must* be a verb (e.g. `retrieve-location` and not `location`) to differentiate from an actual resource creation.
 
 It is also fine to use POST instead of GET:
-- to bypass technical limitations, such as URL character limits (if longer than 4k characters) or passing complex objects in the request.
-- for operations that do not need to kept cached.
+- to bypass technical limitations, such as URL character limits (if longer than 4k characters) or passing complex objects in the request
+- for operations where the response should not be kept cached, such as anti-fraud verifications or data that can change asynchronously (such as status information)
 
 ### 3.2 HTTP Response Codes
 
