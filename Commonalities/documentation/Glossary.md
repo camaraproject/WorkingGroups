@@ -23,7 +23,7 @@
 | **accuracy** | | accuracy |
 | **Location Verification result** | As value is a boolean, it matches better with an adjective. In future versions we may need to enhance current response model to give mor information about the verification process, for example to deal with partial matches. |locationVerified |
 | **Telco Operator Edge site** | Edge Datacenter where the Application are deployed. Term for the documentation. |N/A|N/A |
-| **API Producer** | Software component, inside the platform, that exposes the CAMARA API. Term for the documentation. |N/A|N/A |
+| **API Producer** | Software component, inside the platform, that exposes the CAMARA API. Term for the documentation. |N/A|API Provider |
 | **API Consumer** | Software component in the Application implemented by the Developer, that consumes the CAMARA API produced by the API Producer. Term for the documentation. |N/A|N/A |
 
 
