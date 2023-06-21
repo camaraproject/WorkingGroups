@@ -283,7 +283,7 @@ In such cases, it is recommended to use one of the following methods to transfer
 - When using `GET`, transfer the data using headers, which are not routinely logged or cached
 - Use `POST` instead of `GET`, with the sensitive data being embedded in the request body which, again, is not routinely logged or cached 
 
-When the `POST` methid is used, the resource in the path *must* be a verb (e.g. `retrieve-location` and not `location`) to differentiate from an actual resource creation.
+When the `POST` method is used, the resource in the path *must* be a verb (e.g. `retrieve-location` and not `location`) to differentiate from an actual resource creation.
 
 It is also fine to use POST instead of GET to bypass technical limitations, such as URL character limits (if longer than 4k characters) or passing complex objects in the request.
 
