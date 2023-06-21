@@ -1,6 +1,6 @@
 # Changelog
 
-## X.Y.Z [ALPHA] - YYYY-MM-DD
+## X.Y.Z [ALPHA]
 
 ### Added
 

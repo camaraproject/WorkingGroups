@@ -10,13 +10,17 @@
 | https://www.apidays.global/helsinki_and_north/  | 05.-06. June 2023 | Helsinki | DT |
 | https://www.eucnc.eu/about/announcement-eucnc-6g-summit-2023/  | 06.-09. June 2023 | Gothenburg |TEF|
 | [https://www.openatom.org/home](https://www.openatom.org/home) | 11 - 13 June 2023 | Beijing| Huawei |
+| https://www.apidays.global/interface/ | 28 - 29 June 2023 | virtually | 5GFF |
 | https://www.mwcshanghai.com/ | 28 - 30 June 2023 | Shanghai| GSMA |
+| OSPO CodeCon 2023 | 13 July 2023 | virtually | Infosys |
 | https://www.wearedevelopers.com/world-congress  | 27.-28. July 2023 | Berlin | DT, GSMA |
-| https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone |
+| https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone, 5GFF |
 | https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT |
 | https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT |
 | https://edgecomputing-expo.com/europe/ | 26.-27. September 2023 | Amsterdam | DT |
 | https://www.mwclasvegas.com/ | 26 - 28 September 2023 | Las Vegas | GSMA |
+| [https://www.gsma.com/futurenetworks/gsma_events/gsma-open-gateway-devcon/] | 27 September 2023 | Las Vegas | GSMA |
+| [https://futurenetworld.net/events/futurenet-asia-2023/] | 18-19 October 2023 | Singapore | GSMA |
 | https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/  | 06.-09. November 2023 | Chicago ||
 | LFN developers conference | November | Budapest ||
 | https://globecom2023.ieee-globecom.org | 04.-08. December 2023 | Kuala Lumpur | TEF |
