@@ -15,6 +15,7 @@
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
+| Infosys | Chintan Lodariya |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
