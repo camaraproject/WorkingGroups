@@ -268,6 +268,27 @@ In this document will be defined the principal verbs to use in the API definitio
 - `DELETE`: it allows deleting full entities from server. From consumer perspective, it is not a reversible action. (Rollback action is not available).
 - `PATCH`: it allows updating partial fields of a resource.
 
+<br>
+
+#### **POST or GET for transferring sensitive or complex data**
+
+Using the GET operation to pass senstive data potentially embeds this information in the URL if contained in query or path parameters. For example, this information can remain in browser history, could be visible to anyone who can read the URL, or could be logged by elements along the route such as gateways and load balancers. This increases the risk that the sensitive data may be acquired by unauthorised 3rd parties. Using HTTPS does not solve this vulnerability, as the TLS termination points are not necessarily the same as the API endpoints themselves.
+
+The classification of data tagged as sensitive should be assessed for each API project, but might include the following examples:
+-  phone number (MSISDN) must be cautiously handled as it is not solely about the number itself, but also knowing something about what transactions are being processed for that customer
+-  localisation information (such as latitude & longitude) associated with a device identifier as it allows the device, and hence customer, location to be known
+-  physical device identifiers, such as IP addresses, MAC addresses or IMEI
+
+In such cases, it is recommended to use one of the following methods to transfer the sensitive data:
+- When using `GET`, transfer the data using headers, which are not routinely logged or cached
+- Use `POST` instead of `GET`, with the sensitive data being embedded in the request body which, again, is not routinely logged or cached 
+
+When the `POST` method is used, the resource in the path *must* be a verb (e.g. `retrieve-location` and not `location`) to differentiate from an actual resource creation.
+
+It is also fine to use POST instead of GET:
+- to bypass technical limitations, such as URL character limits (if longer than 4k characters) or passing complex objects in the request
+- for operations where the response should not be kept cached, such as anti-fraud verifications or data that can change asynchronously (such as status information)
+
 ### 3.2 HTTP Response Codes
 
 HTTP status response codes indicate if a request has been completed successfully. Response codes are group by five classes.
