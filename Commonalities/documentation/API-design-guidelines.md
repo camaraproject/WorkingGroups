@@ -1021,11 +1021,72 @@ In this part, the error response structure must also be defined, which must be a
 </p>
 
 #### 11.5.1 Usage of discriminator
-
 As mentioned in Openapi doc [here](https://spec.openapis.org/oas/v3.0.3#discriminator-object) usage of discriminator may
 simplify serialization/deserialization process and so reduce resource consumption.
 
-To achieve this in the Camara context, we decided that :
+##### Inheritance
+The mappings section is not mandatory in discriminator, by default ClassName are used as values to populate the property. You can use mappings to restrict usage to subset of subclasses.
+
+
+``` yaml 
+    IpAddr:
+      type: object
+      properties:
+        addressType:
+            type: string
+      required:
+         - addressType
+      discriminator:
+        propertyName: addressType 
+        mappings:                   
+            - IPV4ADDR: Ipv4Addr
+            - IPV4ADDR: Ipv4Addr   
+
+    Ipv4Addr: 
+      type: object
+      allOf:            <-- extends IpAddr (no need to define addressType because it's inherited
+        - $ref: IpAddr
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          format: ipv6
+        ...
+
+    Ipv6Addr:
+      type: object
+      allOf:            <-- extends IpAddr
+        - $ref: IpAddr
+      required:
+        - address
+      properties:
+        address:
+          type: string
+          format: ipv4
+        ...
+```
+This example shows how to use simple inheritance which is compatible with all Object Oriented languages.
+
+WARNING: Writing your object as follows result in multiple inheritance that is incompatible with the majority of languages.
+
+``` yaml
+    Ipv6Addr:
+      allOf:            
+        - $ref: IpAddr <-- extends IpAddr
+        - type: object <-- extends anonymous inlined object
+          required:
+            - address
+          properties:
+            address:
+            type: string
+            format: ipv4
+        ...
+```
+Fortunately, if you use OpenAPIGenerators, the generators for these languages will still give you a composite object that will work, but most will also generate a useless class called Ipv6AddrAllOf to represent the anonymous object.
+
+##### Polymorphism
+To help usage of Camara object from strongly typed languages prefer to use inheritance than polymorphism ... Despite this, if you have to use it apply following rules:
 
     - objects containing oneOf or anyOf section MUST include a discriminator defined by a propertyName
     - objects involved in oneOf / anyOf section MUST include the property designed by propetyName
@@ -1079,6 +1140,7 @@ When IpAddr is used in a payload the property objectType MUST be present to indi
     }    
 }
 ```
+
 
 ### 11.6 OAuth Definition
 
