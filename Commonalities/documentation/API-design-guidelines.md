@@ -1043,7 +1043,6 @@ The mappings section is not mandatory in discriminator, by default ClassName are
             - IPV6ADDR: Ipv6Addr   
 
     Ipv4Addr: 
-      type: object
       allOf:            <-- extends IpAddr (no need to define addressType because it's inherited
         - $ref: IpAddr
         - type: object
@@ -1056,7 +1055,6 @@ The mappings section is not mandatory in discriminator, by default ClassName are
         ...
 
     Ipv6Addr:
-      type: object
       allOf:            <-- extends IpAddr
         - $ref: IpAddr
         - type: object
