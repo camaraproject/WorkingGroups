@@ -622,7 +622,7 @@ In the following, we ellaborate on the exisiing client errors. In particular, we
 
 | **Error code** | Description |
 |-----|-----|
-|`INVALID ARGUMENT` |  A specified resource duplicate entry found. |
+|`INVALID_ARGUMENT` |  A specified resource duplicate entry found. |
 |`CONFLICT` |  A specified resource duplicate entry found. |
 |`OUT_OF_RANGE`| Client specified an invalid range. |
 |`PERMISSION_DENIED`|  Client does not have sufficient permissions to perform this action. |
