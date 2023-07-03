@@ -1040,50 +1040,34 @@ The mappings section is not mandatory in discriminator, by default ClassName are
         propertyName: addressType 
         mappings:                   
             - IPV4ADDR: Ipv4Addr
-            - IPV4ADDR: Ipv4Addr   
+            - IPV6ADDR: Ipv6Addr   
 
     Ipv4Addr: 
       type: object
       allOf:            <-- extends IpAddr (no need to define addressType because it's inherited
         - $ref: IpAddr
-      required:
-        - address
-      properties:
-        address:
-          type: string
-          format: ipv6
+        - type: object
+          required:
+            - address
+          properties:
+            address:
+                type: string
+                format: ipv4
         ...
 
     Ipv6Addr:
       type: object
       allOf:            <-- extends IpAddr
         - $ref: IpAddr
-      required:
-        - address
-      properties:
-        address:
-          type: string
-          format: ipv4
-        ...
-```
-This example shows how to use simple inheritance which is compatible with all Object Oriented languages.
-
-WARNING: Writing your object as follows result in multiple inheritance that is incompatible with the majority of languages.
-
-``` yaml
-    Ipv6Addr:
-      allOf:            
-        - $ref: IpAddr <-- extends IpAddr
-        - type: object <-- extends anonymous inlined object
+        - type: object
           required:
             - address
           properties:
             address:
-            type: string
-            format: ipv4
+              type: string
+              format: ipv6
         ...
 ```
-Fortunately, if you use OpenAPIGenerators, the generators for these languages will still give you a composite object that will work, but most will also generate a useless class called Ipv6AddrAllOf to represent the anonymous object.
 
 ##### Polymorphism
 To help usage of Camara object from strongly typed languages prefer to use inheritance than polymorphism ... Despite this, if you have to use it apply following rules:
@@ -1111,7 +1095,7 @@ The following sample illustrates this usage.
           type: string
         address:
           type: string
-          format: ipv6
+          format: ipv4
         ...
 
     Ipv6Addr: <-- object involved in oneOf MUST include the objectype property
@@ -1124,7 +1108,7 @@ The following sample illustrates this usage.
           type: string
         address:
           type: string
-          format: ipv4
+          format: ipv6
         ...
 
 ```
