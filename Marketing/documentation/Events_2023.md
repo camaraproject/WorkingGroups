@@ -15,12 +15,14 @@
 | OSPO CodeCon 2023 | 13 July 2023 | virtually | Infosys |
 | https://www.wearedevelopers.com/world-congress  | 27.-28. July 2023 | Berlin | DT, GSMA |
 | https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone, 5GFF |
+| https://cpaasaa.com/event/cpaas-acceleration-summit/ | 18.-20. September 2023 | Amsterdam | CPaaSAA, KPN, e& Enterprise, BICS, Radisys, Microsoft |
 | https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT |
 | https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT |
 | https://edgecomputing-expo.com/europe/ | 26.-27. September 2023 | Amsterdam | DT |
 | https://www.mwclasvegas.com/ | 26 - 28 September 2023 | Las Vegas | GSMA |
 | [https://www.gsma.com/futurenetworks/gsma_events/gsma-open-gateway-devcon/] | 27 September 2023 | Las Vegas | GSMA |
 | [https://futurenetworld.net/events/futurenet-asia-2023/] | 18-19 October 2023 | Singapore | GSMA |
+| Network X | 24-26 October 2023 | Paris | DT |
 | https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/  | 06.-09. November 2023 | Chicago ||
 | LFN developers conference | November | Budapest ||
 | https://globecom2023.ieee-globecom.org | 04.-08. December 2023 | Kuala Lumpur | TEF |

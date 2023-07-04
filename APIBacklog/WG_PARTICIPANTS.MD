@@ -15,12 +15,14 @@
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
+| Infosys | Chintan Lodariya |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
 | T-Mobile NL | Muhammad Ahmad  |
+| T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
