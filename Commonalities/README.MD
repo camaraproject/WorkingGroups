@@ -1,6 +1,6 @@
 ## Scope
 * Elaborate and list “Commonalities for APIs”, work out commonalities on the list
-* Commonalities are topics which apply to some or all APIs, e.g. authentification, authorization, API documentation and development standards, ...
+* Commonalities are topics which apply to some or all APIs, e.g. API design guidelines, API readiness criteria checklist, Glossary etc.
 * Started: October 2021  
 * Location: virtually  
 
@@ -13,8 +13,9 @@
 ## Results
 Documentation includes:
 * Meeting minutes : [MeetingMinutes](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/MeetingMinutes)
-* Presentations and other supplementary docs : [SupportingDocuments](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation/SupportingDocuments)
-* Commonalities approved deliverables: [documentation](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities/documentation)
+* Presentations and other supplementary docs : [SupportingDocuments](https://github.com/camaraproject/Commonalities/tree/main/documentation/SupportingDocuments)
+* Commonalities approved deliverables: [Documentation](https://github.com/camaraproject/Commonalities/tree/main/documentation)
+* Commonalities approved artifacts:  [Artifacts](https://github.com/camaraproject/Commonalities/tree/main/artifacts)
 
 ## Mailing list
 * To subscribe / unsubscribe to the mailing list of this Working Group please visit <https://lists.camaraproject.org/g/wg-com>.
