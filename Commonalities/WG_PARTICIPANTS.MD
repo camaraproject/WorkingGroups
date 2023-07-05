@@ -34,6 +34,7 @@
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
 | Orange | Olivier Mathieu |
+| Orange | Patrice Conil |
 | Orange | Sylvain Morel|
 | Orange | Ludovic Robert|
 | SpryFox Networks | Jignesh Sorathia |
