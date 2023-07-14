@@ -5,6 +5,7 @@
 | Cablelabs | Randy Levensalor |
 | China Mobile | Hanbai Wang |
 | China Telekom | Xu Dan |
+| Comviva | Vidhi Mehta |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
