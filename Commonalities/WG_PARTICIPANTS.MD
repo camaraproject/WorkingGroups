@@ -37,6 +37,7 @@
 | Orange | Patrice Conil |
 | Orange | Sylvain Morel|
 | Orange | Ludovic Robert|
+| Singtel | Ming Hui Foo |
 | SpryFox Networks | Jignesh Sorathia |
 | SpryFox Networks | Ramesh Shanmugasundaram |
 | Syniverse | Jyrki Penttinen |
