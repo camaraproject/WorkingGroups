@@ -22,6 +22,7 @@
 | MEF | Karthik |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
+| Singtel | Ming Hui Foo |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |
