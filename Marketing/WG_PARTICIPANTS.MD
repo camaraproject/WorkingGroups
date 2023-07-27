@@ -9,6 +9,7 @@
 | CPaaSaa | Rob Kurver |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Deutsche Telekom AG	| Jasmin Schulmeyer |
+| ENEA | Iftikhar Waheed |
 | Ericsson	| Bart van Kaathoven |
 | Ericsson	| Pehr Claesson |
 | Google Cloud	| Sridhar Gollapudi |
