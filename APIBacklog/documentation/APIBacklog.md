@@ -3,7 +3,7 @@
 
  This is a live doc that captures the status of all the APIs which have been formally registered in CAMARA project. 
 
- | **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **TSC date** |  **Steering Committee decision / Sub Project**  |  **API name**  |  **API release** |  **Link to API definition**  | **Link to API documentation**  |  **Link to API code**  |  **API tested at** |  **API deployed at company and country**  |  
+ | **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **TSC date** |  **TSC decision / Sub Project**  |  **API name**  |  **API release** |  **Link to API definition**  | **Link to API documentation**  |  **Link to API code**  |  **API tested at** |  **API deployed at company and country**  |  
  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |---|
  | Quality on Demand | DT | YYYY/MM/DD| xxx | DT, ORA, TEF, VDF | YYYY/MM/DD | Approved ([QualityOnDemand](https://github.com/camaraproject/QualityOnDemand)) | Quality on Demand | v0.1.0 | TBC | TBC |TBC | DT | DT - Germany |
  |  | | | | | |  | | v0.8.0 | [YAML](https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml)  | [Doc](https://github.com/camaraproject/QualityOnDemand/blob/main/documentation/API_documentation/QoD_API.md) | TBD | TBD | TBD | <!---Simple Edge Discovery --->
