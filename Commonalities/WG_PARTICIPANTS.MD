@@ -30,6 +30,7 @@
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
 | KDDI | Keichi Okonogi |
+| KDDI | Tetsuya Chiba |
 | KDDI | Toshi Wakayama |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
