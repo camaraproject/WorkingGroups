@@ -22,6 +22,7 @@
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
 | Intel	| Petar Torre |
+| KDDI | Tetsuya Chiba |
 | KDDI	| Toshiyasu Wakayama |
 | Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
