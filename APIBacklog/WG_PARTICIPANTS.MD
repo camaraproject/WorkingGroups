@@ -22,6 +22,7 @@
 | MEF | Karthik |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
+| Shabodi | Umair Ali Rashid |
 | Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
 | T-Mobile NL | Muhammad Ahmad  |
