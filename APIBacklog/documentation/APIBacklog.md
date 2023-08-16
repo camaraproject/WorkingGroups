@@ -24,9 +24,10 @@
  | Identity and Consent | TEF | 2023/01/19| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIFamilyproposal_Identity%26Consent.md)| ATT, DT, ERI, KDDI, IBM, MSFT, NOK, ORA, TEF, TELUS, TIM, SCE, VODA | 2023/03/09 | Approved ([IdentityAndConsentManagement](https://github.com/camaraproject/IdentityAndConsentManagement))  | N/A | N/A | N/A | TBD | TBD| TBD | TBD | <!---Blockchain Public Address-->
  | Blockchain Public Address | TEF | 2023/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/154/files#diff-bc4cef8af2ee8790fd4d796a87bf7d198a1c7439fd79c75ed535276b13048fac)| TEF, GSMA, DT | 2023/06/15| Approved ([BlockchainPublicAddress](https://github.com/camaraproject/BlockchainPublicAddress))  | N/A | N/A | [Doc](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_BlockchainPublicAddress_Telefonica.md) | TBD | TBD| TBD | TBD | 
  | Click to Dial | China Mobile | 2023/05/12 | [Link](https://github.com/camaraproject/WorkingGroups/pull/224) | China Mobile | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
- | KYC Match | KDDI | 2023/07/15 | [Link](https://github.com/camaraproject/WorkingGroups/pull/269) | KDDI, TEF, Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
- | KYC Fill-in | KDDI | 2023/07/15 | [Link](https://github.com/camaraproject/WorkingGroups/pull/268) | KDDI, MTN, TEF, Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
- | Site-to-cloud VPN | China Telecom | 2023/07/ 23| [Link](https://github.com/camaraproject/WorkingGroups/pull/273) | China Telecom, Huawei | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
+ | KYC Match | KDDI | 2023/07/15 | [Link](https://github.com/camaraproject/WorkingGroups/pull/269) | KDDI, TEF, GSMA Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
+ | KYC Fill-in | KDDI | 2023/07/15 | [Link](https://github.com/camaraproject/WorkingGroups/pull/268) | KDDI, MTN, TEF, GSMA Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
+ | Site-to-cloud VPN | China Telecom | 2023/07/23| [Link](https://github.com/camaraproject/WorkingGroups/pull/273) | China Telecom, Huawei | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
+ | WebRTC | Telefónica | 2023/08/16| [Link](https://github.com/camaraproject/WorkingGroups/pull/280) | Telefónica, Mavenir | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 
 
  ## Attributes
