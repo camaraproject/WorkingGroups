@@ -1,0 +1,611 @@
+openapi: 3.0.0
+info:
+  title: Bring Your Own Number (BYON) call handling API (VVOIP Service)
+  description: APIs for REST clients for 1-1 calling
+  contact:
+    email: contact@mavenir.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: '{apiRoot}/vvoip/{apiVersion}/{userId}'
+    variables:
+      apiRoot:
+        description: API root
+        default: http://localhost:9091
+      apiVersion:
+        description: Version of the VVOIP service API
+        default: v1
+      userId:
+        description: >-
+          The public identity of the user in the URI format through which client
+          is trying to communicate
+        default: user
+tags:
+  - name: OneToOneCall
+    description: APIs related to 1-1 voice/video call session
+paths:
+  /sessions:
+    post:
+      tags:
+        - OneToOneCall
+      summary: Creates voice and/or video session
+      description: Creates a voice and/or video session
+      operationId: postSessions
+      parameters:
+        - name: transactionId
+          in: header
+          description: The Transaction  associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client Id assigned by WebRTC Gateway
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: Provide the information required for session creation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VvoipSessionInformation'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VvoipSessionInformation'
+              examples:
+                SessionCreated:
+                  $ref: '#/components/examples/exVSIResponse'
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '500':
+          $ref: '#/components/responses/Generic500'
+        '503':
+          $ref: '#/components/responses/Generic503'
+      security:
+        - BearerAuth:
+            - read
+            - write
+  /sessions/{sessionId}:
+    get:
+      tags:
+        - OneToOneCall
+      summary: Get the vvoip session information
+      description: >
+        Get the VVoIP Session description based on sessionId.
+
+
+        **Client shall use the resourceUrl supplied in the session creation
+        response (origination) or in the invitation notification (termination)**
+      operationId: getSessionDetailsById
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction Id associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client Id assigned by WebRTC GW
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          description: The sessionId assigned by the WebRTC GW for the vvoip session
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A session information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VvoipSessionInformation'
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/SessionNotFound404'
+        '500':
+          $ref: '#/components/responses/Generic500'
+        '503':
+          $ref: '#/components/responses/Generic503'
+      security:
+        - BearerAuth:
+            - read
+            - write
+    delete:
+      tags:
+        - OneToOneCall
+      summary: Cancel or Terminate the vvoip session
+      description: >
+        Cancel a 1-1 vvoip session (as originator),
+
+        Decline a 1-1 vvoip session (as receiver),
+
+        Terminate a 1-1 an ongoing vvoip session
+
+
+        **Client shall use the resourceUrl supplied in the session creation
+        response (origination) or in the invitation notification
+        (termination)**'
+      operationId: deleteSessionById
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction Id associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client Id assigned by WebRTC GW
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          description: The sessionId assigned by the WebRTC GW for the vvoip session
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Session deleted
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/SessionNotFound404'
+        '500':
+          $ref: '#/components/responses/Generic500'
+        '503':
+          $ref: '#/components/responses/Generic503'
+      security:
+        - BearerAuth:
+            - read
+            - write
+  /sessions/{sessionId}/status:
+    put:
+      tags:
+        - OneToOneCall
+      summary: Update the status of the vvoip session
+      description: >
+        Update the status of the vvoip session, this may include updating SDP
+        media
+      operationId: postSessionStatus
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction Id associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client Id assigned by WebRTC GW
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          description: The sessionId assigned by the WebRTC GW for the vvoip session
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiverSessionStatus'
+            examples:
+              MT183:
+                $ref: '#/components/examples/exMT183'
+              MT180:
+                $ref: '#/components/examples/exMT180'
+              MT200:
+                $ref: '#/components/examples/exMT200'
+      responses:
+        '200':
+          description: Updated the session status
+        '401':
+          $ref: '#/components/responses/Generic401'
+        '403':
+          $ref: '#/components/responses/Generic403'
+        '404':
+          $ref: '#/components/responses/SessionNotFound404'
+        '500':
+          $ref: '#/components/responses/Generic500'
+        '503':
+          $ref: '#/components/responses/Generic503'
+      security:
+        - BearerAuth:
+            - read
+            - write
+components:
+  schemas:
+    VvoipSessionInformation:
+      required:
+        - originatorAddress
+        - receiverAddress
+      type: object
+      properties:
+        originatorAddress:
+          type: string
+          description: Address of the session originator
+          example: tel:+911234567890
+        originatorName:
+          type: string
+          description: Friendly name of the originator
+          example: originator
+        receiverAddress:
+          type: string
+          description: Address of the session receiver
+          example: tel:+911234567891
+        receiverName:
+          type: string
+          description: Friendly name of the receiver
+          example: receiver
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        offer:
+          $ref: '#/components/schemas/WrtcsOffer'
+        answer:
+          $ref: '#/components/schemas/WrtcsAnswer'
+        clientCorrelator:
+          type: string
+          description: >-
+            A correlator that the client can use to tag this particular resource
+            representation during a request to create a resource on the server.
+            Note - This allows the client to recover from communication failures
+            during resource creation and therefore avoids re-sending the message
+            in such situations. In case the element is present, the WebRTC GW
+            shall not alter its value, and shall provide it as part of the
+            representation of this resource.
+        resourceUrl:
+          type: string
+          description: >-
+            Self referring URL. The resourceURL shall not be included in POST
+            requests by the client, but must be included in the notifications
+            from the WebRTC GW to client when a complete representation of the
+            resource is embedded in the notification. The resourceURL must also
+            be included in responses to any HTTP method that returns an entity
+            body, and in PUT requests
+          example: $url/{sessionId}
+    SessionInvitationNotification:
+      required:
+        - originatorAddress
+      type: object
+      properties:
+        originatorAddress:
+          type: string
+          description: Address (e.g. 'sip' URI, 'tel' URI, 'acr' URI) of the originator
+          example: tel:+911234567890
+        originatorName:
+          type: string
+          description: Friendly name of the call originator
+          example: originator
+        receiverAddress:
+          type: string
+          description: Address (e.g. 'sip' URI, 'tel' URI, 'acr' URI) of the originator
+          example: tel:+911234567899
+        receiverName:
+          type: string
+          description: Friendly name of the call receiver
+          example: receiver
+        offer:
+          $ref: '#/components/schemas/WrtcsOffer'
+        answer:
+          $ref: '#/components/schemas/WrtcsAnswer'
+        callObjectRef:
+          type: string
+          description: The reference to the call object
+        serverCorrelator:
+          type: string
+          description: >-
+            A correlator that the server instructs the client to use for end to
+            end correlation. The server shall use the end to end correlator
+            generated by the network to signal the client to use it for end to
+            end correlation. This field can be used in the Quality-of-Experience
+            (QoE) reports
+    SessionStatusNotification:
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        responseCode:
+          type: integer
+          description: >-
+            Indicates corresponding SIP response code, mainly used for
+            provisional responses (status set to InProgress)
+        offer:
+          $ref: '#/components/schemas/WrtcsOffer'
+        answer:
+          $ref: '#/components/schemas/WrtcsAnswer'
+        receiverName:
+          type: string
+          description: Name of the receiver
+        receiverAddress:
+          type: string
+          description: Address (e.g. 'sip' URI, 'tel' URI, 'acr' URI) of the receiver
+        callObjectRef:
+          type: string
+          description: Call object reference
+          format: url
+        offerRequired:
+          type: boolean
+          description: >-
+            This element shall be included and set to true, if the session
+            updates are received without SDP offer. This element indicates
+            clients to send the offer.
+        serverCorrelator:
+          type: string
+          description: >-
+            A correlator that the server instructs the client to use for end to
+            end correlation. The server shall use the end to end correlator
+            generated by the network to signal the client to use it for end to
+            end correlation. This field can be used in the Quality-of-Experience
+            (QoE) reports
+        reason:
+          type: string
+          description: The description of the event that has happened within the session
+        sequenceNumber:
+          type: string
+          description: The sequence number of the notification sent to client
+    ReceiverSessionStatus:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        responseCode:
+          type: integer
+          description: >
+            Indicates corresponding SIP response code, mainly used for
+            provisional responses (status set to “InProgress”, “Ringing”)
+            Possible values are 180, 183, 200, if any other values are set, then
+            the behavior is undefined or unknown. When the client sets the
+            status as “Hold”, the responseCode element be set to 200. Web RTC
+            gateway shall be use this to determins WebRTC GW if it's a hold
+            request or response to hold notification sent earlier.
+        offer:
+          $ref: '#/components/schemas/WrtcsOffer'
+        answer:
+          $ref: '#/components/schemas/WrtcsAnswer'
+        receiverName:
+          type: string
+          description: Name of the receiver
+        receiverAddress:
+          type: string
+          description: Address (e.g. 'sip' URI, 'tel' URI, 'acr' URI) of the receiver
+    SessionStatus:
+      type: string
+      enum:
+        - Initial
+        - InProgress
+        - Ringing
+        - Proceeding
+        - Connected
+        - Terminated
+        - Hold
+        - Resume
+        - SessionCancelled
+        - Declined
+        - Failed
+        - Waiting
+        - NoAnswer
+        - NotReachable
+        - Busy
+    WrtcsOffer:
+      type: object
+      properties:
+        sdp:
+          type: string
+          description: >
+            An inlined session description in SDP format [RFC4566].If XML syntax
+            is used, the content of this element SHALL be embedded in a CDATA
+            section
+      description: >
+        The offer, which MUST be present in a request from the application to
+        the server to create a session. Note that the offer can be absent in a
+        session created by the server as part of an offerless INVITE [RFC3261].
+    WrtcsAnswer:
+      type: object
+      properties:
+        sdp:
+          type: string
+          description: >
+            An inlined session description in SDP format [RFC4566].If XML syntax
+            is used, the content of this element SHALL be embedded in a CDATA
+            section
+      description: >
+        This type represents an answer in WebRTC Signaling. This element is not
+        present in case there is no answer yet, or the session invitation has
+        been declined by the Terminating Participant.This element MUST NOT be
+        present in a request from the application to the server to create a
+        session.
+    ErrorInfo:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code returned along with this error response
+        code:
+          type: string
+          description: Code given to this error
+        message:
+          type: string
+          description: Detailed error description
+      required:
+        - status
+        - code
+        - message
+  parameters:
+    hdrclientId:
+      name: clientId
+      in: header
+      description: The Client Id assigned by WebRTC GW
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    hdrTransactionId:
+      name: transactionId
+      in: header
+      description: Transaction Id associated with the request
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    pathParamSessionId:
+      name: sessionId
+      in: path
+      description: The sessionId assigned by the WebRTC GW for the vvoip session
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+  examples:
+    exVSIResponse:
+      value:
+        originatorAddress: tel:+817085852753
+        originatorName: 817085852753
+        receiverAddress: tel:+817085854000
+        receiverName: 817085854000
+        status: Initial
+        clientCorrelator: fda6e26d-e7c8-4596-870c-c083c0d39b2c
+        resourceURL: >-
+          $url/sessions/0AEE1B58BAEEDA3EABA42B32EBB3DFE0DEAD3F90AE0CEB9EEB0C0F703E199FC00E7C6E648F50EE885FF0CE6C7E1CEE795EDD
+    exMT183:
+      value:
+        receiverSessionStatus:
+          status: InProgress
+          answer:
+            sdp: "v=0\r\no=- 8066321617929821805 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\nm=audio 42988 RTP/SAVPF 102 113\r\nc=IN IP6 2001:e0:410:2448:7a05:9b11:66f2:c9e\r\nb=AS:64\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=candidate:1645903805 1 udp 2122262783 2001:e0:410:2448:7a05:9b11:66f2:c9e 42988 typ host generation 0 network-id 3 network-cost 900\r\na=ice-ufrag:4eKp\r\na=ice-pwd:D4sF5Pv9vx9ggaqxBlHbAFMx\r\na=ice-options:trickle renomination\r\na=mid:audio\r\na=extmap:2 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=sendrecv\r\na=rtcp-mux\r\na=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:Xm3YciqVIWFNSwy19e9MvfZ2YOdAZil7oT/tHjdf\r\na=rtpmap:102 AMR-WB/16000\r\na=fmtp:102 octet-align=0; mode-set=0,1,2; mode-change-capability=2\r\na=rtpmap:113 telephone-event/16000\r\n"
+          responseCode: '183'
+    exMT180:
+      value:
+        receiverSessionStatus:
+          status: Ringing
+          responseCode: '180'
+    exMT200:
+      value:
+        receiverSessionStatus:
+          status: Connected
+          answer:
+            sdp: "v=0\r\no=- 4576312012535546667 4 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\nm=audio 47510 RTP/SAVPF 102 113\r\nc=IN IP6 2001:e0:410:243a:a344:cee7:7b39:bb1e\r\nb=AS:64\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=candidate:3108871805 1 udp 2122262783 2001:e0:410:243a:a344:cee7:7b39:bb1e 47510 typ host generation 0 network-id 3 network-cost 900\r\na=ice-ufrag:47Nx\r\na=ice-pwd:ln3CttOSkObcQ7A0tYO1LXqy\r\na=ice-options:trickle renomination\r\na=mid:audio\r\na=extmap:2 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\na=sendrecv\r\na=rtcp-mux\r\na=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:ruAnBNYnTJqDVZAIJV59VpQ5DxGI6tMX9h9kkHSz\r\na=rtpmap:102 AMR-WB/16000\r\na=fmtp:102 octet-align=0; mode-set=0,1,2; mode-change-capability=2\r\na=rtpmap:113 telephone-event/16000\r\na=ptime:20\r\n"
+          responseCode: '200'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  responses:
+    Generic400:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 400
+            code: INVALID_ARGUMENT
+            message: Schema validation failed at  ...
+    Generic401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 401
+            code: UNAUTHENTICATED
+            message: 'Authorization failed: ...'
+    Generic403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 403
+            code: PERMISSION_DENIED
+            message: 'Operation not allowed: ...'
+    SessionNotFound404:
+      description: Session not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 404
+            code: NOT_FOUND
+            message: Session Id does not exist
+    Generic500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 500
+            code: INTERNAL
+            message: 'Internal server error: ...'
+    Generic501:
+      description: Not Implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 501
+            code: NOT_IMPLEMENTED
+            message: Service not implemented for the specified user device
+    Generic503:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 503
+            code: UNAVAILABLE
+            message: Service unavailable
