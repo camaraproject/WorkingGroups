@@ -10,6 +10,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | Ericsson | Rajat Kandoi |
+| GSMA | Helen Vigue |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
 | Huawei | Chuanyu Chen |
@@ -20,6 +21,7 @@
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
+| Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
 | Shabodi | Nitin Sood |
