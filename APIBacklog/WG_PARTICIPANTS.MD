@@ -28,6 +28,7 @@
 | Shabodi | Umair Ali Rashid |
 | Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
+| SK Telecom | Yoon Sun Jung |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |
