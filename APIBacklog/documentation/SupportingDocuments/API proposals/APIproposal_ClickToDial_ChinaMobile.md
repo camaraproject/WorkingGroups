@@ -12,5 +12,5 @@ This template captures all the information that a partner should fill out when p
 | YAML code available? | YES.|
 | Validated in lab/productive environments? | YES. <br>Available in China Mobile test environment.|
 | Validated with real customers? | YES.<br> Click-to-Dial is being used by several companies, such as YIDIANLING,China Mobile (Hangzhou) Information Technology Co., Ltd. and others.|
-| Validated with operators? | NO.|
+| Validated with operators? |YES. <br>It is available for China Mobile in China.|
 
