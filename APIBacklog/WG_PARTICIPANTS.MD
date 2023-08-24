@@ -3,6 +3,7 @@
 | Accenture | Giuseppe Di Nuccio  |
 | AT&T | Sharam Mohajeri  |
 | Cablelabs | Randy Levensalor |
+| China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
 | China Telekom | Xu Dan |
 | Comviva | Vidhi Mehta |
