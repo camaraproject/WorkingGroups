@@ -26,7 +26,7 @@
 | Click to Dial | China Mobile | 2023/05/12 | [Link](https://github.com/camaraproject/WorkingGroups/pull/224) | China Mobile,China Telecom | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 | KYC Match | KDDI | 2023/07/15 | [Link](https://github.com/camaraproject/WorkingGroups/pull/269) | KDDI, TEF, GSMA Open Gateway, Orange | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 | KYC Fill-in | KDDI | 2023/07/15 | [Link](https://github.com/camaraproject/WorkingGroups/pull/268) | KDDI, MTN, TEF, GSMA Open Gateway, Orange | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
-| Site-to-cloud VPN | China Telecom | 2023/07/23| [Link](https://github.com/camaraproject/WorkingGroups/pull/273) | China Telecom, Huawei,China Mobile | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
+| Site-to-cloud VPN | China Telecom | 2023/07/23| [Link](https://github.com/camaraproject/WorkingGroups/pull/273) | China Telecom, Huawei, China Mobile | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 | Device Swap | MTN | 2023/08/13| [Link](https://github.com/camaraproject/WorkingGroups/pull/276) | MTN, GSMA Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 | IMEI Fraud | MTN | 2023/08/13| [Link](https://github.com/camaraproject/WorkingGroups/pull/277) | MTN, GSMA Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 | WebRTC | Telefónica | 2023/08/16| [Link](https://github.com/camaraproject/WorkingGroups/pull/280) | Telefónica, Mavenir, Orange, Vodafone | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
