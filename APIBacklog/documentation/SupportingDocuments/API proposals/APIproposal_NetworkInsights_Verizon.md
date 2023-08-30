@@ -1,0 +1,13 @@
+API : Network Insights/ Quality Status / Network Status
+
+
+| Field                                     | Description                                                                                                                                                                                                                                                                                                                                     |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| API name                                  | Network Insights / Quality Status / Network Status                                                                                                        |
+| API owner                                 | Verizon(Mahesh Chapalamadugu)                                                                                                                          |
+| API Contributors                          | 5GFF (Mahesh Chapalamadugu)                                                                                                                           |
+| API summary                               | The API enables App Developers to define intents in the form of policy thresholds for QoS metrics against the device and the application service. The API service will alert the consumers if and when the policy has breached. This API would be useful for applications that optimize user experience based on the user's network experience. |
+| Technical viability                       |                                                                                                                                                        |
+| Commercial viability                      | Requests for this functionality were shared by multiple ISVs.  Couple of ISVs were in the streaming and AR based gaming space.                                                                                                                    |
+| YAML code available?                      | YES- Contribution from 5GFF available                                                                                                                                                                                                                                                                                                           |
+| Validated in lab/productive environments? | No    
