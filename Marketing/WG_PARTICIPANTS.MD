@@ -4,6 +4,7 @@
 | AclDigital | Sagar Suresh Nangare |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
+| China Telecom | Dan Xu |
 | Cisco | Ravi Guntupalli |
 | Comviva | Vidhi Mehta |
 | CPaaSaa | Rob Kurver |
@@ -21,6 +22,7 @@
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
 | Intel	| Petar Torre |
+| KDDI | Tetsuya Chiba |
 | KDDI	| Toshiyasu Wakayama |
 | Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |

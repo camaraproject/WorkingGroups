@@ -3,6 +3,7 @@
 | Accenture | Giuseppe Di Nuccio  |
 | AT&T | Sharam Mohajeri  |
 | Cablelabs | Randy Levensalor |
+| China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
 | China Telekom | Xu Dan |
 | Comviva | Vidhi Mehta |
@@ -10,6 +11,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | Ericsson | Rajat Kandoi |
+| GSMA | Helen Vigue |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
 | Huawei | Chuanyu Chen |
@@ -20,9 +22,14 @@
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
+| Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
 | Scenera | Andrew Wajs  |
+| Shabodi | Nitin Sood |
+| Shabodi | Umair Ali Rashid |
+| Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
+| SK Telecom | Yoon Sun Jung |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |

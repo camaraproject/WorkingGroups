@@ -23,7 +23,7 @@
  | Traffic Influence | OPAG, TIM | 2022/11/02| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_NumberVerificationMS2FA_DeustcheTelekom.md)| DT, TEF, VDF | 2022/11/10 | Approved ([EdgeCloud](https://github.com/camaraproject/EdgeCloud))   | Traffic Influence | v0.8.1 | [YAML](https://github.com/camaraproject/EdgeCloud/blob/main/code/API_definitions/Traffic_Influence.yaml) | [Doc](https://github.com/camaraproject/EdgeCloud/blob/main/documentation/API_Documentation/Traffic_Influence_API_Documentation.md) | TBD | TBD | TBD | <!---Identity and Consent API-->
  | Identity and Consent | TEF | 2023/01/19| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIFamilyproposal_Identity%26Consent.md)| ATT, DT, ERI, KDDI, IBM, MSFT, NOK, ORA, TEF, TELUS, TIM, SCE, VODA | 2023/03/09 | Approved ([IdentityAndConsentManagement](https://github.com/camaraproject/IdentityAndConsentManagement))  | N/A | N/A | N/A | TBD | TBD| TBD | TBD | <!---Blockchain Public Address-->
  | Blockchain Public Address | TEF | 2023/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/154/files#diff-bc4cef8af2ee8790fd4d796a87bf7d198a1c7439fd79c75ed535276b13048fac)| TEF, GSMA, DT | 2023/06/15| Approved ([BlockchainPublicAddress](https://github.com/camaraproject/BlockchainPublicAddress))  | N/A | N/A | [Doc](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_BlockchainPublicAddress_Telefonica.md) | TBD | TBD| TBD | TBD | 
- 
+
 
  ## Attributes
  - `API [family] name`: it is the name of the API [family] proposal
