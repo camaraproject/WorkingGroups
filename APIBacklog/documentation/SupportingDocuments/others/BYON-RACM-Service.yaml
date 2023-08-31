@@ -1,0 +1,374 @@
+openapi: 3.0.0
+info:
+  title: >-
+    Bring Your Own Number (BYON) Registration and Connectivity Management (RACM)
+    Service APIs
+  description: >-
+    This API provide REST API for clients to manage Registration and
+    Connectivity (RACM) towards MNO's IMS Network.
+  version: 1.0.0
+servers:
+  - url: '{apiRoot}/racm/{apiVersion}/{userId}'
+    description: APIs to manage Client Registration and Connection
+    variables:
+      apiRoot:
+        description: API Root
+        default: http://localhost:9091
+      apiVersion:
+        description: The version of API to be used
+        default: v1
+      userId:
+        description: User name allocated by the operator
+        default: userId
+tags:
+  - name: Registration and Connection Management
+    description: APIs for Client to Register into MNO's IMS Network
+paths:
+  /session:
+    post:
+      tags:
+        - RACM
+      summary: Create RACM Session
+      description: Create RACM Session
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction ID associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RacmRequest'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RacmResponse'
+        '400':
+          $ref: '#/components/responses/Generic400'
+      security:
+        - BearerAuth:
+            - read
+            - write
+  /session/{sessionId}:
+    put:
+      tags:
+        - RACM
+      summary: >-
+        For sharing new AccessToken with WebRTC GW, the AccessToken is expected
+        to be received from the Auth server.
+      description: >-
+        **The client shall use the resourceUrl supplied in the session creation
+        request. There is no need of constructing the URL**
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction ID associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client ID assigned by WebRTC GW
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          description: The sessionId assigned by the WebRTC GW RACM service
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No Content
+      security:
+        - BearerAuth:
+            - read
+            - write
+    delete:
+      tags:
+        - RACM
+      summary: Delete Registration Session.
+      description: >-
+        **The client shall use the resourceUrl supplied in the session creation
+        request. There is no need of constructing the URL**
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction ID associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client ID assigned by WebRTC GW
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          description: The sessionId assigned by the WebRTC GW RACM service
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/NotFound404'
+      security:
+        - BearerAuth:
+            - read
+            - write
+  /push:
+    post:
+      tags:
+        - Push Token
+      summary: Update device token
+      description: >-
+        User providing device token to network. This is an Optional API, the
+        client could use any external mechanism to update the PNS server
+      parameters:
+        - name: transactionId
+          in: header
+          description: Transaction ID associated with the request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientId
+          in: header
+          description: The Client ID assigned by WebRTC GW
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushInformation'
+            examples:
+              BrowserClients:
+                value:
+                  deviceId: Device Id provided by the client
+                  appName: Application Name
+                  BundleID: Bundle ID assigned to the application
+                  WebToken: RegistrationToken
+        required: true
+      responses:
+        '200':
+          description: Device token accepted
+        '400':
+          $ref: '#/components/responses/Generic400'
+        '403':
+          $ref: '#/components/responses/Generic403'
+      security:
+        - BearerAuth:
+            - read
+            - write
+      servers:
+        - url: http://swaggerhub.intinfra.com/device/v1/{deviceSessionId}
+components:
+  schemas:
+    RacmRequest:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: The device-id of the client in UUID format.
+    RacmResponse:
+      type: object
+      properties:
+        connectionInformation:
+          $ref: '#/components/schemas/ConnectionInformation'
+        notificationChannelInformation:
+          $ref: '#/components/schemas/NotificationChannelInformation'
+        resourceURL:
+          type: string
+          description: >-
+            The resource URL allocated by WebRTC GW representing the RACM
+            session created. The sessionId assigned for RACM session is part of
+            the url.
+    NotificationChannelInformation:
+      properties:
+        channelURL:
+          type: string
+          description: The channel url which client need to use for WebSocket creation.
+    ConnectionInformation:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: >-
+            The unique id assigned by WebRTC GW for identifying the association
+            of device with WebRTC GW. The clients are required to include this
+            value in clientId header.
+    PushInformation:
+      required:
+        - deviceId
+      properties:
+        deviceId:
+          type: string
+          description: Indicates the device id in UUID format.
+        OSName:
+          type: string
+          description: Indicates the device os type.
+        OSVersion:
+          type: string
+          description: Indicates the device os version. <os name> SP <os vserion>
+        appName:
+          type: string
+          description: Indicates the application given name.
+        BundleID:
+          type: string
+          description: Indicates the application bundle-id.
+        WebToken:
+          type: string
+          description: >-
+            This is the registration token for sending notifications using Web
+            Push FCM interface. Currently, notifications to Chrome Browser is
+            supported. In the future, desktop electron app and other browsers
+            would be supported. In such case, the same WebToken param would hold
+            the registration token of their instance on respective platform.
+    ErrorInfo:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code returned along with this error response
+        code:
+          type: string
+          description: Code given to this error
+        message:
+          type: string
+          description: Detailed error description
+      required:
+        - status
+        - code
+        - message
+  parameters:
+    hdrClientId:
+      name: clientId
+      in: header
+      description: The Client ID assigned by WebRTC GW
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    hdrTransactionId:
+      name: transactionId
+      in: header
+      description: The Transaction ID associated with the request
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    pathParamSessionId:
+      name: sessionId
+      in: path
+      description: The sessionId assigned by the RACM service
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  responses:
+    Generic400:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 400
+            code: INVALID_ARGUMENT
+            message: Schema validation failed at  ...
+    Generic401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 401
+            code: UNAUTHENTICATED
+            message: 'Authorization failed: ...'
+    Generic403:
+      description: Device not authorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 403
+            code: PERMISSION_DENIED
+            message: 'Operation not allowed: ...'
+    NotFound404:
+      description: Session Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 404
+            code: NOT_FOUND
+            message: Unable to find the session with the provided Id parameters
+    Generic500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 500
+            code: INTERNAL
+            message: 'Internal server error: ...'
+    Generic501:
+      description: Not Implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 501
+            code: NOT_IMPLEMENTED
+            message: Service not implemented for the specified user device
+    Generic503:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 503
+            code: UNAVAILABLE
+            message: Service unavailable
