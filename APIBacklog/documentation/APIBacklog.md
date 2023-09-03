@@ -30,6 +30,7 @@
   | Device Swap | MTN | 2023/08/13| [Link](https://github.com/camaraproject/WorkingGroups/pull/276) | MTN, GSMA Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
  | IMEI Fraud | MTN | 2023/08/13| [Link](https://github.com/camaraproject/WorkingGroups/pull/277) | MTN, GSMA Open Gateway | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
  | WebRTC | Telefónica | 2023/08/16| [Link](https://github.com/camaraproject/WorkingGroups/pull/280) | Telefónica, Mavenir, Orange, Vodafone | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
+  | Network Insights | Verizon | 2023/08/31| [Link](https://github.com/camaraproject/WorkingGroups/pull/295) | Verizon, 5GFF| YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
 
 
  ## Attributes
