@@ -6,6 +6,7 @@
 | Capgemini	| Deepak A. Gunjal |
 | China Telecom | Dan Xu |
 | Cisco | Ravi Guntupalli |
+| CNCF | Casey Cain |
 | Comviva | Vidhi Mehta |
 | CPaaSaa | Rob Kurver |
 | Deutsche Telekom AG	| Markus Kümmerle |
