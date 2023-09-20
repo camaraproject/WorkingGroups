@@ -3,9 +3,11 @@
 | Accenture | Giuseppe Di Nuccio  |
 | AT&T | Sharam Mohajeri  |
 | Cablelabs | Randy Levensalor |
+| Centillion | Nick Venezia |
 | China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
 | China Telekom | Xu Dan |
+| Comcast | Prasad Siddalinga |
 | Comviva | Vidhi Mehta |
 | Deutsche Telekom | Noel Wirzius  |
 | Ericsson | Jan Friman |
@@ -41,6 +43,8 @@
 | Telefonica | Rubén Barrado González  |
 | TIM | Fabrizio Moggio  |
 | Vodafone | Kevin Smith  |
+| | Cmti CA |
+
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
 | | Prashant Shrivastava |
