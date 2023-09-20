@@ -44,6 +44,7 @@
 | Syniverse | Jyrki Penttinen |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut  |
+| T-Mobile US | Poornima Magadevan |
 | T-Mobile US | Riza Hassan |
 | Telefonica | Jorge Garcia Hospital |
 | Telefonica | José Ordoñez-Lucena |
