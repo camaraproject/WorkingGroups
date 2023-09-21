@@ -4,6 +4,7 @@
 | Accenture | Adriano Poloni|
 | Accenture | Gaetano Biancardi |
 | Accenture | Giuseppe Di Nuccio|
+| AT&T | Pierre Close |
 | AT&T | Shahram Mohajeri|
 | Broadpeak | Christoph Neumann |
 | CableLabs | Randy Levensalor |
