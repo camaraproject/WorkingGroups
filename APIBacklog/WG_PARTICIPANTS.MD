@@ -2,6 +2,7 @@
 | -----------------------| ----------------------------------------------------|
 | 1rstwap | Alex Sandra |
 | Accenture | Giuseppe Di Nuccio  |
+| AT&T | Pierre Close |
 | AT&T | Sharam Mohajeri  |
 | Cablelabs | Randy Levensalor |
 | Centillion | Nick Venezia |
