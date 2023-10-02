@@ -34,6 +34,7 @@
 | Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
 | SK Telecom | Yoon Sun Jung |
+| Sofrecom | Walid Trabelsi |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |
