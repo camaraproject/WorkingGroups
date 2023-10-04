@@ -28,6 +28,7 @@
 | MEF | Karthik |
 | Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
+| Qwilt | Yoav |
 | Scenera | Andrew Wajs  |
 | Shabodi | Nitin Sood |
 | Shabodi | Umair Ali Rashid |
