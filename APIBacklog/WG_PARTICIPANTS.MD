@@ -38,16 +38,16 @@
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |
+| TIM | Fabrizio Moggio  |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
 | Telefonica | Jorge Garcia Hospital |
 | Telefonica | Jose Ordonez-Lucena  |
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
-| TIM | Fabrizio Moggio  |
+| Telesmart | Bulent Tuncel |
 | Vodafone | Kevin Smith  |
-| | Cmti CA |
-
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
+| | Cmti CA |
 | | Prashant Shrivastava |
