@@ -20,7 +20,7 @@
 | https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone, 5GFF |
 | https://cpaasaa.com/event/cpaas-acceleration-summit/ | 18.-20. September 2023 | Amsterdam | CPaaSAA, KPN, e& Enterprise, BICS, Radisys, Microsoft |
 | https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT |
-| https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT |
+| https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT TEF |
 | https://edgecomputing-expo.com/europe/ | 26.-27. September 2023 | Amsterdam | DT |
 | https://www.mwclasvegas.com/ | 26 - 28 September 2023 | Las Vegas | GSMA |
 | [https://www.gsma.com/futurenetworks/gsma_events/gsma-open-gateway-devcon/] | 27 September 2023 | Las Vegas | GSMA |
