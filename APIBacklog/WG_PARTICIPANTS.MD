@@ -11,7 +11,8 @@
 | China Telekom | Xu Dan |
 | Comcast | Prasad Siddalinga |
 | Comviva | Vidhi Mehta |
-| Deutsche Telekom | Noel Wirzius  |
+| Deutsche Telekom | Noel Wirzius |
+| EN5 | Paul |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | Ericsson | Rajat Kandoi |
@@ -50,5 +51,6 @@
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
+| Zignos | Carlos |
 | | Cmti CA |
 | | Prashant Shrivastava |
