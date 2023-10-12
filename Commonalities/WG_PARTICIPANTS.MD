@@ -34,6 +34,7 @@
 | KDDI | Toshi Wakayama |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
+| Nokia | Uwe Rauschenbach |
 | Orange | Olivier Mathieu |
 | Orange | Patrice Conil |
 | Orange | Sylvain Morel|
