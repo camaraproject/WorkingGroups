@@ -9,5 +9,5 @@
 # CAMARA Working Groups
 Repository for the CAMARA Working Groups:
 * [API backlog](https://github.com/camaraproject/WorkingGroups/tree/main/APIBacklog)
-* [Commonalities](https://github.com/camaraproject/WorkingGroups/tree/main/Commonalities)
+* [Commonalities](https://github.com/camaraproject/Commonalities)
 * [Marketing](https://github.com/camaraproject/WorkingGroups/tree/main/Marketing)
