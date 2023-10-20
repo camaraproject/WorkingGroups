@@ -27,6 +27,7 @@
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
+| Netcheck | Sanjeev Shankar |
 | Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
 | Qwilt | Yoav |
