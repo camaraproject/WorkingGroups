@@ -25,6 +25,7 @@
 | Intel	| Petar Torre |
 | KDDI | Tetsuya Chiba |
 | KDDI	| Toshiyasu Wakayama |
+| KPN | Huub Appelboom |
 | Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
