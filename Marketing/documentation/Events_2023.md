@@ -32,5 +32,5 @@
 | https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/  | 06.-09. November 2023 | Chicago ||
 | LFN developers conference | November | Budapest ||
 | https://globecom2023.ieee-globecom.org | 04.-08. December 2023 | Kuala Lumpur | TEF |
-| https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | DT |
+| https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | DT, Orange |
 | [https://www.mwcbarcelona.com] | 26.-29. February 2024 | Barcelona | GSMA |
