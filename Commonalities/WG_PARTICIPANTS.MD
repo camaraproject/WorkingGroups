@@ -34,11 +34,13 @@
 | KDDI | Toshi Wakayama |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
+| Nokia | Uwe Rauschenbach |
 | Orange | Olivier Mathieu |
 | Orange | Patrice Conil |
 | Orange | Sylvain Morel|
 | Orange | Ludovic Robert|
 | Singtel | Ming Hui Foo |
+| Softbank | Toru Kikuchi |
 | SpryFox Networks | Jignesh Sorathia |
 | SpryFox Networks | Ramesh Shanmugasundaram |
 | Syniverse | Jyrki Penttinen |
