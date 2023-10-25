@@ -11,7 +11,8 @@
 | China Telekom | Xu Dan |
 | Comcast | Prasad Siddalinga |
 | Comviva | Vidhi Mehta |
-| Deutsche Telekom | Noel Wirzius  |
+| Deutsche Telekom | Noel Wirzius |
+| EN5 | Paul |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | Ericsson | Rajat Kandoi |
@@ -26,27 +27,32 @@
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
+| Netcheck | Sanjeev Shankar |
 | Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
+| Qwilt | Yoav |
 | Scenera | Andrew Wajs  |
 | Shabodi | Nitin Sood |
 | Shabodi | Umair Ali Rashid |
 | Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
 | SK Telecom | Yoon Sun Jung |
+| Sofrecom | Walid Trabelsi |
+| Softbank | Toru Kikuchi |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Poornima Magadevan |
+| TIM | Fabrizio Moggio  |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
 | Telefonica | Jorge Garcia Hospital |
 | Telefonica | Jose Ordonez-Lucena  |
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
-| TIM | Fabrizio Moggio  |
+| Telesmart | Bulent Tuncel |
 | Vodafone | Kevin Smith  |
-| | Cmti CA |
-
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
+| Zignos | Carlos |
+| | Cmti CA |
 | | Prashant Shrivastava |

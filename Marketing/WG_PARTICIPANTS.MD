@@ -25,6 +25,7 @@
 | Intel	| Petar Torre |
 | KDDI | Tetsuya Chiba |
 | KDDI	| Toshiyasu Wakayama |
+| KPN | Huub Appelboom |
 | Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
@@ -33,6 +34,7 @@
 | ORANGE	| Sylvain Morel |
 | Scenera	| Chien Lim |
 | Scenera	| David Lee |
+| Softbank | Toru Kikuchi |
 | Starhub | Rajesh Naresh Mhatre |
 | Summit-Tech | Doug Makishima |
 | T-Mobile NL | Muhammad Ahmad  |

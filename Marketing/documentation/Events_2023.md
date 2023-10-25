@@ -1,10 +1,11 @@
-| Event link | Schedule | Location | Participant(s) |
+﻿| Event link | Schedule | Location | Participant(s) |
 | -----------| -----------| -----------| -----------|
 | https://tmt.knect365.com/6g-summit/| 26 April 2023 | Berlin | TEF |
 | https://events.linuxfoundation.org/open-source-summit-north-america/ | 10.-12. May 2023 | Vancouver||
 | https://www.apidays.global/new-york/ | 15.-16. May 2023 | New York | Verizon |
 | https://mobixd.com.br/| 16 May 2023 | Sao Paulo | GSMA |
 | https://news.microsoft.com/build-2023/| 23-25 May 2023 | Seattle | TEF |
+| Akraino Spring Summit 2023 | 29. Mar 2023 | Anhui | LF Edge, Huawei, China Unicom |
 | https://devdays.lt/ |23.-24. May 2023 | Vilnius | DT|
 | https://icc2023.ieee-icc.org/  | 28. May – 01. June 2023 | Rome  | DT, TEF |
 | https://www.mobile360series.com/latin-america | 31 May - 1 June 2023 | Mexico City | GSMA |
@@ -20,9 +21,11 @@
 | https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone, 5GFF |
 | https://cpaasaa.com/event/cpaas-acceleration-summit/ | 18.-20. September 2023 | Amsterdam | CPaaSAA, KPN, e& Enterprise, BICS, Radisys, Microsoft |
 | https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT |
-| https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT |
+| https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT TEF |
 | https://edgecomputing-expo.com/europe/ | 26.-27. September 2023 | Amsterdam | DT |
 | https://www.mwclasvegas.com/ | 26 - 28 September 2023 | Las Vegas | GSMA |
+| ONE Summit Regional Day 2023 https://www.lfasiallc.com/kubecon-cloudnativecon-open-source-summit-china/ | 26 September 2023 | Shanghai | Huawei, China Unicom |
+| KubeCon Shanghai 2023 https://www.lfasiallc.com/kubecon-cloudnativecon-open-source-summit-china/ | 27 - 28 September 2023 | Shanghai | Huawei |
 | [https://www.gsma.com/futurenetworks/gsma_events/gsma-open-gateway-devcon/] | 27 September 2023 | Las Vegas | GSMA |
 | [https://futurenetworld.net/events/futurenet-asia-2023/] | 18-19 October 2023 | Singapore | GSMA |
 | Network X | 24-26 October 2023 | Paris | DT |
