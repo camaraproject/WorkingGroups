@@ -53,6 +53,7 @@
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
+| | José Emmanuel Arellano Bravo |
 | Zignos | Carlos |
 | | Cmti CA |
 | | Prashant Shrivastava |
