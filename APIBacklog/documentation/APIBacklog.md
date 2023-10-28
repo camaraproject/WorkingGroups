@@ -32,7 +32,7 @@
  | IMEI Fraud | MTN | 2023/08/13| [Link](https://github.com/camaraproject/WorkingGroups/pull/277) | MTN, GSMA Open Gateway, Huawei | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
  | WebRTC | Telefónica | 2023/08/16| [Link]([https://github.com/camaraproject/WorkingGroups/pull/280](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_WebRTC_Telefonica.md)) | Telefónica, Mavenir, Orange, Vodafone, TMUS | YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
   | Network Insights | Verizon | 2023/08/31| [Link](https://github.com/camaraproject/WorkingGroups/pull/295) | Verizon, 5GFF, GSMA Open Gateway| YYYY/MM/DD | Under Evaluation | N/A | N/A | N/A | TBD | TBD | TBD | TBD |
- 
+
 
  ## Attributes
  - `API [family] name`: it is the name of the API [family] proposal
