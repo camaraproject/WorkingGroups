@@ -41,6 +41,7 @@
 | Softbank | Toru Kikuchi |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US | Murat Karabulut |
+| T-Mobile US | Murthy Gorthy |
 | T-Mobile US | Poornima Magadevan |
 | TIM | Fabrizio Moggio  |
 | Telecomsxchange | Ameed Jamous |
