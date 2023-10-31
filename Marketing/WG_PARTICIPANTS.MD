@@ -4,6 +4,7 @@
 | AclDigital | Sagar Suresh Nangare |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
+| Centillion | Nicholas Venezia |
 | China Telecom | Dan Xu |
 | Cisco | Ravi Guntupalli |
 | CNCF | Casey Cain |
