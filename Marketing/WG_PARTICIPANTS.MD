@@ -23,7 +23,6 @@
 | Huawei	| Qing Shuting |
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
-| Infolysis | C. Fragkos |
 | Infolysis | Vaios Koumaras |
 | Intel	| Petar Torre |
 | KDDI | Tetsuya Chiba |
