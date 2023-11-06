@@ -27,6 +27,7 @@
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
+| Infolysis | Vaios Koumaras |
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
 | KDDI | Keichi Okonogi |
