@@ -23,6 +23,7 @@
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
+| Infolysis | Nikolaos VRIONIS |
 | Infosys | Chintan Lodariya |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
