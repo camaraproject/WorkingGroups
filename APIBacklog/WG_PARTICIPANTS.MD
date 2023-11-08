@@ -33,6 +33,7 @@
 | Orange | Sylvain Morel  |
 | Qwilt | Yoav |
 | Scenera | Andrew Wajs  |
+| Shabodi | Kevin Howe-Patterson |
 | Shabodi | Nitin Sood |
 | Shabodi | Umair Ali Rashid |
 | Singtel | Macus Chua |
