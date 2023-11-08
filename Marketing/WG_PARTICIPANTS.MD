@@ -36,6 +36,7 @@
 | ORANGE	| Sylvain Morel |
 | Scenera	| Chien Lim |
 | Scenera	| David Lee |
+| Shabodi | Kevin Howe-Patterson |
 | Softbank | Toru Kikuchi |
 | Starhub | Rajesh Naresh Mhatre |
 | Summit-Tech | Doug Makishima |
