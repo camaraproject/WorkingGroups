@@ -53,10 +53,11 @@
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
 | Telesmart | Bulent Tuncel |
+| Verizon | Santhi Dharmapalan |
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
-| | José Emmanuel Arellano Bravo |
 | Zignos | Carlos |
 | | Cmti CA |
+| | José Emmanuel Arellano Bravo |
 | | Prashant Shrivastava |
