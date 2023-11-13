@@ -61,3 +61,5 @@
 | | Cmti CA |
 | | José Emmanuel Arellano Bravo |
 | | Prashant Shrivastava |
+| China Unicom | Fan Yang |
+| China Unicom | Jing Hao  |
