@@ -56,3 +56,5 @@
 | Zignos | Carlos |
 | | Cmti CA |
 | | Prashant Shrivastava |
+| China Unicom | Fan Yang |
+| China Unicom | Jing Hao |
