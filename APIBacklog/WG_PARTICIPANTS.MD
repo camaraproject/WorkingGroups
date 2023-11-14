@@ -53,6 +53,7 @@
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
 | Telesmart | Bulent Tuncel |
+| Upstream Systems | Nikos Fotiou |
 | Verizon | Santhi Dharmapalan |
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
