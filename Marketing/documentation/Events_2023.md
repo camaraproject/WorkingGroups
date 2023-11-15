@@ -42,5 +42,5 @@
 | https://globecom2023.ieee-globecom.org | 04.-08. December 2023 | Kuala Lumpur | TEF |
 | M360 MENA [https://www.mobile360series.com/mena/]| 06. December 2023 | Riyadh | |
 | CCSA and GSMA workshop about 5G network slicing | 06. December 2023 | Chongqing, China | |
-| https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | DT |
+| https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | DT, TEF |
 | [https://www.mwcbarcelona.com] | 26.-29. February 2024 | Barcelona | GSMA |
