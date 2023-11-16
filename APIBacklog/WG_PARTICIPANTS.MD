@@ -64,3 +64,4 @@
 | | Prashant Shrivastava |
 | China Unicom | Fan Yang |
 | China Unicom | Jing Hao  |
+| Airtel | Rajneesh Kumar, Ramit Chawla |
