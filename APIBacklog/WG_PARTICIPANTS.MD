@@ -5,6 +5,7 @@
 | AT&T | Pierre Close |
 | AT&T | Sharam Mohajeri  |
 | Cablelabs | Randy Levensalor |
+| Centillion | Bart |
 | Centillion | Nick Venezia |
 | China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
