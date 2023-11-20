@@ -1,5 +1,6 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
+| 1Global | Stanislav Slavkov |
 | 1rstwap | Alex Sandra |
 | Accenture | Giuseppe Di Nuccio  |
 | AT&T | Pierre Close |
