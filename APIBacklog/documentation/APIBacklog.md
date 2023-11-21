@@ -12,8 +12,7 @@
 
  | **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **TSC decision (date)** |  **Sub Project**  |  **API name**  |
  | --- |  --- | --- | --- | --- | --- | --- | --- | 
- | Quality on Demand | DTAG | N/A | N/A | DTAG, Orange, Telefonica, Vodafone|  Approved (N/A) | [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) | qod | 
-<!---Simple Edge Discovery --->
+ | Quality on Demand | DTAG | N/A | N/A | DTAG, Orange, Telefonica, Vodafone|  Approved (N/A) | [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) | qod |<!---Simple Edge Discovery --->
 | Simple Edge Discovery | Vodafone | N/A | N/A  | 5GFF, Vodafone | Approved (N/A)  | [EdgeCloud/Discovery](https://github.com/camaraproject/EdgeCloud/tree/main/code/API_definitions/Discovery) | simple-edge-discovery | <!---MEC Management --->
 | MEC Management | Telefonica | N/A | N/A  | GSMA-OGW, Telefonica | Approved (N/A) |[EdgeCloud/Discovery](https://github.com/camaraproject/EdgeCloud/tree/main/code/API_definitions/Discovery)  | mec-exposure-and-experience-management | [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<!---Device Location-->%%%%%%%%%%%%%%%%%%%%%
 | Device Location | DTAG | 2022/01/11 | N/A | DTAG, Orange, Telefonica, Vodafone | Approved (2022/04/17) | [DeviceLocation](https://github.com/camaraproject/DeviceLocation) | location-verification | %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<!---Device Status-->%%%%%%%%%%%%%%%%%%%%%
