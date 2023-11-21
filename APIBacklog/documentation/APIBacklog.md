@@ -47,6 +47,5 @@
  - `Link to the filled-in template`: URL where the filled-in template for API proposal has been submitted. If no URL is specified, it is assumed that no submission has been done yet; in such a case, the API is captured in the backlog for guidance/reference for future submissions.
  - `Supporters in API Backlog Working Group`: it lists the partners (e.g., CAMARA member compnay, external companies or GSMA OPG) that support working out API proposal in CAMARA. 
  - `TSC decision (date)`: it specifies the Technical Steering Committee (TSC) meeting date where API proposal has been voted. The date follows the YYYY/MM/DD format. 
- - `TSC decision / Sub Project`: it specifies the decision that the TSC took after API proposal voting. 
 - `Sub Project`: it specifies the CAMARA Sub Project where the API proposal is allocated into. 
 - `API name`: the actual name of the API. 
