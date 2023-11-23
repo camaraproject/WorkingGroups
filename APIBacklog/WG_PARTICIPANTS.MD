@@ -11,6 +11,7 @@
 | China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
 | China Telekom | Xu Dan |
+| China Unicom | Yang Fan |
 | Comcast | Prasad Siddalinga |
 | Comviva | Vidhi Mehta |
 | Deutsche Telekom | Noel Wirzius |
@@ -31,6 +32,7 @@
 | KDDI | Yusuke Nakano |
 | MEF | Karthik |
 | Netcheck | Sanjeev Shankar |
+| Nokia | Tanja de Groot |
 | Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
 | Qwilt | Yoav |
