@@ -37,6 +37,7 @@
 | Scenera	| Chien Lim |
 | Scenera	| David Lee |
 | Shabodi | Kevin Howe-Patterson |
+| Singtel | Ming Hui Foo |
 | Softbank | Toru Kikuchi |
 | Starhub | Rajesh Naresh Mhatre |
 | Summit-Tech | Doug Makishima |
