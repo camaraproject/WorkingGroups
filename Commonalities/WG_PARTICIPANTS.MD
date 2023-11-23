@@ -33,6 +33,7 @@
 | KDDI | Keichi Okonogi |
 | KDDI | Tetsuya Chiba |
 | KDDI | Toshi Wakayama |
+| Madison | Victor Javier Quirog |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
 | Nokia | Uwe Rauschenbach |
