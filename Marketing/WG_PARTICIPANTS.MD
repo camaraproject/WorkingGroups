@@ -4,6 +4,7 @@
 | AclDigital | Sagar Suresh Nangare |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
+| Centillion | Nicholas Venezia |
 | China Telecom | Dan Xu |
 | Cisco | Ravi Guntupalli |
 | CNCF | Casey Cain |
@@ -22,6 +23,7 @@
 | Huawei	| Qing Shuting |
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
+| Infolysis | Vaios Koumaras |
 | Intel	| Petar Torre |
 | KDDI | Tetsuya Chiba |
 | KDDI	| Toshiyasu Wakayama |
@@ -34,6 +36,8 @@
 | ORANGE	| Sylvain Morel |
 | Scenera	| Chien Lim |
 | Scenera	| David Lee |
+| Shabodi | Kevin Howe-Patterson |
+| Singtel | Ming Hui Foo |
 | Softbank | Toru Kikuchi |
 | Starhub | Rajesh Naresh Mhatre |
 | Summit-Tech | Doug Makishima |

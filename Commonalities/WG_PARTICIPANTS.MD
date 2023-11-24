@@ -27,11 +27,13 @@
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
+| Infolysis | Vaios Koumaras |
 | Intel | Francesc Guim |
 | Intel | Petar Torre |
 | KDDI | Keichi Okonogi |
 | KDDI | Tetsuya Chiba |
 | KDDI | Toshi Wakayama |
+| Madison | Victor Javier Quirog |
 | Nabstract.io | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
 | Nokia | Uwe Rauschenbach |

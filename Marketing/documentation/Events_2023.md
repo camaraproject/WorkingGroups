@@ -20,17 +20,27 @@
 | https://www.wearedevelopers.com/world-congress  | 27.-28. July 2023 | Berlin | DT, GSMA |
 | https://www.apidays.global/london/  | 13.-14. September 2023 | London | DT, Vodafone, 5GFF |
 | https://cpaasaa.com/event/cpaas-acceleration-summit/ | 18.-20. September 2023 | Amsterdam | CPaaSAA, KPN, e& Enterprise, BICS, Radisys, Microsoft |
-| https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT |
+| https://events.linuxfoundation.org/open-source-summit-europe/  | 19.-21. September 2023 | Bilbao | DT, TEF |
 | https://dtw.tmforum.org/  | 19.-21. September 2023 | Copenhagen | DT TEF |
 | https://edgecomputing-expo.com/europe/ | 26.-27. September 2023 | Amsterdam | DT |
 | https://www.mwclasvegas.com/ | 26 - 28 September 2023 | Las Vegas | GSMA |
 | ONE Summit Regional Day 2023 https://www.lfasiallc.com/kubecon-cloudnativecon-open-source-summit-china/ | 26 September 2023 | Shanghai | Huawei, China Unicom |
 | KubeCon Shanghai 2023 https://www.lfasiallc.com/kubecon-cloudnativecon-open-source-summit-china/ | 27 - 28 September 2023 | Shanghai | Huawei |
 | [https://www.gsma.com/futurenetworks/gsma_events/gsma-open-gateway-devcon/] | 27 September 2023 | Las Vegas | GSMA |
+| [https://blogthinkbig.com/api-addicts-day-2023-telefonica] | 3 October 2023 | Madrid| TEF |
+| [https://www.fyuz.events/EN/FYUZ22] | 9 October 2023 | Madrid| TEF |
 | [https://futurenetworld.net/events/futurenet-asia-2023/] | 18-19 October 2023 | Singapore | GSMA |
-| Network X | 24-26 October 2023 | Paris | DT |
+| Network X | 24-26 October 2023 | Paris | DT, TEF |
 | https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/  | 06.-09. November 2023 | Chicago ||
+| [https://mobi-id.com.br/]  | 7 November 2023 | São Paulo | TEF | 
+| [https://www.puzzlex.io/]  | 7 November 2023 | Barcelona | TEF | 
+| [https://websummit.com/schedule/ws23/timeslot/opening-the-gateway-the-transformation-of-the-telco-sector]  | 13-16 November 2023 | Lisbon | TEF | 
+| [https://apwg.org/event/ecrime2023/]  | 16 November 2023 | Barcelona | TEF | 
+| [https://www.idc.com/eu/events/70847-idc-european-telco-xchange#section_11]  | 20 November 2023 | Cascais | TEF | 
+| [https://reinvent.awsevents.com/]  | 27 November 2023 | Las Vegas | TEF | 
 | LFN developers conference | November | Budapest ||
 | https://globecom2023.ieee-globecom.org | 04.-08. December 2023 | Kuala Lumpur | TEF |
-| https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | DT, Orange |
+| M360 MENA [https://www.mobile360series.com/mena/]| 06. December 2023 | Riyadh | |
+| CCSA and GSMA workshop about 5G network slicing | 06. December 2023 | Chongqing, China | |
+| https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | DT, ORANGE, TEF |
 | [https://www.mwcbarcelona.com] | 26.-29. February 2024 | Barcelona | GSMA |
