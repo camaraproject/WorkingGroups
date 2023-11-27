@@ -1,5 +1,7 @@
 ﻿| Event link | Schedule | Location | Participant(s) |
 | -----------| -----------| -----------| -----------|
+| MWC 2023 Barcelona| 27 February - 02 March 2023 | Barcelona | Deutsche Telekom, Orange, Telefonica, Vodafone |
+| Bridge Alliance CXO Forum | 21 March 2023 | Singapore | Deutsche Telekom |
 | https://tmt.knect365.com/6g-summit/| 26 April 2023 | Berlin | Telefonica |
 | https://events.linuxfoundation.org/open-source-summit-north-america/ | 10.-12. May 2023 | Vancouver||
 | https://www.apidays.global/new-york/ | 15.-16. May 2023 | New York | Verizon |
@@ -44,3 +46,5 @@
 | CCSA and GSMA workshop about 5G network slicing | 06. December 2023 | Chongqing, China | |
 | https://www.apidays.global/paris/ | 06.-08. December 2023 | Paris | Deutsche Telekom, Orange, Telefonica |
 | [https://www.mwcbarcelona.com] | 26.-29. February 2024 | Barcelona | GSMA |
+| LF One Summit | 29 April -01 May 2024 | San Jose | LF |
+| DTW Ignite | 18-20 June 2024 | Copenhagen | |
