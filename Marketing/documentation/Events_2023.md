@@ -48,3 +48,4 @@
 | [https://www.mwcbarcelona.com] | 26.-29. February 2024 | Barcelona | GSMA |
 | LF One Summit | 29 April -01 May 2024 | San Jose | LF |
 | DTW Ignite | 18-20 June 2024 | Copenhagen | |
+| KubeCon 2024 https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/| 19-22 March 2024 | Paris | Huawei |
