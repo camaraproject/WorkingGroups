@@ -29,6 +29,7 @@
 | KDDI	| Toshiyasu Wakayama |
 | KPN | Huub Appelboom |
 | LinuxFoundation | Jill Lovato |
+| Microsoft | An Shimel |
 | Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
