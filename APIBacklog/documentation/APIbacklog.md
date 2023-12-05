@@ -4,7 +4,7 @@
 
  This is a live doc that captures the status of all the APIs which have been formally registered in CAMARA project. 
 
-  | **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **TSC decision (date)** |  **TSC decision (date)** | **Sub Project**  |
+  | **API [family] name**  |  **API [family] owner** |  **API [family] proposal registration date**  | **Link to the filled-in application template**   |  **Supporters in API Backlog Working Group**  |  **API backlog - Status** |  **TSC - Status** | **Sub Project**  |
  | --- |  --- | --- | --- | --- | --- | --- | --- |
  | Quality on Demand | Deutsche Telekom | N/A | N/A | Deutsche Telekom, Orange, Telefónica, Vodafone|  --- |Approved (N/A) | [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand) |%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<!---Simple Edge Discovery --->
 | Simple Edge Discovery | Vodafone | N/A | N/A  | 5GFF, Vodafone | --- | Approved (N/A)  | [EdgeCloud/Discovery](https://github.com/camaraproject/EdgeCloud/tree/main/code/API_definitions/Discovery) |  <!---MEC Management --->
