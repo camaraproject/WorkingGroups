@@ -6,7 +6,7 @@
 
 ## Meetings
 * Meetings are held virtually
-* Schedule: bi-weekly Tuesday 3pm CET
+* Schedule: every 3rd Tuesday in a month at 3pm CET/CEST
 * Meeting link: [Link](https://dtag.webex.com/dtag/j.php?MTID=mac7e77e6b47a7c2a17935b5db79473ec)
 
 ## Participantship and mailing list
