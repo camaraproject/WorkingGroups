@@ -45,6 +45,7 @@
 | Summit-Tech | Doug Makishima |
 | T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US	| Lyle Bertz |
+| T-Mobile US	| Stephen Compston |
 | Telecom Italia	| Roberto Procopio |
 | Telefonica | Fernando Guillot |
 | Telefonica | Laura Lacarraarcos |
@@ -53,6 +54,7 @@
 | TELUS	| Ali Tizghadam |
 | Verizon	| Alicia Miller |
 | Verizon	| Priyanka Shah |
+| Vodafone	| Edon Ophir |
 | Vodafone	| Simon Gordon |
 | Vodafone	| Steven Pater |
 | ZTE | Jie Hu |
