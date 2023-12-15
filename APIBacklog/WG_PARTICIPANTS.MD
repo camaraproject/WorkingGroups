@@ -8,6 +8,7 @@
 | Cablelabs | Randy Levensalor |
 | Centillion | Bart |
 | Centillion | Nick Venezia |
+| Charter | Justin Pace |
 | China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
 | China Telekom | Xu Dan |
@@ -33,6 +34,7 @@
 | MEF | Karthik |
 | Netcheck | Sanjeev Shankar |
 | Nokia | Tanja de Groot |
+| Optus | Scott Byiers |
 | Orange | Ludovic Robert  |
 | Orange | Sylvain Morel  |
 | Qwilt | Yoav |
