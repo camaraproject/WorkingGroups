@@ -24,6 +24,7 @@
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
 | Huawei | Chuanyu Chen |
+| Huawei | Kai Zhang Kai |
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
