@@ -46,6 +46,7 @@
 | Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
 | SK Telecom | Yoon Sun Jung |
+| Slagen | D. Garavito |
 | Sofrecom | Walid Trabelsi |
 | Softbank | Toru Kikuchi |
 | T-Mobile NL | Muhammad Ahmad  |
