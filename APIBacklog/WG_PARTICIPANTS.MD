@@ -33,6 +33,7 @@
 | Infosys | Chintan Lodariya |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
+| KPN | Huub Appelboom |
 | MEF | Karthik |
 | Netcheck | Sanjeev Shankar |
 | Nokia | Tanja de Groot |
