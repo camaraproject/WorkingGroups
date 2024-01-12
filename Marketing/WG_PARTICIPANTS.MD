@@ -12,6 +12,7 @@
 | CPaaSaa | Rob Kurver |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Deutsche Telekom AG	| Jasmin Schulmeyer |
+| Deutsche Telekom AG	| Robert Jeschonnek |
 | ENEA | Iftikhar Waheed |
 | Ericsson	| Bart van Kaathoven |
 | Ericsson	| Pehr Claesson |
