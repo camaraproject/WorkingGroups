@@ -37,7 +37,7 @@
 | Device Location Retrieval | Orange | 2023/11/09| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/API_Proposal_Device_Location_Retrieval.md) | Deutsche Telekom, Ericsson, Orange, Telefónica, Vodafone, GSMA-OGW | Not yet discussed| Not yet treated | --- | %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<!---Send SMS API-->%%%%%%%%%%%%%%%%%%%%%
 | Send SMS | Airtel | 2023/11/06| [Link](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/SupportingDocuments/API%20proposals/APIproposal_SendSMS.md) | Airtel, KDDI, GSMA-OGW | Sent to TSC for approval (2023/11/30) | Not yet treated  | --- | %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<!---Consent & Measurement-->%%%%%%%%%%%%%%%%%%%%%
 | Consent and Measurement | Centillion | 2023/11/15| [Link](https://github.com/camaraproject/WorkingGroups/pull/350) | Centillion| Not yet discussed| Not yet treated  | --- | %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%<!---Call Forwarding Signal-->%%%%%%%%%%%%%%%%%%%%%
-| Call Forwarding Signal | Telecom Italia | 2023/12/05| [Link](https://github.com/camaraproject/WorkingGroups/pull/361) | Telecom Italia, GSMA-OGW | Under discussion | Not yet treated  | --- | 
+| Call Forwarding Signal | Telecom Italia | 2023/12/05| [Link](https://github.com/camaraproject/WorkingGroups/pull/361) | Telecom Italia, GSMA-OGW, Orange | Under discussion | Not yet treated  | --- | 
 
  ## Attributes
  - `API [family] name`: it is the name of the API [family] proposal
