@@ -14,8 +14,9 @@
 | Deutsche Telekom AG	| Jasmin Schulmeyer |
 | Deutsche Telekom AG	| Robert Jeschonnek |
 | ENEA | Iftikhar Waheed |
-| Ericsson	| Bart van Kaathoven |
-| Ericsson	| Pehr Claesson |
+| Ericsson | Bart van Kaathoven |
+| Ericsson | Michael Axelsson |
+| Ericsson | Pehr Claesson |
 | Google Cloud	| Sridhar Gollapudi |
 | GSMA	| Henry Calvert |
 | GSMA	| Lucy Thatcher |
