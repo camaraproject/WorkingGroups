@@ -7,7 +7,7 @@ info:
     Service enabling API for customer premises equipment (CPE) management. The APIs initial focus is on managing **Isolated Networks** (API clients can manage the access details for logically separated networks on the same device) and device reboot requests.
 
     # Introduction
-    An isolated network is a network access configuration where each configuration is for a logically separated Local Area Network (LAN) within the scope of a single network device. Application developers can create, modify, or remove these networks which could be useful in scenarios such as:
+    An isolated network is a network access configuration where each configuration is for a logically separated Local Area Network (LAN). Application developers can create, modify, or remove these networks which could be useful in scenarios such as:
 
     - A property owner wants to create a temporary network for the duration of a short-term booking or long-term rental.
     - A property manager wants to replicate the network access details across multiple devices at one or more locations such as common areas, offices, etc.
@@ -19,7 +19,7 @@ info:
     - A property manager wants to reboot multiple devices at one or more locations such as common areas, offices, etc.
 
     # Relevant Terms and Definitions
-    - **Isolated Network**: Network access configuration where each configuration is for a logically separated Local Area Network (LAN) when on the same device. Isolation in this context means that traffic will not be forwarded or routed from one logical LAN to another on the same device. The isolation implementation must be considered a logical construct only. Network operators are free to choose how to implement this behavior using any number of technologies such as with VLANs or OpenFlow rules. Traffic between two network clients using the same isolated network access details, but across different devices, is an undefined behavior.
+    - **Isolated Network**: Network access configuration where each configuration is for a logically separated Local Area Network (LAN) when on the same device. Isolation in this context means that traffic will not be forwarded or routed from one logical LAN to another on the same device. The isolation implementation must be considered a logical construct only. Network operators are free to choose how to implement this behavior using any number of technologies such as with VLANs or OpenFlow rules. Traffic between two network clients using the same isolated network access details, but across different devices, is currently undefined behavior.
     - **Reboot Request**: A request to reboot a network operator supplied network access device.
     - **Device**: A network operator supplied network access device that supports isolated networks.  Multiple devices that support LAN connectivity across the same isolated network (e.g., mesh Wi-Fi, Thread personal area network, etc.) SHOULD be presented as a single device for implementations of this API.
     - **Network Operator**: Service provider that implements this API and has operational control of supporting devices.
@@ -101,7 +101,7 @@ tags:
   - name: Reboot Requests
 
 servers:
-  - url: '{apiRoot}/{basePath}'
+  - url: "{apiRoot}/{basePath}"
     variables:
       apiRoot:
         default: http://localhost:5000
@@ -138,31 +138,31 @@ paths:
           - `cpe-management-devices-write`
           - `cpe-management-devices-hardware-address-read`
       responses:
-        '200':
+        "200":
           description: Contains information about all service sites
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceSiteList'
+                $ref: "#/components/schemas/ServiceSiteList"
               examples:
                 BaseServiceSiteList:
-                  $ref: '#/components/examples/BaseServiceSiteList'
+                  $ref: "#/components/examples/BaseServiceSiteList"
                 ServiceSiteListWithLocation:
-                  $ref: '#/components/examples/ServiceSiteListWithLocation'
+                  $ref: "#/components/examples/ServiceSiteListWithLocation"
                 ServiceSiteListWithDevices:
-                  $ref: '#/components/examples/ServiceSiteListWithDevices'
+                  $ref: "#/components/examples/ServiceSiteListWithDevices"
                 ServiceSiteListWithLocationAndDevices:
-                  $ref: '#/components/examples/ServiceSiteListWithLocationAndDevices'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/ServiceSiteListWithLocationAndDevices"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /service-sites/{siteId}:
     get:
@@ -186,37 +186,37 @@ paths:
           - `cpe-management-devices-write`
           - `cpe-management-devices-hardware-address-read`
       parameters:
-      - $ref: '#/components/parameters/siteId'
+        - $ref: "#/components/parameters/siteId"
       responses:
-        '200':
+        "200":
           description: Contains information about the service site
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceSite'
+                $ref: "#/components/schemas/ServiceSite"
               examples:
                 BaseServiceSite:
-                  $ref: '#/components/examples/BaseServiceSite'
+                  $ref: "#/components/examples/BaseServiceSite"
                 ServiceSiteWithLocation:
-                  $ref: '#/components/examples/ServiceSiteWithLocation'
+                  $ref: "#/components/examples/ServiceSiteWithLocation"
                 ServiceSiteWithDevices:
-                  $ref: '#/components/examples/ServiceSiteWithDevices'
+                  $ref: "#/components/examples/ServiceSiteWithDevices"
                 ServiceSiteWithLocationAndDevices:
-                  $ref: '#/components/examples/ServiceSiteWithLocationAndDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/ServiceSiteNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/ServiceSiteWithLocationAndDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/ServiceSiteNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /service-sites/{siteId}/devices:
     get:
@@ -249,37 +249,37 @@ paths:
           - `cpe-management-isolated-networks-auxiliary-write`
 
       parameters:
-      - $ref: '#/components/parameters/siteId'
+        - $ref: "#/components/parameters/siteId"
       responses:
-        '200':
+        "200":
           description: Contains information about devices at the service site
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceList'
+                $ref: "#/components/schemas/DeviceList"
               examples:
                 DeviceListWithServiceSite:
-                  $ref: '#/components/examples/DeviceListWithServiceSite'
+                  $ref: "#/components/examples/DeviceListWithServiceSite"
                 DeviceListWithHardwareAddressAndServiceSite:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndServiceSite'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndServiceSite"
                 DeviceListWithServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithServiceSiteAndNetworks'
+                  $ref: "#/components/examples/DeviceListWithServiceSiteAndNetworks"
                 DeviceListWithHardwareAddressAndServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndServiceSiteAndNetworks'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/ServiceSiteNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndServiceSiteAndNetworks"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/ServiceSiteNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /service-sites/{siteId}/isolated-networks:
     get:
@@ -308,31 +308,31 @@ paths:
             - `cpe-management-isolated-networks-auxiliary-read`
             - `cpe-management-isolated-networks-auxiliary-write`
       parameters:
-      - $ref: '#/components/parameters/siteId'
+        - $ref: "#/components/parameters/siteId"
       responses:
-        '200':
+        "200":
           description: Contains information about networks at the service site
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetworkList'
+                $ref: "#/components/schemas/NetworkList"
               examples:
                 NetworkListWithDevices:
-                  $ref: '#/components/examples/NetworkListWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/ServiceSiteNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/NetworkListWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/ServiceSiteNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /devices:
     get:
@@ -360,43 +360,43 @@ paths:
               - `cpe-management-isolated-networks-auxiliary-read`
               - `cpe-management-isolated-networks-auxiliary-write`
       responses:
-        '200':
+        "200":
           description: Contains information about all devices
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceList'
+                $ref: "#/components/schemas/DeviceList"
               examples:
                 BaseDeviceList:
-                  $ref: '#/components/examples/BaseDeviceList'
+                  $ref: "#/components/examples/BaseDeviceList"
                 DeviceListWithHardwareAddress:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddress'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddress"
                 DeviceListWithServiceSite:
-                  $ref: '#/components/examples/DeviceListWithServiceSite'
+                  $ref: "#/components/examples/DeviceListWithServiceSite"
                 DeviceListWithNetworks:
-                  $ref: '#/components/examples/DeviceListWithNetworks'
+                  $ref: "#/components/examples/DeviceListWithNetworks"
                 DeviceListWithHardwareAddressAndServiceSite:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndServiceSite'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndServiceSite"
                 DeviceListWithHardwareAddressAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndNetworks'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndNetworks"
                 DeviceListWithServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithServiceSiteAndNetworks'
+                  $ref: "#/components/examples/DeviceListWithServiceSiteAndNetworks"
                 DeviceListWithHardwareAddressAndServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndServiceSiteAndNetworks'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndServiceSiteAndNetworks"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /devices/{deviceId}:
     parameters:
-      - $ref: '#/components/parameters/deviceId'
+      - $ref: "#/components/parameters/deviceId"
     get:
       tags:
         - Devices
@@ -422,47 +422,47 @@ paths:
               - `cpe-management-isolated-networks-auxiliary-read`
               - `cpe-management-isolated-networks-auxiliary-write`
       responses:
-        '200':
+        "200":
           description: Contains information about the device
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Device'
+                $ref: "#/components/schemas/Device"
               examples:
                 BaseDevice:
-                  $ref: '#/components/examples/BaseDevice'
+                  $ref: "#/components/examples/BaseDevice"
                 DeviceWithHardwareAddress:
-                  $ref: '#/components/examples/DeviceWithHardwareAddress'
+                  $ref: "#/components/examples/DeviceWithHardwareAddress"
                 DeviceWithServiceSite:
-                  $ref: '#/components/examples/DeviceWithServiceSite'
+                  $ref: "#/components/examples/DeviceWithServiceSite"
                 DeviceWithNetworks:
-                  $ref: '#/components/examples/DeviceWithNetworks'
+                  $ref: "#/components/examples/DeviceWithNetworks"
                 DeviceWithHardwareAddressAndServiceSite:
-                  $ref: '#/components/examples/DeviceWithHardwareAddressAndServiceSite'
+                  $ref: "#/components/examples/DeviceWithHardwareAddressAndServiceSite"
                 DeviceWithHardwareAddressAndNetworks:
-                  $ref: '#/components/examples/DeviceWithHardwareAddressAndNetworks'
+                  $ref: "#/components/examples/DeviceWithHardwareAddressAndNetworks"
                 DeviceWithServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceWithServiceSiteAndNetworks'
+                  $ref: "#/components/examples/DeviceWithServiceSiteAndNetworks"
                 DeviceWithHardwareAddressAndServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceWithHardwareAddressAndServiceSiteAndNetworks'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/DeviceNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/DeviceWithHardwareAddressAndServiceSiteAndNetworks"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/DeviceNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /devices/{deviceId}/isolated-networks:
     parameters:
-      - $ref: '#/components/parameters/deviceId'
+      - $ref: "#/components/parameters/deviceId"
     get:
       tags:
         - Devices
@@ -486,29 +486,29 @@ paths:
             - `cpe-management-isolated-networks-auxiliary-read`
             - `cpe-management-isolated-networks-auxiliary-write`
       responses:
-        '200':
+        "200":
           description: Contains information about networks configured on the device
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetworkList'
+                $ref: "#/components/schemas/NetworkList"
               examples:
                 NetworkListWithDevices:
-                  $ref: '#/components/examples/NetworkListWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/DeviceNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/NetworkListWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/DeviceNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     patch:
       tags:
@@ -534,24 +534,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BulkNetworkUpdate'
+              $ref: "#/components/schemas/BulkNetworkUpdate"
       responses:
         204:
           description: Successfully inserted/removed the configuration for many networks from the device
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/DeviceOrNetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/DeviceOrNetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /isolated-networks:
     get:
@@ -591,22 +591,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetworkList'
+                $ref: "#/components/schemas/NetworkList"
               examples:
                 BaseNetworkList:
-                  $ref: '#/components/examples/BaseNetworkList'
+                  $ref: "#/components/examples/BaseNetworkList"
                 NetworkListWithDevices:
-                  $ref: '#/components/examples/NetworkListWithDevices'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/NetworkListWithDevices"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     post:
       tags:
@@ -639,38 +639,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NetworkCreate'
+              $ref: "#/components/schemas/NetworkCreate"
             examples:
               BaseNetworkCreate:
-                $ref: '#/components/examples/BaseNetworkCreate'
+                $ref: "#/components/examples/BaseNetworkCreate"
               NetworkCreateWithDevices:
-                $ref: '#/components/examples/NetworkCreateWithDevices'
+                $ref: "#/components/examples/NetworkCreateWithDevices"
               NetworkCreateStaged:
-                $ref: '#/components/examples/NetworkCreateStaged'
+                $ref: "#/components/examples/NetworkCreateStaged"
       responses:
         201:
           description: Contains information about the created network
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Network'
+                $ref: "#/components/schemas/Network"
               examples:
                 BaseNetwork:
-                  $ref: '#/components/examples/BaseNetwork'
+                  $ref: "#/components/examples/BaseNetwork"
                 NetworkWithDevices:
-                  $ref: '#/components/examples/NetworkWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/NetworkWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /isolated-networks/{netId}:
     get:
@@ -705,33 +705,33 @@ paths:
             - `cpe-management-devices-write`
             - `cpe-management-devices-hardware-address-read`
       parameters:
-        - $ref: '#/components/parameters/netId'
+        - $ref: "#/components/parameters/netId"
       responses:
-        '200':
+        "200":
           description: Contains information about the network
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Network'
+                $ref: "#/components/schemas/Network"
               examples:
                 BaseNetwork:
-                  $ref: '#/components/examples/BaseNetwork'
+                  $ref: "#/components/examples/BaseNetwork"
                 NetworkWithDevices:
-                  $ref: '#/components/examples/NetworkWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/NetworkWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     patch:
       tags:
@@ -756,42 +756,42 @@ paths:
             - `cpe-management-isolated-networks-primary-write`
             - `cpe-management-isolated-networks-auxiliary-write`
       parameters:
-        - $ref: '#/components/parameters/netId'
+        - $ref: "#/components/parameters/netId"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NetworkUpdate'
+              $ref: "#/components/schemas/NetworkUpdate"
             examples:
               NetworkUpdate:
-                $ref: '#/components/examples/NetworkUpdate'
+                $ref: "#/components/examples/NetworkUpdate"
       responses:
         200:
           description: Contains information about the updated network
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Network'
+                $ref: "#/components/schemas/Network"
               examples:
                 BaseNetwork:
-                  $ref: '#/components/examples/BaseNetwork'
+                  $ref: "#/components/examples/BaseNetwork"
                 NetworkWithDevices:
-                  $ref: '#/components/examples/NetworkWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/NetworkWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     delete:
       tags:
@@ -816,28 +816,28 @@ paths:
             - `cpe-management-isolated-networks-primary-write`
             - `cpe-management-isolated-networks-auxiliary-write`
       parameters:
-        - $ref: '#/components/parameters/netId'
+        - $ref: "#/components/parameters/netId"
       responses:
-        '204':
+        "204":
           description: Successfully deleted the network
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /isolated-networks/{netId}/devices:
     parameters:
-      - $ref: '#/components/parameters/netId'
+      - $ref: "#/components/parameters/netId"
     get:
       tags:
         - Devices
@@ -866,35 +866,35 @@ paths:
               - `cpe-management-service-sites-read`
               - `cpe-management-service-sites-location-read`
       responses:
-        '200':
+        "200":
           description: Contains information about devices configured with the network
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceList'
+                $ref: "#/components/schemas/DeviceList"
               examples:
                 DeviceListWithNetworks:
-                  $ref: '#/components/examples/DeviceListWithNetworks'
+                  $ref: "#/components/examples/DeviceListWithNetworks"
                 DeviceListWithHardwareAddressAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndNetworks'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndNetworks"
                 DeviceListWithServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithServiceSiteAndNetworks'
+                  $ref: "#/components/examples/DeviceListWithServiceSiteAndNetworks"
                 DeviceListWithHardwareAddressAndServiceSiteAndNetworks:
-                  $ref: '#/components/examples/DeviceListWithHardwareAddressAndServiceSiteAndNetworks'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/DeviceListWithHardwareAddressAndServiceSiteAndNetworks"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     patch:
       tags:
@@ -920,24 +920,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BulkDeviceUpdate'
+              $ref: "#/components/schemas/BulkDeviceUpdate"
       responses:
         204:
           description: Successfully inserted/removed the network from the configuration of many devices
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/Generic403'
-        '404':
-          $ref: '#/components/responses/DeviceOrNetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "404":
+          $ref: "#/components/responses/DeviceOrNetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
   /reboot-requests:
     get:
@@ -969,22 +969,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RebootRequestList'
+                $ref: "#/components/schemas/RebootRequestList"
               examples:
                 BaseRebootRequestList:
-                  $ref: '#/components/examples/BaseRebootRequestList'
+                  $ref: "#/components/examples/BaseRebootRequestList"
                 RebootRequestListWithDevices:
-                  $ref: '#/components/examples/RebootRequestListWithDevices'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/RebootRequestListWithDevices"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
     post:
       tags:
         - Reboot Requests
@@ -1012,37 +1012,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RebootRequestCreate'
+              $ref: "#/components/schemas/RebootRequestCreate"
             examples:
               BaseRebootRequestCreate:
-                $ref: '#/components/examples/BaseRebootRequestCreate'
+                $ref: "#/components/examples/BaseRebootRequestCreate"
               RebootRequestCreateWithDevices:
-                $ref: '#/components/examples/RebootRequestCreateWithDevices'
+                $ref: "#/components/examples/RebootRequestCreateWithDevices"
       responses:
         201:
           description: Contains information about the created reboot request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RebootRequest'
+                $ref: "#/components/schemas/RebootRequest"
               examples:
                 BaseRebootRequest:
-                  $ref: '#/components/examples/BaseRebootRequest'
+                  $ref: "#/components/examples/BaseRebootRequest"
                 RebootRequestWithDevices:
-                  $ref: '#/components/examples/RebootRequestWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
-  
+                  $ref: "#/components/examples/RebootRequestWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
+
   /reboot-requests/{rebootId}:
     get:
       tags:
@@ -1068,33 +1068,33 @@ paths:
             - `cpe-management-devices-write`
             - `cpe-management-devices-hardware-address-read`
       parameters:
-        - $ref: '#/components/parameters/rebootId'
+        - $ref: "#/components/parameters/rebootId"
       responses:
-        '200':
+        "200":
           description: Contains information about the reboot request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RebootRequest'
+                $ref: "#/components/schemas/RebootRequest"
               examples:
                 BaseRebootRequest:
-                  $ref: '#/components/examples/BaseRebootRequest'
+                  $ref: "#/components/examples/BaseRebootRequest"
                 RebootRequestWithDevices:
-                  $ref: '#/components/examples/RebootRequestWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/RebootRequestWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     patch:
       tags:
@@ -1108,49 +1108,49 @@ paths:
         **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-write`
-            
+
         ## Advanced Mode
         **Required Scopes:**
           - `cpe-management-devices-write`
           - **any of**
             - `cpe-management-reboot-requests-write`
       parameters:
-        - $ref: '#/components/parameters/rebootId'
+        - $ref: "#/components/parameters/rebootId"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RebootRequestUpdate'
+              $ref: "#/components/schemas/RebootRequestUpdate"
             examples:
               RebootRequestUpdate:
-                $ref: '#/components/examples/RebootRequestUpdate'
+                $ref: "#/components/examples/RebootRequestUpdate"
       responses:
         200:
           description: Contains information about the updated reboot request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RebootRequest'
+                $ref: "#/components/schemas/RebootRequest"
               examples:
                 BaseRebootRequest:
-                  $ref: '#/components/examples/BaseRebootRequest'
+                  $ref: "#/components/examples/BaseRebootRequest"
                 RebootRequestWithDevices:
-                  $ref: '#/components/examples/RebootRequestWithDevices'
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+                  $ref: "#/components/examples/RebootRequestWithDevices"
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
     delete:
       tags:
@@ -1171,24 +1171,24 @@ paths:
           - **any of**
             - `cpe-management-reboot-requests-write`
       parameters:
-        - $ref: '#/components/parameters/rebootId'
+        - $ref: "#/components/parameters/rebootId"
       responses:
-        '204':
+        "204":
           description: Successfully deleted the reboot request
-        '400':
-          $ref: '#/components/responses/Generic400'
-        '401':
-          $ref: '#/components/responses/Generic401'
-        '403':
-          $ref: '#/components/responses/OperationalModeNotSupported403'
-        '404':
-          $ref: '#/components/responses/NetworkNotFound404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '501':
-          $ref: '#/components/responses/Generic501'
-        '503':
-          $ref: '#/components/responses/Generic503'
+        "400":
+          $ref: "#/components/responses/Generic400"
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/OperationalModeNotSupported403"
+        "404":
+          $ref: "#/components/responses/NetworkNotFound404"
+        "500":
+          $ref: "#/components/responses/Generic500"
+        "501":
+          $ref: "#/components/responses/Generic501"
+        "503":
+          $ref: "#/components/responses/Generic503"
 
 components:
   securitySchemes:
@@ -1197,9 +1197,9 @@ components:
       description: This API uses OAuth 2 with the authorization code grant type flow
       flows:
         authorizationCode:
-          authorizationUrl: '{oauth2AuthorizationUrl}'
-          tokenUrl: &token-url '{oauth2TokenUrl}'
-          refreshUrl: &token-refresh-url '{oauth2RefreshUrl}'
+          authorizationUrl: "{oauth2AuthorizationUrl}"
+          tokenUrl: &token-url "{oauth2TokenUrl}"
+          refreshUrl: &token-refresh-url "{oauth2RefreshUrl}"
           scopes: &scopes
             cpe-management-service-sites-read: List a service owner's service sites
             cpe-management-service-sites-location-read: Read a service site's physical location
@@ -1225,28 +1225,28 @@ components:
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/ServiceSiteId'
+        $ref: "#/components/schemas/ServiceSiteId"
       description: ID of the service site to find
     deviceId:
       name: deviceId
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/DeviceId'
+        $ref: "#/components/schemas/DeviceId"
       description: ID of the device to find
     netId:
       name: netId
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/DeviceId'
+        $ref: "#/components/schemas/DeviceId"
       description: ID of the network to find
     rebootId:
       name: rebootId
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/RebootId'
+        $ref: "#/components/schemas/RebootId"
       description: ID of the reboot request to find
 
   schemas:
@@ -1255,50 +1255,50 @@ components:
       minLength: 1
       maxLength: 64
       description: The unique identifier for a service site
-      example: &service-site-id 'site-123'
+      example: &service-site-id "site-123"
 
     DeviceId:
       type: string
       minLength: 1
       maxLength: 64
       description: The unique identifier for a device
-      example: &device-id 'device-1'
+      example: &device-id "device-1"
 
     DeviceIdList:
       type: array
       description: List of device IDs
       items:
-        $ref: '#/components/schemas/DeviceId'
+        $ref: "#/components/schemas/DeviceId"
       example: &device-id-list
         - *device-id
-        - &device-id2 'device-2'
+        - &device-id2 "device-2"
 
     NetworkId:
       type: string
       minLength: 1
       maxLength: 64
       description: The unique identifier for the network.
-      example: &network-id 'wifi-1'
+      example: &network-id "wifi-1"
 
     NetworkIdList:
       type: array
       items:
-        $ref: '#/components/schemas/NetworkId'
+        $ref: "#/components/schemas/NetworkId"
       example: &network-id-list
         - *network-id
-        - &network-id2 'wifi-2'
+        - &network-id2 "wifi-2"
 
     RebootId:
       type: string
       minLength: 1
       maxLength: 64
       description: The unique identifier for the reboot request.
-      example: &reboot-id 'reboot-1'
+      example: &reboot-id "reboot-1"
 
     RebootIdList:
       type: array
       items:
-        $ref: '#/components/schemas/RebootId'
+        $ref: "#/components/schemas/RebootId"
       example: reboot-id-list
         - *reboot-id
         - *reboot-id2
@@ -1328,7 +1328,7 @@ components:
               type: string
               enum: [feet, meters]
               description: The units of elevation (feet or meters)
-              example: &geographic-point-elevation-units 'feet'
+              example: &geographic-point-elevation-units "feet"
           required:
             - value
             - units
@@ -1339,9 +1339,9 @@ components:
         - latitude
         - longitude
       example: &geographic-point
-          latitude: *geographic-point-latitude
-          longitude: *geographic-point-longitude
-          elevation: *geographic-point-elevation
+        latitude: *geographic-point-latitude
+        longitude: *geographic-point-longitude
+        elevation: *geographic-point-elevation
 
     PropertyAddress:
       type: object
@@ -1354,153 +1354,151 @@ components:
           description: The unique identifier for the property address
           minLength: 1
           maxLength: 64
-          example: &property-address-id 'site-123'
+          example: &property-address-id "site-123"
         addressLine1:
           type: string
           maxLength: 128
           description: The first line of the address
-          example: &property-address-address-line-1 '123 Main St'
+          example: &property-address-address-line-1 "123 Main St"
         addressLine2:
           type: string
           maxLength: 128
           description: The second line of the address
-          example: &property-address-address-line-2 'Suite 456'
+          example: &property-address-address-line-2 "Suite 456"
         streetNr:
           type: string
           maxLength: 64
           description: The street number
-          example: &property-address-street-nr '123'
+          example: &property-address-street-nr "123"
         streetNrSuffix:
           type: string
           maxLength: 64
           description: The suffix for the street number
-          example: &property-address-street-nr-suffix 'A'
+          example: &property-address-street-nr-suffix "A"
         streetNrLast:
           type: string
           maxLength: 64
           description: The last street number
-          example: &property-address-street-nr-last '125'
+          example: &property-address-street-nr-last "125"
         streetNrLastSuffix:
           type: string
           maxLength: 64
           description: The suffix for the last street number
-          example: &property-address-street-nr-last-suffix 'B'
+          example: &property-address-street-nr-last-suffix "B"
         streetName:
           type: string
           maxLength: 64
           description: The name of the street
-          example: &property-address-street-name 'Main'
+          example: &property-address-street-name "Main"
         subUnitType:
           type: string
           maxLength: 64
           description: The type of sub-unit (e.g., Apartment, Suite)
-          example: &property-address-sub-unit-type 'Apartment'
+          example: &property-address-sub-unit-type "Apartment"
         subUnitNr:
           type: string
           maxLength: 64
           description: The number of the sub-unit
-          example: &property-address-sub-unit-nr 'A12'
+          example: &property-address-sub-unit-nr "A12"
         levelType:
           type: string
           maxLength: 64
           description: The type of level (e.g., Floor, Basement)
-          example: &property-address-level-type 'Floor'
+          example: &property-address-level-type "Floor"
         levelNr:
           type: string
           maxLength: 64
           description: The number of the level
-          example: &property-address-level-nr '3'
+          example: &property-address-level-nr "3"
         buildingName:
           type: string
           maxLength: 64
           description: The name of the building
-          example: &property-address-building-name 'Example Building'
+          example: &property-address-building-name "Example Building"
         privateStreetName:
           type: string
           maxLength: 64
           description: The name of a private street
-          example: &property-address-private-street-name 'Private Rd'
+          example: &property-address-private-street-name "Private Rd"
         locality:
           type: string
           maxLength: 64
           description: The locality (neighborhood, area)
-          example: &property-address-locality 'Example Locality'
+          example: &property-address-locality "Example Locality"
         city:
           type: string
           maxLength: 128
           description: The city or town
-          example: &property-address-city 'Example State'
+          example: &property-address-city "Example State"
         stateOrProvince:
           type: string
           maxLength: 64
           description: The state or province
-          example: &property-address-state-or-province 'EX'
+          example: &property-address-state-or-province "EX"
         country:
           type: string
           maxLength: 64
           description: The country
-          example: &property-address-country 'United States'
+          example: &property-address-country "United States"
         postCode:
           type: string
           maxLength: 64
           description: The postal code or ZIP code
-          example: &property-address-post-code '12345'
+          example: &property-address-post-code "12345"
         postCodeExtension:
           type: string
           maxLength: 64
           description: The postal code extension
-          example: &property-address-post-code-extension '6789'
+          example: &property-address-post-code-extension "6789"
       example: &property-address
-          id: *property-address-id
-          addressLine1: *property-address-address-line-1
-          addressLine2: *property-address-address-line-2
-          streetNr: *property-address-street-nr
-          streetNrSuffix: *property-address-street-nr-suffix
-          streetNrLast: *property-address-street-nr-last
-          streetNrLastSuffix: *property-address-street-nr-last-suffix
-          streetName: *property-address-street-name
-          subUnitType: *property-address-sub-unit-type
-          subUnitNr: *property-address-sub-unit-nr
-          levelType: *property-address-level-type
-          levelNr: *property-address-level-nr
-          buildingName: *property-address-building-name
-          privateStreetName: *property-address-private-street-name
-          locality: *property-address-locality
-          city: *property-address-city
-          stateOrProvince: *property-address-state-or-province
-          country: *property-address-country
-          postCode: *property-address-post-code
-          postCodeExtension: *property-address-post-code-extension
+        id: *property-address-id
+        addressLine1: *property-address-address-line-1
+        addressLine2: *property-address-address-line-2
+        streetNr: *property-address-street-nr
+        streetNrSuffix: *property-address-street-nr-suffix
+        streetNrLast: *property-address-street-nr-last
+        streetNrLastSuffix: *property-address-street-nr-last-suffix
+        streetName: *property-address-street-name
+        subUnitType: *property-address-sub-unit-type
+        subUnitNr: *property-address-sub-unit-nr
+        levelType: *property-address-level-type
+        levelNr: *property-address-level-nr
+        buildingName: *property-address-building-name
+        privateStreetName: *property-address-private-street-name
+        locality: *property-address-locality
+        city: *property-address-city
+        stateOrProvince: *property-address-state-or-province
+        country: *property-address-country
+        postCode: *property-address-post-code
+        postCodeExtension: *property-address-post-code-extension
 
     ServiceSite:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/ServiceSiteId'
+          $ref: "#/components/schemas/ServiceSiteId"
         name:
           type: string
           maxLength: 64
-          example: &service-site-name 'Example Service Site 1'
+          example: &service-site-name "Example Service Site 1"
         description:
           type: string
           maxLength: 64
-          example: &service-site-description 'This is the first example service site'
+          example: &service-site-description "This is the first example service site"
         devices:
           allOf:
             - description: The IDs of devices located at this service site
-            - $ref: '#/components/schemas/DeviceIdList'
+            - $ref: "#/components/schemas/DeviceIdList"
         location:
           type: object
           properties:
             geographicPoint:
-              $ref: '#/components/schemas/GeographicPoint'
+              $ref: "#/components/schemas/GeographicPoint"
             propertyAddress:
-              $ref: '#/components/schemas/PropertyAddress'
+              $ref: "#/components/schemas/PropertyAddress"
           example: &service-site-location
-            geographicPoint:
-              *geographic-point
-            propertyAddress:
-              *property-address
+            geographicPoint: *geographic-point
+            propertyAddress: *property-address
       required:
         - id
       example: &service-site
@@ -1513,50 +1511,50 @@ components:
     ServiceSiteList:
       type: array
       items:
-        $ref: '#/components/schemas/ServiceSite'
+        $ref: "#/components/schemas/ServiceSite"
       example: &service-site-list
         - *service-site
-        - id: &service-site-id2 'site-456'
-          name: &service-site-name2 'Example Service Site 2'
-          description: &service-site-description2 'This is the second example service site'
+        - id: &service-site-id2 "site-456"
+          name: &service-site-name2 "Example Service Site 2"
+          description: &service-site-description2 "This is the second example service site"
           devices: &service-site-devices2
-            - 'device-3'
-            - 'device-4'
+            - "device-3"
+            - "device-4"
           location: &service-site-location2
             geographicPoint:
               latitude: 41.8781
               longitude: -87.6298
               elevation:
                 value: 5.0
-                units: 'meters'
+                units: "meters"
             propertyAddress:
-              id: 'address-2'
-              addressLine1: '456 Elm St'
-              streetNr: '456'
-              streetName: 'Elm'
-              locality: 'Another Locality'
-              city: 'Another City'
-              stateOrProvince: 'AY'
-              country: 'Another Country'
-              postCode: '67890'
+              id: "address-2"
+              addressLine1: "456 Elm St"
+              streetNr: "456"
+              streetName: "Elm"
+              locality: "Another Locality"
+              city: "Another City"
+              stateOrProvince: "AY"
+              country: "Another Country"
+              postCode: "67890"
 
     Device:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/DeviceId'
+          $ref: "#/components/schemas/DeviceId"
         name:
           type: string
           minLength: 1
           maxLength: 100
           description: The name of the device
-          example: &device-name 'Gateway-1'
+          example: &device-name "Gateway-1"
         description:
           type: string
           minLength: 0
           maxLength: 255
           description: A description of the device
-          example: &device-description 'A Wi-Fi gateway device'
+          example: &device-description "A Wi-Fi gateway device"
         hardwareAddress:
           description: The hardware address of the device
           oneOf:
@@ -1564,12 +1562,12 @@ components:
               properties:
                 hardwareAddressType:
                   type: string
-                  enum: ['EUI-48']
-                  example: &device-hardware-address-type 'EUI-48'
+                  enum: ["EUI-48"]
+                  example: &device-hardware-address-type "EUI-48"
                 value:
                   type: string
-                  pattern: '^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
-                  example: &device-hardware-address-value '12:34:56:78:9A:BC'
+                  pattern: "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
+                  example: &device-hardware-address-value "12:34:56:78:9A:BC"
               required:
                 - hardwareAddressType
           discriminator:
@@ -1578,11 +1576,11 @@ components:
             hardwareAddressType: *device-hardware-address-type
             value: *device-hardware-address-value
         serviceSite:
-          $ref: '#/components/schemas/ServiceSiteId'
+          $ref: "#/components/schemas/ServiceSiteId"
         networks:
           type: array
           items:
-            $ref: '#/components/schemas/NetworkId'
+            $ref: "#/components/schemas/NetworkId"
           description: The IDs of networks attached to the device
           example: *network-id-list
       example: &device
@@ -1595,18 +1593,18 @@ components:
     DeviceList:
       type: array
       items:
-        $ref: '#/components/schemas/Device'
+        $ref: "#/components/schemas/Device"
       example: &device-list
         - *device
         - id: *device-id2
-          name: &device-name2 'Gateway-2'
-          description: &device-description2 'A second Wi-Fi gateway devices'
+          name: &device-name2 "Gateway-2"
+          description: &device-description2 "A second Wi-Fi gateway devices"
           hardwareAddress: &device-hardware-address2
-            hardwareAddressType: 'EUI-48'
-            value: 'AB:CD:EF:12:34:56'
+            hardwareAddressType: "EUI-48"
+            value: "AB:CD:EF:12:34:56"
           serviceSite: *service-site-id2
           networks: &device-networks2
-            - 'wifi-3'
+            - "wifi-3"
 
     WpaPersonalDetail:
       type: object
@@ -1615,7 +1613,7 @@ components:
           type: string
           maxLength: 255
           description: The password for the WPA Personal Wi-Fi network
-          example: &wpa-personal-password 'my-password'
+          example: &wpa-personal-password "my-password"
         securityModeType:
           type: string
           enum:
@@ -1623,7 +1621,7 @@ components:
             - WPA2-WPA3-Personal
             - WPA3-Personal
           description: The security mode type for the WPA Personal Wi-Fi network
-          example: &wpa-personal-security-mode-type 'WPA3-Personal'
+          example: &wpa-personal-security-mode-type "WPA3-Personal"
       required:
         - securityModeType
       example: &wpa-personal
@@ -1637,14 +1635,14 @@ components:
           type: string
           maxLength: 255
           description: The authentication server for the WPA Enterprise Wi-Fi network
-          example: &wpa-enterprise-auth-server '1.2.3.4'
+          example: &wpa-enterprise-auth-server "1.2.3.4"
         securityModeType:
           type: string
           enum:
             - WPA2-Enterprise
             - WPA3-Enterprise
           description: The security mode type for the WPA Enterprise Wi-Fi network
-          example: &wpa-enterprise-security-mode-type 'WPA3-Enterprise'
+          example: &wpa-enterprise-security-mode-type "WPA3-Enterprise"
       required:
         - securityModeType
       example: &wpa-enterprise
@@ -1658,25 +1656,25 @@ components:
           type: string
           enum:
             - Wi-Fi
-          example: &wifi-access-detail-access-type 'Wi-Fi'
+          example: &wifi-access-detail-access-type "Wi-Fi"
         ssid:
           type: string
           minLength: 2
           maxLength: 32
           description: The SSID (network name) of the Wi-Fi network
-          example: &wifi-access-detail-ssid 'my-ssid'
+          example: &wifi-access-detail-ssid "my-ssid"
         securityMode:
           oneOf:
-            - $ref: '#/components/schemas/WpaPersonalDetail'
-            - $ref: '#/components/schemas/WpaEnterpriseDetail'
+            - $ref: "#/components/schemas/WpaPersonalDetail"
+            - $ref: "#/components/schemas/WpaEnterpriseDetail"
           discriminator:
             propertyName: securityModeType
             mapping:
-              WPA2-Personal: '#/components/schemas/WpaPersonalDetail'
-              WPA2-WPA3-Personal: '#/components/schemas/WpaPersonalDetail'
-              WPA3-Personal: '#/components/schemas/WpaPersonalDetail'
-              WPA2-Enterprise: '#/components/schemas/WpaEnterpriseDetail'
-              WPA3-Enterprise: '#/components/schemas/WpaEnterpriseDetail'
+              WPA2-Personal: "#/components/schemas/WpaPersonalDetail"
+              WPA2-WPA3-Personal: "#/components/schemas/WpaPersonalDetail"
+              WPA3-Personal: "#/components/schemas/WpaPersonalDetail"
+              WPA2-Enterprise: "#/components/schemas/WpaEnterpriseDetail"
+              WPA3-Enterprise: "#/components/schemas/WpaEnterpriseDetail"
           description: The security mode details for the Wi-Fi network
           example: *wpa-personal
       required:
@@ -1688,11 +1686,11 @@ components:
 
     AccessDetail:
       oneOf:
-        - $ref: '#/components/schemas/WiFiAccessDetail'
+        - $ref: "#/components/schemas/WiFiAccessDetail"
       discriminator:
         propertyName: accessType
         mapping:
-          Wi-Fi: '#/components/schemas/WiFiAccessDetail'
+          Wi-Fi: "#/components/schemas/WiFiAccessDetail"
       example: *wifi-access-detail
 
     NetworkUpdate:
@@ -1702,17 +1700,17 @@ components:
           type: string
           maxLength: 255
           description: A description of the network
-          example: &network-description 'my network'
+          example: &network-description "my network"
         accessDetail:
           description: The access details for the network
           allOf:
-            - $ref: '#/components/schemas/AccessDetail'
+            - $ref: "#/components/schemas/AccessDetail"
           example: *wifi-access-detail
         expiration:
           type: string
           format: date-time
           description: The expiration date and time of the network
-          example: &network-expiration '1970-01-03T00:00:00.000Z'
+          example: &network-expiration "1970-01-03T00:00:00.000Z"
       example: &network-update
         description: *network-description
         accessDetail: *wifi-access-detail
@@ -1720,12 +1718,12 @@ components:
 
     NetworkCreate:
       allOf:
-        - $ref: '#/components/schemas/NetworkUpdate'
+        - $ref: "#/components/schemas/NetworkUpdate"
       properties:
         devices:
           type: array
           items:
-            $ref: '#/components/schemas/DeviceId'
+            $ref: "#/components/schemas/DeviceId"
           description: >-
             List of devices to configure the created network.  Any empty list is a staged network not provisioned to any devices. When undefined, the network targets the 'default' device (simple use case that wouldn't use locations or devices). Throws an error when creating if there is no 'default' device.
           example: *device-id-list
@@ -1739,30 +1737,30 @@ components:
 
     Network:
       allOf:
-        - $ref: '#/components/schemas/NetworkCreate'
+        - $ref: "#/components/schemas/NetworkCreate"
       properties:
         id:
-          $ref: '#/components/schemas/NetworkId'
+          $ref: "#/components/schemas/NetworkId"
         createdAt:
           type: string
           format: date-time
           description: The creation date and time of the network
-          example: &network-created '1970-01-01T00:00:00.000Z'
+          example: &network-created "1970-01-01T00:00:00.000Z"
         createdBy:
           type: string
           maxLength: 100
           description: The user who created the network
-          example: &network-created-by 'user-1'
+          example: &network-created-by "user-1"
         modifiedAt:
           type: string
           format: date-time
           description: The last update date and time of the network
-          example: &network-modified '1970-01-02T00:00:00.000Z'
+          example: &network-modified "1970-01-02T00:00:00.000Z"
         modifiedBy:
           type: string
           maxLength: 100
           description: The user who last updated the network
-          example: &network-modified-by 'user-2'
+          example: &network-modified-by "user-2"
       required:
         - id
         - accessDetail
@@ -1780,25 +1778,25 @@ components:
     NetworkList:
       type: array
       items:
-        $ref: '#/components/schemas/Network'
+        $ref: "#/components/schemas/Network"
       example: &network-list
         - *network
         - id: *network-id2
-          description: &network-description2 'my second network'
+          description: &network-description2 "my second network"
           accessDetail: &network-access-detail2
-            accessType: 'Wi-Fi'
-            ssid: 'my-second-ssid'
+            accessType: "Wi-Fi"
+            ssid: "my-second-ssid"
             securityMode:
-              password: 'my-other-password'
-              securityModeType: 'WPA2-Personal'
-          expiration: &network-expiration2 '2023-08-25T00:42:17.272Z'
+              password: "my-other-password"
+              securityModeType: "WPA2-Personal"
+          expiration: &network-expiration2 "2023-08-25T00:42:17.272Z"
           devices: &network-devices2
-            - 'device-3'
-            - 'device-4'
-          createdAt: &network-created-at2 '2023-08-25T00:42:17.272Z'
-          createdBy: &network-created-by2 'user-3'
-          modifiedAt: &network-modified-at2 '2023-08-25T00:42:17.272Z'
-          modifiedBy: &network-modified-by2 'user-4'
+            - "device-3"
+            - "device-4"
+          createdAt: &network-created-at2 "2023-08-25T00:42:17.272Z"
+          createdBy: &network-created-by2 "user-3"
+          modifiedAt: &network-modified-at2 "2023-08-25T00:42:17.272Z"
+          modifiedBy: &network-modified-by2 "user-4"
 
     BulkDeviceUpdate:
       type: object
@@ -1806,13 +1804,13 @@ components:
         Update a set of devices by inserting or deleting devices by ID from that set.  The output may be used to set a property that is a set of devices, or the output may be used to perform an action on a set of devices.
       properties:
         insert:
-          $ref: '#/components/schemas/DeviceIdList'
+          $ref: "#/components/schemas/DeviceIdList"
           example: *device-id-list
         delete:
           allOf:
-            - $ref: '#/components/schemas/DeviceIdList'
+            - $ref: "#/components/schemas/DeviceIdList"
             - example: &bulk-device-update-delete
-              - 'device-3'
+                - "device-3"
       example: &bulk-device-update
         insert: *device-id-list
         delete: *bulk-device-update-delete
@@ -1823,13 +1821,13 @@ components:
         Update a set of networks by inserting or deleting networks by ID from that set.  The output may be used to set a property that is a set of networks, or the output may be used to perform an action on a set of networks.
       properties:
         insert:
-          $ref: '#/components/schemas/NetworkIdList'
+          $ref: "#/components/schemas/NetworkIdList"
           example: *network-id-list
         delete:
           allOf:
-            - $ref: '#/components/schemas/NetworkIdList'
+            - $ref: "#/components/schemas/NetworkIdList"
             - example: &bulk-network-update-delete
-              - 'wifi-3'
+                - "wifi-3"
       example: &bulk-network-update
         insert: *device-id-list
         delete: *bulk-network-update-delete
@@ -1841,24 +1839,24 @@ components:
           type: string
           maxLength: 255
           description: A message related to the reboot request
-          example: &reboot-message 'reboot to correct performance'
+          example: &reboot-message "reboot to correct performance"
         atTime:
           type: string
           format: date-time
           description: The date and time to reboot the device. Do not include 'atTime' to request immediate reboot.
-          example: &reboot-at-time '1970-01-03T00:00:00.000Z'
+          example: &reboot-at-time "1970-01-03T00:00:00.000Z"
       example: &reboot-request-update
         message: *reboot-message
         atTime: *reboot-at-time
 
     RebootRequestCreate:
       allOf:
-        - $ref: '#/components/schemas/RebootRequestUpdate'
+        - $ref: "#/components/schemas/RebootRequestUpdate"
       properties:
         devices:
           type: array
           items:
-            $ref: '#/components/schemas/DeviceId'
+            $ref: "#/components/schemas/DeviceId"
           description: >-
             List of devices to reboot. When undefined, the reboot targets the 'default' device (simple use case that wouldn't use locations or devices). Throws an error when creating if there is no 'default' device.
           example: *device-id-list
@@ -1869,30 +1867,30 @@ components:
 
     RebootRequest:
       allOf:
-        - $ref: '#/components/schemas/RebootRequestCreate'
+        - $ref: "#/components/schemas/RebootRequestCreate"
       properties:
         id:
-          $ref: '#/components/schemas/RebootId'
+          $ref: "#/components/schemas/RebootId"
         createdAt:
           type: string
           format: date-time
           description: The creation date and time of the reboot request
-          example: &reboot-created '1970-01-01T00:00:00.000Z'
+          example: &reboot-created "1970-01-01T00:00:00.000Z"
         createdBy:
           type: string
           maxLength: 100
           description: The user who created the reboot request
-          example: &reboot-created-by 'user-1'
+          example: &reboot-created-by "user-1"
         modifiedAt:
           type: string
           format: date-time
           description: The last update date and time of the reboot request
-          example: &reboot-modified '1970-01-02T00:00:00.000Z'
+          example: &reboot-modified "1970-01-02T00:00:00.000Z"
         modifiedBy:
           type: string
           maxLength: 100
           description: The user who last updated the reboot request
-          example: &reboot-modified-by 'user-2'
+          example: &reboot-modified-by "user-2"
       required:
         - id
       example: &reboot-request
@@ -1908,20 +1906,20 @@ components:
     RebootRequestList:
       type: array
       items:
-        $ref: '#/components/schemas/RebootRequest'
+        $ref: "#/components/schemas/RebootRequest"
       example: &reboot-request-list
         - *reboot-request
-        - id: &reboot-id2 'reboot-2'
-          message: &reboot-message2 'my second reboot request'
-          atTime: &reboot-at-time2 '2023-08-25T00:42:17.272Z'
+        - id: &reboot-id2 "reboot-2"
+          message: &reboot-message2 "my second reboot request"
+          atTime: &reboot-at-time2 "2023-08-25T00:42:17.272Z"
           devices: &reboot-devices2
-            - 'device-3'
-            - 'device-4'
-          createdAt: &reboot-created-at2 '2023-08-25T00:42:17.272Z'
-          createdBy: &reboot-created-by2 'user-3'
-          modifiedAt: &reboot-modified-at2 '2023-08-25T00:42:17.272Z'
-          modifiedBy: &reboot-modified-by2 'user-4'
-    
+            - "device-3"
+            - "device-4"
+          createdAt: &reboot-created-at2 "2023-08-25T00:42:17.272Z"
+          createdBy: &reboot-created-by2 "user-3"
+          modifiedAt: &reboot-modified-at2 "2023-08-25T00:42:17.272Z"
+          modifiedBy: &reboot-modified-by2 "user-4"
+
     ErrorInfo:
       type: object
       properties:
@@ -2405,7 +2403,7 @@ components:
             - `cpe-management-devices-write`
             - `cpe-management-devices-hardware-address-read`
       value: *network-list
-    
+
     BaseRebootRequest:
       summary: Simple Mode Reboot Request
       description: |
@@ -2495,40 +2493,40 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example: &generic-400
             status: 400
             code: INVALID_ARGUMENT
-            message: 'Schema validation failed at  ...'
+            message: "Schema validation failed at  ..."
 
     Generic401:
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 401
             code: UNAUTHENTICATED
-            message: 'Authorization failed: ...'
+            message: "Authorization failed: ..."
 
     Generic403:
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example: &generic-403-example
             status: 403
             code: PERMISSION_DENIED
-            message: 'Operation not allowed: ...'
+            message: "Operation not allowed: ..."
 
     OperationalModeNotSupported403:
       description: Operational mode not supported
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           examples:
             OperationalModeNotSupported:
               summary: Operational Mode Error
@@ -2537,7 +2535,7 @@ components:
               value:
                 status: 403
                 code: OPERATIONAL_MODE_NOT_SUPPORTED
-                message: 'Operational mode not supported: simple: ...'
+                message: "Operational mode not supported: simple: ..."
             Generic:
               summary: Forbidden
               value: *generic-403-example
@@ -2547,74 +2545,74 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 404
             code: NOT_FOUND
-            message: 'Service site ID(s) do not exist: [...]'
+            message: "Service site ID(s) do not exist: [...]"
 
     DeviceNotFound404:
       description: Device(s) not found
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 404
             code: NOT_FOUND
-            message: 'Device ID(s) do not exist: [...]'
+            message: "Device ID(s) do not exist: [...]"
 
     NetworkNotFound404:
       description: Network(s) not found
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 404
             code: NOT_FOUND
-            message: 'Network ID(s) do not exist: [...]'
+            message: "Network ID(s) do not exist: [...]"
 
     DeviceOrNetworkNotFound404:
       description: Device(s) and/or network(s) not found
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 404
             code: NOT_FOUND
-            message: 'Device ID(s) do not exist: [...]; Network ID(s) do not exist: [...]'
+            message: "Device ID(s) do not exist: [...]; Network ID(s) do not exist: [...]"
 
     Generic500:
       description: Internal server error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 500
             code: INTERNAL_SERVER_ERROR
-            message: 'Internal server error: ...'
+            message: "Internal server error: ..."
 
     Generic501:
       description: Not Implemented
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 501
             code: NOT_IMPLEMENTED
-            message: 'Service not implemented for the specified endpoint'
+            message: "Service not implemented for the specified endpoint"
 
     Generic503:
       description: Service unavailable
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            $ref: "#/components/schemas/ErrorInfo"
           example:
             status: 503
             code: SERVICE_UNAVAILABLE
-            message: 'Service unavailable'
+            message: "Service unavailable"
