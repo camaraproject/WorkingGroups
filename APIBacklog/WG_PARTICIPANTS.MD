@@ -8,6 +8,7 @@
 | Cablelabs | Randy Levensalor |
 | Centillion | Bart |
 | Centillion | Nick Venezia |
+| Charter | Christopher Aubut |
 | Charter | Jason Page |
 | Charter | Justin Pace |
 | China Mobile | Bao Yuhan |
