@@ -43,6 +43,7 @@
 | Orange | Sylvain Morel  |
 | Qwilt | Yoav |
 | Scenera | Andrew Wajs  |
+| Shabodi | Jeff |
 | Shabodi | Kevin Howe-Patterson |
 | Shabodi | Nitin Sood |
 | Shabodi | Umair Ali Rashid |
