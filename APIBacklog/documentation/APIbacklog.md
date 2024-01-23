@@ -41,7 +41,7 @@
 | Receive SMS | X | 2024/01/04| Not Available | X | Not yet discussed | Not yet treated  | --- | 
 | Device Quality Indicator | Deutsche Telekom | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/380/files) | Deutsche Telekom, GSMA-OGW | Not yet discussed | Not yet treated  | --- | 
 | Best Interconnection | Deutsche Telekom | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/381/files) | Deutsche Telekom, GSMA-OGW | Not yet discussed | Not yet treated  | --- | 
-| Customer Premise Equipment Management | Charter Communications | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/381/files) | CableLabs, Charter Communications, Liberty Global, Vodafone, VodafoneZiggo | Not yet discussed | Not yet treated  | --- | 
+| Customer Premise Equipment Management | Charter Communications | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/379/files) | CableLabs, Charter Communications, Liberty Global, Vodafone, VodafoneZiggo | Not yet discussed | Not yet treated  | --- | 
 
  ## Attributes
  - `API [family] name`: it is the name of the API [family] proposal
