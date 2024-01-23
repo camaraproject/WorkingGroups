@@ -21,8 +21,9 @@
 | GSMA	| Henry Calvert |
 | GSMA	| Lucy Thatcher |
 | HCL | Norbert Naveen |
-| Huawei	| Albert Wang |
-| Huawei	| Qing Shuting |
+| Huawei| Albert Wang |
+| Huawei | Kai Zhangkai |
+| Huawei| Qing Shuting |
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
 | Infolysis | Vaios Koumaras |
