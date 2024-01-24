@@ -4,22 +4,22 @@ info:
   title: CPE Management API
   version: 0.0.1
   description: |
-    Service enabling API for customer premises equipment (CPE) management. The APIs initial focus is on managing **Isolated Networks** (API clients can manage the access details for logically separated networks on the same device) and device reboot requests.
+    Service enabling API for managing network operator supplied network access devices. This APIs initial focus is on managing **Isolated Networks** and device reboot requests.
 
     # Introduction
     An isolated network is a network access configuration where each configuration is for a logically separated Local Area Network (LAN). Application developers can create, modify, or remove these networks which could be useful in scenarios such as:
 
     - A property owner wants to create a temporary network for the duration of a short-term booking or long-term rental.
-    - A property manager wants to replicate the network access details across multiple devices at one or more locations such as common areas, offices, etc.
+    - A property manager wants to replicate the network access details across multiple network access devices at one or more locations such as common areas, offices, etc.
     - A security/privacy-minded user wants to create one or more networks for their guests or Internet-of-Thing (IoT) network clients.
 
     A reboot request is simply a request to reboot a network operator supplied network access device. Application developers can create these requests which could be useful in scenarios such as:
 
-    - A property owner wants to recover from a faulty network state by rebooting gateway device.
+    - A property owner wants to recover from a faulty network state by rebooting a gateway device.
     - A property manager wants to reboot multiple devices at one or more locations such as common areas, offices, etc.
 
     # Relevant Terms and Definitions
-    - **Isolated Network**: Network access configuration where each configuration is for a logically separated Local Area Network (LAN) when on the same device. Isolation in this context means that traffic will not be forwarded or routed from one logical LAN to another on the same device. The isolation implementation must be considered a logical construct only. Network operators are free to choose how to implement this behavior using any number of technologies such as with VLANs or OpenFlow rules. Traffic between two network clients using the same isolated network access details, but across different devices, is currently undefined behavior.
+    - **Isolated Network**: Network access configuration where each configuration is for a logically separated Local Area Network (LAN) when on the same network access device. Isolation in this context means that traffic will not be forwarded or routed from one logical LAN to another on the same device. The isolation implementation must be considered a logical construct only. Network operators are free to choose how to implement this behavior using any number of technologies such as with VLANs or OpenFlow rules. Traffic between two network clients using the same isolated network access details, but across different network access devices, is currently undefined behavior.
     - **Reboot Request**: A request to reboot a network operator supplied network access device.
     - **Device**: A network operator supplied network access device that supports isolated networks.  Multiple devices that support LAN connectivity across the same isolated network (e.g., mesh Wi-Fi, Thread personal area network, etc.) SHOULD be presented as a single device for implementations of this API.
     - **Network Operator**: Service provider that implements this API and has operational control of supporting devices.
@@ -27,21 +27,21 @@ info:
     - **Service Site**: A distinct service owner location, as interpreted by the network operator, with one or more devices.  A service site typically has a one-to-one relationship with the mailing address of the location.  Network operators that support a single identity or interchangeable identities for multiple service sites at the same mailing address (e.g., a residential and business account, an office and common area account, etc.) MUST provide some distinction in the property address (e.g., attn: Home Office, attn: Common Area, etc.).  Multiple service sites, for the same mailing address, but for unrelated service owner identities, do not have this requirement.
     - **End-User**: The user connecting to an isolated network with a network client.
     - **Network Client**: End-user equipment connecting to an isolated network (e.g., laptop, phone, IoT device, etc.).
-    - **API Client**: A first- or third-party software system managing isolated networks through this API.
+    - **API Client**: A first- or third-party software system using this API.
 
     # API Functionality
-    This API allows API clients to manage isolated networks. It has two operational modes: simple and advanced. OAuth 2.0 is used for authorizing an identity (resource holder) and scopes are used for role-based authorization.
+    This API allows API clients to manage isolated networks and reboot network access devices. OAuth 2.0 is used for authorizing an identity (resource holder) and scopes are used for role-based authorization.
 
     ## Authorization
-    Authorization of API clients is typically performed by the OAuth 2.0 authorization code grant type such that service owners delegate access to their resources exposed by this API to the API client.  PKCE MUST be used when the API client secret cannot be secured (e.g., mobile application or single page application without a secure back-end).  This API can also be used with the OAuth 2.0 client credentials grant type, though such a use case only makes sense for first-party network operator API clients or when the service owner operates their own API client (client ID is bound to the service owner's identity).
+    Authorization of API clients SHOULD be performed with OAuth 2.0 using the authorization code grant type such that service owners delegate access to their resources exposed by this API to the API client.  PKCE MUST be used when the API client secret cannot be secured (e.g., mobile application or single page application without a secure back-end).  This API MAY also be used with the client credentials grant type, though such a use case only makes sense for first-party network operator API clients or when the service owner operates their own API client (client ID is bound to the service owner's identity).
 
     ### Scopes
-    OAuth 2.0 scopes are used to protect the service owner's information and privacy.  The general format is `<API_name>-<Resource>-<Permission>`.  A resource may be further broken down into `<Resource_name>-<Field>` or `<Resource_name>-<Role>` for granular permissions. Scopes also control output information as opposed to just authorizing endpoints. Each endpoint definition will clearly state what scopes are needed to access an endpoint and which are needed to access additional information within an endpoint. Below are some general rules for scopes in this API.
+    OAuth 2.0 scopes are used to protect the service owner's information and privacy.  The general format is `<API_name>-<Resource>-<Permission>`.  A resource may be further broken down into `<Resource_name>-<Field>` or `<Resource_name>-<Role>` for granular permissions. Scopes also control output information as opposed to just authorizing endpoints. Each endpoint definition will clearly state what scopes are needed for access and which are needed to access additional information. Below are some general rules for scopes in this API.
 
-    - Government regulated information has special scopes, such as physical locations or hardware addresses of network devices.  Network operators are expected to follow any local laws when sharing this information with an API client.
+    - Regulated information, such as physical locations or hardware addresses of network devices, have special scopes.  Network operators are expected to follow any local regulations when sharing this information with an API client.
     - Scopes have inheritance when one scope would otherwise require the inherited scope.
     - Read scopes for one resource impacts the output of another resource when the requested resource has a relationship with the first (e.g., listing networks on a device requires both device and network read scopes).
-    - Isolated networks are broken down into 3 roles allowing service owners to grant granular permissions to API clients: default, primary, and auxiliary. The default role allows API clients to manage networks it creates. These are considered a type of auxiliary or secondary network. The primary role allows API clients to manage the main network access configuration. The last role allows API clients to manage all auxiliary networks (owned and those created by other first- or third-party API clients). Complete administrative control requires both the primary and auxiliary roles.
+    - Isolated networks are broken down into 3 roles allowing service owners to grant granular permissions to API clients: only-own, primary, and auxiliary. The primary role allows API clients to manage the main network access configuration. The auxiliary role allows API clients to manage all auxiliary (i.e., secondary) networks. The only-own role allows API clients to manage networks it has created. Only-own networks SHOULD be an auxiliary, or secondary, network. Note that there is an edge case when a service owner revokes the primary role authorization. An API client SHOULD be able to continue managing primary isolated networks created by the client. Complete administrative control requires both the primary and auxiliary roles.
 
     | Scope | Description | Inherits
     |-------|-------------|---------
@@ -54,7 +54,7 @@ info:
     | **cpe-management-isolated-networks-write** | Create or modify a service owner's isolated networks created by the calling API client | cpe-management-isolated-networks-read
     | **cpe-management-isolated-networks-primary-read** | Access information about a service owner's primary isolated network
     | **cpe-management-isolated-networks-primary-write** | Modify a service owner's primary isolated network | cpe-management-isolated-networks-primary-read
-    | **cpe-management-isolated-networks-auxiliary-read** | List service owner's auxiliary isolated networks | cpe-management-isolated-networks-read
+    | **cpe-management-isolated-networks-auxiliary-read** | List a service owner's auxiliary isolated networks | cpe-management-isolated-networks-read
     | **cpe-management-isolated-networks-auxiliary-write** | Create or modify a service owner's auxiliary isolated networks | cpe-management-isolated-networks-auxiliary-read<br />cpe-management-isolated-networks-write
     | **cpe-management-reboot-requests-read** | List a service owner's reboot requests created by the calling API client
     | **cpe-management-reboot-requests-write** | Create or modify a service owner's reboot request created by the calling API client | cpe-management-reboot-request-read
@@ -65,25 +65,16 @@ info:
     ## General Usage
     This API is intended for creating, modifying, or deleting isolated networks using the `/isolated-networks` endpoints to build access detail configurations. The `/service-sites` endpoints are used for iterating over a service owner's locations. The exact location may be requested with an additional scope to assist with reconciling information about service sites when the API client operator has an existing relationship with the service owner. Similarly, the `/devices` endpoints are used for iterating over and configuring a service owner's devices.  The hardware address may be requested for the same purpose of reconciling information from another source (e.g., database, persons with physical device access, etc.).
 
-    ### Operational Modes
-    Two operational modes are supported: simple and advanced.  The default operational mode is advanced.  Simple mode is enabled on a per OAuth 2.0 access token basis when the following criteria are met:
+    ## Optional Modes
 
-    1. The OAuth 2.0 access token MUST only be authorized with `cpe-management-isolated-networks-*` scopes.
-    2. The OAuth 2.0 access token MUST be for service owners with one and only one device and one and only one service site.
-
-    Simple mode implicitly inherits read/write access from the `cpe-management-isolated-networks-*` scopes to the one and only one device at one and only one service site without exposing endpoints or information for those resources to the API client (Principal of Least Privilege).  If criteria 1 is met but not criteria 2, `/isolated-networks` and `/isolated-networks/{netId}` endpoints MUST fail with a `403 OPERATIONAL_MODE_NOT_SUPPORTED`.  Simple mode is not intended to be used for service owners that do not meet criteria 2.  Those service owners must grant explicit authorization to service site and device resources.
-
-      All `/isolated-networks` and `/isolated-networks/{netId}` endpoints are indirectly impacted by the operational mode (e.g., reading what devices are configured with an isolated network, writing changes to an isolated network to device configurations, etc.).  That is, they all require implicit (simple) or explicit (advanced) device authorization.
-
-    The following endpoint(s) are directly impacted by the operational mode:
-
-    | Method | Endpoint | Mode | Impact |
-    |--------|----------|------|--------|
-    | `POST` | `/isolated-networks` | Simple | `devices` field in the request body MUST NOT be set or it MUST be set to `undefined`.  Network is configured to the one and only one device.
-    | `POST` | `/isolated-networks` | Advanced | `devices` field in the request body MUST be set to an `empty list` or `list of device IDs`.  Network is staged or configured to the specified devices.
+    ### Default Device
+    When an identity for OAuth 2.0 access token has a "default device", such as a typical residential customer with one service site and one network access device, service site and device scopes MAY be omitted.  Any fields referencing a network access device using the `/isolated-networks` or `/isolated-networks/*` APIs MUST be left blank by API clients.   Network operators SHOULD substitute the missing field with the default device.  API definitions include additional details for error responses so API clients can detect if this mode is available.
 
     ## Comments for Network Operators
     The following comments are for Network Operators implementing this API.
+
+    ### Auto-Deleting Isolated Networks
+    When an isolated network is not configured on any device the network configuration and its identifier SHOULD be auto-deleted.  API clients MUST not be expected to delete networks not configured on any device.
 
     ### Mesh Systems
     Mesh systems SHOULD be represented as a single device when implementing this API due to the undefined behavior of LAN connectivity across multiple devices with the same isolated network.  The recommendation is to use the gateway hardware address of the mesh system when exposing that field, though the hardware address of any node in the mesh may be used.  If an end-user replaces the equipment, all existing isolated networks SHOULD be synced to the new device representing this mesh.  Alternatively, a synthetic hardware address may also be used if the specification for the address type allows.
@@ -291,7 +282,6 @@ paths:
       description: |
         Returns all networks at a service site that matches the given ID.
 
-        ## Advanced Mode
         **Required Scopes:**
           - **any of**
             - `cpe-management-service-sites-read`
@@ -472,7 +462,6 @@ paths:
       description: |
         Returns all networks configured on a device that matches the given ID.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Advanced Mode
         **Required Scopes:**
           - **any of**
             - `cpe-management-devices-read`
@@ -514,12 +503,14 @@ paths:
       tags:
         - Devices
         - Isolated Networks
-      summary: Bulk insert or remove many networks from the configuration of a device
+      summary: Bulk insert, remove or replace many networks from the configuration of a device
       operationId: patchDeviceWithNetworks
       description: |
-        Bulk inserts or removes many networks from the configuration of the device by the given IDs.
+        Bulk inserts, removes, or replaces many networks from the configuration of the device by the given IDs.
 
-        ## Advanced Mode
+        The replace option is intended to be used for networks that have a "removable" flag of `false`.  When a network
+        is replaced and is no longer assigned to any device, it is considered automatically deleted.
+
         **Required Scopes:**
            - `cpe-management-devices-write`
           - **any of**
@@ -536,10 +527,10 @@ paths:
             schema:
               $ref: "#/components/schemas/BulkNetworkUpdate"
       responses:
-        204:
-          description: Successfully inserted/removed the configuration for many networks from the device
+        "204":
+          description: Successfully inserted, removed, or replaced the configuration for many networks on the device
         "400":
-          $ref: "#/components/responses/Generic400"
+          $ref: "#/components/responses/NetworkNotRemovable400"
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
@@ -562,7 +553,7 @@ paths:
       description: |
         Returns all networks.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-isolated-networks-read`
@@ -572,21 +563,22 @@ paths:
             - `cpe-management-isolated-networks-auxiliary-read`
             - `cpe-management-isolated-networks-auxiliary-write`
 
-        ## Advanced Mode
-          **Required Scopes:**
-          - **any of**
-            - `cpe-management-isolated-networks-read`
-            - `cpe-management-isolated-networks-write`
-            - `cpe-management-isolated-networks-primary-read`
-            - `cpe-management-isolated-networks-primary-write`
-            - `cpe-management-isolated-networks-auxiliary-read`
-            - `cpe-management-isolated-networks-auxiliary-write`
-          - **any of**
-            - `cpe-management-devices-read`
-            - `cpe-management-devices-write`
-            - `cpe-management-devices-hardware-address-read`
+        ## Without Default Device
+        **Required Scopes:**
+        - **any of**
+          - `cpe-management-isolated-networks-read`
+          - `cpe-management-isolated-networks-write`
+          - `cpe-management-isolated-networks-primary-read`
+          - `cpe-management-isolated-networks-primary-write`
+          - `cpe-management-isolated-networks-auxiliary-read`
+          - `cpe-management-isolated-networks-auxiliary-write`
+        - **any of**
+          - `cpe-management-devices-read`
+          - `cpe-management-devices-write`
+          - `cpe-management-devices-hardware-address-read`
+
       responses:
-        200:
+        "200":
           description: Contains information about all networks
           content:
             application/json:
@@ -600,7 +592,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "500":
           $ref: "#/components/responses/Generic500"
         "501":
@@ -616,8 +608,8 @@ paths:
       description: |
         Creates and returns the new network.  Scopes impact the function and output of this endpoint. See the examples for various permutations.
 
-        ## Simple Mode
-        Simple mode creates the network and configures it to the service owner's one and only one device at their one and only one service location.  The `devices` field MUST NOT be set or it MUST be set to `undefined`.
+        ## With Default Device
+        For eligible service owner's with a default device, create the network and configure it to the service owner's one and only one device at their one and only one service location.  The `devices` field MUST NOT be set or it MUST be set to `undefined`.
 
         **Required Scopes:**
           - **any of**
@@ -625,8 +617,8 @@ paths:
             - `cpe-management-isolated-networks-primary-write`
             - `cpe-management-isolated-networks-auxiliary-write`
 
-        ## Advanced Mode
-        Advanced mode creates the network and optionally configures it to one or more devices.  The `devices` field MUST be set to an `empty list` or `list of device IDs`.  Networks will be staged when setting `devices` to an `empty list`.
+        ## Without Default Device
+        Create the network and configure it to one or more devices.  The `devices` field MUST NOT be empty.
 
         **Required Scopes:**
           - `cpe-management-devices-write`
@@ -645,10 +637,8 @@ paths:
                 $ref: "#/components/examples/BaseNetworkCreate"
               NetworkCreateWithDevices:
                 $ref: "#/components/examples/NetworkCreateWithDevices"
-              NetworkCreateStaged:
-                $ref: "#/components/examples/NetworkCreateStaged"
       responses:
-        201:
+        "201":
           description: Contains information about the created network
           content:
             application/json:
@@ -664,7 +654,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "500":
           $ref: "#/components/responses/Generic500"
         "501":
@@ -681,7 +671,7 @@ paths:
       description: |
         Returns the network that matches the given ID.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-isolated-networks-read`
@@ -691,7 +681,7 @@ paths:
             - `cpe-management-isolated-networks-auxiliary-read`
             - `cpe-management-isolated-networks-auxiliary-write`
 
-        ## Advanced Mode
+        ## Without Default Device
           **Required Scopes:**
           - **any of**
             - `cpe-management-isolated-networks-read`
@@ -723,7 +713,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "404":
           $ref: "#/components/responses/NetworkNotFound404"
         "500":
@@ -741,14 +731,14 @@ paths:
       description: |
         Updates the network, reconfigures any devices configured with the network, and returns the network that matches the given ID.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-isolated-networks-write`
             - `cpe-management-isolated-networks-primary-write`
             - `cpe-management-isolated-networks-auxiliary-write`
 
-        ## Advanced Mode
+        ## Without Default Device
         **Required Scopes:**
           - `cpe-management-devices-write`
           - **any of**
@@ -767,7 +757,7 @@ paths:
               NetworkUpdate:
                 $ref: "#/components/examples/NetworkUpdate"
       responses:
-        200:
+        "200":
           description: Contains information about the updated network
           content:
             application/json:
@@ -783,7 +773,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "404":
           $ref: "#/components/responses/NetworkNotFound404"
         "500":
@@ -801,14 +791,14 @@ paths:
       description: |
         Deletes the network and removes the configuration from any devices configured with the network that matches the given ID.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-isolated-networks-write`
             - `cpe-management-isolated-networks-primary-write`
             - `cpe-management-isolated-networks-auxiliary-write`
 
-        ## Advanced Mode
+        ## Without Default Device
         **Required Scopes:**
           - `cpe-management-devices-write`
           - **any of**
@@ -821,11 +811,11 @@ paths:
         "204":
           description: Successfully deleted the network
         "400":
-          $ref: "#/components/responses/Generic400"
+          $ref: "#/components/responses/NetworkNotRemovable400"
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "404":
           $ref: "#/components/responses/NetworkNotFound404"
         "500":
@@ -847,7 +837,6 @@ paths:
       description: |
         Returns all devices configured with a network that matches the given ID.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Advanced Mode
         **Required Scopes:**
           - **any of**
             - `cpe-management-devices-read`
@@ -900,12 +889,11 @@ paths:
       tags:
         - Devices
         - Isolated Networks
-      summary: Bulk insert or remove a network from the configuration of many devices
+      summary: Bulk insert, remove, or replace a network from the configuration of many devices
       operationId: patchDevicesWithNetwork
       description: |
-        Bulk inserts or removes a network from the configuration of many devices by the given IDs.
+        Bulk inserts, removes, replaces a network from the configuration of many devices by the given IDs.
 
-        ## Advanced Mode
         **Required Scopes:**
            - `cpe-management-devices-write`
           - **any of**
@@ -922,10 +910,10 @@ paths:
             schema:
               $ref: "#/components/schemas/BulkDeviceUpdate"
       responses:
-        204:
-          description: Successfully inserted/removed the network from the configuration of many devices
+        "204":
+          description: Successfully inserted, removed, or replaced the network from the configuration of many devices
         "400":
-          $ref: "#/components/responses/Generic400"
+          $ref: "#/components/responses/NetworkNotRemovable400"
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
@@ -948,13 +936,13 @@ paths:
       description: |
         Returns all reboot requests.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-read`
             - `cpe-management-reboot-requests-write`
 
-        ## Advanced Mode
+        ## Without Default Device
           **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-read`
@@ -964,7 +952,7 @@ paths:
             - `cpe-management-devices-write`
             - `cpe-management-devices-hardware-address-read`
       responses:
-        200:
+        "200":
           description: Contains information about all reboot requests
           content:
             application/json:
@@ -978,13 +966,14 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "500":
           $ref: "#/components/responses/Generic500"
         "501":
           $ref: "#/components/responses/Generic501"
         "503":
           $ref: "#/components/responses/Generic503"
+
     post:
       tags:
         - Reboot Requests
@@ -993,15 +982,15 @@ paths:
       description: |
         Creates and returns the new reboot request.  Scopes impact the function and output of this endpoint. See the examples for various permutations.
 
-        ## Simple Mode
-        Simple mode creates the reboot request and issues it to the service owner's one and only one device at their one and only one service location.  The `devices` field MUST NOT be set or it MUST be set to `undefined`.
+        ## With Default Device
+        Creates the reboot request and issues it to the service owner's one and only one device at their one and only one service location.  The `devices` field MUST NOT be set or it MUST be set to `undefined`.
 
         **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-write`
 
-        ## Advanced Mode
-        Advanced mode creates the reboot request and optionally issues it to one or more devices.  The `devices` field MUST be set to a `list of device IDs`.
+        ## Without Default Device
+        Creates the reboot request and issues it to one or more devices.  The `devices` field MUST be set to a non-empty `list of device IDs`.
 
         **Required Scopes:**
           - `cpe-management-devices-write`
@@ -1019,7 +1008,7 @@ paths:
               RebootRequestCreateWithDevices:
                 $ref: "#/components/examples/RebootRequestCreateWithDevices"
       responses:
-        201:
+        "201":
           description: Contains information about the created reboot request
           content:
             application/json:
@@ -1035,7 +1024,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "500":
           $ref: "#/components/responses/Generic500"
         "501":
@@ -1052,13 +1041,13 @@ paths:
       description: |
         Returns the reboot request that matches the given ID.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-read`
             - `cpe-management-reboot-requests-write`
 
-        ## Advanced Mode
+        ## Without Default Device
           **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-read`
@@ -1086,7 +1075,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "404":
           $ref: "#/components/responses/NetworkNotFound404"
         "500":
@@ -1104,12 +1093,12 @@ paths:
       description: |
         Updates the reboot request, reboot for any devices targeted with the reboot request, and returns the reboot request that matches the given ID.  Scopes impact the output of this endpoint.  See the examples for various permutations.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-write`
 
-        ## Advanced Mode
+        ## Without Default Device
         **Required Scopes:**
           - `cpe-management-devices-write`
           - **any of**
@@ -1126,7 +1115,7 @@ paths:
               RebootRequestUpdate:
                 $ref: "#/components/examples/RebootRequestUpdate"
       responses:
-        200:
+        "200":
           description: Contains information about the updated reboot request
           content:
             application/json:
@@ -1142,7 +1131,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "404":
           $ref: "#/components/responses/NetworkNotFound404"
         "500":
@@ -1160,12 +1149,12 @@ paths:
       description: |
         Deletes the reboot request that matches the given ID.
 
-        ## Simple Mode
+        ## With Default Device
         **Required Scopes:**
           - **any of**
             - `cpe-management-reboot-requests-write`
 
-        ## Advanced Mode
+        ## Without Default Device
         **Required Scopes:**
           - `cpe-management-devices-write`
           - **any of**
@@ -1180,7 +1169,7 @@ paths:
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
-          $ref: "#/components/responses/OperationalModeNotSupported403"
+          $ref: "#/components/responses/DefaultDeviceNotSupported403"
         "404":
           $ref: "#/components/responses/NetworkNotFound404"
         "500":
@@ -1197,9 +1186,9 @@ components:
       description: This API uses OAuth 2 with the authorization code grant type flow
       flows:
         authorizationCode:
-          authorizationUrl: "{oauth2AuthorizationUrl}"
-          tokenUrl: &token-url "{oauth2TokenUrl}"
-          refreshUrl: &token-refresh-url "{oauth2RefreshUrl}"
+          authorizationUrl: "https://api.example.com/oauth2/authorize"
+          tokenUrl: &token-url "https://api.example.com/oauth2/token"
+          refreshUrl: &token-refresh-url "https://api.example.com/refresh"
           scopes: &scopes
             cpe-management-service-sites-read: List a service owner's service sites
             cpe-management-service-sites-location-read: Read a service site's physical location
@@ -1227,6 +1216,7 @@ components:
       schema:
         $ref: "#/components/schemas/ServiceSiteId"
       description: ID of the service site to find
+
     deviceId:
       name: deviceId
       in: path
@@ -1234,6 +1224,7 @@ components:
       schema:
         $ref: "#/components/schemas/DeviceId"
       description: ID of the device to find
+
     netId:
       name: netId
       in: path
@@ -1241,6 +1232,7 @@ components:
       schema:
         $ref: "#/components/schemas/DeviceId"
       description: ID of the network to find
+
     rebootId:
       name: rebootId
       in: path
@@ -1282,11 +1274,19 @@ components:
 
     NetworkIdList:
       type: array
+      description: List of network IDs
       items:
         $ref: "#/components/schemas/NetworkId"
       example: &network-id-list
         - *network-id
         - &network-id2 "wifi-2"
+
+    NetworkVersion:
+      type: string
+      minLength: 1
+      maxLength: 64
+      description: The unique version for the network.
+      example: &network-version "1234ABCD"
 
     RebootId:
       type: string
@@ -1294,14 +1294,6 @@ components:
       maxLength: 64
       description: The unique identifier for the reboot request.
       example: &reboot-id "reboot-1"
-
-    RebootIdList:
-      type: array
-      items:
-        $ref: "#/components/schemas/RebootId"
-      example: reboot-id-list
-        - *reboot-id
-        - *reboot-id2
 
     GeographicPoint:
       type: object
@@ -1354,7 +1346,7 @@ components:
           description: The unique identifier for the property address
           minLength: 1
           maxLength: 64
-          example: &property-address-id "site-123"
+          example: &property-address-id "address-123"
         addressLine1:
           type: string
           maxLength: 128
@@ -1538,6 +1530,125 @@ components:
               country: "Another Country"
               postCode: "67890"
 
+    NetworkRole:
+      description: >-
+        Role of the network on a device.
+      type: string
+      enum: [primary, auxiliary]
+      default: "auxiliary"
+      example: &network-role "primary"
+
+    NetworkDeviceIntersectionCreate:
+      type: object
+      description: >-
+        Properties of a specific network configuration with an implied network on a specific network access device.
+      oneOf:
+        - required: ["device", "role"]
+          properties:
+            device:
+              description: "ID of the device with the network"
+              allOf:
+                - $ref: "#/components/schemas/DeviceId"
+              example: *device-id
+            role:
+              description: >-
+                Role of the network on the device.  Defaults to "auxiliary" if unspecified.
+              default: "auxiliary"
+              allOf:
+                - $ref: "#/components/schemas/NetworkRole"
+              example: *network-role
+        - required: ["device", "replace"]
+          properties:
+            device:
+              description: "ID of the device with the network"
+              allOf:
+                - $ref: "#/components/schemas/DeviceId"
+              example: *device-id
+            replace:
+              description: >-
+                Network to replace on the device.
+              allOf:
+                - $ref: "#/components/schemas/NetworkId"
+              example: *network-id
+      required:
+        - device
+      example: &network-device-intersection-create
+        device: *device-id
+        role: *network-role
+
+    NetworkDeviceIntersectionCreateList:
+      type: array
+      items:
+        $ref: "#/components/schemas/NetworkDeviceIntersectionCreate"
+      example: &network-device-intersection-create-list
+        - *network-device-intersection-create
+        - &network-device-intersection-create-2
+          device: *device-id2
+          replace: *network-id2
+
+    NetworkDeviceIntersection:
+      allOf:
+        - $ref: "#/components/schemas/NetworkDeviceIntersectionCreate"
+      description: >-
+        Properties of a specific network configuration with an implied network on a specific network access device.
+      properties:
+        removable:
+          type: boolean
+          description: >-
+            Flag indicating if the network can be removed.  Defaults to `true` if unspecified.
+          default: true
+          example: &network-removable false
+      required:
+        - device
+      example: &network-device-intersection
+        device: *device-id
+        role: *network-role
+        removable: *network-removable
+
+    NetworkDeviceIntersectionList:
+      type: array
+      items:
+        $ref: "#/components/schemas/NetworkDeviceIntersection"
+      example: &network-device-intersection-list
+        - *network-device-intersection
+
+    DeviceNetworkIntersection:
+      type: object
+      description: >-
+        Properties of a specific network configuration on a specific network access device with an implied device.
+      properties:
+        network:
+          description: "ID of the network."
+          allOf:
+            - $ref: "#/components/schemas/NetworkId"
+          example: *network-id
+        role:
+          description: >-
+            Role of the network.  Defaults to "auxiliary" if unspecified.
+          default: "auxiliary"
+          allOf:
+            - $ref: "#/components/schemas/NetworkRole"
+          example: *network-role
+        removable:
+          type: boolean
+          description: >-
+            Flag indicating if the network can be removed.  Defaults to `true` if unspecified.
+          default: true
+          example: *network-removable
+      required:
+        - network
+      example: &device-network-intersection
+        network: *network-id
+        role: *network-role
+        removable: *network-removable
+
+    DeviceNetworkIntersectionList:
+      type: array
+      items:
+        $ref: "#/components/schemas/DeviceNetworkIntersection"
+      example: &device-network-intersection-list
+        - *device-network-intersection
+
     Device:
       type: object
       properties:
@@ -1570,6 +1681,7 @@ components:
                   example: &device-hardware-address-value "12:34:56:78:9A:BC"
               required:
                 - hardwareAddressType
+                - value
           discriminator:
             propertyName: hardwareAddressType
           example: &device-hardware-address
@@ -1578,17 +1690,29 @@ components:
         serviceSite:
           $ref: "#/components/schemas/ServiceSiteId"
         networks:
-          type: array
-          items:
-            $ref: "#/components/schemas/NetworkId"
+          allOf:
+            - $ref: "#/components/schemas/DeviceNetworkIntersectionList"
           description: The IDs of networks attached to the device
-          example: *network-id-list
+          example: *device-network-intersection-list
+        maxAuxiliaryNetworks:
+          type: integer
+          description: >-
+            Maximum amount of auxiliary networks the device supports for a given client.  For the `only-own` client
+            roles, this is a count of what is in-use by the client + remaining count of what the client can create.  For
+            `primary`-only client roles, the field is not used.  For `auxiliary`-only client roles, it is the maximum
+            number the device supports.
+          minimum: 1
+          example: &device-max-networks 2
+      required:
+        - id
       example: &device
+        id: *device-id
         name: *device-name
         description: *device-description
         hardwareAddress: *device-hardware-address
         serviceSite: *service-site-id
-        networks: *network-id-list
+        networks: *device-network-intersection-list
+        maxAuxiliaryNetworks: *device-max-networks
 
     DeviceList:
       type: array
@@ -1603,8 +1727,8 @@ components:
             hardwareAddressType: "EUI-48"
             value: "AB:CD:EF:12:34:56"
           serviceSite: *service-site-id2
-          networks: &device-networks2
-            - "wifi-3"
+          networks: *device-network-intersection-list
+          maxAuxiliaryNetworks: &device-max-networks2 2
 
     WpaPersonalDetail:
       type: object
@@ -1721,26 +1845,35 @@ components:
         - $ref: "#/components/schemas/NetworkUpdate"
       properties:
         devices:
-          type: array
-          items:
-            $ref: "#/components/schemas/DeviceId"
+          allOf:
+            - $ref: "#/components/schemas/NetworkDeviceIntersectionCreateList"
+          minLength: 1
           description: >-
-            List of devices to configure the created network.  Any empty list is a staged network not provisioned to any devices. When undefined, the network targets the 'default' device (simple use case that wouldn't use locations or devices). Throws an error when creating if there is no 'default' device.
-          example: *device-id-list
+            List of network role and device pairs to configure the created network.
+          example:
+            - *network-device-intersection-create-list
       required:
         - accessDetail
       example: &network-create
         description: *network-description
         accessDetail: *wifi-access-detail
         expiration: *network-expiration
-        devices: *device-id-list
+        devices: *network-device-intersection-create-list
 
     Network:
       allOf:
-        - $ref: "#/components/schemas/NetworkCreate"
+        - $ref: "#/components/schemas/NetworkUpdate"
       properties:
         id:
           $ref: "#/components/schemas/NetworkId"
+        devices:
+          allOf:
+            - $ref: "#/components/schemas/NetworkDeviceIntersectionList"
+          minLength: 1
+          description: >-
+            List of devices the network is configured on.
+          example:
+            - *network-device-intersection-create-list
         createdAt:
           type: string
           format: date-time
@@ -1761,6 +1894,8 @@ components:
           maxLength: 100
           description: The user who last updated the network
           example: &network-modified-by "user-2"
+        version:
+          $ref: "#/components/schemas/NetworkVersion"
       required:
         - id
         - accessDetail
@@ -1769,11 +1904,12 @@ components:
         description: *network-description
         accessDetail: *wifi-access-detail
         expiration: *network-expiration
-        devices: *device-id-list
+        devices: *network-device-intersection-list
         createdAt: *network-created
         createdBy: *network-created-by
         modifiedAt: *network-modified
         modifiedBy: *network-modified-by
+        version: *network-version
 
     NetworkList:
       type: array
@@ -1790,47 +1926,115 @@ components:
               password: "my-other-password"
               securityModeType: "WPA2-Personal"
           expiration: &network-expiration2 "2023-08-25T00:42:17.272Z"
-          devices: &network-devices2
-            - "device-3"
-            - "device-4"
+          devices: &network-device-intersection-list2
+            - device: *device-id2
+              role: &network-role2 "auxiliary"
           createdAt: &network-created-at2 "2023-08-25T00:42:17.272Z"
           createdBy: &network-created-by2 "user-3"
           modifiedAt: &network-modified-at2 "2023-08-25T00:42:17.272Z"
           modifiedBy: &network-modified-by2 "user-4"
+          version: &network-version2 "0000FFFF"
+
+    DeviceNetworkReplacement:
+      type: object
+      description: |
+        A device network replacement operation.
+      properties:
+        device:
+          allOf:
+            - $ref: "#/components/schemas/DeviceId"
+            - example: *device-id
+        replace:
+          allOf:
+            - $ref: "#/components/schemas/NetworkId"
+            - example: *network-id
+      required:
+        - device
+        - replace
+      example: &device-network-replacement
+        device: "device-4"
+        replace: "wifi-5"
+
+    DeviceNetworkReplacementList:
+      type: array
+      items:
+        $ref: "#/components/schemas/DeviceNetworkReplacement"
+      example: &device-network-replacement-list
+        - *device-network-replacement
 
     BulkDeviceUpdate:
       type: object
       description: |
-        Update a set of devices by inserting or deleting devices by ID from that set.  The output may be used to set a property that is a set of devices, or the output may be used to perform an action on a set of devices.
+        Update a set of devices by inserting or deleting devices by ID from that set.
       properties:
         insert:
-          $ref: "#/components/schemas/DeviceIdList"
-          example: *device-id-list
+          allOf:
+            - $ref: "#/components/schemas/DeviceIdList"
+            - example: *device-id-list
         delete:
           allOf:
             - $ref: "#/components/schemas/DeviceIdList"
             - example: &bulk-device-update-delete
                 - "device-3"
+        replace:
+          allOf:
+            - $ref: "#/components/schemas/DeviceNetworkReplacementList"
+            - example: *device-network-replacement-list
       example: &bulk-device-update
         insert: *device-id-list
         delete: *bulk-device-update-delete
+        replace: *device-network-replacement-list
+
+    NetworkReplacement:
+      type: object
+      description: |
+        A network replacement operation.
+      properties:
+        replace:
+          allOf:
+            - $ref: "#/components/schemas/NetworkId"
+            - example: *network-id
+        with:
+          allOf:
+            - $ref: "#/components/schemas/NetworkId"
+            - example: *network-id2
+      required:
+        - replace
+        - with
+      example: &network-replacement
+        replace: "wifi-4"
+        with: "wifi-5"
+
+    NetworkReplacementList:
+      type: array
+      items:
+        $ref: "#/components/schemas/NetworkReplacement"
+      example: &network-replacement-list
+        - *network-replacement
 
     BulkNetworkUpdate:
       type: object
       description: |
-        Update a set of networks by inserting or deleting networks by ID from that set.  The output may be used to set a property that is a set of networks, or the output may be used to perform an action on a set of networks.
+        Update a set of networks by inserting, deleting, or replacing networks by ID from that set.
       properties:
         insert:
-          $ref: "#/components/schemas/NetworkIdList"
-          example: *network-id-list
+          allOf:
+            - $ref: "#/components/schemas/NetworkIdList"
+            - example: *network-id-list
         delete:
           allOf:
             - $ref: "#/components/schemas/NetworkIdList"
             - example: &bulk-network-update-delete
                 - "wifi-3"
+        replace:
+          description: List of network replacements.
+          allOf:
+            - $ref: "#/components/schemas/NetworkReplacementList"
+            - example: *network-replacement-list
       example: &bulk-network-update
-        insert: *device-id-list
+        insert: *network-id-list
         delete: *bulk-network-update-delete
+        replace: *network-replacement-list
 
     RebootRequestUpdate:
       type: object
@@ -1945,6 +2149,7 @@ components:
           - `cpe-management-service-sites-read`
       value: &base-service-site
         id: *service-site-id
+
     ServiceSiteWithLocation:
       summary: Service Site with Location
       description: |
@@ -1955,6 +2160,7 @@ components:
         name: *service-site-name
         description: *service-site-description
         location: *service-site-location
+
     ServiceSiteWithDevices:
       summary: Service Site with Devices
       description: |
@@ -1967,6 +2173,7 @@ components:
       value: &service-site-with-devices
         id: *service-site-id
         devices: *device-id-list
+
     ServiceSiteWithLocationAndDevices:
       summary: Service Site with Location and Devices
       description: |
@@ -1986,6 +2193,7 @@ components:
       value:
         - *base-service-site
         - id: *service-site-id2
+
     ServiceSiteListWithLocation:
       summary: Service Site List with Location
       description: |
@@ -1997,6 +2205,7 @@ components:
           name: *service-site-name2
           description: *service-site-description2
           location: *service-site-location2
+
     ServiceSiteListWithDevices:
       summary: Service Site List with Devices
       description: |
@@ -2010,6 +2219,7 @@ components:
         - *service-site-with-devices
         - id: *service-site-id2
           devices: *service-site-devices2
+
     ServiceSiteListWithLocationAndDevices:
       summary: Service Site List with Location and Devices
       description: |
@@ -2032,6 +2242,7 @@ components:
         id: *device-id
         name: *device-name
         description: *device-description
+
     DeviceWithHardwareAddress:
       summary: Device with Hardware Address
       description: |
@@ -2042,6 +2253,7 @@ components:
         name: *device-name
         description: *device-description
         hardwareAddress: *device-hardware-address
+
     DeviceWithServiceSite:
       summary: Device with Service Site
       description: |
@@ -2057,6 +2269,7 @@ components:
         name: *device-name
         description: *device-description
         serviceSite: *service-site-id
+
     DeviceWithNetworks:
       summary: Device with Networks
       description: |
@@ -2075,7 +2288,9 @@ components:
         id: *device-id
         name: *device-name
         description: *device-description
-        networks: *network-id-list
+        networks: *device-network-intersection-list
+        maxAuxiliaryNetworks: *device-max-networks
+
     DeviceWithHardwareAddressAndServiceSite:
       summary: Device with Hardware Address and Service Site
       description: |
@@ -2090,6 +2305,7 @@ components:
         description: *device-description
         hardwareAddress: *device-hardware-address
         serviceSite: *service-site-id
+
     DeviceWithHardwareAddressAndNetworks:
       summary: Device with Hardware Address and Networks
       description: |
@@ -2107,7 +2323,9 @@ components:
         name: *device-name
         description: *device-description
         hardwareAddress: *device-hardware-address
-        networks: *network-id-list
+        networks: *device-network-intersection-list
+        maxAuxiliaryNetworks: *device-max-networks
+
     DeviceWithServiceSiteAndNetworks:
       summary: Device with Service Site and Networks
       description: |
@@ -2130,7 +2348,9 @@ components:
         name: *device-name
         description: *device-description
         serviceSite: *service-site-id
-        networks: *network-id-list
+        networks: *device-network-intersection-list
+        maxAuxiliaryNetworks: *device-max-networks
+
     DeviceWithHardwareAddressAndServiceSiteAndNetworks:
       summary: Device with Hardware Address, Service Site, and Networks
       description: |
@@ -2160,6 +2380,7 @@ components:
         - id: *device-id2
           name: *device-name2
           description: *device-description2
+
     DeviceListWithHardwareAddress:
       summary: Device List with Hardware Address
       description: |
@@ -2171,6 +2392,7 @@ components:
           name: *device-name2
           description: *device-description2
           hardwareAddress: *device-hardware-address2
+
     DeviceListWithServiceSite:
       summary: Device List with Service Site
       description: |
@@ -2187,6 +2409,7 @@ components:
           name: *device-name2
           description: *device-description2
           serviceSite: *service-site-id2
+
     DeviceListWithNetworks:
       summary: Device List with Networks
       description: |
@@ -2206,7 +2429,9 @@ components:
         - id: *device-id2
           name: *device-name2
           description: *device-description2
-          networks: *device-networks2
+          networks: *device-network-intersection-list
+          maxAuxiliaryNetworks: *device-max-networks2
+
     DeviceListWithHardwareAddressAndServiceSite:
       summary: Device List with Hardware Address and Service Site
       description: |
@@ -2222,6 +2447,7 @@ components:
           description: *device-description2
           hardwareAddress: *device-hardware-address2
           serviceSite: *service-site-id2
+
     DeviceListWithHardwareAddressAndNetworks:
       summary: Device List with Hardware Address and Networks
       description: |
@@ -2240,7 +2466,9 @@ components:
           name: *device-name2
           description: *device-description2
           hardwareAddress: *device-hardware-address2
-          networks: *device-networks2
+          networks: *device-network-intersection-list
+          maxAuxiliaryNetworks: *device-max-networks2
+
     DeviceListWithServiceSiteAndNetworks:
       summary: Device List with Service Site and Networks
       description: |
@@ -2264,7 +2492,9 @@ components:
           name: *device-name2
           description: *device-description2
           serviceSite: *service-site-id2
-          networks: *device-networks2
+          networks: *device-network-intersection-list
+          maxAuxiliaryNetworks: *device-max-networks2
+
     DeviceListWithHardwareAddressAndServiceSiteAndNetworks:
       summary: Device List with Hardware Address, Service Site, and Networks
       description: |
@@ -2283,7 +2513,7 @@ components:
       value: *device-list
 
     BaseNetwork:
-      summary: Simple Mode Network
+      summary: Network Configuration with Default Device
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2302,8 +2532,10 @@ components:
         createdBy: *network-created-by
         modifiedAt: *network-modified
         modifiedBy: *network-modified-by
+        version: *network-version
+
     NetworkWithDevices:
-      summary: Advanced Mode Network
+      summary: Network Configuration
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2330,7 +2562,7 @@ components:
       value: *network-update
 
     BaseNetworkCreate:
-      summary: Create Network on Device (Simple Mode)
+      summary: Create Network on Default Device
       description: |
         Post with the following scope(s):
           - **any of**
@@ -2341,8 +2573,9 @@ components:
         description: *network-description
         accessDetail: *wifi-access-detail
         expiration: *network-expiration
+
     NetworkCreateWithDevices:
-      summary: Create Network on Devices (Advanced Mode)
+      summary: Create Network on Devices
       description: |
         Post with the following scope(s):
           - **any of**
@@ -2351,23 +2584,9 @@ components:
             - `cpe-management-isolated-networks-auxiliary-write`
           - `cpe-management-devices-write`
       value: *network-create
-    NetworkCreateStaged:
-      summary: Create Network as Staged (Advanced Mode)
-      description: |
-        Post with the following scope(s):
-          - **any of**
-            - `cpe-management-isolated-networks-write`
-            - `cpe-management-isolated-networks-primary-write`
-            - `cpe-management-isolated-networks-auxiliary-write`
-          - `cpe-management-devices-write`
-      value:
-        description: *network-description
-        accessDetail: *wifi-access-detail
-        expiration: *network-expiration
-        devices: []
 
     BaseNetworkList:
-      summary: Simple Mode Network List
+      summary: Network List with Default Device
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2387,8 +2606,10 @@ components:
           createdBy: *network-created-by2
           modifiedAt: *network-modified-at2
           modifiedBy: *network-modified-by2
+          version: *network-version2
+
     NetworkListWithDevices:
-      summary: Advanced Mode Network List
+      summary: Network List with Devices
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2405,7 +2626,7 @@ components:
       value: *network-list
 
     BaseRebootRequest:
-      summary: Simple Mode Reboot Request
+      summary: Reboot Request with Default Device
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2419,8 +2640,9 @@ components:
         createdBy: *reboot-created-by
         modifiedAt: *reboot-modified
         modifiedBy: *reboot-modified-by
+
     RebootRequestWithDevices:
-      summary: Advanced Mode Reboot Request
+      summary: Reboot Request
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2441,7 +2663,7 @@ components:
       value: *reboot-request-update
 
     BaseRebootRequestCreate:
-      summary: Create Reboot Request for Device (Simple Mode)
+      summary: Create Reboot Request for Default Device
       description: |
         Post with the following scope(s):
           - **any of**
@@ -2449,8 +2671,9 @@ components:
       value: &reboot-request-update
         message: *reboot-message
         atTime: *reboot-at-time
+
     RebootRequestCreateWithDevices:
-      summary: Create Reboot Request for Devices (Advanced Mode)
+      summary: Create Reboot Request for Devices
       description: |
         Post with the following scope(s):
           - **any of**
@@ -2459,7 +2682,7 @@ components:
       value: *reboot-create
 
     BaseRebootRequestList:
-      summary: Simple Mode Reboot Request List
+      summary: Reboot Request List with Default Device
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2474,8 +2697,9 @@ components:
           createdBy: *reboot-created-by2
           modifiedAt: *reboot-modified-at2
           modifiedBy: *reboot-modified-by2
+
     RebootRequestListWithDevices:
-      summary: Advanced Mode Reboot Request List
+      summary: Reboot Request List
       description: |
         Output with the following scope(s):
           - **any of**
@@ -2494,10 +2718,29 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorInfo"
-          example: &generic-400
+          example: &generic-400-example
             status: 400
             code: INVALID_ARGUMENT
-            message: "Schema validation failed at  ..."
+            message: "Schema validation failed: ..."
+
+    NetworkNotRemovable400:
+      description: Network not removable
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            NetworkNotRemovable:
+              summary: Network Not Removable Error
+              description: |
+                Output when attempting to delete or remove a network that can only be replaced.
+              value:
+                status: 400
+                code: NETWORK_NOT_REMOVABLE
+                message: "Network not removable: ..."
+            Generic:
+              summary: Invalid Argument
+              value: *generic-400-example
 
     Generic401:
       description: Unauthorized
@@ -2521,21 +2764,21 @@ components:
             code: PERMISSION_DENIED
             message: "Operation not allowed: ..."
 
-    OperationalModeNotSupported403:
-      description: Operational mode not supported
+    DefaultDeviceNotSupported403:
+      description: Default device not supported
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorInfo"
           examples:
-            OperationalModeNotSupported:
-              summary: Operational Mode Error
+            DefaultDeviceNotSupported:
+              summary: Default Device Not Supported Error
               description: |
-                Output with scopes for a simple mode access token but for an unsupported resource owner.
+                Output with scopes for a default device but for an unsupported resource owner.
               value:
                 status: 403
-                code: OPERATIONAL_MODE_NOT_SUPPORTED
-                message: "Operational mode not supported: simple: ..."
+                code: DEFAULT_DEVICE_NOT_SUPPORTED
+                message: "Default device not supported: ..."
             Generic:
               summary: Forbidden
               value: *generic-403-example
