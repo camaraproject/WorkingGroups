@@ -71,6 +71,7 @@
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
 | Zignos | Carlos |
+| ZTE | Hans Neff |
 | | Cmti CA |
 | | José Emmanuel Arellano Bravo |
 | | Prashant Shrivastava |
