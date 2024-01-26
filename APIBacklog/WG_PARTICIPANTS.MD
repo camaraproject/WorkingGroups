@@ -32,6 +32,8 @@
 | Infobip | Kwok Onn Looi |
 | Infolysis | Nikolaos VRIONIS |
 | Infosys | Chintan Lodariya |
+| Ipification	| Aleksandar Brankovic |
+| Ipification	| L. B. |
 | KDDI | Toshi (Toshiyasu) Wakayama  |
 | KDDI | Yusuke Nakano |
 | KPN | Huub Appelboom |
