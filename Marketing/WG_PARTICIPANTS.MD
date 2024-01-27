@@ -45,7 +45,6 @@
 | Softbank | Toru Kikuchi |
 | Starhub | Rajesh Naresh Mhatre |
 | Summit-Tech | Doug Makishima |
-| T-Mobile NL | Muhammad Ahmad  |
 | T-Mobile US	| Lyle Bertz |
 | T-Mobile US	| Stephen Compston |
 | Telecom Italia	| Roberto Procopio |
