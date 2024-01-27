@@ -33,7 +33,6 @@
 | KPN | Huub Appelboom |
 | LinuxFoundation | Jill Lovato |
 | Microsoft | Angel Shimelish |
-| Microsoft	| Joe Biron |
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
 | Nokia	| Tanja de Groot |
