@@ -40,6 +40,7 @@
 | ORANGE	| Sylvain Morel |
 | Scenera	| Chien Lim |
 | Scenera	| David Lee |
+| Segron | Florian Leeder |
 | Shabodi | Kevin Howe-Patterson |
 | Singtel | Ming Hui Foo |
 | Softbank | Toru Kikuchi |
