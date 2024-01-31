@@ -35,6 +35,7 @@
 | Microsoft | Angel Shimelish |
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
+| Nabstract | Vaibhav Mehta |
 | Nokia	| Tanja de Groot |
 | Nokia	| William Stanley |
 | ORANGE	| Sylvain Morel |
