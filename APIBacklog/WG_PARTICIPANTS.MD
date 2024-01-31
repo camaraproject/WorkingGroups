@@ -45,6 +45,7 @@
 | Orange | Sylvain Morel  |
 | Qwilt | Yoav |
 | Scenera | Andrew Wajs  |
+| Shabodi | Brian |
 | Shabodi | Jeff |
 | Shabodi | Kevin Howe-Patterson |
 | Shabodi | Nitin Sood |
