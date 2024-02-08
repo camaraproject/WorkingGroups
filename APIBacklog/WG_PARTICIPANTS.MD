@@ -67,6 +67,7 @@
 | Telefonica | Maria Virtudes Briz Ruiz |
 | Telefonica | Rubén Barrado González  |
 | Telesmart | Bulent Tuncel |
+| Totogi | Ailton Santana |
 | Upstream Systems | Nikos Fotiou |
 | Verizon | Santhi Dharmapalan |
 | Vodafone | Kevin Smith  |
