@@ -9,4 +9,4 @@
 | Validated in lab/productive environments? | In progress |
 | Validated with real customers? | NO |
 | Validated with operators? | NO |
-| Supporters in API Backlog Working Group |  TBD |
+| Supporters in API Backlog Working Group |  T-Mobile US |
