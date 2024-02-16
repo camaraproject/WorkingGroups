@@ -63,9 +63,11 @@
 | TIM | Fabrizio Moggio  |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
+| Telefonica | Javier Villa Labarra Practicas |
 | Telefonica | Jorge Garcia Hospital |
 | Telefonica | Jose Ordonez-Lucena  |
 | Telefonica | Maria Virtudes Briz Ruiz |
+| Telefonica | Ricardo Serrano Gutierrez |
 | Telefonica | Rubén Barrado González  |
 | Telesmart | Bulent Tuncel |
 | Totogi | Ailton Santana |
