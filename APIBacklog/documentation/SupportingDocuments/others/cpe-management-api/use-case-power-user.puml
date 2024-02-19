@@ -1,0 +1,58 @@
+@startuml
+title Use Case Diagram: Power User
+
+[Subscriber Client] #LightGreen
+[NetworkOperator] #LightGray
+[Subscriber] #LightGreen
+[Subscriber Client] -> [NetworkOperator]
+[NetworkOperator] -> [Subscriber]
+[Subscriber] -> [Subscriber Client] : \noperates & \nconsents\n<<OAuth2/API key>>
+
+note left of [Subscriber Client] : example: Home Assistent on an RPi
+
+@enduml
+
+@startuml
+
+object RequiredScopes {
+  <#LightBlue,#black>|= Scope |= Notes |
+  <#LightYellow>| cpe-management-service-sites-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-service-sites-location-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-devices-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-devices-hardware-address-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-devices-write | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-isolated-networks-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-isolated-networks-write | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-isolated-networks-primary-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-isolated-networks-primary-write | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-isolated-networks-auxiliary-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-isolated-networks-auxiliary-write | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-reboot-requests-read | Subscriber selected for Client |
+  <#LightYellow>| cpe-management-reboot-requests-write | Subscriber selected for Client |
+}
+
+object AccessRights {
+  <#LightBlue,#black>|= Route |= Notes |
+  <#LightYellow>| GET /service-sites | Subscriber selected for Client |
+  <#LightYellow>| GET /service-sites/{sideId} | Subscriber selected for Client |
+  <#LightYellow>| GET /service-sites/{siteId}/devices | Subscriber selected for Client |
+  <#LightYellow>| GET /service-sites/{siteId}/isolated-networks | Subscriber selected for Client |
+  <#LightYellow>| GET /service-sites/{siteId}/devices | Subscriber selected for Client |
+  <#LightYellow>| GET /devices | Subscriber selected for Client |
+  <#LightYellow>| GET /devices/{deviceId} | Subscriber selected for Client |
+  <#LightYellow>| GET /devices/{deviceId}/isolated-networks | Subscriber selected for Client |
+  <#LightYellow>| PATCH /devices/{deviceId}/isolated-networks | Subscriber selected for Client |
+  <#LightYellow>| GET /isolated-networks | Subscriber selected for Client |
+  <#LightYellow>| POST /isolated-networks | Subscriber selected for Client |
+  <#LightYellow>| GET /isolated-networks/{netId} | Subscriber selected for Client |
+  <#LightYellow>| PATCH /isolated-networks/{netId} | Subscriber selected for Client |
+  <#LightYellow>| DELETE /isolated-networks/{netId} | Subscriber selected for Client |
+  <#LightYellow>| GET /isolated-networks/{netId}/devices | Subscriber selected for Client |
+  <#LightYellow>| PATCH /isolated-networks/{netId}/devices | Subscriber selected for Client |
+  <#LightYellow>| GET /reboot-requests | Subscriber selected for Client |
+  <#LightYellow>| POST /reboot-requests | Subscriber selected for Client |
+  <#LightYellow>| GET /reboot-requests{rebootId} | Subscriber selected for Client |
+  <#LightYellow>| PATCH /reboot-requests{rebootId} | Subscriber selected for Client |
+  <#LightYellow>| DELETE /reboot-requests{rebootId} | Subscriber selected for Client |
+}
+@enduml

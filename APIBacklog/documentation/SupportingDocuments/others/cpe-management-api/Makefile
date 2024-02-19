@@ -12,6 +12,5 @@ plantuml: $(PLANTUML_TARGETS)
 
 $(PLANTUML_TARGETS): %.png: %.puml
 	docker run --rm -it --user "$$(id -u):$$(id -g)" \
-		-e JAVA_HOME=/tmp \
 		--volume "$$PWD:/data:Z"  \
 		plantuml/plantuml:latest /data/$<

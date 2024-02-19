@@ -1,0 +1,63 @@
+@startuml
+title Use Case Diagram: Property Manager - Tenant Subscriber
+
+[3rd-Party Client] #LightBlue
+[NetworkOperator] #LightGray
+[Property Manager] #LightCyan
+[Subscriber\nTenantA] #LightGreen
+[Subscriber\nTenantB] #MistyRose
+
+[3rd-Party Client] -left-> [NetworkOperator]: \nclient of
+[3rd-Party Client] <-down- [Property Manager]: \ncustomer of
+[3rd-Party Client] <- [Subscriber\nTenantA]: \nconsents\n<<OAuth2>>
+[3rd-Party Client] <- [Subscriber\nTenantB]: \n no consent
+
+[Property Manager] <-down- [Subscriber\nTenantA]: \ntenant of
+[Property Manager] <-down- [Subscriber\nTenantB]: \ntenant of
+
+@enduml
+
+@startuml
+
+object RequiredScopes {
+  <#LightBlue,#black>|= Scope |= Notes |
+  <#MistyRose>| cpe-management-service-sites-read | No |
+  <#MistyRose>| cpe-management-service-sites-location-read | No |
+  <#MistyRose>| cpe-management-devices-read | No |
+  <#MistyRose>| cpe-management-devices-hardware-address-read | No |
+  <#MistyRose>| cpe-management-devices-write | No |
+  <#Lavender>| cpe-management-isolated-networks-read | Inherited |
+  <#LightGreen>| cpe-management-isolated-networks-write | Inherited |
+  <#Lavender>| cpe-management-isolated-networks-primary-read | Inherited |
+  <#LightGreen>| cpe-management-isolated-networks-primary-write | Manage primary network |
+  <#Lavender>| cpe-management-isolated-networks-auxiliary-read | Inherited |
+  <#LightGreen>| cpe-management-isolated-networks-auxiliary-write | Manage auxiliary networks |
+  <#Lavender>| cpe-management-reboot-requests-read | Inherited |
+  <#LightGreen>| cpe-management-reboot-requests-write | Client can reboot devices |
+}
+
+object AccessRights {
+  <#LightBlue,#black>|= Route |= Notes |
+  <#MistyRose>| GET /service-sites | No |
+  <#MistyRose>| GET /service-sites/{sideId} | No |
+  <#MistyRose>| GET /service-sites/{siteId}/devices | No |
+  <#MistyRose>| GET /service-sites/{siteId}/isolated-networks | No |
+  <#MistyRose>| GET /service-sites/{siteId}/devices | No |
+  <#MistyRose>| GET /devices | No |
+  <#MistyRose>| GET /devices/{deviceId} | No |
+  <#MistyRose>| GET /devices/{deviceId}/isolated-networks | No |
+  <#MistyRose>| PATCH /devices/{deviceId}/isolated-networks | No |
+  <#LightYellow>| GET /isolated-networks | default device |
+  <#LightYellow>| POST /isolated-networks | default device |
+  <#LightYellow>| GET /isolated-networks/{netId} | default device |
+  <#LightYellow>| PATCH /isolated-networks/{netId} | default device |
+  <#LightYellow>| DELETE /isolated-networks/{netId} | default device |
+  <#MistyRose>| GET /isolated-networks/{netId}/devices | No |
+  <#MistyRose>| PATCH /isolated-networks/{netId}/devices | No |
+  <#LightYellow>| GET /reboot-requests | default device |
+  <#LightYellow>| POST /reboot-requests | default device |
+  <#LightYellow>| GET /reboot-requests{rebootId} | default device |
+  <#LightYellow>| PATCH /reboot-requests{rebootId} | default device |
+  <#LightYellow>| DELETE /reboot-requests{rebootId} | default device |
+}
+@enduml
