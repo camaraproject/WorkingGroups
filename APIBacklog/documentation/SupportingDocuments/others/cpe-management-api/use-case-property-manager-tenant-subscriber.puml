@@ -4,16 +4,19 @@ title Use Case Diagram: Property Manager - Tenant Subscriber
 [3rd-Party Client] #LightBlue
 [NetworkOperator] #LightGray
 [Property Manager] #LightCyan
-[Subscriber\nTenantA] #LightGreen
-[Subscriber\nTenantB] #MistyRose
+[Subscriber\n<<TenantA>>] #LightGreen
+[Subscriber\n<<TenantB>>] #MistyRose
 
-[3rd-Party Client] -left-> [NetworkOperator]: \nclient of
-[3rd-Party Client] <-down- [Property Manager]: \ncustomer of
-[3rd-Party Client] <- [Subscriber\nTenantA]: \nconsents\n<<OAuth2>>
-[3rd-Party Client] <- [Subscriber\nTenantB]: \n no consent
+[3rd-Party Client] -left-> [NetworkOperator]: \n client of
+[3rd-Party Client] <-down- [Property Manager]: \n customer of
+[3rd-Party Client] <- [Subscriber\n<<TenantA>>]: \n consents\n <<OAuth2>>
+[3rd-Party Client] <- [Subscriber\n<<TenantB>>]: \n rejects consent\n <<OAuth2>>
 
-[Property Manager] <-down- [Subscriber\nTenantA]: \ntenant of
-[Property Manager] <-down- [Subscriber\nTenantB]: \ntenant of
+[Property Manager] <-down- [Subscriber\n<<TenantA>>]: \n tenant of
+[Property Manager] <-down- [Subscriber\n<<TenantB>>]: tenant of
+
+[NetworkOperator] -> [Subscriber\n<<TenantA>>]: services
+[NetworkOperator] -> [Subscriber\n<<TenantB>>]: services
 
 @enduml
 

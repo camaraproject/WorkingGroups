@@ -4,8 +4,8 @@ title Use Case Diagram: Power User
 [Subscriber Client] #LightGreen
 [NetworkOperator] #LightGray
 [Subscriber] #LightGreen
-[Subscriber Client] -> [NetworkOperator]
-[NetworkOperator] -> [Subscriber]
+[Subscriber Client] -> [NetworkOperator]: client of
+[NetworkOperator] -> [Subscriber]: services
 [Subscriber] -> [Subscriber Client] : \noperates & \nconsents\n<<OAuth2/API key>>
 
 note left of [Subscriber Client] : example: Home Assistent on an RPi

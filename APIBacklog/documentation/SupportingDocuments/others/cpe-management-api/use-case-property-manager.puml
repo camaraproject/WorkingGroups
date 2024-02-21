@@ -3,15 +3,17 @@ title Use Case Diagram: Property Manager
 
 [3rd-Party Client] #LightBlue
 [NetworkOperator] #LightGray
-[Subscriber\nProperty Manager] #LightGreen
+[Subscriber\n<<Property Manager>>] #LightGreen
 [TenantA] #LightCyan
 [TenantB] #LightCyan
 
 [3rd-Party Client] -left-> [NetworkOperator]: \nclient of
-[3rd-Party Client] <-down- [Subscriber\nProperty Manager]: \ncustomer of &\nconsents\n<<OAuth2>>
+[3rd-Party Client] <-down- [Subscriber\n<<Property Manager>>]: \ncustomer of &\nconsents\n<<OAuth2>>
 
-[Subscriber\nProperty Manager] <-down- [TenantA]: \ntenant of &\nconsents\n<<rental agreement>>
-[Subscriber\nProperty Manager] <-down- [TenantB]: \ntenant of &\nconsents\n<<rental agreement>>
+[Subscriber\n<<Property Manager>>] <-down- [TenantA]: \ntenant of &\nconsents\n<<rental agreement>>
+[Subscriber\n<<Property Manager>>] <-down- [TenantB]: \ntenant of &\nconsents\n<<rental agreement>>
+
+[NetworkOperator] -> [Subscriber\n<<Property Manager>>]: services
 
 @enduml
 

@@ -5,7 +5,7 @@ title Use Case Diagram: Short-Term Rental
 [NetworkOperator] #LightGray
 [Subscriber] #LightGreen
 [3rd-Party Client] -> [NetworkOperator]: \nclient of
-[NetworkOperator] -> [Subscriber]
+[NetworkOperator] -> [Subscriber]: services
 [Subscriber] -> [3rd-Party Client] : \ncustomer of &\nconsents\n<<OAuth2>>
 
 @enduml
