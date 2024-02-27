@@ -1,0 +1,296 @@
+swagger: "2.0"
+info:
+  title: IMEI Fraud Check API
+  version: '0.1'
+  description: |-
+   Is an API that allows the  client to check the status and authenticity of mobile devices to see if they have ever been used fraudulently, stolen, lost, or blacklisted.
+
+   **Supported OpCo's:** TBD
+
+host: api.chenosis.io
+basePath: "/v1/imei-information/"
+schemes:
+  - https
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: application
+    tokenUrl: 'https://api.chenosis.io/v1/oauth/access_token?grant_type=client_credetials'
+security:
+  - OAuth2: []
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/{IMEI}/status':
+    get:
+      tags:
+        - IMEI Fraud check API
+      summary: Retrieve imei information
+      description: >-
+        IMEI Fraud API -  uses the IMEI number provided and returns the device information and the status of the IMEI i.e. lost/stolen etc.
+
+
+      parameters:
+        - name: IMEI
+          in: path
+          description: >-
+             IMEI of the subscriber 
+          required: true
+          type: string
+        - name: transactionId
+          in: header
+          description: >-
+            Transaction ID for tracing purposes. If not passed by API client, this value is generated internally
+          required: false
+          type: string
+
+
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/imeistatusResponse'
+          headers:
+            chenosis-transactionId:
+              type: string
+              description: "Client generated Id to include for tracing requests"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error400'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error401'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Error403'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error404'
+        '405':
+          description: Method No Allowed
+          schema:
+            $ref: "#/definitions/Error405"
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: "#/definitions/Error415"
+        '408':
+          description: Time out
+          schema:
+            $ref: "#/definitions/Error408"
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/Error500"
+        '503':
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/Error503"
+            
+definitions:
+
+  imeistatusResponse:
+   type: object
+   properties:
+    statusCode:
+        type: string
+        description: HTTP error code extension
+        example: '0000'
+    statusMessage:
+        type: string
+        description: Message.
+        example: Successful
+    customerId:
+        type: string
+        description: IMEI of the customer provided in the input as customerId
+        example: '656789999781'
+    transactionId:
+        type: string
+        description: transactionId from the backend provider system for tracing.
+        example: 1f73e9a3-39fa-596a-a030-e03d8cb01a2c
+    data:
+        $ref: '#/definitions/imeiData'    
+  imeiData : 
+   type: object
+   properties:
+        status : 
+         type: string
+         example : blacklisted
+        date_reported:
+         type: string
+         example : 10-01-2023
+  Error400:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: HTTP error code extension
+          example: "5000"
+        statusMessage:
+          type: string
+          description: "5000-The input parameters provided are invalid"
+          example: "Bad Request"
+        supportMessage:
+          type: string
+          description: "Unsupported input, please enter a valid 'msisdn' value"
+          example: "Unsupported input, please enter a valid 'msisdn' value"
+        transactionId:
+          type: string
+          description: "Id for tracing."
+          example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error401:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: HTTP error code extension
+          example: "4000"
+        statusMessage:
+          type: string
+          description: "Short description of the error"
+          example: "Unauthorised"
+        supportMessage:
+          type: string
+          description: "Longer description of the error"
+          example: "Please verify token environment or access token or API key"
+        transactionId:
+          type: string
+          description: "Id for tracing."
+          example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error403:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: HTTP error code extension
+          example: "6000"
+        statusMessage:
+          type: string
+          description: "Short description of the error"
+          example: "Forbidden"
+        supportMessage:
+          type: string
+          description: "Longer description of the error"
+          example: "Please verify token environment or access token or API key"
+        transactionId:
+          type: string
+          description: "Id for tracing."
+          example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error404:
+    type: object
+    description: "Subscriber not found"
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "1000"
+      statusMessage:
+        type: string
+        example: "Not Found"
+      supportMessage:
+        type: string
+        example: "Resource Not Found"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error405:
+    type: object
+    description: "Method not Allowed"
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "4001"
+      statusMessage:
+        type: string
+        example: "Not Allowed"
+      supportMessage:
+        type: string
+        example: "Method Not Allowed"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error408:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "3003"
+      statusMessage:
+        type: string
+        description:  "The request timed out."
+        example: "Timeout"
+      supportMessage:
+        type: string
+        description: "The server took too long to respond."
+        example: "Request timed out"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error415:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "5000"
+      statusMessage:
+        type: string
+        description: "Short description of the error"
+        example: "Unsupported Media Type"
+      supportMessage:
+        type: string
+        description: "Longer description of the error"
+        example: "Unsupported Media Type. It should be application/json"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error500:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "3001"
+      statusMessage:
+        type: string
+        description: "Internal Server Error"
+        example: "Internal Server Error"
+      supportMessage:
+        type: string
+        description: "Error"
+        example: "Internal Server Error"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"
+  Error503:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "3000"
+      statusMessage:
+        type: string
+        description: "The service is not available."
+        example: "Service Unavailable"
+      supportMessage:
+        type: string
+        description: "Provider API Internal server error."
+        example: "Service Unavailable"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"
