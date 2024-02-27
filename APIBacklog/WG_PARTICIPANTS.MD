@@ -19,6 +19,7 @@
 | Comcast | Prasad Siddalinga |
 | Comviva | Vidhi Mehta |
 | Deutsche Telekom | Noel Wirzius |
+| Deutsche Telekom | Shilpa Padgaonkar |
 | EN5 | Paul |
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
