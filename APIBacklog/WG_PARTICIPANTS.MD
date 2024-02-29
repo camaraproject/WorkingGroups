@@ -79,6 +79,7 @@
 | Vodafone | Iván Nieto  |
 | Zignos | Carlos |
 | ZTE | Hans Neff |
+| | Andrew Sungwoon Song |
 | | Cmti CA |
 | | José Emmanuel Arellano Bravo |
 | | Prashant Shrivastava |
