@@ -78,6 +78,7 @@
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
+| Vonage | James Emerson |
 | Zignos | Carlos |
 | ZTE | Hans Neff |
 | | Andrew Sungwoon Song |
