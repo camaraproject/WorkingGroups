@@ -29,6 +29,7 @@
 | HCL | Norbert Naveen |
 | Huawei | Chuanyu Chen |
 | Huawei | Kai Zhang Kai |
+| Huawei | Philip Xujin |
 | Huawei | Shuting Qing |
 | IEEE | Mak Saleh |
 | Infobip | Kwok Onn Looi |
