@@ -23,6 +23,7 @@
 | HCL | Norbert Naveen |
 | Huawei| Albert Wang |
 | Huawei | Kai Zhangkai |
+| Huawei | Philip Xujin |
 | Huawei| Qing Shuting |
 | IBM	| Jason Hunt |
 | IEEE | Mak Saleh |
