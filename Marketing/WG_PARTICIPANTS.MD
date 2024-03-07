@@ -2,6 +2,7 @@
 | -----------------------| ----------------------------------------------------|
 | 5GFF	| Jeremy Giese |
 | AclDigital | Sagar Suresh Nangare |
+| Aegis Mobile | Dan Holloway |
 | AT&T	| Wiley Wilkins |
 | Capgemini	| Deepak A. Gunjal |
 | Centillion | Nicholas Venezia |
