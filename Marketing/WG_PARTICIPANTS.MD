@@ -6,6 +6,7 @@
 | Capgemini	| Deepak A. Gunjal |
 | Centillion | Nicholas Venezia |
 | China Telecom | Dan Xu |
+| China Unicom | Yang Fan |
 | Cisco | Ravi Guntupalli |
 | CNCF | Casey Cain |
 | Comviva | Vidhi Mehta |
