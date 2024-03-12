@@ -65,6 +65,7 @@
 | TIM | Fabrizio Moggio  |
 | Telecomsxchange | Ameed Jamous |
 | Telefonica | Agustin Martin Gonzalez |
+| Telefonica | Ignacio Dominguez Martinez |
 | Telefonica | Javier Villa Labarra Practicas |
 | Telefonica | Jorge Garcia Hospital |
 | Telefonica | Jose Ordonez-Lucena  |
