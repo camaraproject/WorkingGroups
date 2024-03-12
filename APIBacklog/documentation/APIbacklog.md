@@ -42,6 +42,8 @@
 | Device Quality Indicator | Deutsche Telekom | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/380/files) | Deutsche Telekom, GSMA-OGW | Under discussion | Not yet treated  | --- | 
 | Best Interconnection | Deutsche Telekom | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/381/files) | Deutsche Telekom, GSMA-OGW | Under discussion | Not yet treated  | --- | 
 | Customer Premise Equipment Management | Charter Communications | 2024/01/19| [Link](https://github.com/camaraproject/WorkingGroups/pull/379/files) | CableLabs, Charter Communications, Liberty Global, Vodafone, VodafoneZiggo | Under discussion | Not yet treated  | --- | 
+| Capability and Runtime Restrictions | T-Mobile US | 2024/02/01 | [Link](https://github.com/camaraproject/WorkingGroups/pull/384/files) | T-Mobile US | Under discussion | Not yet treated  | --- |
+| Carrier Wholesale Pricing | TelecomsXChange | 2024/03/04 | [Link](https://github.com/camaraproject/WorkingGroups/pull/384/files) | TelecomsXChange | Not yet discussed | Not yet treated  | --- | 
 
  ## Attributes
  - `API [family] name`: it is the name of the API [family] proposal
