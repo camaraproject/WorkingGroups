@@ -19,6 +19,7 @@
 | Ericsson | Bart van Kaathoven |
 | Ericsson | Michael Axelsson |
 | Ericsson | Pehr Claesson |
+| EVOX | Tom Wu |
 | Google Cloud	| Sridhar Gollapudi |
 | GSMA	| Henry Calvert |
 | GSMA	| Lucy Thatcher |
