@@ -24,6 +24,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel Garcia |
 | Ericsson | Rajat Kandoi |
+| EVOX | Tom Wu |
 | GSMA | Helen Vigue |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
