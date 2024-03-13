@@ -36,6 +36,7 @@
 | KDDI | Toshi Wakayama |
 | Madison | Victor Javier Quirog |
 | Nabstract.io | Vaibhav Mehta |
+| NLT | William Araujo |
 | Nokia	| Tanja de Groot |
 | Nokia | Uwe Rauschenbach |
 | Orange | Olivier Mathieu |
