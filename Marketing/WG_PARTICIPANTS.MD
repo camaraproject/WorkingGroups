@@ -40,6 +40,7 @@
 | Microsoft	| Landon Cox |
 | Midokura	| Kenji Shimizu |
 | Nabstract | Vaibhav Mehta |
+| NLT | William Araujo |
 | Nokia	| Tanja de Groot |
 | Nokia	| William Stanley |
 | ORANGE	| Sylvain Morel |
