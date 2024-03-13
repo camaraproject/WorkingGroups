@@ -19,6 +19,7 @@
 | Ericsson | Jan Friman |
 | Ericsson | Miguel A. García-Martin |
 | Ericsson | Rajat Kandoi |
+| EVOX | Tom Wu |
 | Gapask | Rajesh Murty |
 | GSMA | Gareth Williams |
 | GSMA | Mark Cornall |
