@@ -1,0 +1,63 @@
+@startuml
+title Use Case Diagram: Property Manager
+
+[3rd-Party Client] #LightBlue
+[NetworkOperator] #LightGray
+[Subscriber\n<<Property Manager>>] #LightGreen
+[TenantA] #LightCyan
+[TenantB] #LightCyan
+
+[3rd-Party Client] -left-> [NetworkOperator]: \nclient of
+[3rd-Party Client] <-down- [Subscriber\n<<Property Manager>>]: \ncustomer of &\nconsents\n<<OAuth2>>
+
+[Subscriber\n<<Property Manager>>] <-down- [TenantA]: \ntenant of &\nconsents\n<<rental agreement>>
+[Subscriber\n<<Property Manager>>] <-down- [TenantB]: \ntenant of &\nconsents\n<<rental agreement>>
+
+[NetworkOperator] -> [Subscriber\n<<Property Manager>>]: services
+
+@enduml
+
+@startuml
+
+object RequiredScopes {
+  <#LightBlue,#black>|= Scope |= Notes |
+  <#Lavender>| cpe-management-service-sites-read | Inherited |
+  <#LightGreen>| cpe-management-service-sites-location-read | Client can list all service sites with address |
+  <#Lavender>| cpe-management-devices-read | Inherited |
+  <#LightGreen>| cpe-management-devices-hardware-address-read | Client can list all devices with hardware address |
+  <#LightGreen>| cpe-management-devices-write | Client can configure/reboot specific devices |
+  <#Lavender>| cpe-management-isolated-networks-read | Inherited |
+  <#Lavender>| cpe-management-isolated-networks-write | Inherited |
+  <#Lavender>| cpe-management-isolated-networks-primary-read | Inherited |
+  <#LightGreen>| cpe-management-isolated-networks-primary-write | Manage primary network |
+  <#Lavender>| cpe-management-isolated-networks-auxiliary-read | Inherited |
+  <#LightGreen>| cpe-management-isolated-networks-auxiliary-write | Manage auxiliary networks |
+  <#Lavender>| cpe-management-reboot-requests-read | Inherited |
+  <#LightGreen>| cpe-management-reboot-requests-write | Client can reboot devices |
+}
+
+object AccessRights {
+  <#LightBlue,#black>|= Route |= Notes |
+  <#LightGreen>| GET /service-sites | Yes |
+  <#LightGreen>| GET /service-sites/{sideId} | Yes |
+  <#LightGreen>| GET /service-sites/{siteId}/devices | Yes |
+  <#LightGreen>| GET /service-sites/{siteId}/isolated-networks | Yes |
+  <#LightGreen>| GET /service-sites/{siteId}/devices | Yes |
+  <#LightGreen>| GET /devices | Yes |
+  <#LightGreen>| GET /devices/{deviceId} | Yes |
+  <#LightGreen>| GET /devices/{deviceId}/isolated-networks | Yes |
+  <#LightGreen>| PATCH /devices/{deviceId}/isolated-networks | Yes |
+  <#LightGreen>| GET /isolated-networks | Yes |
+  <#LightGreen>| POST /isolated-networks | Yes |
+  <#LightGreen>| GET /isolated-networks/{netId} | Yes |
+  <#LightGreen>| PATCH /isolated-networks/{netId} | Yes |
+  <#LightGreen>| DELETE /isolated-networks/{netId} | Yes |
+  <#LightGreen>| GET /isolated-networks/{netId}/devices | Yes |
+  <#LightGreen>| PATCH /isolated-networks/{netId}/devices | Yes |
+  <#LightGreen>| GET /reboot-requests | Yes |
+  <#LightGreen>| POST /reboot-requests | Yes |
+  <#LightGreen>| GET /reboot-requests{rebootId} | Yes |
+  <#LightGreen>| PATCH /reboot-requests{rebootId} | Yes |
+  <#LightGreen>| DELETE /reboot-requests{rebootId} | Yes |
+}
+@enduml

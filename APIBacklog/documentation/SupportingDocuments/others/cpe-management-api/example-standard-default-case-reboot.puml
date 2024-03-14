@@ -1,0 +1,31 @@
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam linetype polyline
+skinparam sequenceParticipant underline
+
+participant "3rd Party Developer" as Developer
+participant "CPE Management API" as API
+participant "Device" as Device
+
+alt Standard Case
+    Developer -> API: /service-sites/{siteId}/devices
+    activate API #LightGreen
+    note right of API #Yellow: Retrieve device list\n(Standard case)
+    API --> Developer: Device List
+    Developer -> API: Reboot Request (Standard)\nWith Device List
+    note right of API #Yellow: Specific devices targeted
+else Default Device Case
+    Developer -> API: Reboot Request (Residential)
+    activate API #LightBlue
+    note right of API #Yellow: Default device targeted\n(No specific info required)
+end
+
+API -> Device: Reboot Command to Device(s)
+activate Device #Pink
+Device --> API: Acknowledgement
+deactivate Device
+API --> Developer: Response
+deactivate API
+
+@enduml
