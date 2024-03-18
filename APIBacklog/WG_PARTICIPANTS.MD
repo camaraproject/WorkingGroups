@@ -55,6 +55,7 @@
 | Shabodi | Umair Ali Rashid |
 | Singtel | Macus Chua |
 | Singtel | Ming Hui Foo |
+| SK Telecom | Dong Hwan |
 | SK Telecom | Yoon Sun Jung |
 | Slagen | D. Garavito |
 | Sofrecom | Walid Trabelsi |
