@@ -44,6 +44,7 @@
 | Orange | Sylvain Morel|
 | Orange | Ludovic Robert|
 | Singtel | Ming Hui Foo |
+| SK Telecom | Dong Hwan |
 | Softbank | Toru Kikuchi |
 | SpryFox Networks | Jignesh Sorathia |
 | SpryFox Networks | Ramesh Shanmugasundaram |
