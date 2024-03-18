@@ -49,6 +49,7 @@
 | Segron | Florian Leeder |
 | Shabodi | Kevin Howe-Patterson |
 | Singtel | Ming Hui Foo |
+| SK Telecom | Dong Hwan |
 | Softbank | Toru Kikuchi |
 | Starhub | Rajesh Naresh Mhatre |
 | Summit-Tech | Doug Makishima |
