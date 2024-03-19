@@ -67,3 +67,4 @@
 | Vodafone	| Simon Gordon |
 | Vodafone	| Steven Pater |
 | ZTE | Jie Hu |
+| | Jonathan Gilat |
