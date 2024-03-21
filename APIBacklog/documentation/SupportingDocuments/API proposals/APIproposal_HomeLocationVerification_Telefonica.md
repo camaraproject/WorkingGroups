@@ -9,4 +9,4 @@
 | Validated in lab/productive environments? | YES |
 | Validated with real customers? | YES |
 | Validated with operators? | YES<br> Proposal validated in OGW drop3 |
-| Supporters in API Backlog Working Group | Telefonica |
+| Supporters in API Backlog Working Group | Telefonica, Telecom Italia |
