@@ -6,9 +6,8 @@
 ## Meetings
 * Meetings are held virtually
 * Schedule: 
-	- 2nd Thursday of the month (10-11 CET)
-	- 4th Thursday of the month (15-16 CET)
-* Meeting link: [MS Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ODgyMWQ2MmUtYzIxNS00MzY5LWFiZWQtODM0ZGMxNDZiMzY1%40thread.v2/0?context=%7b%22Tid%22%3a%229744600e-3e04-492e-baa1-25ec245c6f10%22%2c%22Oid%22%3a%22ec8dd69b-01fe-4d41-a294-c2927b548e27%22%7d)
+	- 2nd Thursday of the month (10-11 CET): [Meeting Link](https://protect.checkpoint.com/v2/___https://zoom-lfx.platform.linuxfoundation.org/meeting/93440994620?password=d78d425d-912b-44c6-8ccc-9dafa0e4dfc4___.YzJlOnRlbGVmb25pY2Fjb3Jwb3JhY2lvbjpjOm86MTliMTljYzI2NjVkM2JlMWYxMDgxODcwZjRlYjI3YzQ6Njo2NmU2OjcyMDM3MGI5ZDk5ZmY1ODZmMmJmZDAwZTEwZmJmYTBmMTllMGE1YWEyYTEwZDEyNTBkMDhmZTExYjdiNGRhMTY6aDpU)
+	- 4th Thursday of the month (15-16 CET): [Meeting Link](https://protect.checkpoint.com/v2/___https://zoom-lfx.platform.linuxfoundation.org/meeting/96853703306?password=b973acfe-4f3e-489d-9af5-a19c1d0eab0e___.YzJlOnRlbGVmb25pY2Fjb3Jwb3JhY2lvbjpjOm86NDdhYWQ0MDIzZWMxOTk4ZjQ1YjA4NDYwMzM2MzQ0YjU6NjozNDVjOjIxODA5NzU3MTQyNjc5N2ZkYWE5NDBjZjVkNGQwMmVlMWM1YmM1ZjM2NGM2MWQyOTc2MGQzMWU1N2Q1MDM5MGY6aDpU)
   
 ## Results
 * Lifecycle of API proposals: [APIbacklog.md](https://github.com/camaraproject/WorkingGroups/blob/main/APIBacklog/documentation/APIbacklog.md)
