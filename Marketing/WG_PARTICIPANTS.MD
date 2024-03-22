@@ -12,6 +12,7 @@
 | CNCF | Casey Cain |
 | Comviva | Vidhi Mehta |
 | CPaaSaa | Rob Kurver |
+| CPaaSaa | Robert Galop |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Deutsche Telekom AG	| Jasmin Schulmeyer |
 | Deutsche Telekom AG	| Robert Jeschonnek |
