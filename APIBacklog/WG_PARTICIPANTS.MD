@@ -81,6 +81,7 @@
 | Vodafone | Eric Murray  |
 | Vodafone | Iván Nieto  |
 | Vonage | James Emerson |
+| Vonage | Qaunain Meghjee |
 | Zignos | Carlos |
 | ZTE | Hans Neff |
 | | Andrew Sungwoon Song |
