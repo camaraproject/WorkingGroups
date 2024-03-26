@@ -15,6 +15,7 @@
 | CPaaSaa | Robert Galop |
 | Deutsche Telekom AG	| Markus Kümmerle |
 | Deutsche Telekom AG	| Jasmin Schulmeyer |
+| Deutsche Telekom AG	| Mario Bodemann |
 | Deutsche Telekom AG	| Robert Jeschonnek |
 | ENEA | Iftikhar Waheed |
 | Ericsson | Bart van Kaathoven |
