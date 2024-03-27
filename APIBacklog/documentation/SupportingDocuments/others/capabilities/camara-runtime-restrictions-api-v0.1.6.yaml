@@ -1,0 +1,898 @@
+openapi: 3.0.3
+info:
+  title: CAMARA Runtime Restrictions API
+  description: |
+    The CAMARA Runtime Restrictions API provides a programmable interface for developers and other users to discover API restrictions for 
+    CAMARA projects.
+
+    # Introduction
+    
+    This API allows users to discover restrictions to services, including operations and values. Runtime restrictions limit the use of 
+    operations, parameters, or schema elements.
+
+    The goal of this API is to allow API consumers to identify differences between implementations of the same API which reflect 
+    implementation decisions, capabilities, and operational practices.
+
+    ##Example Restriction Scenarios
+    - **Unsupported optional parameters:** The CAMARA <a href="https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml">Device object</a>
+      requires one of four identifier types to be present. However, the API provide only supports two of them. If an API Consumer 
+      does not provide the supported identifiers, they are sending invalid requests.   
+    - **Minimum accuracy for DeviceLocation Area:** Due to legal or technical reasons, the minimum accuracy value in an API may be too small - 
+      violating privacy or technical capability. In such cases, the API provider MUST convey the higher minimum accuracy value allowed.
+    - **Different authorization flows for API scopes:** Using restrictions, an API provider can declare which scopes require specific 
+      authorization flow types.
+
+    ## Restriction Rules
+    <ol>
+    <li><i>Valid</i> Restrictions result in valid requests sent to the APIs they affect. For example, a restriction would be invalid if 
+    it sets an integer property's maximum value to 4 when its schema sets its minimum at 5. APIs MUST never pass invalid restrictions. 
+    Invalid restrictions MUST be ignored by the Client.
+    </li><li>Any schema instance may have metadata (deprecated, readOnly) or general (type, enum, const) restrictions applied to it.
+    </li><li>Restrictions apply to primitive types as follows:
+      <ol>
+        <li>"numeric" instance <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">validation keywords</a> 
+        </li><li>"strings" - validation keywords as defined by <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-str">validation keywords</a> 
+        </li><li>"array" - validation keywords as defined by <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">validation keywords</a> 
+        </li><li>"object" - restriction mechanisms are
+          <ul>
+            <li>object instance <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-obj">validation keywords</a>
+            </li><li>excludedProperties_rr - A list of <i>optional</i> properties that MUST NOT be present in the object 
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </li><li>Parameters may also be restricted.  General schema restrictions, i.e., Any Instance, apply. Parameters MAY further be restricted as follows:
+      <ol>
+        <li>Deprecate use of a parameter. This can only be done if the original schema does not have 'required: true' for this 
+        parameter specification.
+        </li><li>Mandate use of an optional parameter. This can only be done if the original schema does not have 'deprecated: true' 
+        for this parameter specification.
+        </li><li>Allow empty values. This can only be TRUE if the schema did not explicitly specify its value as false.
+        </li>
+      </ol>
+    </li><li>Restrictions may apply to subschemas that are applied with logic keywords "anyOf" or "oneOf".  When restricted, the specific 
+    subschema is treated as if it were added to an adjacent "not" subschema, i.e., subschemas in the same location in the instance as 
+    the parent schema.  For example, given
+
+        "oneOf": [ { "$ref": "#/definitions/structa" }, {"$ref": "#/definitions/structb" } ]  
+  
+       A Restriction of <code>{ "subschemaScope" : "oneOf", "subschemaRef": "#/definitions/structb" }</code> would restrict the nodes to only values of structa.
+    </li><li>Setting a referenced item to 'readonly', effectively noting that its value will be ignored by the server.
+    </li><li>If the API producer doesn't implement all <i>optional</i> API operations defined, such operations can be restricted by declaring the operation 
+       <ul>
+          <li>'deprecated', as long as the original schema did not explicitly specify its value as false, 
+          </li><li>'not available', for temporary unavailability 
+          </li><li>or 'not implemented', if the operation hasn't been implemented.
+          </li>
+      </ul>
+    </li>
+    </ol>
+
+    All runtime restrictions end with the suffix '_rr'.
+
+    ## References
+
+    The target of restrictions is comprised of 5 parts
+    <ol>
+    <li>An optional <i>operationRefs</i> list that defines referenced operations. List entries follow the <a href="https://swagger.io/docs/specification/links/">operationRef</a> syntax.</li>
+    <li>An optional <i>operationIds</i> list which describes a list of <a href="https://swagger.io/docs/specification/links/">operation identifiers</a>.</li>
+    <li>An optional list of parameter names. When this parameter is present, the appliesToRequestBody parameter MUST also be present.</li>
+    <li>appliesToRequestBody is a boolean that indicates that restrictions apply to request bodies as well as the specified list of parameters.</li>
+    <li>A list of <i>subjects</i> which the restrictions apply to. List entries are operation parameter names OR follow the <a href="https://swagger.io/docs/specification/using-ref/">$ref</a> syntax.</li>
+    </ol>
+
+    Restrictions are applied upon 3 parts of any request:
+    <ol>
+    <li>operations - referenced in <b>OperationReferences</b> as lists of <a href="https://swagger.io/docs/specification/links/">operationRefs</a> and <a href="https://swagger.io/docs/specification/links/">operationIds</a></li>
+    <li>path parameters - referenced in <b>ParameterReferences</b> parameters list</li>
+    <li>operation request body - referenced in <b>ParameterReferences</b> parameters list when its <i>appliesToRequestBody</i> property value is <code>true</code></li>
+    </ol>
+
+    <p>When <b>ParameterReferences</b> does not contain <b>OperationReferences</b>, the <b>ParameterReferences</b> applies across any operations.</p>
+
+    <p>Restrictions use a <i>Context</i> which is an array of <b>ParameterReferences</b>, <b>OperationReferences</b> and <b>PropertyTests</b>.
+    For any request, if all values in the Context equate to <code>true</code> then restrictions are applied to the subjects of the Restriction.</p> 
+
+    ## LIMITATIONS/OPEN ITEMS
+    <ol>
+    <li>Due to use of openapi 3.0.3, const_rr and default_rr are limited to string types. Use of openapi 3.1 is required to use the 'any' type, i.e., '{}'.</li>
+    <li>Add more examples.
+      <ul>
+      <li>Address type discriminator to resolve the Civic address issue by type for TM Forum</li>
+      <li>JSON-LD context example test for GS1 resolution of location vs postal address</li>
+      </ul>
+    </li>
+    </ol>
+
+    # Usage
+    API Consumers first use a GET operation to acquire **Runtime Restrictions** by name. Additionally, API Consumers 
+    may acquire the URL of the **Runtime Restrictions Notification Server** to subscribe to subsequent 
+    changes in Runtime Restrictions. Two event types are supported
+    <ul>
+    <li><b>RuntimeRestrictionRemovedEvent</b> includes the Runtime Restriction that has been removed.
+    </li><li><b>RuntimeRestrictionChangedEvent</b> includes the changed event. In this event the name of RuntimeRestriction indicates
+    the target RuntimeRestriction but its version has changed. If a cacheId is included, it <i>may</i> be used to indicate the RuntimeRestricion
+    that will be updated. Any new references to the cacheId will use the event's RuntimeRestriction as its target.
+    </li>
+    </ul>
+
+    # Relevant terms and definitions
+
+    * **API restrictions**: 
+    A set of measures put in place to help ensure the stability and performance of an API system. It works by setting limits on how many 
+    requests can be made within a certain period of time and what actions can be taken.
+
+    * **Authentication**:
+    Security access keys such as OAuth 2.0 client credentials used by client applications to invoke the Runtime Restrictions API.
+
+    * **Runtime restrictions**: 
+    Limits that are applied during the execution of a program or system
+
+    # Further info and support
+
+    ## Frequently Asked Questions (FAQs)
+    1. What is the purpose of the Runtime Restrictions API? The Runtime Restrictions API provides a programmable interface for developers and other users 
+    to discover API restrictions for projects.
+
+    2. What are some examples of restriction scenarios that the Runtime Restrictions API can handle? Some examples of restriction scenarios that the Runtime Restrictions API 
+    can handle include unsupported optional parameters, minimum accuracy for DeviceLocation Area, and different authorization flows for API scopes.
+
+    3. What are the rules for valid restrictions in the Runtime Restrictions API? Valid restrictions result in valid requests sent to the APIs they affect. 
+    For example, a restriction would be invalid if it sets an integer property's maximum value to 4 when its schema sets its minimum at 5. APIs must never pass invalid restrictions. 
+    Invalid restrictions must be ignored by the client.
+
+    4. How can I acquire runtime restrictions using the Runtime Restrictions API? API Consumers first use a GET operation to acquire runtime restrictions by name. 
+    Additionally, API Consumers may acquire the URL of the runtime restrictions notification server to subscribe to subsequent changes in runtime restrictions.
+
+    5. What are the event types supported by the Runtime Restrictions API? Two event types are supported: RuntimeRestrictionRemovedEvent, which includes the runtime restriction 
+    that has been removed, and RuntimeRestrictionChangedEvent, which includes the changed event.
+
+    6. What are API restrictions? API restrictions are a set of measures put in place to help ensure the stability and performance of an API system. It works by setting limits on 
+    how many requests can be made within a certain period of time and what actions can be taken.
+
+    7. What is authentication in the context of the Runtime Restrictions API? Authentication refers to security access keys such as OAuth 2.0 client credentials used by client applications 
+    to invoke the Runtime Restrictions API.
+
+    8. What are runtime restrictions? Runtime restrictions are limits that are applied during the execution of a program or system.
+
+    9. How can I discover the supported endpoing (HTTP) features and methods for the CAMARA Runtime Restrictions API? You can discover the supported features and methods for the CAMARA Runtime Restrictions API 
+    by using the OPTIONS operation on the relevant endpoint.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: project-email@sample.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.1.5-wip
+externalDocs:
+  description: Product documentation at Camara
+  url: https://github.com/camaraproject/
+security:
+  - oAuth2ClientCredentials: []
+servers:
+  - url: "{apiRoot}/{basePath}"
+    variables:
+      apiRoot:
+        default: http://localhost:9091
+        description: API root
+      basePath:
+        default: rr/v0
+        description: Base path for the CAMARA Runtime Restrictions (RR) API
+paths:
+  /rr-notification-server:
+    get:
+      tags:
+        - Notification Server URL 
+      summary: |
+        Returns the notification server URL for the capabilities API provider..
+      description: |
+        Returns the notification server URL for the capabilities API provider. This will be returned with HTTP Status Code 301 
+        (Moved Permanently). Code 301 is used instead of 302 (Temporary) to ensure the Client does not need to repeatedly poll 
+        this path. The Notificxation's URL is returned as part of the Location Header.
+      operationId: getRRNotificationServerURL
+      responses:
+        "301":
+          description: Contains information about the notification server location
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "https://api-provider.example.com/subscriptions"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "404":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "rr-notification-server-read"
+    options:
+      tags:
+        - Get Notification Server URL Features
+      operationId: getRRNotificatServerFeatures
+      description: Discover supported features and methods for this endpoint
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "rr-notification-server-read"
+
+  /runtimerestrictions/{identifier}:
+    get:
+      tags:
+        - Query runtime restrictions for a specific service API or group of Restrictions
+      summary: Get runtime restrictions for specified service API
+      description: |
+        Returns the runtime restrictions of for a specific service API or group of Restrictions on the gateway.
+      operationId: getRuntimeRestrictions
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier of the set of restrictions to retrieve. It could be an API name or some other string.
+          schema:
+            type: string
+            minLength: 1
+          required: true
+      responses:
+        "200":
+          description: Contains information about service API runtime restrictions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restrictions"
+              examples:
+                AcceptedDeviceIdentifiers:
+                  description: ipv4Address and networkAccessIdentifier are not supported within https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml
+                  value:
+                    {
+                      "cacheId": "rr1",
+                      "identifiers": [
+                        "AcceptedDeviceIdentifiers"
+                        ],
+                      "version": "0.0.1",
+                      "subjects": [
+                        "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/paths/~1sessions/post/requestBody/content/application~1json/schema/CreateSession/properties/device/"
+                        ],
+                      "restrictions": [
+                        {
+                          "excludedProperties_rr": [
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/schemas/Device/ipv4Address",
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/schemas/Device/networkAccessIdentifier"
+                          ],
+                          "rrType": "ObjectInstanceRestriction"
+                        }
+                      ]
+                    }
+                OfferedQoSProfiles:
+                  description: return Offered QoSProfiles within https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml
+                  value:
+                    {
+                      "cacheId": "rr2",
+                      "identifiers": [
+                        "OfferedQoSProfiles"
+                        ],
+                      "version": "0.0.1",
+                      "operationIds": [
+                        "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/paths/~1/qos-profiles/get"
+                      ], 
+                      "subjects": [
+                        "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/schemas/QosProfileStatusEnum"
+                        ],
+                      "restrictions": [
+                        {
+                          "enum_rr": [
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/schemas/QosProfileStatusEnum/enum/2",
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/schemas/QosProfileStatusEnum/enum/3"
+                            ],
+                          "rrType": "AnyInstanceRestriction"
+                        }
+                      ]
+                    }
+                CreateSessionOperationNotSupported:
+                  description: declare new CreateSession operation is no longer supported within https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml
+                  value:
+                    {
+                      "cacheId": "rr3",
+                      "identifiers": [
+                        "CreateSessionOperationNotSupported"
+                        ],
+                      "version": "0.0.1",
+                      "subjects": [
+                        "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/paths/~1sessions/post"
+                        ],
+                      "restrictions": [
+                        {
+                          "deprecated_rr": true,
+                          "rrType": "OperationRestriction"
+                        }
+                      ]
+                    }
+                NotificationSubscriptionTimeFilterNotSupported:
+                  description: declare filtering on time related paramaters of notification getSubscriptions operation is supported yet within https://github.com/camaraproject/Commonalities/tree/main/artifacts/camara-notification-api.yaml
+                  value:
+                    {
+                      "cacheId": "rr4",
+                      "identifiers": [
+                        "NotificationSubscriptionTimeFilterNotSupported"
+                        ],
+                      "version": "0.0.1",
+                      "subjects": [
+                        "https://github.com/camaraproject/Commonalities/tree/main/artifacts/camara-notification-api.yaml#/paths/~1subscriptions/get/parameters"
+                        ],
+                      "restrictions": [
+                        {
+                          "excludedProperties_rr": [
+                            "StartsAt",
+                            "ExpiresAt"
+                            ],
+                          "rrType": "ObjectInstanceRestriction"
+                        }
+                      ]
+                    }
+                LocationRadiusRange:
+                  description: declare new range of location radius supported within https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-verification.yaml
+                  value:
+                    {
+                      "cacheId": "rr5",
+                      "identifiers": [
+                        "LocationRadiusRange"
+                        ],
+                      "version": "0.0.1",
+                      "subjects": [
+                        "https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-verification.yaml#/components/schemas/Circle/radius"
+                        ],
+                      "restrictions": [
+                        {
+                          "minimum_rr": 3000,
+                          "maximum_rr": 30000,
+                          "rrType": "NumericInstanceRestriction"
+                        }
+                      ]
+                    }
+                ServingAreaBellevueWARadius:
+                  description: declare restricted radius of the serving area supported within https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-retrieval.yaml
+                  value:
+                    {
+                      "cacheId": "rr6",
+                      "identifiers": [
+                        "ServingAreaBellevueWARadius"
+                        ],
+                      "subjects": [
+                        "https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-retrieval.yaml#/components/schemas/Circle/radius"
+                        ],
+                      "restrictions": [
+                        {
+                          "minimum_rr": 1000000,
+                          "maximum_rr": 1000000,
+                          "rrType": "NumericInstanceRestriction"
+                        }
+                      ]                 
+                    }
+                ServingAreaBellevueWALatitude:
+                  description: declare restricted latitude of the serving area supported within https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-retrieval.yaml
+                  value:
+                    {
+                      "cacheId": "rr7",
+                      "identifiers": [
+                        "ServingAreaBellevueWALatitude"
+                        ],
+                      "subjects": [
+                        "https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-retrieval.yaml#/components/schemas/Latitude"
+                        ],
+                      "restrictions": [
+                        {
+                          "minimum_rr": 47.610377,
+                          "maximum_rr": 47.610377,
+                          "rrType": "NumericInstanceRestriction"
+                        }
+                      ]
+                    }
+                ServingAreaBellevueWALongitude:
+                  description: declare restricted longitude of the serving area supported within https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-retrieval.yaml
+                  value:
+                    {
+                      "cacheId": "rr8",
+                      "identifiers": [
+                        "ServingAreaBellevueWALongitude"
+                        ],
+                      "subjects": [
+                        "https://github.com/camaraproject/DeviceLocation/blob/main/code/API_definitions/location-retrieval.yaml#/components/schemas/Longitude"
+                        ],
+                      "restrictions": [
+                        {
+                          "minimum_rr": -122.2006786,
+                          "maximum_rr": -122.2006786,
+                          "rrType": "NumericInstanceRestriction"
+                        }
+                      ]   
+                    }
+                SupportedScopesPerAuthFlow1:
+                  description: Requiring the all scopes to be populated in each authflow defined in the components/securitySchemes following will reduce the applicable scopes to each auth flow type
+                  value:
+                    {
+                      "cacheId": "rr9",
+                      "identifiers": [
+                        "SupportedScopesPerAuthFlow1"
+                        ],
+                      "subjects": [
+                        "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/securitySchemes/threeLegged/flows/authorizationCode/scopes"
+                        ],
+                      "restrictions": [
+                        {
+                          "enum_rr": [
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/securitySchemes/threeLegged/flows/authorizationCode/scopes/2",
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/securitySchemes/threeLegged/flows/authorizationCode/scopes/3"
+                            ],
+                          "rrType": "AnyInstanceRestriction"
+                        }
+                      ]
+                    }  
+                SupportedScopesPerAuthFlow2:
+                  description: Requiring the all scopes to be populated in each authflow defined in the components/securitySchemes following will reduce the applicable scopes to each auth flow type
+                  value:
+                    {
+                      "cacheId": "rr10",
+                      "identifiers": [
+                        "SupportedScopesPerAuthFlow2"
+                        ],
+                      "subjects": [
+                        "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/securitySchemes/threeLegged/flows/authorizationCode/scopes"
+                        ],
+                      "restrictions": [
+                        {
+                          "enum_rr": [
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/securitySchemes/oAuth2ClientCredentials/flows/clientCredentials/scopes/1",
+                            "https://github.com/camaraproject/QualityOnDemand/blob/main/code/API_definitions/qod-api.yaml#/components/securitySchemes/oAuth2ClientCredentials/flows/clientCredentials/scopes/4"
+                            ],
+                          "rrType": "AnyInstanceRestriction"
+                        }
+                      ]
+                    }  
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "404":
+          $ref: "#/components/responses/RestrictionsApiNotFound404"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "501":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/NotImplemented"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "rr-read"
+    options:
+      tags:
+        - Get Runtime Restrctions Features
+      operationId: getRuntimeRestrictionsFeatures
+      description: Discover supported features and methods for this endpoint
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier of the set of restrictions to retrieve. It could be an API name or some other string.
+          schema:
+            type: string
+            minLength: 1
+          required: true
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "rr-read"
+
+components:
+  securitySchemes:
+    oAuth2ClientCredentials:
+      description: |
+        The Runtime Restrictions API makes use of the OAUTH 2.0 client credentials grant which is applicable for server to server use cases involving trusted partners or clients without any protected user data involved. In this method the API invoker client is registered as a confidential client with an authorization grant type of client_credentials
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.example.com/oauth/token
+          scopes: {}
+    threeLegged:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.example.com/oauth2/authorize
+          tokenUrl: https://api.example.com/oauth/token
+          scopes:
+            rr-notification-server-read: Retrieval of Runtime Restrictions API provider notification server
+            rr-read: Retrieval of Runtime Restrictions
+
+  schemas:
+    BaseRestriction:
+      description: base (parent) of all types of restrictions
+      type: object
+      required:
+        - rrType
+      properties:
+        rrType:
+          description: Object type used as a discriminator.
+          type: string
+
+    AnyInstanceMetaRestriction:
+      description: Based upon the JSON Schema <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-a-vocabulary-for-basic-meta">A Vocabulary for Basic Meta-Data Annotations</a>. Note that 'writeOnly was not added as a runtime restriction as it applies to only input (request restrictions).'
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        deprecated_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-a-vocabulary-for-basic-meta">deprecated</a>.
+          type: boolean
+        readOnly_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-a-vocabulary-for-basic-meta">readOnly</a>.
+          type: boolean
+        writeOnly_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-a-vocabulary-for-basic-meta">writeOnly</a>. For security reasons, this can only be used when the writeonly property was not explicitly set to 'true' in the schema specification.
+          type: boolean
+        default_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-a-vocabulary-for-basic-meta">default</a>.
+          type: string
+      minProperties: 1
+ 
+    AnyInstanceRestriction:
+      description: Based upon the JSON Schema <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-any">validation keywords for Any instances</a>
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        type_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-any">type</a>. Note this can only be applied if the type property was not specified for the scope within the schema specification.
+          type: string
+          enum: [ "null", "boolean", "object", "array", "number", "string", "integer" ]
+        enum_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-any">enum</a> Note this can only be applied if the enum property was not specified for the scope within the schema specification or it specifies a subset of the enum list in the schema specification.
+          type: array
+          items: {}
+        const_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-any">const</a> Note this can only be applied if the const property was not specified for the scope within the schema specification.
+          type: string
+      minProperties: 1
+
+    NumericInstanceRestriction:
+      description: Based upon the JSON Schema <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">validation keywords for Numeric Instances</a>
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        multipleOf_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">multipleOf</a>
+          type: integer
+          minimum: 1
+        maximum_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">maximum</a>
+          type: integer
+        minimum_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">minimum</a>
+          type: integer
+        exclusiveMaximum_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">exclusiveMaximum</a>
+          type: integer
+        exclusiveMinimum_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-num">exclusiveMinimum</a>
+          type: integer
+      minProperties: 1
+
+    StringInstanceRestriction:
+      description: Based upon the JSON Schema <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-str">validation keywords for Strings</a>
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties: 
+        maxLength_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-str">maxLength</a>
+          type: integer
+          minimum: 0
+        minLength_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-str">minLength</a>
+          type: integer
+          minimum: 0
+        pattern_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-str">pattern</a>
+          type: string
+      minProperties: 1
+
+    ArrayInstanceRestriction:
+      description: Based upon the JSON Schema <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">validation keywords for Array Instances</a>
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        maxItems_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">maxItems</a>
+          type: integer
+          minimum: 0
+        minItems_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">minItems</a>
+          type: integer
+          minimum: 0
+        uniqueItems_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">uniqueItems</a> 
+            Note - this value can only be <code>FALSE</code> if the original schema did not define the value as <code>TRUE</code>.
+          type: boolean
+        maxContains_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">maxContains</a>
+          type: integer
+          minimum: 0
+        minContains_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation.html#name-validation-keywords-for-arr">minContains</a>
+          type: integer
+          minimum: 0
+      minProperties: 1
+
+    ObjectInstanceRestriction:
+      description: Based upon the JSON Schema <a href="https://json-schema.org/draft/2020-12/json-schema-validation#name-validation-keywords-for-obj">validation keywords for Object Instances</a>
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        maxProperties_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation#name-validation-keywords-for-obj">maxProperties</a>
+          type: integer
+          minimum: 0
+        minProperties_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation#name-validation-keywords-for-obj">minProperties</a>
+          type: integer
+          minimum: 0         
+        required_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation#name-validation-keywords-for-obj">required</a>
+          type: array
+          items:
+            type: string
+          minItems: 1
+        dependentRequired_rr:
+          description: See <a href="https://json-schema.org/draft/2020-12/json-schema-validation#name-validation-keywords-for-obj">dependentRequired</a>
+          type: array
+          items:
+            type: string
+          minItems: 1
+        excludedProperties_rr:
+          description: A list of properties that MUST be excluded.
+          type: array
+          items:
+            type: string
+          minItems: 1
+      minProperties: 1
+
+    ParameterRestriction:
+      description: | 
+        Based upon the Swagger <a href="https://swagger.io/specification/">Parameter Object</a>, it
+        provides the following types of restrictions:
+        <ul>
+        <li>Mandate use of an optional parameter </li>
+        <li>Allow empty values.</i>
+        </ul>
+        The conditions under which these restrictions apply are specified in the property defintions.
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        allowEmptyValue_rr:
+          description: "Allows empty values. This can only be <code>true</code> if the schema did not explicitly specify its value as <code>false</code>."
+          type: boolean
+        mandatory_rr: 
+          description: |
+            Based upon the Swagger <a href="https://swagger.io/specification/">Parameter Object</a>, it mandates use of an optional parameter. This can only be done if
+            <ol>
+            <li>The original schema does not have <code>deprecated: true</code> for this parameter.</li>
+            <li>The original schema does not explicitly set <code>mandatory</code> to a value that is opposite of the value of this parameter.</li>
+            </l>
+          type: boolean    
+      minProperties: 1
+
+    OperationRestriction:
+      description: | 
+        Based upon the Swagger <a href="https://swagger.io/specification/">Operation Object</a>, it
+        provides the following types of restrictions:
+        <ul>
+        <li>notImplemented</li> 
+        <li>notAvailable</li>
+        </ul>
+      allOf:
+      - $ref: '#/components/schemas/BaseRestriction'
+      - type: object
+      properties:
+        notAvailable:
+          description: |
+            Indicates if the operation is not available. If <code>true</code>, invocation of the referenced operations will result in a HTTP Server reponse of <code>501 - Not Implemented</code>
+          type: boolean
+        notImplemented:
+          description: |
+            Indicates if the operation is not implemented. If <code>true</code>, invocation of the referenced operations will result in a HTTP Server reponse of <code>503 - Not Available</code>
+          type: boolean  
+      minProperties: 1
+
+    OperationReferences:
+      description: A set of operations described by either OperationRefs or operataionIds.  
+      type: object
+      properties:
+        operationRefs:
+          description: A list of referenced operations. Entries follow the <a href="https://swagger.io/docs/specification/links/">operationRef</a> syntax.
+          type: array
+          items:
+            type: string
+          minItems: 1
+        operationIds:
+          description: A list referenced operations. Entries follo the <a href="https://swagger.io/docs/specification/links/">operation identifiers</a> syntax.
+          type: array
+          items:
+            type: string
+          minItems: 1
+
+    ParameterReferences:
+      description: A list of parameters runtime restrictions apply to. It contains an indicator noting if the accompanied runtime restrictions 
+        apply not only to operation parameters but also parameters of the same name in request bodies.
+      allOf:
+      - $ref: "#/components/schemas/OperationReferences"
+      - type: object
+      properties:
+        parameters:
+          description: list of parameter names
+          type: array
+          items:
+            type: string
+          minItems: 1
+        appliesToRequestBody:
+          description: Indicates that restrictions apply to requestBody as well as the specified list of parameters.
+          type: boolean
+      required: [ "parameters", "appliesToRequestBody" ]
+
+    PropertyTest:
+      description: A boolean test on a property. It MUST evaluate to true in order to have associated runtime restrictions applied.
+      type: object
+      properties:
+        name:
+          description: Property Name. If it includes a relative path, it applies to the request body. Otherwise, it applies to a parameter.
+          type: string
+        value: 
+          description: Value of the object. As of this writing, it is limited to a string. 
+          type: string
+        test:
+          description: Type of test to apply. It MUST be applicable to the property type or it can be ingored by the client.
+            <ul>
+              <li> eq - equals </li>
+              <li> ne - not equal </li>
+              <li> present - The property is present in the structure. </li>
+              <li> presentNotEmpty - The property is present in the structure and non-emptry. </li>
+              <li> absent - The property is not present. </li>
+              <li> lte - less than or equal to </li>
+              <li> lt - less than </li>
+              <li> gte - greater than or equal to </li>
+              <li> gt - greater than </li>
+            </ul>
+          type: string
+          enum: [ "eq", "ne", "present", "presentNotEmpty", "absent", "lte", "le", "lt", gte", "gt" ]
+        
+    Restrictions:
+      description: "The restrictions and scope (operations, parameters, operation request bodies or entire schema) a set of restrictions applies to."
+      type: object
+      properties:
+        cacheId:
+          description: A cache identifier. This is a unique key for management of updates between the API provider and consumers. When this value is not provided, cache management, if provided, occurs via implementation specific means.
+          type: string
+          minLength: 1
+        identifiers:
+          description: An array of identifiers this set of restrictions is known by. Using any one of them via this API will result in retrieval of this instance of the restrictions.
+          type: array
+          items:
+            type: string
+          minItems: 1
+        version:
+          description: Restrictions version.
+          type: string
+        context:
+          description: An array of items that equate to boolean values. If all items are true then the restrictions are enforced to the subject(s). For example, if an array element has an opeationRef/operationId and a corresponding parameter in a paraemters list, an object contains a specific value, etc. Note that some array elements apply to operations to be invoked (or their parameters) while others apply to subjects. If this value is empty, the context is satisfied.
+          type: array
+          items:
+            oneOf: 
+              - $ref: "#/components/schemas/OperationReferences"
+              - $ref: "#/components/schemas/ParameterReferences"
+              - $ref: "#/components/schemas/PropertyTest"
+        subjects:
+          description: A list of <i>subjects</i> which the restrictions apply to. List entries follow the <a href="https://swagger.io/docs/specification/using-ref/">$ref</a> syntax.
+          type: array
+          items:
+            type: string
+          minItems: 1
+        restrictions:
+          description: "A list of restrictions that limit what can be passed to an API. When applied, it MUST result in a valid request per the orginal schema specification."
+          type: array
+          minItems: 1
+          items: 
+            oneOf: [
+              {  $ref: "#/components/schemas/AnyInstanceMetaRestriction" },
+              {  $ref: "#/components/schemas/AnyInstanceRestriction" } ,  
+              {  $ref: "#/components/schemas/NumericInstanceRestriction" } ,             
+              {  $ref: "#/components/schemas/StringInstanceRestriction" },
+              {  $ref: "#/components/schemas/ArrayInstanceRestriction" },
+              {  $ref: "#/components/schemas/ObjectInstanceRestriction" },
+              {  $ref: "#/components/schemas/ParameterRestriction" },
+              {  $ref: "#/components/schemas/OperationRestriction" } 
+              ]
+            discriminator:
+              propertyName: rrType
+      required: [ "identifiers", "subjects", "restrictions" ]
+    
+    RuntimeRestrictionRemovedEvent:
+      description: RuntimeRestrictions Removed cloud event.
+      allOf: 
+      - $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/CloudEventBase"
+      - type: object
+        properties:
+          data:
+            type: object
+            description: 'event details payload described in each CAMARA API and referenced by its "type"'
+            properties:
+              subscriptionId:
+                $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/SubscriptionId"
+              eventDetail:
+                $ref: '#/components/schemas/Restrictions'  
+            required:    
+              - eventDetail  
+
+    RuntimeRestrictionChangedEvent:
+      description: RuntimeRestrictions Changed cloud event.
+      allOf: 
+      - $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/CloudEventBase"
+      - type: object
+        properties:
+          data:
+            type: object
+            description: 'event details payload described in each CAMARA API and referenced by its "type"'
+            properties:
+              subscriptionId:
+                $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/SubscriptionId"
+              eventDetail:
+                $ref: '#/components/schemas/Restrictions'  
+            required:    
+              - eventDetail     
+
+    RuntimeRestrictionEvents:
+      description: Runtime Restriction Events.
+      oneOf:
+        - $ref: "#/components/schemas/RuntimeRestrictionChangedEvent"
+        - $ref: "#/components/schemas/RuntimeRestrictionRemovedEvent"
+      discriminator:
+        propertyName: type
+        mapping:
+          "org.camara.rr.0.1.5.RuntimeRestrictionChanged": "#/components/schemas/RuntimeRestrictionChangedEvent"
+          "org.camara.rr.0.1.5.RuntimeRestrictionRemoved": "#/components/schemas/RuntimeRestrictionRemovedEvent"
+
+  responses:
+    RestrictionsApiNotFound404:
+      description: Runtime Restriction API not found
+      content:
+        application/json:
+          schema:
+            $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/schemas/ErrorInfo"
+          example:
+            status: 404
+            code: NOT_FOUND
+            message: "No Runtime Restriction API found"

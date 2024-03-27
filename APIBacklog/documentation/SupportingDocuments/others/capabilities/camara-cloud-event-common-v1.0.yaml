@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: CAMARA Notification as Cloud Event Common Structures
+  description: Common data structures for Notification as Cloud Event
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: project-email@sample.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.1.6-wip
+externalDocs:
+  description: Product documentation at Camara
+  url: https://github.com/camaraproject/
+components:
+  schemas:
+    SubscriptionId:
+      description: Identifier of the event subscription - This attribute must not be present in the POST request as it is provided by API server.
+        Applies to Resource-based (explicit) subscription.  This value is mandatory in server response.
+      type: string
+      minLength: 1
+
+    #Cloud Event structures 
+    DateTime: 
+      type: string
+      format: date-time
+      description: Timestamp of when the occurrence happened. Must adhere to RFC 3339.
+      example: '2018-04-05T17:31:00Z'
+
+    Source:
+      type: string
+      format: uri-reference
+      minLength: 1
+      description: 'Identifies the context in which an event happened(example: "com.orange.camara.qod")'
+      example:
+        - https://github.com/cloudevents
+        - mailto:cncf-wg-serverless@lists.cncf.io
+        - urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66
+        - cloudevents/spec/pull/123
+        - /sensors/tn-1234567/alerts
+        - 1-555-123-4567
+
+    CloudEventBase:
+      description: 'The notification callback. This deviates from CloudEvents by requiring the "time" attribute.'
+      required:
+        - id
+        - source
+        - type_sne
+        - specversion
+        - time
+      properties:
+        id:
+          type: string
+          description: identifier of this event, that must be unique in the source context. It MUST be unique within the scope of the producer
+          minLength: 1
+        source:
+          $ref: '#/components/schemas/Source'
+        type:
+          type: string
+          description: 'type of event as defined in each CAMARA API (e.g.: org.camaraproject.qod.qos-status-changed-event)'
+          example: 'org.camaraproject.qod.qos-status-changed-event'
+          minLength: 25
+        specversion:
+          type: string
+          description: 'version of the specification to which this event conforms (must be "1.0" if it conforms to cloudevents 1.0.2 version)'
+          minLength: 3
+        datacontenttype:
+          type: string
+          description: 'media-type that describes the event payload encoding, must be "application/json" for CAMARA APIs'
+        time:
+          $ref: "#/components/schemas/DateTime"
+
+    DataEventBase:
+      description: Base stucture for the Data subtypes of cloud events.
+      properties:
+        data:
+          type: object
+          description: 'event details payload described in each CAMARA API and referenced by its "type"'
+          properties:
+            subscriptionId:
+              $ref: "#/components/schemas/SubscriptionId"
