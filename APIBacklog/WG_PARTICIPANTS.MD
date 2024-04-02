@@ -3,6 +3,7 @@
 | 1Global | Stanislav Slavkov |
 | 1rstwap | Alex Sandra |
 | Accenture | Giuseppe Di Nuccio  |
+| Amdocs | Nir Fattal |
 | AT&T | Pierre Close |
 | AT&T | Sharam Mohajeri |
 | Bics | Karan Verma |
