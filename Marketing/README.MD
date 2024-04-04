@@ -6,8 +6,8 @@
 
 ## Meetings
 * Meetings are held virtually
-* Schedule: every 3rd Tuesday in a month at 3pm CET/CEST
-* Meeting link: [Link](https://dtag.webex.com/dtag/j.php?MTID=mac7e77e6b47a7c2a17935b5db79473ec)
+* Schedule: every 3rd Tuesday in a month at 3pm CET / 4pm CEST
+* Meeting link: [Link](https://zoom-lfx.platform.linuxfoundation.org/meeting/98623615151?password=f925c48e-22d6-4f22-aba1-593fe4539f4e)
 
 ## Participantship and mailing list
 * To subscribe / unsubscribe to the mailing list of this Working Group and thus be / resign as Working Group participant please visit <https://lists.camaraproject.org/g/wg-mkt>.
