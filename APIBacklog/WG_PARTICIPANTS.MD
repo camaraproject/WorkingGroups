@@ -61,6 +61,7 @@
 | Slagen | D. Garavito |
 | Sofrecom | Walid Trabelsi |
 | Softbank | Toru Kikuchi |
+| T-Mobile US | Lyle Bertz |
 | T-Mobile US | Murat Karabulut |
 | T-Mobile US | Murthy Gorthy |
 | T-Mobile US | Poornima Magadevan |
