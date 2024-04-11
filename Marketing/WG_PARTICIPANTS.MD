@@ -65,6 +65,7 @@
 | Telefonica	| Maria Virtudes Briz Ruiz |
 | TELUS	| Ali Tizghadam |
 | Verizon	| Alicia Miller |
+| Verizon	| Josh Arensberg |
 | Verizon	| Priyanka Shah |
 | Vodafone	| Edon Ophir |
 | Vodafone	| Simon Gordon |
