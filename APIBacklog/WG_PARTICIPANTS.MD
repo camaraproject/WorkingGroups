@@ -28,6 +28,7 @@
 | GSMA | Helen Vigue |
 | GSMA | Mark Cornall |
 | HCL | Norbert Naveen |
+| Honda R&D Europe | Simon Davis |
 | Huawei | Chuanyu Chen |
 | Huawei | Kai Zhang Kai |
 | Huawei | Philip Xujin |
