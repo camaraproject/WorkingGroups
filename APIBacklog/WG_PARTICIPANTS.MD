@@ -78,6 +78,7 @@
 | Telesmart | Bulent Tuncel |
 | Totogi | Ailton Santana |
 | Upstream Systems | Nikos Fotiou |
+| Verizon | Mahesh Chapalamadugu |
 | Verizon | Santhi Dharmapalan |
 | Vodafone | Kevin Smith  |
 | Vodafone | Eric Murray  |
