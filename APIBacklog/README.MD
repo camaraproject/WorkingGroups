@@ -9,6 +9,7 @@
 		* [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/93440994620?password=d78d425d-912b-44c6-8ccc-9dafa0e4dfc4)
 	* 4th Thursdays at 15:00 CE(S)T / 13:00 UTC / 06:00 PT
 		* [Registration / Join](https://zoom-lfx.platform.linuxfoundation.org/meeting/96853703306?password=b973acfe-4f3e-489d-9af5-a19c1d0eab0e)
+  * [Meeting minutes](https://wiki.camaraproject.org/x/I4tF).
 * Mailing List
 	* Subscribe <wg-abl+subscribe@lists.camaraproject.org>
 	* https://lists.camaraproject.org/g/wg-abl
