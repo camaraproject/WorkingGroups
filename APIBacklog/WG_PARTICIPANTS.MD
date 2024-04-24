@@ -28,6 +28,7 @@
 | EVOX | Tom Wu |
 | GSMA | Helen Vigue |
 | GSMA | Mark Cornall |
+| GSMA | R. Cox |
 | HCL | Norbert Naveen |
 | Honda R&D Europe | Simon Davis |
 | Huawei | Chuanyu Chen |
