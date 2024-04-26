@@ -1,7 +1,3 @@
-# API Proposal Template
-This template captures all the information that a partner should fill out when proposing a new API (or API family) to CAMARA.
-
-
 | **Field** | Description | 
 | ---- | ----- |
 | API family name | Shutdown Service Status |
