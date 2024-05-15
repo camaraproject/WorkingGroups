@@ -16,6 +16,7 @@
 | Charter | Justin Pace |
 | China Mobile | Bao Yuhan |
 | China Mobile | Hanbai Wang |
+| China Mobile | Xiu Dushen |
 | China Telekom | Xu Dan |
 | China Unicom | Yang Fan |
 | Comcast | Prasad Siddalinga |
