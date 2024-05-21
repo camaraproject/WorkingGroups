@@ -1,0 +1,820 @@
+openapi: 3.0.3
+info:
+  title: CAMARA Generic Capability API
+  description: |
+    The CAMARA Capability API provides programmable interface for developers and other users (capabilities consumers) to discover and be notified 
+    about active capabilities (functions) for APIs.
+
+    # Introduction
+    This API enables feature discovery and real-time feature status notifications for APIs provided by the gateway.
+
+    An **API** (Application Programming Interface) often includes **features** that can be *active* or *inactive* during 
+    interactions with API consumers. For example, feature negotiation during session establishment or events such as high congestion that 
+    change a feature's status. 
+    
+    **Capabilities** represent a collection of features and their **status** (*active* or *inactive*) at a specific point in time.
+    These capabilities provide a way to describe what an API can do.
+
+    **Footprints** define the coverage area where specific capabilities are available. A device must be located within the footprint to access 
+    these capabilities. If no footprint is specified, the capabilities *may* be available to *any* device connected to the network. Footprints 
+    have a *usage type* that determines their visibility and use. For example, some footprints may only be visible to Access Networks where 
+    devices are attached, while others may be visible to Internet servers or services in a Non-Access network. Some footprints 
+    may even be used in both types of networksd.
+
+    When footprints are used, they are presented as part of a collection. A device is considered to be covered by a footprint collection if it 
+    falls within at least one footprint in the collection. Footprint *precedence* specifies the search execution order of footprints in the
+    collection. The lower the numerical value of precedence, the higher the footprint precedence. Footprints with equal precedence MAY be 
+    executed in parallel if supported by the sytem.
+    
+    **Resource Scopes** are URIs that further restrict when capabilites apply. These scopes may refer to one or more device sessions, 
+    specific times of day and other relevant conditions. 
+
+    **Footprints** and **Resource Scopes** help define conditions under which the capabilities are relevant. For a capability to be usable, 
+    all required Footprints and Resource Scopes must be satisfied (see *Usage* for more detail).
+
+    To convey the impact of capability status to API consumers in a meaningful way, capabilities are directly tied to a set of **Runtime Restrictions**. 
+    These restrictions affect optional or alternative structures, parameters, and other aspects of API usage.
+
+    **Capabilties Set** associates a **Footprints** and **Resource Scopes** to **Capabilties** using a *group type* mechanism. The grouping type may be 
+    the organizations that defined the capabilities, an operator, etc. 
+
+    **Bit Sets** are used to efficiently communicate capability status. In a Bit Set, individual bits represent the active (1) or 
+    inactive (0) status of specific **Capability Sets**. Bit Sets may also include a **Footprints** or **Resource Scopes** to further 
+    define the applicability of the status.
+
+    If both the Bit Set and a specific Capability Set provide Footprints, the Device must satisfy the conditions of both Footprints 
+    collections and Resource Scopes for the bit’s status to be applicable. To avoid conflicts where a capability is active in one bit 
+    while inactive in another, Bit Sets have a concept of correctness or well-formedness. Each Capability across all Bit Sets must not 
+    appear with overlapping Footprints, the same major/minor versions, and overlapping Resource Scopes.
+
+    # Usage
+    API Consumers first use a GET operation to acquire **Capability Bit Set Specifications**, which include the *Capability Sets* and 
+    associated *Footprints* and *Runtime Restrictions Set Identifiers*. With these definitions, API Consumers can then use a GET operation to acquire **Capabilities Bit Set Values** 
+    which contain the *current* bit status of associated **Capability Bit Sets**. API Consumers may choose to acquire all Bit Set Values or 
+    specific ones. Additionally, API Consumers may acquire the URL of the **Capability Notification Server** to subscribe to subsequent 
+    changes in *Capabilities, Capabilities Set, Capability Bit Sets or Capability Bit Set* values.  Three event types are supported
+    <ul>
+    <li><b>BitSetRemovedEvent</b> includes the <i>Capabilities Bit Set</i> that has been removed.
+    </li><li><b>BitSetChangedEvent</b> includes the changed event. In this event the name of <i>BitSet</i> indicates
+    the target BitSet but its version will be changed. If a cacheId is included, it <i>may</i> be used to indicate the BitSet
+    that will be updated. Any new references to the cacheId will use the event's BitSet as its target.
+    </li><li><b>BitSetValueChangedEvent</b> indicates that the BitSet value has changed.
+    </li>
+    </ul>
+
+    # Relevant terms and definitions
+
+    * **Authentication**:
+    Security access keys such as OAuth 2.0 client credentials used by client applications to invoke the Capability API.
+
+    * **API (Application Programming Interface)**:
+    A set of protocols and tools for building software and applications.
+
+    * **Features**:
+    Specific functions or capabilities of an API that can be active or inactive.
+
+    * **Capabilities**:
+    A collection of features and their status (active or inactive) at a specific point in time.
+
+    * **Footprints**:
+    Define the coverage area where specific capabilities are available.
+
+    * **Resource Scopes**: 
+    URIs that further restrict when capabilities apply.
+
+    * **Runtime Restrictions**:
+    Restrictions that affect optional or alternative structures, parameters, and other aspects of API usage.
+
+    * **Capabilities Set**: 
+    Associates a Footprint and Resource Scopes to Capabilities using a group type mechanism.
+
+    * **Bit Sets**: 
+    Used to efficiently communicate capability status, where individual bits represent the active (1) or inactive (0) status of specific Capability Sets.
+    
+    # API functionality
+
+    Please see examples within this yaml on what options the gateway may return in the response.
+
+    # Further info and support
+
+    ## Frequently Asked Questions (FAQs)
+
+    1. What is the purpose of the API described in the text? The API enables feature discovery and real-time feature status notifications 
+    for APIs provided by the gateway.
+
+    2. What are capabilities and how do they relate to API features? Capabilities represent a collection of features and their 
+    status (active or inactive) at a specific point in time. These capabilities provide a way to describe what an API can do.
+
+    3. What are footprints and how do they affect the availability of capabilities? Footprints define the coverage area where specific 
+    capabilities are available. A device must be located within the footprint to access these capabilities. If no footprint is specified, 
+    the capabilities may be available to any device connected to the network.
+
+    4. How do resource scopes restrict the applicability of capabilities? Resource Scopes are URIs that further restrict when capabilities 
+    apply. These scopes may refer to one or more device sessions, specific times of day, and other relevant conditions.
+
+    5. What is the role of footprint precedence in the search execution order? Footprint precedence specifies the search execution order of 
+    Footprints in the collection. The lower the numerical value of precedence, the higher the Footprint precedence. Footprints with equal 
+    precedence may be executed in parallel if supported by the system.
+
+    6. How do runtime restrictions affect API usage? To convey the impact of capability status to API consumers in a meaningful way, 
+    capabilities are directly tied to a set of runtime restrictions. These restrictions affect optional or alternative structures, 
+    parameters, and other aspects of API usage.
+
+    7. What is a Capabilities Set and how is it associated with Footprints and Resource Scopes? A Capabilities Set associates a Footprint 
+    and Resource Scopes to Capabilities using a group type mechanism. The grouping type may be the organizations that defined the 
+    capabilities, an operator, etc.
+
+    8. How are Bit Sets used to communicate capability status? Bit Sets are used to efficiently communicate capability status. In a Bit Set, 
+    individual bits represent the active (1) or inactive (0) status of specific Capability Sets. Bit Sets may also include a Footprint or 
+    Resource Scopes to further define the applicability of the status.
+
+    9. How do Bit Sets and Capability Sets interact with Footprints and Resource Scopes? If both the Bit Set and a specific Capability Set 
+    provide Footprints, the Device must satisfy the conditions of both Footprint collections and Resource Scopes for the bit’s status to 
+    be applicable. To avoid conflicts where a capability is active in one bit while inactive in another, Bit Sets have a concept of 
+    correctness or well-formedness.
+
+    10. How do API Consumers acquire Capability Set Specifications and Bit Set Values? API Consumers first use a GET operation to acquire 
+    Capability Set Specifications, which include the Capability Sets and associated Footprints and Runtime Restrictions Set Identifiers. 
+    With these definitions, API Consumers can then use a GET operation to acquire Capabilities Bit Set Values which contain the current 
+    bit status of associated Capability Bit Sets. API Consumers may choose to acquire all Bit Set Values or specific ones. Additionally, 
+    API Consumers may acquire the URL of the Capability Notification Server to subscribe to subsequent changes in Capabilities, 
+    Capabilities Set, Capability Bit Sets or Capability Bit Set values.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: project-email@sample.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.4.2-wip
+externalDocs:
+  description: Product documentation at Camara
+  url: https://github.com/camaraproject/
+security:
+  - oAuth2ClientCredentials: []
+servers:
+  - url: "{apiRoot}/{basePath}"
+    variables:
+      apiRoot:
+        default: http://localhost:9091
+        description: API root
+      basePath:
+        default: cap/v0
+        description: Base path for the CAMARA Capability API
+paths:
+  /cap-notification-server:
+    get:
+      tags:
+        - Notification Server URL
+      summary: |
+        Query the notification server URL for the capabilities API provider.
+      description: |
+        Returns the notification server URL for the capabilities API provider. This will be returned with HTTP Status Code 301 (Moved Permanently).
+        Code 301 is used instead of 302 (Temporary) to ensure the Client does not need to repeatedly poll this path. The Notificxation's URL
+        is returned as part of the Location Header.  
+      operationId: getCapabilitiesApiNotificationServerURL
+      responses:
+        "301":
+          description: Contains information about the notification server location
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "https://api-provider.example.com/subscriptions"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Internal"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-notification-server-read"
+    options:
+      tags:
+        - Get Notification Server URL Features
+      operationId: getCapNotificatServerFeatures
+      description: Discover supported features and methods for this endpoint
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-notification-server-read"
+  /bitsets:
+    get:
+      tags:
+        - Get All Bitsets
+      summary: "Query bit set values for all service capabilities on the gateway"
+      description: |
+        Returns the set of bitset values for all service capabilities on the gateway.
+      operationId: getBitsetValues
+      responses:
+        "200":
+          description: Contains all BitSet values
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BitSetValue"
+          links:
+            GetFirstBitsetById:
+              operationId: getBitsetValuesByIdVersion
+              parameters:
+                name: '$response.body#/[0]/name'
+                version: '$response.body#/[0]/version'
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"     
+        "404":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Internal"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-bitvalue-read"
+    options:
+      tags: 
+        - Get All Bitsets Features
+      operationId: getBitsetsFeatures
+      description: Discover supported features and methods for this endpoint
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-bitvalue-read"
+  /bitsets/{name}:
+    get:
+      tags:
+        - Get All Bitsets with the same name 
+      summary: "Get all bitsets with the same name on the gateway"
+      description: |
+        Returns bitsets that matches the given name.
+      operationId: getBitsetValuesByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Contains all BitSet value based on the name provided in the query.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BitSetValue"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "404":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Internal"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-bitvalue-read"
+    options:
+      tags: 
+        - Get Bitsets By Name Features
+      operationId: getBitsetsByNameFeatures
+      description: Discover supported features and methods for this endpoint
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-bitvalue-read"
+  /bitset-specifications:
+    get:
+      tags:
+        - Get all BitSet Specifications
+      summary: "Get all BitSet Specifications"
+      description: |
+        Returns all BitSet Specifications
+      operationId: getBitSetSpecifications
+      responses:
+        "200":
+          description: Contains an array of Bitset specifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CapabilitiesBitSetSpecification"
+              example:
+                OperatorAQoDrr:
+                  description: operator A QoD related runtime restrictions
+                  value:
+                    {
+                      name: "operator-a:qod-api:1.0",
+                      version: "1.0.0",
+                      cacheId: "Set1",
+                      bitSet:
+                        {
+                          "0":
+                            {
+                              name: "operator-a:qod-api-rr-b0",
+                              version: "0.0.1",
+                              groupType: "org:operator-a:qod",
+                              capabilities: 
+                                {
+                                  {
+                                    name: "operator-a:qod-api-rr-c135",
+                                    version: "0.0.1",
+                                    groupType: "org:operator-a:qod",
+                                    capDescription: "QoD runtime restrictions (1,3,5) defined as bit 0"
+                                  }
+                                }, 
+                              runtimeRestrictionsIDSet: [
+                                "AcceptedDeviceIdentifiers",
+                                "CreateSessionOperationNotSupported",
+                                "SupportedScopesPerAuthFlow1"
+                              ],
+                              footprints: 
+                                {
+                                  {
+                                    name: "fp1",
+                                    version: "0.0.1",                                  
+                                    footprintType: "itue212countrynetworkcode",
+                                    footprintValue: { "310120" },
+                                  }
+                                }                              
+                            },
+                          "1":
+                            {
+                              name: "operator-a:qod-api-rr-b1",
+                              version: "0.0.1",
+                              groupType: "org:operator-a:qod",
+                              capabilities: 
+                                {
+                                  {
+                                    name: "operator-a:qod-api-rr-c246",
+                                    version: "0.0.1",
+                                    groupType: "org:operator-a:qod",
+                                    capDescription: "QoD runtime restrictions (2,4,6) defined as bit 1"
+                                  }
+                                }, 
+                              runtimeRestrictionsIDSet: [
+                                "OfferedQoSProfiles",
+                                "LocationRadiusRange",
+                                "SupportedScopesPerAuthFlow2"
+                               ],
+                              footprints: 
+                                {
+                                  {
+                                    name: "fp2",
+                                    version: "0.0.1",                                  
+                                    footprintType: "geographicaddress",
+                                    footprintValue: { "Bellevue, WA" }
+                                  }
+                                }
+                            },
+                          "2":
+                            {
+                              name: "operator-a:qod-api-rr-b2",
+                              version: "0.0.1",
+                              groupType: "org:operator-a:qod",
+                              capabilities: 
+                                {
+                                  {
+                                    name: "operator-a:qod-api-rr-c246",
+                                    version: "0.0.1",
+                                    groupType: "org:operator-a:qod",
+                                    capDescription: "QoD runtime restrictions (2,4,6) at Bellevue WA area defined as bit 2"
+                                  }
+                                },                               
+                              runtimeRestrictionsIDSet: [
+                                "OfferedQoSProfiles",
+                                "LocationRadiusRange",
+                                "ServingAreaBellevueWARadius",
+                                "ServingAreaBellevueWALatitude",
+                                "ServingAreaBellevueWALongitude",
+                                "SupportedScopesPerAuthFlow2"
+                               ],
+                              footprints: 
+                                {
+                                  {
+                                    name: "fp3",
+                                    version: "0.0.1",                                  
+                                    footprintType: "geographicaddress",
+                                    footprintValue: { "Bellevue, WA" }
+                                  }
+                                }
+                            },
+                          "3":
+                            {
+                              name: "operator-a:qod-api-rr-b3",
+                              version: "0.0.1",
+                              groupType: "org:operator-a:qod",
+                              capabilities: 
+                                {
+                                  {
+                                    name: "operator-a:qod-api-rr-c246",
+                                    version: "0.0.1",
+                                    groupType: "org:operator-a:qod",
+                                    capDescription: "QoD runtime restrictions (2,4,6) for a group of specific QoD sessions in Bellevue WA area defined as bit 3"
+                                  }
+                                },                               
+                              runtimeRestrictionsIDSet: [
+                                "OfferedQoSProfiles",
+                                "LocationRadiusRange",
+                                "ServingAreaBellevueWARadius",
+                                "ServingAreaBellevueWALatitude",
+                                "ServingAreaBellevueWALongitude",
+                                "SupportedScopesPerAuthFlow2"
+                               ],
+                              footprints: 
+                                {
+                                  {
+                                    name: "fp3",
+                                    version: "0.0.1",                                  
+                                    footprintType: "geographicaddress",
+                                    footprintValue: { "Bellevue, WA" }
+                                  }
+                                },
+                              resourceScopes: [
+                                "https://api.example.com/qod/v0/sessions/123a4567-e89b-12d3-a456-426614174000",
+                                "https://api.example.com/qod/v0/sessions/123b4567-e89b-12d3-a456-426614174001",
+                                "https://api.example.com/qod/v0/sessions/123c4567-e89b-12d3-a456-426614174002"
+                              ]
+                            }                                                  
+                        }
+                    }
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "404":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Internal"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-bitdefinition-read"
+    options:
+      tags: 
+        - Get all BitSet Specifications Features
+      operationId: getBitsetsSpecificationsFeatures
+      description: Discover supported features and methods for this endpoint
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "cap-bitdefinition-read"
+
+components:
+  securitySchemes:
+    oAuth2ClientCredentials:
+      description: |
+        The Capability API makes use of the OAUTH 2.0 client credentials grant which is applicable for server to server use cases involving trusted partners or clients without any protected user data involved.
+        In this method the API invoker client is registered as a confidential client with an authorization grant type of client_credentials
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.example.com/oauth/token
+          scopes: {}
+    threeLegged:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.example.com/oauth2/authorize
+          tokenUrl: https://api.example.com/oauth/token
+          scopes:
+            cap-notification-server-read: Retrieval of Capabilities API provider notification server
+            cap-bitvalue-read: Retrieval of BitSetValue
+            cap-bitdefinition-read: Retrieval of CapabilitiesBitSetSpecification
+
+  schemas:
+    VersionedName:
+      description: |
+        An abstract base object containing names with versioning, seperated by :
+      type: object
+      properties:
+        name:
+          description: The item's name. Ideally, it is a unique value for its type. This value MUST NOT contain the semicolon - ';' 
+          type: string
+          example:
+            capabilties: "cap1"
+            footprints: "fp1"
+          minLength: 3
+          maxLength: 256
+          pattern: "^[^;]*$"
+        version:
+          description: The version of the object instance.
+          type: string
+          example: "0.0.1"
+          minLength: 1
+      required:
+        - name
+        - version
+
+    GroupType:
+      description: Used to separate groups of capabilities by type, specifcation body, etc.
+      example:
+        threegpptypes: "org:3gpp"
+        camaraqodcapabilities: "org:camara:qod"
+        operatorqodcapabilities: "operator-a:qod"
+        georestrictionzonea: "zonea:restrictions"
+      type: string
+      minLength: 1
+
+    Capability:
+      description: |
+        A feature or set of features of a system. A Capability can be enabled/disabled via various mechanisms. Capabilities are versioned
+        and may contain a GroupType for grouping of similar capabilities.
+      allOf:
+        - $ref: "#/components/schemas/VersionedName"
+        - type: object
+          properties:
+            groupType:
+              $ref: "#/components/schemas/GroupType"
+            capDescription:
+              description: Description of the capability.
+              type: string
+              minLength: 1
+          required:
+            - groupType
+
+    Footprint:
+      description: |
+        The coverage area to which capabilties apply. They help define the context in which the features are relevant.    
+        There are many ways to describe a footprint -- for example, by address range (e.g., IPv4 CIDR or IPv6 CIDR (Classless Inter-Domain Routing), 
+        network ID (e.g., Autonomous System Number (ASN)), nation boundaries (e.g., country code) or GPS coordinates. 
+
+        When a **Footprint** value is not present, the capabilities apply to *any* connected device.
+      allOf:
+        - $ref: "#/components/schemas/VersionedName"
+        - type: object
+          properties:
+            footprintType:
+              description: | 
+                Types include:
+                * <a href="https://www.iana.org/assignments/cdni-parameters/cdni-parameters.xhtml#metadata-footprint-types">Content Delivery Network Interconnection</a> types
+                * <a href="https://www.iana.org/assignments/method-tokens/method-tokens.xhtml">Geo postion</a> types 
+                * <a href="https://datamodel.tmforum.org/en/latest/Common/Address/">Civic Address</a> types 
+                * <a href="https://github.com/tmforum-apis/TMF673_GeographicAddress">Geographic Address type</a> types  
+                * <a href="https://github.com/tmforum-apis/TMF675_GeographicLocation">Geographic Location type</a> types 
+                * <a href="https://github.com/tmforum-apis/TMF674_GeographicSite">Geographic Site type</a> types  
+                * <a href="https://en.wikipedia.org/wiki/Mobile_country_code">ITU E.212 Mobile Country Code and Mobile Network Code</a> values 
+                * <a href="https://github.com/geojson/schema">GeoJSON</a>
+                * <a href="https://github.com/topojson/topojson ">TopoJSON</a>
+              type: string
+              enum: 
+                - ipv4cidr
+                - ipv6cidr
+                - asn
+                - countrycode
+                - altopid
+                - subdivisioncode
+                - footprintunion
+                - civickaddress
+                - geoposition
+                - itue212countrynetworkcode
+                - postaladdress
+                - geographicaddress
+                - geographiclocation
+                - geographicsite
+                - geojson
+                - topojson 
+            footprintValue:
+              description: A list of footprint values.
+              type: array
+              items:
+                oneOf:
+                  - type: string
+                  - type: object
+                  - type: array
+            footprintUsage:
+              description: Indicates that the footprint value represents an Access Network, a non Access Network, i.e., networks facing the Internet, or both.
+              type: string
+              enum:
+                - access
+                - non_access
+                - both
+            precedence:
+              description: |
+                Specifies the search execution order of Footprints when they are part of a collection. The lower the numerical value of precedence, 
+                the higher the rule precedence. Rules with equal precedence MAY be executed in parallel if supported.
+              type: integer
+              minimum: 0
+      required:
+        - name
+        - version
+        - footprintType
+        - footprintValue
+        - footprintUsage
+        - precedence
+
+    CapabilitiesSet:
+      description: A set of capabilties of the same groupType. The set may be restricted by a Footprint. A *well formed* 
+      allOf:
+        - $ref: "#/components/schemas/VersionedName"
+        - type: object
+          properties:
+            groupType:
+              $ref: "#/components/schemas/GroupType"
+            capabilities:
+              description: The set of capablity versioned name pairs.
+              type: array
+              items:
+                $ref: "#/components/schemas/Capability"
+              minItems: 1
+            runtimeRestrictionsIDSet:
+              description: |
+                An array of references to the response of RR 
+                <a href="https://github.com/camaraproject/Commonalities/tree/main/artifacts/camara-runtime-restrictions-api.yaml#/components/schemas/Restrictions/properties/identifiers">identifiers</a> 
+                within a successful Runtime Restrictions API <a href="https://github.com/camaraproject/Commonalities/tree/main/artifacts/camara-runtime-restrictions-api.yaml#/paths/~1runtimerestrictions/get/responses/%22200%22/content/application~1json/schema/items">response</a>
+              type: array
+              items:
+                type: string
+              minItems: 1
+            footprints:
+              type: array
+              items: 
+                $ref: "#/components/schemas/Footprint"
+            resourceScopes:
+              description: |
+                <p>Optional list of resource identifiers this **CapabilitiesSet** is constrainted to. Each resource identifier is a $ref field of the path item object in the OAS.</p><p>
+                If resourceScope is not present, the **CapabilitieSet** applies to all resources within the applicable **Footprints**.</p><p>
+                The example shows this set of capabilities only applies to a specified QoD session.</p>
+              type: array
+              items:
+                type: string
+                example: "https://api.example.com/qod/v0/sessions/123e4567-e89b-12d3-a456-426614174000"
+          required:
+            - name
+            - version
+            - groupType
+            - capabilities
+            - runtimeRestrictionsIDSet
+
+    CacheId:
+      description: |
+        A cache identifier. This is a unique key for management of updates between the API provider and Consumers. When this value is not provided, cache management,
+        if provided, occurs via implementation specific means.
+      type: string
+      minLength: 1
+
+    CapabilitiesBitSetSpecification:
+      description: A collection of capabilities. It maintains a mapping (integer => <a href="CapabiltiesSet">CapabiltiesSet</a>) that descrbes the capabilities in this set.
+      allOf:
+        - $ref: "#/components/schemas/VersionedName"  
+        - type: object
+          properties:
+            cacheId:
+              $ref: "#/components/schemas/CacheId"
+            bitSet:
+              description: |
+                A map of capability bit positions (postitive integeres) as a <a href="https://swagger.io/docs/specification/data-models/dictionaries/">Swagger 3.0.3 Dictionary</a>. The keys (attribute names)
+                specify the bit positions for the capability and MUST be positive integers and unqiue to the bitSet map. Any other key type will be ignored.
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/CapabilitiesSet'
+            footprints:
+              type: array
+              items:
+                $ref: "#/components/schemas/Footprint"
+            resourceScopes:
+              description: |
+                <p>Optional list of resource identifiers this **CapabilitiesSet** is constrainted to. Each resource identifier is a $ref field of the path item object in the OAS.</p><p>
+                If resourceScope is not present, the **CapabilitieSet** applies to all resources within the applicable **Footprints**.</p><p>
+                The example shows this set of capabilities only applies to a specified QoD session.</p>
+              type: array
+              items:
+                type: string
+                example: "https://api.example.com/qod/v0/sessions/123e4567-e89b-12d3-a456-426614174000"
+          required:
+            - cacheId
+            - bitSet
+
+    BitSetValue:
+      description: |
+        A bit vector value for the referenced Capability Set (as indicated by the name/version properties xor cacheId).
+      allOf:
+        - $ref: "#/components/schemas/VersionedName"
+        - type: object
+          properties:
+            cacheId:
+              $ref: "#/components/schemas/CacheId"
+            vectorValue:
+              description: A BitSetValue value. It is a hexdcimal string.
+              type: string
+              format: string
+              pattern: "^[0-9A-Fa-f]+$"
+              example: "1"
+          oneOf:
+            - required:
+              - vectorValue
+              - cacheId
+            - required:
+              - vectorValue
+              - name
+              - version
+
+    BitSetValueChangedEvent:
+      description: BitSet Value Changed cloud event.
+      allOf: 
+      - $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/CloudEventBase"
+      - type: object
+        properties:
+          data:
+            description: 'event details payload described in each CAMARA API and referenced by its "type"'
+            allOf:
+            - $ref: "#/components/schemas/BitSetValue"
+            - type: object
+              properties:
+                subscriptionId:
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/SubscriptionId"    
+
+    BitSetRemovedEvent:
+      description: BitSet Removed cloud event.
+      allOf: 
+      - $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/CloudEventBase"
+      - type: object
+        properties:
+          data:
+            description: 'event details payload described in each CAMARA API and referenced by its "type"'
+            allOf:
+            - $ref: "#/components/schemas/CapabilitiesBitSetSpecification"
+            - type: object
+              properties:
+                subscriptionId:
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/SubscriptionId"
+
+    BitSetChangedEvent:
+      description: BitSet Changed cloud event.
+      allOf: 
+      - $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/CloudEventBase"
+      - type: object
+        properties:
+          data:
+            description: 'event details payload described in each CAMARA API and referenced by its "type"'
+            allOf:
+            - $ref: "#/components/schemas/CapabilitiesBitSetSpecification"
+            - type: object
+              properties:
+                subscriptionId:
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/SubscriptionId"
+
+    CapabilityEvents:
+      description: Capabilty API Events.
+      oneOf:
+        - $ref: "#/components/schemas/BitSetValueChangedEvent"
+        - $ref: "#/components/schemas/BitSetRemovedEvent"
+        - $ref: "#/components/schemas/BitSetChangedEvent"
+      discriminator:
+        propertyName: type
+        mapping:
+          "org.camara.capability.0.4.1.BitSetValueChangedEvent": "#/components/schemas/BitSetValueChangedEvent"
+          "org.camara.capability.0.4.1.BitSetRemovedEvent": "#/components/schemas/BitSetRemovedEvent"
+          "org.camara.capability.0.4.1.BitSetChangedEvent": "#/components/schemas/BitSetChangedEvent"

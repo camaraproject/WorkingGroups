@@ -1,0 +1,583 @@
+openapi: 3.0.3
+info:
+  title: CAMARA Subscription, Notification & Event (SNE) Common API
+  description: |
+    This is a common API implementation of the CAMARA Commonalities API Design Guidelines <a href="https://raw.githubusercontent.com/camaraproject/Commonalities/main/documentation/API-design-guidelines.md#12-subscription-notification--event">Subscription, Notification & Event</a> section.
+   
+    
+    # Introduction
+    The CAMARA Subscription, Notification & Event (SNE) Common API provides a programmable interface for developers and other users to subscribe to events and receive notifications. This is a common API implementation of the CAMARA Commonalities API Design Guidelines Subscription, Notification & Event section. It supports implicit subscription structure (webhook) but it cannot define it - that is API specific.
+
+    # Subscribe to the API
+    To subscribe to the API, you will need to use the POST operation on the /subscriptions endpoint and provide the necessary information in the request body.
+    
+    # API Authentication
+    Security access keys such as OAuth 2.0 client credentials are used by client applications to invoke the Notification API.
+    
+    # API Description
+    ## Summary of resources
+    The CAMARA Subscription, Notification & Event (SNE) Common API provides several operations for managing event subscriptions, including creating, retrieving, and deleting subscriptions. The API provides several resources for managing event subscriptions, including the /subscriptions endpoint for creating, retrieving, and deleting subscriptions, and the /supportedEventTypes endpoint for retrieving a list of supported event types.
+    
+    ## Supported Operations
+    ### **Create a subscription**
+    #### Summary of request body parameters
+    The request body must include a webhook object, which contains details for the event channel, such as the notification URL and the notification authentication token. The request body may also include a subscriptionExpireTime and a subscriptionDetail object.
+    
+    ## Summary of response body parameters
+    The response body includes a subscriptionId value, which is a unique identifier for the event subscription. This value can be used to retrieve, update, or delete the subscription.
+    
+    ## List of identifiers returned to be used to delete or retrieve the subscription
+      The subscriptionId value in the response may be used to delete or retrieve the subscription.
+
+    ## Example
+    To create a subscription, you can use the following example request:
+    <pre><code>
+    POST /subscriptions
+    Content-Type: application/json
+    {
+      \"webhook\": {
+        \"notificationUrl\": \"https://example.com/notifications\",
+        \"notificationAuthToken\": \"my-auth-token\"
+      },
+      \"subscriptionExpireTime\": \"2024-03-13T12:55:23Z\",
+      \"subscriptionDetail\": {
+        \"type_sne\": \"my-event-type\"
+      }
+    }
+    </code></pre>
+    
+    ## Most frequent errors
+      The most frequent errors when creating a subscription include invalid arguments, unauthenticated requests, permission denied, and internal server errors.
+    
+    # **Request list of subscriptions**
+    ## Summary of request body parameters
+    ## Summary of response body parameters
+    The request body is not used for this operation.
+    
+    The response body includes an array of Subscription objects, each representing an event subscription.
+    
+    ## Example
+    To retrieve a list of subscriptions, you can use the following example request:
+    <pre><code>
+    GET /subscriptions
+    </code></pre>
+    
+    ## Most frequent errors
+    The most frequent errors when retrieving a list of subscriptions include invalid arguments, unauthenticated requests, and internal server errors.
+    
+    # **Query a subscription by identifier**
+    ## Summary of request body parameters
+    The request body is not used for this operation.
+    
+    ## Summary of response body parameters
+    The response body includes a Subscription object representing the specified event subscription.
+    
+    # Example
+    To retrieve a specific subscription, you can use the following example request:
+    <pre><code>
+    GET /subscriptions/{subscriptionId}
+    </code></pre>
+    
+    ## Most frequent errors
+    The most frequent errors when retrieving a specific subscription include invalid arguments, unauthenticated requests, and internal server errors.
+    
+    # **Delete a subscription by identifier**
+    ## Summary of request body parameters
+    The request body is not used for this operation.
+    
+    ## Summary of response body parameters
+    The response body is not used for this operation.
+    
+    ## Example
+    To delete a specific subscription, you can use the following example request:
+    <pre><code>
+    DELETE /subscriptions/{subscriptionId}
+    </code></pre>
+    
+    ## Most frequent errors
+    The most frequent errors when deleting a specific subscription include invalid arguments, unauthenticated requests, and internal server errors.
+    
+
+    * **Authentication**:
+    Security access keys such as OAuth 2.0 client credentials used by client applications to invoke the Notification API.
+
+    # Further info and support
+
+    ## Frequently Asked Questions (FAQs)
+
+    <b> 1. What is the purpose of the CAMARA Subscription, Notification & Event (SNE) Common API? </b>
+    
+    <pre><p>
+          The CAMARA Subscription, Notification & Event (SNE) Common API provides a programmable interface for developers and other users to subscribe to events and receive notifications. 
+    </p></pre>
+
+    <b> 2. What are the limitations of the CAMARA Subscription, Notification & Event (SNE) Common API? </b>
+    
+    <pre><p>
+          Sorting and pagination of notifications are not supported.
+    </p></pre>
+
+    <b> 3. What is authentication in the context of the CAMARA Subscription, Notification & Event (SNE) Common API? </b>
+    <pre><p>
+          Authentication refers to security access keys such as OAuth 2.0 client credentials used by client applications to invoke the Notification API.
+    </p></pre>
+    
+    <b> 4. How can I request an event subscription using the CAMARA Subscription, Notification & Event (SNE) Common API? </b>
+    <pre><p>
+        You can request an event subscription by using the POST operation on the `/subscriptions` endpoint and providing the necessary information in the request body. </b>
+    </p></pre>
+    
+    <b> 5. How can I retrieve a list of event subscriptions using the CAMARA Subscription, Notification & Event (SNE) Common API?  </b>
+    <pre><p>
+        You can retrieve a list of event subscriptions by using the GET operation on the `/subscriptions` endpoint. The list can be filtered based on optional query parameters.
+    </p></pre>
+    
+    <b> 6. How can I retrieve a specific event subscription using the CAMARA Subscription, Notification & Event (SNE) Common API?  </b>
+    <pre><p>
+        You can retrieve a specific event subscription by using the GET operation on the `/subscriptions/{subscriptionId}` endpoint and providing the subscription ID in the path parameter.
+    </p></pre>
+    
+    <b> 7. How can I delete a specific event subscription using the CAMARA Subscription, Notification & Event (SNE) Common API?  </b>
+    <pre><p>
+        You can delete a specific event subscription by using the DELETE operation on the `/subscriptions/{subscriptionId}` endpoint and providing the subscription ID in the path parameter.
+    </p></pre>
+    
+    <b> 8. How can I retrieve a list of supported event types using the CAMARA Subscription, Notification & Event (SNE) Common API?  </b>
+    <pre><p>
+        You can retrieve a list of supported event types by using the GET operation on the `/supportedEventTypes` endpoint.
+    </p></pre>
+    
+    <b> 9. What is the role of the webhook object in the CAMARA Subscription, Notification & Event (SNE) Common API?  </b> 
+    <pre><p>
+        The webhook object is provided in the API's POST request and contains details for the event channel, such as the notification URL and the notification authentication token.
+    </p></pre>
+    
+    <b> 10. What is the subscription ID and how is it used in the CAMARA Subscription, Notification & Event (SNE) Common API?  </b>
+    <pre><p>
+        The subscription ID is a unique identifier for an event subscription. It is provided by the API server and can be used to retrieve, update, or delete a specific event subscription.
+    </p></pre>
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: project-email@sample.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.1.9-wip
+externalDocs:
+  description: Product documentation at Camara
+  url: https://github.com/camaraproject/
+security:
+  - oAuth2ClientCredentials: []
+servers:
+  - url: "{apiRoot}/{basePath}"
+    variables:
+      apiRoot:
+        default: http://localhost:9091
+        description: API root
+      basePath:
+        default: sne/v0
+        description: Base path for the CAMARA Subscription, Notification & Event (SNE) Common API
+paths:
+  /subscriptions:
+    post:
+      tags:
+        - Request event subscription
+      summary: "Request event subscription"
+      description: Operation to request a event subscription.
+      operationId: subscribeToEventNotifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                webhook:
+                  $ref: "#/components/schemas/Webhook"
+                subscriptionExpireTime:
+                  $ref: "#/components/schemas/SubscriptionExpireTime"
+                subscriptionDetail:
+                  $ref: "#/components/schemas/SubscriptionDetail"
+              required:
+                - webhook
+      callbacks:
+        notifications:
+          "{$request.body#/webhook/notificationUrl}":
+            post:
+              summary: "A callback to recieve event notifications"
+              description: |
+                Important: this endpoint is to be implemented by the API consumer.
+                The API provider will call this endpoint whenever any subscription related event occurs.
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloud-event-common-v1.0.yaml#/components/schemas/CloudEventBase"
+              responses:
+                "204":
+                  description: Successful notification
+                "400":
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/InvalidArgument"
+                "401":
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+                "403":
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+                "500":
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Internal"
+                "503":
+                  $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+              security:
+                - {}
+                - notificationsBearerAuth: [ "{$request.body#/webhook.notificationAuthToken}" ]
+      responses:
+        "201":
+          description: Subscription Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          links:
+            DeleteSubscriptionWithId:
+              operationId: deleteSubscription
+              parameters:
+                subscriptionId: '$response.body#/subscriptionId'
+              description: The subscriptionId value in the response may be used to delete the subscritpion prior to its expiry.
+            GetSubscriptionWithId:
+              operationId: getSubscriptionById
+              parameters:
+                subscriptionId: '$response.body#/subscriptionId'
+              description: The subscriptionId value in the response may be used to retrieve the subscritpion prior to its expiry.
+        "400":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/InvalidArgument"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/SubscriptionPeriodNotAllowed403"
+        "409":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Internal"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+          - "sne-subscription-create"
+    get:
+      tags:
+        - Retrieve all event subscriptions
+      summary: "Retrieve all event subscriptions"
+      description: |
+        Retrieve a list of event subscriptions filtered based on the optional query names. 
+        eg. GET /subscriptions?type=org.camaraproject.capability.v1.bitmask-vector-changed&expiresAt.lt=2023-10-11
+        Could be an empty list. 
+      operationId: getSubscriptions
+      parameters:
+        - name: startsAt
+          in: query
+          schema:
+            $ref: "#/components/schemas/StartsAt"
+          required: false
+        - name: expiresAt
+          in: query
+          schema:
+            $ref: "#/components/schemas/ExpiresAt"
+          required: false
+        - name: type_sne
+          in: query
+          schema:
+            $ref: "#/components/schemas/SubscriptionDetail/properties/type_sne"
+          required: false
+      responses:
+        "200":
+          description: Subscriptions Found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Subscription"
+        "400":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/InvalidArgument"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+          - "sne-subscription-get"
+    options:
+      tags:
+        - Get Event Subscriptions Features
+      operationId: getSubscriptionsFeatures
+      description: Discover supported features and methods for this endpoint
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "POST,GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+          - "sne-subscription-get"
+  /subscriptions/{subscriptionId}:
+    get:
+      tags:
+        - Retrieve specific event subscription
+      summary: "Retrieve specific event subscription"
+      description: Retrieve the subscription by subscriptionId
+      operationId: getSubscriptionById
+      parameters:
+        - name: subscriptionId
+          in: path
+          schema:
+            $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloude-event-common-v1.0.yaml#/components/schemas/SubscriptionId"
+          description: subscription identifier
+          required: true
+      responses:
+        "200":
+          description: Subscription Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+        "400":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/InvalidArgument"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "404":
+          $ref: "#/components/responses/NotificationApiNotFound404"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+          - "sne-subscription-get"
+    options:
+      tags:
+        - Get Event Subscription Features
+      operationId: getSubscriptionFeatures
+      description: Discover supported features and methods for this endpoint
+      parameters:
+        - name: subscriptionId
+          in: path
+          schema:
+            $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloude-event-common-v1.0.yaml#/components/schemas/SubscriptionId"
+          description: subscription identifier
+          required: true
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+          - "sne-subscription-get"
+    delete:
+      tags:
+        - Delete specific event subscription
+      summary: "Delete specific event subscription"
+      description: Operation to delete an event subscription 
+      operationId: deleteSubscription
+      parameters:
+        - name: subscriptionId
+          in: path
+          schema:
+            $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloude-event-common-v1.0.yaml#/components/schemas/SubscriptionId"
+          description: subscription identifier
+          required: true
+      responses:
+        "204":
+          description: Successful subscription deletion (no body returned)
+        "400":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/InvalidArgument"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "404":
+          $ref: "#/components/responses/NotificationApiNotFound404"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "sne-subscription-delete"
+
+  /supportedEventTypes:
+    get:
+      tags:
+        - Retrieve event types
+      summary: "Retrieve event types"
+      description: A list of supported Event Types
+      responses:
+        "200":
+          description: Event Types Supported
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: string
+        "400":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/InvalidArgument"
+        "401":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unauthenticated"
+        "403":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Conflict"
+        "500":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/PermissionDenied"
+        "503":
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/responses/Unavailable"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "sne-eventtype-read"
+    options:
+      tags:
+        - Get Event Types Features
+      operationId: getEventTypesFeatures
+      description: Discover supported features and methods for this endpoint
+      responses:
+        "200":
+            description: OK
+            headers:
+              Allow:
+                schema:
+                  type: string
+                  default: "GET,OPTIONS"
+      security:
+        - oAuth2ClientCredentials: []
+        - threeLegged:
+            - "sne-eventtype-read"
+
+components:
+  securitySchemes:
+    oAuth2ClientCredentials:
+      description: |
+        The Runtime Restrictions API makes use of the OAUTH 2.0 client credentials grant which is applicable for server to server use cases involving trusted partners or clients without any protected user data involved. In this method the API invoker client is registered as a confidential client with an authorization grant type of client_credentials
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.example.com/oauth/token
+          scopes: {}
+    notificationsBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: "{$request.body#/webhook/notificationAuthToken}"
+    threeLegged:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.example.com/oauth2/authorize
+          tokenUrl: https://api.example.com/oauth/token
+          scopes:
+            sne-subscription-create: Create one subscription
+            sne-subscription-get: Retrieval of one or list of subscriptions
+            sne-subscription-delete: Delete one subscription
+            sne-eventtype-read: Retrieval of EventType supported
+
+  schemas:
+    Subscription:
+      description: Event subscription
+      type: object
+      properties:
+        webhook:
+          $ref: "#/components/schemas/Webhook"
+        subscriptionId:
+          $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/camara-cloude-event-common-v1.0.yaml#/components/schemas/SubscriptionId"
+        subscriptionExpireTime:
+          $ref: "#/components/schemas/SubscriptionExpireTime"
+        startsAt:        
+          $ref: "#/components/schemas/StartsAt"
+        expiresAt:
+          $ref: "#/components/schemas/ExpiresAt"
+        subscriptionDetail:
+          $ref: "#/components/schemas/SubscriptionDetail"
+      required:
+        - webhook
+        - subscriptionId
+
+    Webhook:
+      description: The object provided in an API's POST with detail for event channel.
+      type: object
+      properties:
+        notificationUrl:
+          description: https callback address where the notification must be POST-ed
+          type: string
+          format: url
+          example: "https://api-consumer.example.com/notification"
+        notificationAuthToken:
+          description: "OAuth2 token to be used by the callback API endpoint. It MUST be indicated within HTTP Authorization header e.g. Authorization: Bearer $notificationAuthToken"
+          type: string
+          minLength: 20
+          maxLength: 256
+          example: "c8974e592c2fa383d4a3960714"
+      required:
+        - notificationUrl
+
+    SubscriptionExpireTime:
+      description:   Date when the event subscription should end. Provided by API requester. Server may reject the suscription if the period requested do not comply with Telco Operator policies (i.e. to avoid unlimited time subscriptions). In this case server returns exception 403 "SUBSCRIPTION_PERIOD_NOT_ALLOWED"
+      type: string
+      format: date-time
+
+    StartsAt:
+      description: Date when the event subscription will begin/began. This attribute must not be present in the POST request as it is provided by API server. It must be present in GET endpoints
+      type: string
+      format: date-time
+
+    ExpiresAt:
+      description: Date when the event subscription will expire. This attribute must not be present in the POST request as it is provided by API server.
+      type: string
+      format: date-time
+
+    SubscriptionDetail:
+      description: Object defined for each event subscription depending on the event - it could be for example the ueID targeted by the subscription
+      type: object
+      properties:
+        type_sne:
+          type: string
+      required:
+        - type_sne
+
+  responses:
+    SubscriptionPeriodNotAllowed403:
+      description: "Service does not allowed the provided subscription period"
+      content:
+        application/json:
+          schema:
+            $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/schemas/ErrorInfo"
+          example:
+            status: 403
+            code: SUBSCRIPTION_PERIOD_NOT_ALLOWED
+            message: "The period requested does not comply with Telco Operator policies"
+
+    NotificationApiNotFound404:
+      description: Notification API not found
+      content:
+        application/json:
+          schema:
+            $ref: "https://raw.githubusercontent.com/camaraproject/Commonalities/main/artifacts/CAMARA_common.yaml#/components/schemas/ErrorInfo"
+          example:
+            status: 404
+            code: NOT_FOUND
+            message: "No Notification API found"
