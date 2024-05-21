@@ -19,6 +19,7 @@
 | China Mobile | Xiu Dushen |
 | China Telekom | Xu Dan |
 | China Unicom | Yang Fan |
+| Chunghwa Telecom | Guang-Han Ma |
 | Comcast | Prasad Siddalinga |
 | Comviva | Vidhi Mehta |
 | Deutsche Telekom | Noel Wirzius |
