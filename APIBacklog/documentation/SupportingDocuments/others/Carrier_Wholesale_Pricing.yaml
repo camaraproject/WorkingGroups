@@ -1,0 +1,411 @@
+openapi: 3.0.3
+info:
+  title: Carrier Wholesale Pricing API
+  description: Provides real-time access and updates to wholesale pricing for voice, SMS, and virtual numbers among carrier partners. Enhanced with security measures, versioning, error handling, and support for pagination and filtering.
+  version: "1.0.0"
+  contact:
+    email: a.jamous@telecomsxchange.com
+servers:
+  - url: '{apiRoot}/{basePath}'
+    description: Production server (uses live data)
+    variables:
+      apiRoot:
+        default: 'https://example.com'  # Placeholder for API root URL
+        description: The root URL of the API.
+      basePath:
+        default: 'v1'  # Placeholder for base path
+        description: The base path of the API.
+security:
+  - OAuth2: ['read', 'write']
+
+paths:
+  /voicePricing:
+    get:
+      summary: Retrieve voice pricing information
+      operationId: getVoicePricing
+      tags:
+        - Voice Pricing
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination. Must be a positive integer.
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            default: 10
+          description: Number of items to return per page for pagination. Must be a positive integer.
+        - in: query
+          name: currency
+          schema:
+            type: string
+            default: "USD"
+          description: Currency code for pricing information. Default is USD.
+      responses:
+        '200':
+          description: A list of voice pricing information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoicePricing'
+          example:
+            - prefixE164: "123"
+              price1: 0.05
+              priceN: 0.03
+              validFrom: "2024-01-01T00:00:00Z"
+              timezone: "UTC"
+              interval1: 60
+              intervalN: 30
+              forbidden: false
+              discontinued: false
+        '400':
+          description: Bad request. Invalid request format.
+          content:
+            application/json:
+              example:
+                message: "Invalid request format."
+        '401':
+          description: Unauthorized. Invalid or expired authentication token.
+          content:
+            application/json:
+              example:
+                message: "Invalid or expired authentication token."
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+          content:
+            application/json:
+              example:
+                message: "Forbidden. Insufficient permissions."
+        '404':
+          description: Not found. The requested resource does not exist.
+          content:
+            application/json:
+              example:
+                message: "Not found."
+        '500':
+          description: Internal Server Error. An error occurred on the server side.
+          content:
+            application/json:
+              example:
+                message: "Internal Server Error. Please try again later."
+
+    post:
+      summary: Update voice pricing information
+      operationId: updateVoicePricing
+      tags:
+        - Voice Pricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoicePricing'
+      responses:
+        '200':
+          description: Voice pricing information updated successfully.
+          content:
+            application/json:
+              example:
+                message: "Voice pricing information updated successfully."
+        '400':
+          description: Bad request. Invalid request format.
+          content:
+            application/json:
+              example:
+                message: "Invalid request format."
+        '401':
+          description: Unauthorized. Invalid or expired authentication token.
+          content:
+            application/json:
+              example:
+                message: "Invalid or expired authentication token."
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+          content:
+            application/json:
+              example:
+                message: "Forbidden. Insufficient permissions."
+        '404':
+          description: Not found. The requested resource does not exist.
+          content:
+            application/json:
+              example:
+                message: "Not found."
+        '500':
+          description: Internal Server Error. An error occurred on the server side.
+          content:
+            application/json:
+              example:
+                message: "Internal Server Error. Please try again later."
+
+  /smsPricing:
+    get:
+      summary: Retrieve SMS pricing information
+      operationId: getSmsPricing
+      tags:
+        - SMS Pricing
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination. Must be a positive integer.
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            default: 10
+          description: Number of items to return per page for pagination. Must be a positive integer.
+        - in: query
+          name: currency
+          schema:
+            type: string
+            default: "USD"
+          description: Currency code for pricing information. Default is USD.
+      responses:
+        '200':
+          description: A list of SMS pricing information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SmsPricing'
+          example:
+            - mccmncE212: "12345"
+              price: 0.02
+              effectiveFrom: "2024-01-01T00:00:00Z"
+              forbidden: false
+              discontinued: false
+        '400':
+          description: Bad request. Invalid request format.
+          content:
+            application/json:
+              example:
+                message: "Invalid request format."
+        '401':
+          description: Unauthorized. Invalid or expired authentication token.
+          content:
+            application/json:
+              example:
+                message: "Invalid or expired authentication token."
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+          content:
+            application/json:
+              example:
+                message: "Forbidden. Insufficient permissions."
+        '404':
+          description: Not found. The requested resource does not exist.
+          content:
+            application/json:
+              example:
+                message: "Not found."
+        '500':
+          description: Internal Server Error. An error occurred on the server side.
+          content:
+            application/json:
+              example:
+                message: "Internal Server Error. Please try again later."
+
+    post:
+      summary: Update SMS pricing information
+      operationId: updateSmsPricing
+      tags:
+        - SMS Pricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SmsPricing'
+      responses:
+        '200':
+          description: SMS pricing information updated successfully.
+          content:
+            application/json:
+              example:
+                message: "SMS pricing information updated successfully."
+        '400':
+          description: Bad request. Invalid request format.
+          content:
+            application/json:
+              example:
+                message: "Invalid request format."
+        '401':
+          description:
+
+ Unauthorized. Invalid or expired authentication token.
+          content:
+            application/json:
+              example:
+                message: "Invalid or expired authentication token."
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+          content:
+            application/json:
+              example:
+                message: "Forbidden. Insufficient permissions."
+        '404':
+          description: Not found. The requested resource does not exist.
+          content:
+            application/json:
+              example:
+                message: "Not found."
+        '500':
+          description: Internal Server Error. An error occurred on the server side.
+          content:
+            application/json:
+              example:
+                message: "Internal Server Error. Please try again later."
+
+  /virtualNumbers:
+    get:
+      summary: Retrieve virtual numbers pricing information
+      operationId: getVirtualNumbersPricing
+      tags:
+        - Virtual Numbers Pricing
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination. Must be a positive integer.
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            default: 10
+          description: Number of items to return per page for pagination. Must be a positive integer.
+        - in: query
+          name: currency
+          schema:
+            type: string
+            default: "USD"
+          description: Currency code for pricing information. Default is USD.
+      responses:
+        '200':
+          description: A list of virtual numbers pricing information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VirtualNumbersPricing'
+          example:
+            - numberE164: "123456789"
+              inboundVoicePrice: 0.01
+              inboundSmsPrice: 0.005
+              interval: 60
+              mrc: 1.99
+              nrc: 0.99
+              documentsVerificationRequired: true
+              status: 1
+              type: "mobile"
+              voice: true
+              sms: true
+              fax: false
+              video: false
+              capacity: 10
+              notes: "Sample note"
+              localRequirements: 2
+        '400':
+          description: Bad request. Invalid request format.
+          content:
+            application/json:
+              example:
+                message: "Invalid request format."
+        '401':
+          description: Unauthorized. Invalid or expired authentication token.
+          content:
+            application/json:
+              example:
+                message: "Invalid or expired authentication token."
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+          content:
+            application/json:
+              example:
+                message: "Forbidden. Insufficient permissions."
+        '404':
+          description: Not found. The requested resource does not exist.
+          content:
+            application/json:
+              example:
+                message: "Not found."
+        '500':
+          description: Internal Server Error. An error occurred on the server side.
+          content:
+            application/json:
+              example:
+                message: "Internal Server Error. Please try again later."
+
+    post:
+      summary: Update virtual numbers pricing information
+      operationId: updateVirtualNumbersPricing
+      tags:
+        - Virtual Numbers Pricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualNumbersPricing'
+      responses:
+        '200':
+          description: Virtual numbers pricing information updated successfully.
+          content:
+            application/json:
+              example:
+                message: "Virtual numbers pricing information updated successfully."
+        '400':
+          description: Bad request. Invalid request format.
+          content:
+            application/json:
+              example:
+                message: "Invalid request format."
+        '401':
+          description: Unauthorized. Invalid or expired authentication token.
+          content:
+            application/json:
+              example:
+                message: "Invalid or expired authentication token."
+        '403':
+          description: Forbidden. The user does not have permission to perform this action.
+          content:
+            application/json:
+              example:
+                message: "Forbidden. Insufficient permissions."
+        '404':
+          description: Not found. The requested resource does not exist.
+          content:
+            application/json:
+              example:
+                message: "Not found."
+        '500':
+          description: Internal Server Error. An error occurred on the server side.
+          content:
+            application/json:
+              example:
+                message: "Internal Server Error. Please try again later."
+
+components:
+  schemas:
+    # The schemas are already defined in the provided YAML file.
+
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://example.com/oauth/token'
+          scopes:
+            read: Grants read access to pricing information.
+            write: Grants write access to update pricing information.
