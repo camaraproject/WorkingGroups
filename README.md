@@ -11,8 +11,8 @@
 This repository is no longer in use, archived, and read-only.
 
 Please go to the following repositories for the CAMARA Working Groups:
-* [API backlog](https://github.com/camaraproject/WorkingGroups/tree/main/APIBacklog)
+* [API Backlog](https://github.com/camaraproject/APIBacklog)
 * [Commonalities](https://github.com/camaraproject/Commonalities)
-* [Identity and Access Management](https://github.com/camaraproject/IdentityAndConsentManagement)
-* [Marketing](https://github.com/camaraproject/WorkingGroups/tree/main/Marketing)
+* [Identity and Consent Management](https://github.com/camaraproject/IdentityAndConsentManagement)
+* [Marketing](https://github.com/camaraproject/Marketing)
 * [Release Management](https://github.com/camaraproject/ReleaseManagement)
