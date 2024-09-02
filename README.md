@@ -7,7 +7,12 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 # CAMARA Working Groups
-Repository for the CAMARA Working Groups:
+
+This repository is no longer in use, archived, and read-only.
+
+Please go to the following repositories for the CAMARA Working Groups:
 * [API backlog](https://github.com/camaraproject/WorkingGroups/tree/main/APIBacklog)
 * [Commonalities](https://github.com/camaraproject/Commonalities)
+* [Identity and Access Management](https://github.com/camaraproject/IdentityAndConsentManagement)
 * [Marketing](https://github.com/camaraproject/WorkingGroups/tree/main/Marketing)
+* [Release Management](https://github.com/camaraproject/ReleaseManagement)
