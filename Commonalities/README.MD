@@ -1,9 +1,3 @@
-## Scope
-* Elaborate and list “Commonalities for APIs”, work out commonalities on the list
-* Commonalities are topics which apply to some or all APIs, e.g. API design guidelines, API readiness criteria checklist, Glossary etc.
-* Started: October 2021  
-* Location: virtually  
-
 
 ## New Repository
 Since July 2023 the work of Commonalities WG takes place in **separate** Github repository: https://github.com/camaraproject/Commonalities
