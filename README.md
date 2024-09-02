@@ -16,3 +16,5 @@ Please go to the following repositories for the CAMARA Working Groups:
 * [Identity and Consent Management](https://github.com/camaraproject/IdentityAndConsentManagement)
 * [Marketing](https://github.com/camaraproject/Marketing)
 * [Release Management](https://github.com/camaraproject/ReleaseManagement)
+
+Search for current list of CAMARA Working Groups repositories: https://github.com/search?q=topic%3Aworkinggroup+org%3Acamaraproject&type=Repositories
